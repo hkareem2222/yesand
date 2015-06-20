@@ -17,64 +17,81 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TOT-2s-7zC">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pBy-Gk-GVr">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pBy-Gk-GVr">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
-                                        <subviews>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="103" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="3DB-k2-6om">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <textField key="tableFooterView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="send message" minimumFontSize="17" id="14l-Uk-T6O">
-                                                    <rect key="frame" x="0.0" y="457" width="600" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="awu-7r-M4L" id="GNp-sG-oxD"/>
-                                                    </connections>
-                                                </textField>
-                                                <prototypes>
-                                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MessageID" rowHeight="103" id="mri-ws-XdE">
-                                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
-                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mri-ws-XdE" id="dQv-0C-EwI">
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                        </tableViewCellContentView>
-                                                    </tableViewCell>
-                                                </prototypes>
-                                                <connections>
-                                                    <outlet property="dataSource" destination="awu-7r-M4L" id="xqA-Ev-9xw"/>
-                                                    <outlet property="delegate" destination="awu-7r-M4L" id="hNv-IG-05P"/>
-                                                </connections>
-                                            </tableView>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jIe-Qj-HG0">
-                                                <rect key="frame" x="554" y="457" width="46" height="30"/>
-                                                <state key="normal" title="Send">
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="onSendButtonTapped:" destination="awu-7r-M4L" eventType="touchUpInside" id="GTB-8I-Yzj"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="56" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="3DB-k2-6om">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="457"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
+                                        <prototypes>
+                                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MessageID" rowHeight="56" id="mri-ws-XdE">
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mri-ws-XdE" id="dQv-0C-EwI">
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="awu-7r-M4L" id="xqA-Ev-9xw"/>
+                                            <outlet property="delegate" destination="awu-7r-M4L" id="hNv-IG-05P"/>
+                                        </connections>
+                                    </tableView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q0g-z5-x7R">
+                                        <rect key="frame" x="0.0" y="457" width="600" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="mTK-u9-vqY"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="awu-7r-M4L" id="Ovy-w9-ziy"/>
+                                        </connections>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nlt-AT-1kx">
+                                        <rect key="frame" x="559" y="457" width="36" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="B9M-O8-Uj6"/>
+                                            <constraint firstAttribute="width" constant="36" id="vxe-t3-Svv"/>
+                                        </constraints>
+                                        <state key="normal" title="Send">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onSendButtonTapped:" destination="awu-7r-M4L" eventType="touchUpInside" id="COe-Vl-c5l"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
-                            </scrollView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="3DB-k2-6om" firstAttribute="top" secondItem="pBy-Gk-GVr" secondAttribute="top" id="6nG-25-Avc"/>
+                                    <constraint firstAttribute="trailing" secondItem="Q0g-z5-x7R" secondAttribute="trailing" id="TP6-iP-38l"/>
+                                    <constraint firstItem="3DB-k2-6om" firstAttribute="leading" secondItem="pBy-Gk-GVr" secondAttribute="leading" id="WMi-ET-U1G"/>
+                                    <constraint firstAttribute="trailing" secondItem="Nlt-AT-1kx" secondAttribute="trailing" constant="5" id="cZL-it-0pE"/>
+                                    <constraint firstAttribute="bottom" secondItem="Q0g-z5-x7R" secondAttribute="bottom" id="ckl-VJ-c77"/>
+                                    <constraint firstItem="Q0g-z5-x7R" firstAttribute="top" secondItem="3DB-k2-6om" secondAttribute="bottom" id="er3-Yy-dxH"/>
+                                    <constraint firstAttribute="bottom" secondItem="Nlt-AT-1kx" secondAttribute="bottom" id="kEK-ez-Miw"/>
+                                    <constraint firstAttribute="trailing" secondItem="3DB-k2-6om" secondAttribute="trailing" id="vqY-PP-45G"/>
+                                    <constraint firstItem="Q0g-z5-x7R" firstAttribute="leading" secondItem="pBy-Gk-GVr" secondAttribute="leading" id="y9N-Cx-WHb"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="pBy-Gk-GVr" firstAttribute="leading" secondItem="ZLU-gp-Nqo" secondAttribute="leadingMargin" constant="-16" id="Rxe-tY-i1K"/>
+                            <constraint firstItem="pBy-Gk-GVr" firstAttribute="top" secondItem="cNR-rv-t7g" secondAttribute="bottom" id="XsP-Fd-Gpq"/>
+                            <constraint firstItem="ard-wm-WB7" firstAttribute="top" secondItem="pBy-Gk-GVr" secondAttribute="bottom" id="XyQ-Zs-2De"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="pBy-Gk-GVr" secondAttribute="trailing" constant="-16" id="zjG-us-T9D"/>
+                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="messageTextField" destination="14l-Uk-T6O" id="39L-AA-QIy"/>
-                        <outlet property="scrollView" destination="TOT-2s-7zC" id="SNk-2M-zvC"/>
+                        <outlet property="messageTextField" destination="Q0g-z5-x7R" id="4fU-sr-keD"/>
                         <outlet property="tableView" destination="3DB-k2-6om" id="Tgp-UU-92M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XKv-Uf-MLO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2462" y="468"/>
+            <point key="canvasLocation" x="2462" y="465"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="ufC-wZ-h7g">

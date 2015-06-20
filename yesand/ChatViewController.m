@@ -12,8 +12,8 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UITextField *messageTextField;
 @property double keyboardHeight;
+@property (weak, nonatomic) IBOutlet UITextField *messageTextField;
 
 
 @end
@@ -43,6 +43,10 @@
 
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardDidShowNotification object:nil];
+}
+
+
+- (IBAction)onSendButtonTapped:(id)sender {
 }
 
 #pragma mark - Scroll View Animation
@@ -85,9 +89,6 @@
 
 
 #pragma mark - Table View
-
-- (IBAction)onSendButtonTapped:(UIButton *)sender {
-}
 
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
