@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		85014A9C1B359F7800E190C8 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 85014A9B1B359F7800E190C8 /* libicucore.dylib */; };
+		85014A9E1B359F8100E190C8 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 85014A9D1B359F8100E190C8 /* libc++.dylib */; };
+		85014AA01B359F8900E190C8 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85014A9F1B359F8900E190C8 /* CFNetwork.framework */; };
+		85014AA21B359F9000E190C8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85014AA11B359F9000E190C8 /* Security.framework */; };
+		85014AA41B359F9700E190C8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85014AA31B359F9700E190C8 /* SystemConfiguration.framework */; };
 		85963F7B1B34C8F7006E2868 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 85963F7A1B34C8F7006E2868 /* main.m */; };
 		85963F7E1B34C8F7006E2868 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 85963F7D1B34C8F7006E2868 /* AppDelegate.m */; };
 		85963F811B34C8F7006E2868 /* yesand.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 85963F7F1B34C8F7006E2868 /* yesand.xcdatamodeld */; };
@@ -37,6 +42,11 @@
 		5504428874710937E23AD880 /* Pods_yesand.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_yesand.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C7676ED28FF610905A6F984 /* Pods-yesand.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yesand.release.xcconfig"; path = "Pods/Target Support Files/Pods-yesand/Pods-yesand.release.xcconfig"; sourceTree = "<group>"; };
 		768A60BFCBC5945ED10E215F /* Pods_yesandTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_yesandTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		85014A9B1B359F7800E190C8 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		85014A9D1B359F8100E190C8 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		85014A9F1B359F8900E190C8 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		85014AA11B359F9000E190C8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		85014AA31B359F9700E190C8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		85963F751B34C8F7006E2868 /* yesand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yesand.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85963F791B34C8F7006E2868 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85963F7A1B34C8F7006E2868 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -62,6 +72,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85014AA41B359F9700E190C8 /* SystemConfiguration.framework in Frameworks */,
+				85014AA21B359F9000E190C8 /* Security.framework in Frameworks */,
+				85014AA01B359F8900E190C8 /* CFNetwork.framework in Frameworks */,
+				85014A9E1B359F8100E190C8 /* libc++.dylib in Frameworks */,
+				85014A9C1B359F7800E190C8 /* libicucore.dylib in Frameworks */,
 				85963FA21B34D264006E2868 /* MapKit.framework in Frameworks */,
 				DC7564BA9797941C8EBD4026 /* Pods_yesand.framework in Frameworks */,
 			);
@@ -87,6 +102,14 @@
 				174CA0AF3328B2CA967B07F4 /* Pods-yesandTests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		85014AA51B35A07500E190C8 /* DangerZone!! */ = {
+			isa = PBXGroup;
+			children = (
+				85963F851B34C8F7006E2868 /* Main.storyboard */,
+			);
+			name = "DangerZone!!";
 			sourceTree = "<group>";
 		};
 		85963F6C1B34C8F7006E2868 = {
@@ -115,11 +138,11 @@
 			children = (
 				85963F7C1B34C8F7006E2868 /* AppDelegate.h */,
 				85963F7D1B34C8F7006E2868 /* AppDelegate.m */,
-				85963F821B34C8F7006E2868 /* HomeViewController.h */,
-				85963F831B34C8F7006E2868 /* HomeViewController.m */,
-				85963F851B34C8F7006E2868 /* Main.storyboard */,
 				85963FA31B359D9C006E2868 /* AuthViewController.h */,
 				85963FA41B359D9C006E2868 /* AuthViewController.m */,
+				85963F821B34C8F7006E2868 /* HomeViewController.h */,
+				85963F831B34C8F7006E2868 /* HomeViewController.m */,
+				85014AA51B35A07500E190C8 /* DangerZone!! */,
 				85963F881B34C8F7006E2868 /* Images.xcassets */,
 				85963F8A1B34C8F7006E2868 /* LaunchScreen.xib */,
 				85963F7F1B34C8F7006E2868 /* yesand.xcdatamodeld */,
@@ -157,6 +180,11 @@
 		E3A497684CF78C658459E9BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				85014AA31B359F9700E190C8 /* SystemConfiguration.framework */,
+				85014AA11B359F9000E190C8 /* Security.framework */,
+				85014A9F1B359F8900E190C8 /* CFNetwork.framework */,
+				85014A9D1B359F8100E190C8 /* libc++.dylib */,
+				85014A9B1B359F7800E190C8 /* libicucore.dylib */,
 				5504428874710937E23AD880 /* Pods_yesand.framework */,
 				768A60BFCBC5945ED10E215F /* Pods_yesandTests.framework */,
 			);
