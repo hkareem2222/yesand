@@ -43,6 +43,7 @@
                   NSLog(@"error: %@", [error localizedDescription]);
               } else {
                   NSString *uid = [result objectForKey:@"uid"];
+                  [self savingUserData];
                   NSLog(@"Successfully created user account with uid: %@", uid);
               }
           }];
@@ -65,5 +66,33 @@
         [button setTitle:@"Log in" forState:UIControlStateNormal];
         [self.signUpButton setTitle:@"Sign up" forState:UIControlStateNormal];
     }
+}
+
+-(void)savingUserData {
+    [self.myRootRef authUser:self.emailField.text password:self.passwordField.text
+withCompletionBlock:^(NSError *error, FAuthData *authData) {
+    if (error) {
+        // Something went wrong. :(
+    } else {
+        // Authentication just completed successfully :)
+        // The logged in user's unique identifier
+        NSLog(@"%@", authData.uid);
+        // Create a new user dictionary accessing the user's info
+        // provided by the authData parameter
+        NSDictionary *newUser = @{
+                                  @"provider": authData.provider,
+                                  @"email": authData.providerData[@"email"]
+                                  };
+        // Create a child path with a key set to the uid underneath the "users" node
+        // This creates a URL path like the following:
+        //  - https://<YOUR-FIREBASE-APP>.firebaseio.com/users/<uid>
+        [[[self.myRootRef childByAppendingPath:@"users"]
+          childByAppendingPath:authData.uid] setValue:newUser];
+    }
+}];
+}
+
+-(IBAction)unwindToAuth:(UIStoryboardSegue *)segue {
+    
 }
 @end

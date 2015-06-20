@@ -12,6 +12,10 @@
 		85014AA01B359F8900E190C8 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85014A9F1B359F8900E190C8 /* CFNetwork.framework */; };
 		85014AA21B359F9000E190C8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85014AA11B359F9000E190C8 /* Security.framework */; };
 		85014AA41B359F9700E190C8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85014AA31B359F9700E190C8 /* SystemConfiguration.framework */; };
+		85014AA81B35AE8E00E190C8 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85014AA71B35AE8E00E190C8 /* ProfileViewController.m */; };
+		85014AAC1B35BD7400E190C8 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85014AAB1B35BD7400E190C8 /* ChatViewController.m */; };
+		85014AAF1B35C24C00E190C8 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 85014AAE1B35C24C00E190C8 /* User.m */; };
+		85014AB21B35C25800E190C8 /* Conversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 85014AB11B35C25800E190C8 /* Conversation.m */; };
 		85963F7B1B34C8F7006E2868 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 85963F7A1B34C8F7006E2868 /* main.m */; };
 		85963F7E1B34C8F7006E2868 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 85963F7D1B34C8F7006E2868 /* AppDelegate.m */; };
 		85963F811B34C8F7006E2868 /* yesand.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 85963F7F1B34C8F7006E2868 /* yesand.xcdatamodeld */; };
@@ -47,6 +51,14 @@
 		85014A9F1B359F8900E190C8 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		85014AA11B359F9000E190C8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		85014AA31B359F9700E190C8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		85014AA61B35AE8E00E190C8 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		85014AA71B35AE8E00E190C8 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		85014AAA1B35BD7400E190C8 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
+		85014AAB1B35BD7400E190C8 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		85014AAD1B35C24C00E190C8 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		85014AAE1B35C24C00E190C8 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		85014AB01B35C25800E190C8 /* Conversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Conversation.h; sourceTree = "<group>"; };
+		85014AB11B35C25800E190C8 /* Conversation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Conversation.m; sourceTree = "<group>"; };
 		85963F751B34C8F7006E2868 /* yesand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yesand.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85963F791B34C8F7006E2868 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85963F7A1B34C8F7006E2868 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -112,6 +124,32 @@
 			name = "DangerZone!!";
 			sourceTree = "<group>";
 		};
+		85014AA91B35AEAB00E190C8 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				85963FA31B359D9C006E2868 /* AuthViewController.h */,
+				85963FA41B359D9C006E2868 /* AuthViewController.m */,
+				85014AA61B35AE8E00E190C8 /* ProfileViewController.h */,
+				85014AA71B35AE8E00E190C8 /* ProfileViewController.m */,
+				85963F821B34C8F7006E2868 /* HomeViewController.h */,
+				85963F831B34C8F7006E2868 /* HomeViewController.m */,
+				85014AAA1B35BD7400E190C8 /* ChatViewController.h */,
+				85014AAB1B35BD7400E190C8 /* ChatViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		85014AB31B35C25E00E190C8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				85014AAD1B35C24C00E190C8 /* User.h */,
+				85014AAE1B35C24C00E190C8 /* User.m */,
+				85014AB01B35C25800E190C8 /* Conversation.h */,
+				85014AB11B35C25800E190C8 /* Conversation.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		85963F6C1B34C8F7006E2868 = {
 			isa = PBXGroup;
 			children = (
@@ -136,12 +174,10 @@
 		85963F771B34C8F7006E2868 /* yesand */ = {
 			isa = PBXGroup;
 			children = (
+				85014AB31B35C25E00E190C8 /* Model */,
 				85963F7C1B34C8F7006E2868 /* AppDelegate.h */,
 				85963F7D1B34C8F7006E2868 /* AppDelegate.m */,
-				85963FA31B359D9C006E2868 /* AuthViewController.h */,
-				85963FA41B359D9C006E2868 /* AuthViewController.m */,
-				85963F821B34C8F7006E2868 /* HomeViewController.h */,
-				85963F831B34C8F7006E2868 /* HomeViewController.m */,
+				85014AA91B35AEAB00E190C8 /* Controllers */,
 				85014AA51B35A07500E190C8 /* DangerZone!! */,
 				85963F881B34C8F7006E2868 /* Images.xcassets */,
 				85963F8A1B34C8F7006E2868 /* LaunchScreen.xib */,
@@ -390,10 +426,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85014AAF1B35C24C00E190C8 /* User.m in Sources */,
 				85963F811B34C8F7006E2868 /* yesand.xcdatamodeld in Sources */,
 				85963FA51B359D9C006E2868 /* AuthViewController.m in Sources */,
 				85963F7E1B34C8F7006E2868 /* AppDelegate.m in Sources */,
 				85963F841B34C8F7006E2868 /* HomeViewController.m in Sources */,
+				85014AA81B35AE8E00E190C8 /* ProfileViewController.m in Sources */,
+				85014AB21B35C25800E190C8 /* Conversation.m in Sources */,
+				85014AAC1B35BD7400E190C8 /* ChatViewController.m in Sources */,
 				85963F7B1B34C8F7006E2868 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

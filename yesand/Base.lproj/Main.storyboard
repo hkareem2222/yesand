@@ -5,10 +5,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Chat View Controller-->
         <scene sceneID="MGB-bI-eOr">
             <objects>
-                <viewController id="awu-7r-M4L" sceneMemberID="viewController">
+                <viewController id="awu-7r-M4L" customClass="ChatViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cNR-rv-t7g"/>
                         <viewControllerLayoutGuide type="bottom" id="ard-wm-WB7"/>
@@ -42,7 +42,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="457"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="mri-ws-XdE">
+                                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MessageID" id="mri-ws-XdE">
                                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mri-ws-XdE" id="dQv-0C-EwI">
@@ -50,6 +50,10 @@
                                                 </tableViewCellContentView>
                                             </tableViewCell>
                                         </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="awu-7r-M4L" id="xqA-Ev-9xw"/>
+                                            <outlet property="delegate" destination="awu-7r-M4L" id="hNv-IG-05P"/>
+                                        </connections>
                                     </tableView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -162,7 +166,7 @@
         <!--Username-->
         <scene sceneID="1Vk-Ef-vtf">
             <objects>
-                <viewController id="DSd-uC-qSp" sceneMemberID="viewController">
+                <viewController id="DSd-uC-qSp" customClass="ProfileViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XX8-Az-woW"/>
                         <viewControllerLayoutGuide type="bottom" id="Cwi-MO-jdh"/>
@@ -173,10 +177,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Username" id="K0h-w6-sAo">
-                        <barButtonItem key="rightBarButtonItem" title="Logout" id="6k4-B0-AX7"/>
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="6k4-B0-AX7">
+                            <connections>
+                                <action selector="onLogoutButtonPressed:" destination="DSd-uC-qSp" id="Ut5-RR-6Xw"/>
+                                <segue destination="o1v-yz-VNm" kind="unwind" identifier="ProfileToAuth" unwindAction="unwindToAuth:" id="rhj-dY-HlI"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mpt-su-ezl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="o1v-yz-VNm" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="274" y="1061"/>
         </scene>
@@ -303,10 +313,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="nwk-oR-gwo">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="94D-AG-c2p"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="94D-AG-c2p">
+                            <connections>
+                                <segue destination="teS-12-r56" kind="unwind" unwindAction="unwindToHome:" id="tfz-oQ-bZe"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6g0-Jm-QaE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="teS-12-r56" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1796" y="384"/>
         </scene>
