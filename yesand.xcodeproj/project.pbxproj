@@ -10,11 +10,13 @@
 		85963F7B1B34C8F7006E2868 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 85963F7A1B34C8F7006E2868 /* main.m */; };
 		85963F7E1B34C8F7006E2868 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 85963F7D1B34C8F7006E2868 /* AppDelegate.m */; };
 		85963F811B34C8F7006E2868 /* yesand.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 85963F7F1B34C8F7006E2868 /* yesand.xcdatamodeld */; };
-		85963F841B34C8F7006E2868 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85963F831B34C8F7006E2868 /* ViewController.m */; };
+		85963F841B34C8F7006E2868 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85963F831B34C8F7006E2868 /* HomeViewController.m */; };
 		85963F871B34C8F7006E2868 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85963F851B34C8F7006E2868 /* Main.storyboard */; };
 		85963F891B34C8F7006E2868 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85963F881B34C8F7006E2868 /* Images.xcassets */; };
 		85963F8C1B34C8F7006E2868 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85963F8A1B34C8F7006E2868 /* LaunchScreen.xib */; };
 		85963F981B34C8F7006E2868 /* yesandTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 85963F971B34C8F7006E2868 /* yesandTests.m */; };
+		85963FA21B34D264006E2868 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85963FA11B34D264006E2868 /* MapKit.framework */; };
+		85963FA51B359D9C006E2868 /* AuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85963FA41B359D9C006E2868 /* AuthViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,14 +36,17 @@
 		85963F7C1B34C8F7006E2868 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		85963F7D1B34C8F7006E2868 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		85963F801B34C8F7006E2868 /* yesand.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = yesand.xcdatamodel; sourceTree = "<group>"; };
-		85963F821B34C8F7006E2868 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		85963F831B34C8F7006E2868 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		85963F821B34C8F7006E2868 /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		85963F831B34C8F7006E2868 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		85963F861B34C8F7006E2868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		85963F881B34C8F7006E2868 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		85963F8B1B34C8F7006E2868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		85963F911B34C8F7006E2868 /* yesandTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = yesandTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		85963F961B34C8F7006E2868 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85963F971B34C8F7006E2868 /* yesandTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = yesandTests.m; sourceTree = "<group>"; };
+		85963FA11B34D264006E2868 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		85963FA31B359D9C006E2868 /* AuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthViewController.h; sourceTree = "<group>"; };
+		85963FA41B359D9C006E2868 /* AuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85963FA21B34D264006E2868 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +71,7 @@
 		85963F6C1B34C8F7006E2868 = {
 			isa = PBXGroup;
 			children = (
+				85963FA11B34D264006E2868 /* MapKit.framework */,
 				85963F771B34C8F7006E2868 /* yesand */,
 				85963F941B34C8F7006E2868 /* yesandTests */,
 				85963F761B34C8F7006E2868 /* Products */,
@@ -85,9 +92,11 @@
 			children = (
 				85963F7C1B34C8F7006E2868 /* AppDelegate.h */,
 				85963F7D1B34C8F7006E2868 /* AppDelegate.m */,
-				85963F821B34C8F7006E2868 /* ViewController.h */,
-				85963F831B34C8F7006E2868 /* ViewController.m */,
+				85963F821B34C8F7006E2868 /* HomeViewController.h */,
+				85963F831B34C8F7006E2868 /* HomeViewController.m */,
 				85963F851B34C8F7006E2868 /* Main.storyboard */,
+				85963FA31B359D9C006E2868 /* AuthViewController.h */,
+				85963FA41B359D9C006E2868 /* AuthViewController.m */,
 				85963F881B34C8F7006E2868 /* Images.xcassets */,
 				85963F8A1B34C8F7006E2868 /* LaunchScreen.xib */,
 				85963F7F1B34C8F7006E2868 /* yesand.xcdatamodeld */,
@@ -223,8 +232,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				85963F811B34C8F7006E2868 /* yesand.xcdatamodeld in Sources */,
+				85963FA51B359D9C006E2868 /* AuthViewController.m in Sources */,
 				85963F7E1B34C8F7006E2868 /* AppDelegate.m in Sources */,
-				85963F841B34C8F7006E2868 /* ViewController.m in Sources */,
+				85963F841B34C8F7006E2868 /* HomeViewController.m in Sources */,
 				85963F7B1B34C8F7006E2868 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -354,6 +364,7 @@
 				INFOPLIST_FILE = yesand/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -364,6 +375,7 @@
 				INFOPLIST_FILE = yesand/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
