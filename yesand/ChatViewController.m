@@ -14,35 +14,30 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *messageTextField;
 @property double keyboardHeight;
-
-
+@property NSMutableArray *messages;
+@property Conversation *conversation;
+@property Firebase *conversationsRef;
 @end
 
 @implementation ChatViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    Firebase *ref = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/conversations"];
-    Conversation *conversation = [Conversation new];
-    conversation.userID = @"123";
-    conversation.messages = @[@"test", @"testing", @"test"];
-//    NSDictionary *alanisawesome = @{
-//                                    @"full_name" : @"Alan Turing",
-//                                    @"date_of_birth": @"June 23, 1912"
-//                                    };
-//    NSDictionary *gracehop = @{
-//                               @"full_name" : @"Grace Hopper",
-//                               @"date_of_birth": @"December 9, 1906"
-//                               };
-//    Firebase *conversationsRef = [ref childByAppendingPath: @"conversations"];
-    NSDictionary *conversations = @{
-                            @"userID": conversation.userID,
-                            @"messages": conversation.messages
-                            };
-    [ref setValue: conversations];
+    self.conversationsRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/conversations"];
+    self.conversation = [Conversation new];
+    self.messages = [NSMutableArray new];
+}
 
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardDidShowNotification object:nil];
+- (IBAction)onSendButtonTapped:(UIButton *)sender {
+    self.conversation.userID = @"123";
+    [self.messages addObject:self.messageTextField.text];
+    self.conversation.messages = self.messages;
+    NSDictionary *convo = @{
+                            @"userID": self.conversation.userID,
+                            @"messages": self.conversation.messages
+                            };
+    Firebase *convoRef = [self.conversationsRef childByAutoId];
+    [convoRef setValue:convo];
 }
 
 #pragma mark - Scroll View Animation
@@ -85,10 +80,6 @@
 
 
 #pragma mark - Table View
-
-- (IBAction)onSendButtonTapped:(UIButton *)sender {
-}
-
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 0;

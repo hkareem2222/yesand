@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface Conversation : NSObject
-@property NSArray *messages;
+@property NSMutableArray *messages;
 @property NSString *userID;
 @end
