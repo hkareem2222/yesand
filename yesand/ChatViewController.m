@@ -12,11 +12,11 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UITextField *messageTextField;
 @property double keyboardHeight;
 @property NSMutableArray *messages;
 @property Conversation *conversation;
 @property Firebase *conversationsRef;
+@property (weak, nonatomic) IBOutlet UITextField *messageTextField;
 @end
 
 @implementation ChatViewController
@@ -28,7 +28,7 @@
     self.messages = [NSMutableArray new];
 }
 
-- (IBAction)onSendButtonTapped:(UIButton *)sender {
+- (IBAction)onSendButtonTapped:(id)sender {
     self.conversation.userID = @"123";
     [self.messages addObject:self.messageTextField.text];
     self.conversation.messages = self.messages;
