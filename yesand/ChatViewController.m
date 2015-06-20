@@ -14,8 +14,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property double keyboardHeight;
 @property (weak, nonatomic) IBOutlet UITextField *messageTextField;
-
-
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textFieldBottomLayout;
+@property NSArray *testMessages;
 @end
 
 @implementation ChatViewController
@@ -43,18 +43,21 @@
 
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardDidShowNotification object:nil];
+
+    self.testMessages = @[@"Test 1", @"Test TWO", @"Test THree", @"Test Four", @"Test 5", @"Test 6", @"Test 7", @"Test 8", @"Test 9", @"Test 10", @"Test 11"];
+    [self.tableView reloadData];
 }
 
 
 - (IBAction)onSendButtonTapped:(id)sender {
+    [self.messageTextField resignFirstResponder];
+    self.textFieldBottomLayout.constant = 0;
 }
 
 #pragma mark - Scroll View Animation
 
 -(void)keyboardOnScreen:(NSNotification *)notification
 {
-    CGPoint scrollPoint = CGPointMake(0, _keyboardHeight);
-    [_scrollView setContentOffset:scrollPoint animated:YES];
     NSDictionary *info  = notification.userInfo;
     NSValue      *value = info[UIKeyboardFrameEndUserInfoKey];
 
@@ -63,28 +66,14 @@
 
     NSLog(@"keyboardFrame: %@", NSStringFromCGRect(keyboardFrame));
     NSLog(@"keyboard height: %f", keyboardFrame.size.height);
+    NSLog(@"------------- %f", rawFrame.size.height);
 
-    _keyboardHeight = keyboardFrame.size.height;
-    CGPoint scrollPointTwo = CGPointMake(0, _keyboardHeight);
-    [_scrollView setContentOffset:scrollPointTwo animated:YES];
-    NSLog(@"keyboard height variable: %f", _keyboardHeight);
+    self.textFieldBottomLayout.constant = keyboardFrame.size.height - 50;
 }
 
--(void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    CGPoint scrollPoint = CGPointMake(0, _keyboardHeight);
-    [_scrollView setContentOffset:scrollPoint animated:YES];
-    NSLog(@"keyboard height variable: %f", _keyboardHeight);
-}
 
--(void)textFieldDidEndEditing:(UITextField *)textField
-{
-    [_scrollView setContentOffset:CGPointZero animated:YES];
-}
 
--(void)dismissKeyboard
-{
-    [self.messageTextField resignFirstResponder];
+-(void)textFieldDidBeginEditing:(UITextField *)textField {
 }
 
 
@@ -92,11 +81,12 @@
 
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return self.testMessages.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MessageID"];
+    cell.textLabel.text = self.testMessages[indexPath.row];
     return cell;
 }
 @end
