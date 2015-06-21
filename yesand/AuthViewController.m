@@ -81,7 +81,8 @@ withCompletionBlock:^(NSError *error, FAuthData *authData) {
         // provided by the authData parameter
         NSDictionary *newUser = @{
                                   @"provider": authData.provider,
-                                  @"email": authData.providerData[@"email"]
+                                  @"email": authData.providerData[@"email"],
+                                  @"isAvailable": @0
                                   };
         // Create a child path with a key set to the uid underneath the "users" node
         // This creates a URL path like the following:

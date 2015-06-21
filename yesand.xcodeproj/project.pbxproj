@@ -28,6 +28,7 @@
 		85963FA51B359D9C006E2868 /* AuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85963FA41B359D9C006E2868 /* AuthViewController.m */; };
 		AB489B11564C56828C4160D5 /* Pods_yesandTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 768A60BFCBC5945ED10E215F /* Pods_yesandTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		DC7564BA9797941C8EBD4026 /* Pods_yesand.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5504428874710937E23AD880 /* Pods_yesand.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		F920C1301B3752A5001EBC22 /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F920C12F1B3752A5001EBC22 /* SplashViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,8 @@
 		85963FA31B359D9C006E2868 /* AuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthViewController.h; sourceTree = "<group>"; };
 		85963FA41B359D9C006E2868 /* AuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthViewController.m; sourceTree = "<group>"; };
 		9C0EFA0CC469F195C6151240 /* Pods-yesandTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yesandTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-yesandTests/Pods-yesandTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F920C12E1B3752A5001EBC22 /* SplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashViewController.h; sourceTree = "<group>"; };
+		F920C12F1B3752A5001EBC22 /* SplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +130,8 @@
 		85014AA91B35AEAB00E190C8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F920C12E1B3752A5001EBC22 /* SplashViewController.h */,
+				F920C12F1B3752A5001EBC22 /* SplashViewController.m */,
 				85963FA31B359D9C006E2868 /* AuthViewController.h */,
 				85963FA41B359D9C006E2868 /* AuthViewController.m */,
 				85014AA61B35AE8E00E190C8 /* ProfileViewController.h */,
@@ -431,6 +436,7 @@
 				85963FA51B359D9C006E2868 /* AuthViewController.m in Sources */,
 				85963F7E1B34C8F7006E2868 /* AppDelegate.m in Sources */,
 				85963F841B34C8F7006E2868 /* HomeViewController.m in Sources */,
+				F920C1301B3752A5001EBC22 /* SplashViewController.m in Sources */,
 				85014AA81B35AE8E00E190C8 /* ProfileViewController.m in Sources */,
 				85014AB21B35C25800E190C8 /* Conversation.m in Sources */,
 				85014AAC1B35BD7400E190C8 /* ChatViewController.m in Sources */,
