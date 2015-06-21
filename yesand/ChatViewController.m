@@ -44,6 +44,9 @@
     } withCancelBlock:^(NSError *error) {
         NSLog(@"%@", error.description);
     }];
+
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardDidShowNotification object:nil];
 }
 
 - (IBAction)onSendButtonTapped:(id)sender {
