@@ -20,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *messageTextField;
 @property Firebase *convoRef;
 @property Firebase *rootRef;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textFieldBottomLayout;
+@property NSArray *testMessages;
 @end
 
 @implementation ChatViewController
@@ -53,14 +55,14 @@
                             @"messages": self.conversation.messages
                             };
     [self.convoRef setValue:convo];
+    [self.messageTextField resignFirstResponder];
+    self.textFieldBottomLayout.constant = 0;
 }
 
 #pragma mark - Scroll View Animation
 
 -(void)keyboardOnScreen:(NSNotification *)notification
 {
-    CGPoint scrollPoint = CGPointMake(0, _keyboardHeight);
-    [_scrollView setContentOffset:scrollPoint animated:YES];
     NSDictionary *info  = notification.userInfo;
     NSValue      *value = info[UIKeyboardFrameEndUserInfoKey];
 
@@ -69,28 +71,14 @@
 
     NSLog(@"keyboardFrame: %@", NSStringFromCGRect(keyboardFrame));
     NSLog(@"keyboard height: %f", keyboardFrame.size.height);
+    NSLog(@"------------- %f", rawFrame.size.height);
 
-    _keyboardHeight = keyboardFrame.size.height;
-    CGPoint scrollPointTwo = CGPointMake(0, _keyboardHeight);
-    [_scrollView setContentOffset:scrollPointTwo animated:YES];
-    NSLog(@"keyboard height variable: %f", _keyboardHeight);
+    self.textFieldBottomLayout.constant = keyboardFrame.size.height - 50;
 }
 
--(void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    CGPoint scrollPoint = CGPointMake(0, _keyboardHeight);
-    [_scrollView setContentOffset:scrollPoint animated:YES];
-    NSLog(@"keyboard height variable: %f", _keyboardHeight);
-}
 
--(void)textFieldDidEndEditing:(UITextField *)textField
-{
-    [_scrollView setContentOffset:CGPointZero animated:YES];
-}
 
--(void)dismissKeyboard
-{
-    [self.messageTextField resignFirstResponder];
+-(void)textFieldDidBeginEditing:(UITextField *)textField {
 }
 
 
