@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property double keyboardHeight;
 @property NSMutableArray *localMessages;
-@property Conversation *conversation;
+//@property Conversation *conversation;
 @property NSArray *cloudMessages;
 @property Firebase *conversationsRef;
 @property (weak, nonatomic) IBOutlet UITextField *messageTextField;
@@ -29,37 +29,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.rootRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
-    self.conversationsRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/conversations"];
-    self.conversation = [Conversation new];
+    NSString *stringWithUID = [NSString stringWithFormat:@"https://yesand.firebaseio.com/conversations/%@", self.rootRef.authData.uid];
     self.localMessages = [NSMutableArray new];
-    self.convoRef = [self.conversationsRef childByAutoId];
-    // Get a reference to our posts
-//    Firebase *ref = [[Firebase alloc] initWithUrl: @"https://docs-examples.firebaseio.com/web/saving-data/fireblog/posts"];
-    // Get the data on a post that has changed
-    // Attach a block to read the data at our posts reference
-    [self.conversationsRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        NSArray *currentUserMessages = [snapshot.value[self.convoRef.key] objectForKey:@"messages"];
-        self.cloudMessages = currentUserMessages;
-        [self.tableView reloadData];
-    } withCancelBlock:^(NSError *error) {
-        NSLog(@"%@", error.description);
-    }];
+    self.conversationsRef = [[Firebase alloc] initWithUrl:stringWithUID];
 
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardDidShowNotification object:nil];
 }
 
 - (IBAction)onSendButtonTapped:(id)sender {
-    self.conversation.userID = self.rootRef.authData.uid;
     [self.localMessages addObject:self.messageTextField.text];
-    self.conversation.messages = self.localMessages;
-    NSDictionary *convo = @{
-                            @"userID": self.conversation.userID,
-                            @"messages": self.conversation.messages
-                            };
-    [self.convoRef setValue:convo];
+    NSDictionary *conversation = @{
+                                   @"messages": self.localMessages
+                                   };
+    [self.conversationsRef setValue:conversation];
+
     [self.messageTextField resignFirstResponder];
     self.textFieldBottomLayout.constant = 0;
+    self.messageTextField.text = @"";
 }
 
 #pragma mark - Scroll View Animation
@@ -88,12 +75,11 @@
 #pragma mark - Table View
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.cloudMessages.count;
+    return 0;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MessageID"];
-    cell.textLabel.text = self.cloudMessages[indexPath.row];
     return cell;
 }
 @end
