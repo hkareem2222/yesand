@@ -9,34 +9,31 @@
 #import "SplashViewController.h"
 
 @interface SplashViewController ()
-
+@property NSMutableArray *availableUsers;
 @end
 
 @implementation SplashViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.availableUsers = [NSMutableArray new];
     Firebase *ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
 
-//    // Attach a block to read the data at our posts reference
-//    [ref observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-//
-//        NSArray *array = snapshot.value;
-////        NSUInteger randomInt = arc4random_uniform((int)array.count);
-//
-//        NSLog(@"-- %@", array);
-//    } withCancelBlock:^(NSError *error) {
-//        NSLog(@"%@", error.description);
-//    }];
-
-    [[[ref queryOrderedByChild:@"isAvailable"] queryEqualToValue:@1]
-     observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
-         NSLog(@"-------------- %@", snapshot.key);
-     }];
-    // Get the data on a post that has been removed
-    [[[ref queryOrderedByChild:@"isAvailable"] queryEqualToValue:@1]
-     observeEventType:FEventTypeChildRemoved withBlock:^(FDataSnapshot *snapshot) {
-        NSLog(@"_______DELETED_______ %@", snapshot.key);
+    [ref observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        for (FDataSnapshot *user in snapshot.children) {
+            NSString *userString = [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@", user.key];
+            Firebase *userRef = [[Firebase alloc] initWithUrl:userString];
+            [userRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+                if ([snapshot.value[@"isAvailable"] isEqualToNumber:@1]) {
+                    [self.availableUsers addObject:snapshot.value];
+                    //self.availableUsers holds a dictionaries of users
+                }
+            } withCancelBlock:^(NSError *error) {
+                NSLog(@"%@", error.description);
+            }];
+        }
+    } withCancelBlock:^(NSError *error) {
+        NSLog(@"%@", error.description);
     }];
 }
 
