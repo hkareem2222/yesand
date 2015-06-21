@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <Firebase/Firebase.h>
 @interface Conversation : NSObject
 @property NSMutableArray *messages;
 @property NSString *userID;
