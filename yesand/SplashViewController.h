@@ -1,16 +1,14 @@
 //
-//  HomeViewController.h
+//  SplashViewController.h
 //  yesand
 //
-//  Created by Husein Kareem on 6/19/15.
+//  Created by Joseph DiVittorio on 6/21/15.
 //  Copyright (c) 2015 Meduse. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import <Firebase/Firebase.h>
 
-@interface HomeViewController : UIViewController
-
+@interface SplashViewController : UIViewController
 
 @end
-

@@ -16,6 +16,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Get a reference to our posts
+}
+
+- (IBAction)onYesAndTapped:(UIButton *)sender {
+    Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
+    Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
+    NSDictionary *isAvailable = @{@"isAvailable": @1};
+    [user updateChildValues: isAvailable];
 }
 
 #pragma mark - Table View
