@@ -35,10 +35,8 @@
         NSMutableArray *usersArray = [NSMutableArray new];
         for (FDataSnapshot *user in snapshot.children) {
             if (![user.value[@"email"] isEqualToString:self.currentUserEmail]) {
-                if ([user.value[@"isPair"] isEqualToNumber:@0]) {
-                    if ([user.value[@"isAvailable"] isEqualToNumber:@1]) {
-                        [usersArray addObject:user.value];
-                    }
+                if ([user.value[@"isPair"] isEqualToNumber:@0] && [user.value[@"isAvailable"] isEqualToNumber:@1]) {
+                    [usersArray addObject:user.value];
                 }
             }
         }
@@ -47,22 +45,24 @@
 
         [usersArray sortUsingDescriptors: arrayOfDescriptors];
         self.availableUsers = usersArray;
-        if (self.availableUsers.count != 0) {
+//        if (self.availableUsers.count != 0) {
             [self pairUsers];
-        }
+//        }
         NSLog(@"------- AVAILABLE %@", self.availableUsers);
     }];
 }
 
 -(void)pairUsers {
-    NSArray *pairedUsers = @[self.currentUserEmail, self.availableUsers.firstObject[@"email"]];
-    self.otherUserLabel.text = self.availableUsers.firstObject[@"email"];
-    NSDictionary *userDic = @{@"isPair": @1
-                              };
-    Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
-    Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
-    [user updateChildValues:userDic];
-    NSLog(@"pairedUsers: %@", pairedUsers);
+    if (self.availableUsers.firstObject[@"email"] != nil) {
+        NSArray *pairedUsers = @[self.currentUserEmail, self.availableUsers.firstObject[@"email"]];
+        self.otherUserLabel.text = self.availableUsers.firstObject[@"email"];
+        NSDictionary *userDic = @{@"isPair": @1
+                                  };
+        Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
+        Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
+        [user updateChildValues:userDic];
+        NSLog(@"pairedUsers: %@", pairedUsers);
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
