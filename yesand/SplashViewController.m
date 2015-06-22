@@ -68,8 +68,10 @@
 -(void)viewWillDisappear:(BOOL)animated {
     Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
     Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
-    NSDictionary *isAvailable = @{@"isAvailable": @0};
-    [user updateChildValues: isAvailable];
+    NSDictionary *userDic = @{@"isAvailable": @0,
+                              @"isPair": @0
+                              };
+    [user updateChildValues: userDic];
 }
 
 @end
