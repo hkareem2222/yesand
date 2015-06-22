@@ -23,7 +23,10 @@
     Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
     Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
     NSDictionary *isAvailable = @{@"isAvailable": @1};
-    [user updateChildValues: isAvailable];
+    NSDictionary *updateAt = @{@"updateAt": kFirebaseServerValueTimestamp};
+    
+    [user updateChildValues:isAvailable];
+    [user updateChildValues:updateAt];
 }
 
 #pragma mark - Table View
