@@ -23,7 +23,8 @@
     Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
     Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
     NSDictionary *userDic = @{@"isAvailable": @1,
-                                  @"updateAt": kFirebaseServerValueTimestamp
+                                  @"updateAt": kFirebaseServerValueTimestamp,
+                                @"isPair": @0
                                   };
     
     [user updateChildValues:userDic];
