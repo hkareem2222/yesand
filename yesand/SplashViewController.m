@@ -62,6 +62,14 @@
         Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
         [user updateChildValues:userDic];
         NSLog(@"pairedUsers: %@", pairedUsers);
+    } else {
+        NSArray *pairedUsers = @[self.currentUserEmail, @"not paired"];
+        self.otherUserLabel.text = @"not paired";
+        NSDictionary *userDic = @{@"isPair": @0
+                                  };
+        Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
+        Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
+        [user updateChildValues:userDic];
     }
 }
 
