@@ -26,7 +26,7 @@
             [userRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
                 if ([snapshot.value[@"isAvailable"] isEqualToNumber:@1]) {
                     [self.availableUsers addObject:snapshot.value];
-                    //self.availableUsers holds a dictionaries of users
+                    NSLog(@"%@", snapshot.key);
                 }
             } withCancelBlock:^(NSError *error) {
                 NSLog(@"%@", error.description);
