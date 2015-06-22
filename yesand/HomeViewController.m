@@ -22,11 +22,11 @@
 - (IBAction)onYesAndTapped:(UIButton *)sender {
     Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
     Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
-    NSDictionary *isAvailable = @{@"isAvailable": @1};
-    NSDictionary *updateAt = @{@"updateAt": kFirebaseServerValueTimestamp};
+    NSDictionary *userDic = @{@"isAvailable": @1,
+                                  @"updateAt": kFirebaseServerValueTimestamp
+                                  };
     
-    [user updateChildValues:isAvailable];
-    [user updateChildValues:updateAt];
+    [user updateChildValues:userDic];
 }
 
 #pragma mark - Table View
