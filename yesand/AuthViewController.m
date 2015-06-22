@@ -82,7 +82,8 @@ withCompletionBlock:^(NSError *error, FAuthData *authData) {
         NSDictionary *newUser = @{
                                   @"provider": authData.provider,
                                   @"email": authData.providerData[@"email"],
-                                  @"isAvailable": @0
+                                  @"isAvailable": @0,
+                                  @"updateAt": kFirebaseServerValueTimestamp
                                   };
         // Create a child path with a key set to the uid underneath the "users" node
         // This creates a URL path like the following:

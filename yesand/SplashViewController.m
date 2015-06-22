@@ -10,23 +10,37 @@
 
 @interface SplashViewController ()
 @property NSMutableArray *availableUsers;
+@property NSUInteger indexOfCurrentUser;
+
 @end
 
 @implementation SplashViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.availableUsers = [NSMutableArray new];
     Firebase *ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
+    self.availableUsers = [NSMutableArray new];
 
     [ref observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        NSLog(@"%@", snapshot.children);
+        NSLog(@"---- %lu", snapshot.childrenCount);
         for (FDataSnapshot *user in snapshot.children) {
             NSString *userString = [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@", user.key];
             Firebase *userRef = [[Firebase alloc] initWithUrl:userString];
-            [userRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+            [[userRef queryOrderedByChild:@"updateAt"] observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
                 if ([snapshot.value[@"isAvailable"] isEqualToNumber:@1]) {
-                    [self.availableUsers addObject:snapshot.value];
+                    if (![self.availableUsers containsObject:snapshot.key]) {
+                        [self.availableUsers addObject:snapshot.key];
+                    }
                     //self.availableUsers holds a dictionaries of users
+                    NSLog(@"%@", self.availableUsers);
+                    self.indexOfCurrentUser = [self.availableUsers indexOfObject:ref.authData.uid];
+                    NSLog(@"---- INDEX %lu", self.indexOfCurrentUser);
+                }
+                if ([snapshot.value[@"isAvailable"] isEqualToNumber:@0]) {
+                    if ([self.availableUsers containsObject:snapshot.key]) {
+                        [self.availableUsers removeObject:snapshot.key];
+                    }
                 }
             } withCancelBlock:^(NSError *error) {
                 NSLog(@"%@", error.description);
@@ -35,6 +49,8 @@
     } withCancelBlock:^(NSError *error) {
         NSLog(@"%@", error.description);
     }];
+
+
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
