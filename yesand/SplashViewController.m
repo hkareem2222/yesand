@@ -13,7 +13,7 @@
 @property NSUInteger indexOfCurrentUser;
 @property (weak, nonatomic) IBOutlet UILabel *currentUserLabel;
 @property (weak, nonatomic) IBOutlet UILabel *otherUserLabel;
-
+@property NSString *currentUserEmail;
 @end
 
 @implementation SplashViewController
@@ -26,6 +26,7 @@
     Firebase *currentUserRef = [[Firebase alloc] initWithUrl:currentUserString];
     [currentUserRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         self.currentUserLabel.text = snapshot.value[@"email"];
+        self.currentUserEmail = snapshot.value[@"email"];
     }];
     Firebase *usersRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/users"];
 
@@ -33,8 +34,10 @@
     [usersRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         NSMutableArray *usersArray = [NSMutableArray new];
         for (FDataSnapshot *user in snapshot.children) {
-            if ([user.value[@"isAvailable"] isEqualToNumber:@1]) {
-                [usersArray addObject:user.value];
+            if (![user.value[@"email"] isEqualToString:self.currentUserEmail]) {
+                if ([user.value[@"isAvailable"] isEqualToNumber:@1]) {
+                    [usersArray addObject:user.value];
+                }
             }
         }
         NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"updateAt" ascending:YES];
@@ -42,8 +45,18 @@
 
         [usersArray sortUsingDescriptors: arrayOfDescriptors];
         self.availableUsers = usersArray;
+        if (self.availableUsers.count != 0) {
+            [self pairUsers];
+        }
         NSLog(@"------- AVAILABLE %@", self.availableUsers);
     }];
+}
+
+-(void)pairUsers {
+    NSArray *pairedUsers = @[self.currentUserEmail, self.availableUsers.firstObject[@"email"]];
+    self.otherUserLabel.text = self.availableUsers.firstObject[@"email"];
+    NSLog(@"pairedUsers: %@", pairedUsers);
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated {

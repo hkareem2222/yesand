@@ -330,6 +330,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="currentUserLabel" destination="EeD-XM-gRQ" id="xVs-XU-jUZ"/>
+                        <outlet property="otherUserLabel" destination="RaT-xK-Kul" id="P1D-LJ-bHj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6g0-Jm-QaE" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="teS-12-r56" userLabel="Exit" sceneMemberID="exit"/>
