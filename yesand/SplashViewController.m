@@ -74,6 +74,7 @@
         if (self.indexOfCurrentUser + 1 < self.availableUsers.count) {
             self.otherUser = self.availableUsers[self.indexOfCurrentUser + 1];
             self.otherUserEmail = [self.otherUser objectForKey:@"email"];
+            self.otherUserLabel.text = [self.otherUser objectForKey:@"email"];
             self.currentUserCharacter.text = self.currentUserCharacterOne;
             self.otherUserCharacter.text = self.currentUserCharacterTwo;
             self.topicLabel.text = self.currentUserTopic;
