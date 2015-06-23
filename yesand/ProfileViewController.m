@@ -9,7 +9,17 @@
 #import "ProfileViewController.h"
 
 @interface ProfileViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *editUsername;
+@property (weak, nonatomic) IBOutlet UILabel *starsCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *upVotesCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *followersCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *followingCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *profileHeadingLabel;
+@property (weak, nonatomic) IBOutlet UILabel *profileSubheadingLabel;
+@property (weak, nonatomic) IBOutlet UILabel *profileLinkLabel;
+
+
+
+
 
 @end
 
@@ -33,5 +43,7 @@
     Firebase *ref = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
     [ref unauth];
 }
+
+
 
 @end
