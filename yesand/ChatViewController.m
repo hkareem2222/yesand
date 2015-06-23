@@ -36,70 +36,69 @@
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardWillShowNotification object:nil];
 
+    self.cloudMessages = [NSMutableArray new];
 
+    //shitty way to do it change later
+//    [self performSelector:@selector(makeNotAvailable) withObject:nil afterDelay:10.0];
+    [self queryConversation];
 }
 
-#pragma mark - Sending Message
-//move querying outside
-- (IBAction)onSendButtonTapped:(id)sender {
+#pragma mark - Query Conversation
+
+-(void)queryConversation {
     NSString * currentUserString = [self.currentUserEmail stringByReplacingOccurrencesOfString:@"." withString:@""];
     NSString * otherUserString = [self.otherUserEmail stringByReplacingOccurrencesOfString:@"." withString:@""];
     if (self.isEven) {
-        Firebase *currentConvo = [self.conversationsRef childByAppendingPath: currentUserString];
-        [self.localMessages addObject:self.messageTextField.text];
-        NSDictionary *conversation = @{
-                                       @"messages": self.localMessages
-                                       };
-        [currentConvo updateChildValues:conversation];
+        self.convoRef = [self.conversationsRef childByAppendingPath: currentUserString];
 
-        [self.messageTextField resignFirstResponder];
-        self.textFieldBottomLayout.constant = 0;
-        self.messageTextField.text = @"";
-
-        [currentConvo observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        [self.convoRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
             if (![snapshot.value isEqual:[NSNull null]]) {
                 NSLog(@"%@", snapshot.value[@"messages"]);
                 self.currentUserMessages = snapshot.value[@"messages"];
                 self.cloudMessages = [NSMutableArray new];
                 [self.cloudMessages addObjectsFromArray:self.currentUserMessages];
                 [self.tableView reloadData];
-                Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
-                Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
-                NSDictionary *userDic = @{@"isAvailable": @0
-                                          };
-                [user updateChildValues: userDic];
             }
         } withCancelBlock:^(NSError *error) {
             NSLog(@"%@", error.description);
         }];
     } else {
-        Firebase *otherConvo = [self.conversationsRef childByAppendingPath: otherUserString];
-        [self.localMessages addObject:self.messageTextField.text];
-        NSDictionary *conversation = @{
-                                       @"messages": self.localMessages
-                                       };
-        [otherConvo updateChildValues:conversation];
-        [self.messageTextField resignFirstResponder];
-        self.textFieldBottomLayout.constant = 0;
-        self.messageTextField.text = @"";
+        self.convoRef = [self.conversationsRef childByAppendingPath: otherUserString];
 
-        [otherConvo observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        [self.convoRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
             NSLog(@"%@", snapshot.value);
             if (![snapshot.value isEqual:[NSNull null]]) {
                 self.otherUserMessages = snapshot.value[@"messages"];
                 self.cloudMessages = [NSMutableArray new];
                 [self.cloudMessages addObjectsFromArray:self.otherUserMessages];
                 [self.tableView reloadData];
-                Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
-                Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
-                NSDictionary *userDic = @{@"isAvailable": @0
-                                          };
-                [user updateChildValues: userDic];
             }
         } withCancelBlock:^(NSError *error) {
             NSLog(@"%@", error.description);
         }];
     }
+
+}
+
+#pragma mark - Sending Message
+- (IBAction)onSendButtonTapped:(id)sender {
+    [self.cloudMessages addObject:self.messageTextField.text];
+    NSDictionary *conversation = @{
+                                   @"messages": self.cloudMessages
+                                   };
+    [self.convoRef updateChildValues:conversation];
+    [self.messageTextField resignFirstResponder];
+    self.textFieldBottomLayout.constant = 0;
+    self.messageTextField.text = @"";
+}
+
+//hacky way to do things but will change later
+-(void)makeNotAvailable {
+    Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
+    Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
+    NSDictionary *userDic = @{@"isAvailable": @0
+                              };
+    [user updateChildValues: userDic];
 }
 
 #pragma mark - Scroll View Animation
