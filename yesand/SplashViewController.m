@@ -35,7 +35,7 @@
         NSMutableArray *usersArray = [NSMutableArray new];
         for (FDataSnapshot *user in snapshot.children) {
             if (![user.value[@"email"] isEqualToString:self.currentUserEmail]) {
-                if ([user.value[@"isPair"] isEqualToNumber:@0] && [user.value[@"isAvailable"] isEqualToNumber:@1]) {
+                if ([user.value[@"isAvailable"] isEqualToNumber:@1]) {
                     [usersArray addObject:user.value];
                 }
             }
@@ -56,22 +56,21 @@
     if (self.availableUsers.firstObject[@"email"] != nil) {
         NSArray *pairedUsers = @[self.currentUserEmail, self.availableUsers.firstObject[@"email"]];
         self.otherUserLabel.text = self.availableUsers.firstObject[@"email"];
-        NSDictionary *userDic = @{@"isPair": @1
-                                  };
-        Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
-        Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
-        [user updateChildValues:userDic];
         NSLog(@"pairedUsers: %@", pairedUsers);
     } else {
-        NSArray *pairedUsers = @[self.currentUserEmail, @"not paired"];
-        self.otherUserLabel.text = @"not paired";
-        NSDictionary *userDic = @{@"isPair": @0
-                                  };
-        Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
-        Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
-        [user updateChildValues:userDic];
+        self.otherUserLabel.text = @"finding user";
     }
 }
+//
+//-(void)unpairUsers {
+//    NSArray *pairedUsers = @[self.currentUserEmail, @"not paired"];
+//    self.otherUserLabel.text = @"not paired";
+//    NSDictionary *userDic = @{@"isPair": @0
+//                              };
+//    Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
+//    Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
+//    [user updateChildValues:userDic];
+//}
 
 -(void)viewWillDisappear:(BOOL)animated {
     Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
