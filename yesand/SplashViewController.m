@@ -10,6 +10,9 @@
 #import "ChatViewController.h"
 
 @interface SplashViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *topicLabel;
+@property (weak, nonatomic) IBOutlet UILabel *currentUserCharacter;
+@property (weak, nonatomic) IBOutlet UILabel *otherUserCharacter;
 @property NSMutableArray *availableUsers;
 @property NSUInteger indexOfCurrentUser;
 @property (weak, nonatomic) IBOutlet UILabel *currentUserLabel;
