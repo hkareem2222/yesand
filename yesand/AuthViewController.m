@@ -45,6 +45,7 @@
                   NSString *uid = [result objectForKey:@"uid"];
                   [self savingUserData];
                   NSLog(@"Successfully created user account with uid: %@", uid);
+                  [self performSegueWithIdentifier:@"AuthToHome" sender:self];
               }
           }];
     } else {
@@ -54,6 +55,7 @@
           NSLog(@"error logging in: %@", [error localizedDescription]);
       } else {
           NSLog(@"logged in");
+          [self performSegueWithIdentifier:@"AuthToHome" sender:self];
       }
   }];
     }
@@ -83,7 +85,7 @@ withCompletionBlock:^(NSError *error, FAuthData *authData) {
                                   @"character one": @"test",
                                   @"character two": @"test",
                                   @"topic name":@"test",
-                                  @"username": [authData.providerData[@"email"] stringByReplacingOccurrencesOfString:@"." withString:@""]
+                                  @"username": self.usernameField.text
                                   };
 
         [[[self.myRootRef childByAppendingPath:@"users"]
@@ -93,6 +95,5 @@ withCompletionBlock:^(NSError *error, FAuthData *authData) {
 }
 
 -(IBAction)unwindToAuth:(UIStoryboardSegue *)segue {
-    [self.myRootRef removeAllObservers];
 }
 @end
