@@ -50,7 +50,7 @@
         NSDictionary *conversation = @{
                                        @"messages": self.localMessages
                                        };
-        [currentConvo setValue:conversation];
+        [currentConvo updateChildValues:conversation];
 
         [self.messageTextField resignFirstResponder];
         self.textFieldBottomLayout.constant = 0;
@@ -73,7 +73,7 @@
         NSDictionary *conversation = @{
                                        @"messages": self.localMessages
                                        };
-        [otherConvo setValue:conversation];
+        [otherConvo updateChildValues:conversation];
         [self.messageTextField resignFirstResponder];
         self.textFieldBottomLayout.constant = 0;
         self.messageTextField.text = @"";
