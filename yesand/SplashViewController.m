@@ -39,7 +39,6 @@
         self.currentUserTopic = snapshot.value[@"topic name"];
         self.currentUserCharacterOne = snapshot.value[@"character one"];
         self.currentUserCharacterTwo = snapshot.value[@"character two"];
-
     }];
     Firebase *usersRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/users"];
 
