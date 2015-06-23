@@ -10,8 +10,6 @@
 #import <Firebase/Firebase.h>
 #import "Conversation.h"
 @interface ChatViewController : UIViewController
-@property NSString *currentUserEmail;
-@property NSString *otherUserEmail;
 @property NSString *currentUsername;
 @property NSString *otherUsername;
 @property BOOL isEven;

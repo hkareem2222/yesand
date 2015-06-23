@@ -23,6 +23,8 @@
 @property NSString *currentUserTopic;
 @property NSString *currentUserCharacterOne;
 @property NSString *currentUserCharacterTwo;
+@property Firebase *usersRef;
+@property Firebase *ref;
 @end
 
 @implementation SplashViewController
@@ -30,8 +32,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.availableUsers = [NSMutableArray new];
-    Firebase *ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com"];
-    NSString *currentUserString = [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@", ref.authData.uid];
+    self.ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com"];
+    NSString *currentUserString = [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@", self.ref.authData.uid];
     Firebase *currentUserRef = [[Firebase alloc] initWithUrl:currentUserString];
     [currentUserRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         self.currentUsername = snapshot.value[@"username"];
@@ -40,10 +42,10 @@
         self.currentUserCharacterOne = snapshot.value[@"character one"];
         self.currentUserCharacterTwo = snapshot.value[@"character two"];
     }];
-    Firebase *usersRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/users"];
+    self.usersRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/users"];
 
     // Retrieve new posts as they are added to firebase
-    [usersRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+    [self.usersRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         NSMutableArray *usersArray = [NSMutableArray new];
         for (FDataSnapshot *user in snapshot.children) {
             if ([user.value[@"isAvailable"] isEqualToNumber:@1]) {
@@ -107,12 +109,7 @@
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
-    Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
-    Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
-    NSDictionary *userDic = @{@"isAvailable": @0,
-                              @"isPair": @0
-                              };
-    [user updateChildValues: userDic];
+    [self.ref removeAllObservers];
 }
 
 @end
