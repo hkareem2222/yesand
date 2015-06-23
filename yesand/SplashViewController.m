@@ -92,16 +92,6 @@
         self.topicLabel.text = [self.otherUser objectForKey:@"topic name"];
     }
 }
-//
-//-(void)unpairUsers {
-//    NSArray *pairedUsers = @[self.currentUserEmail, @"not paired"];
-//    self.otherUserLabel.text = @"not paired";
-//    NSDictionary *userDic = @{@"isPair": @0
-//                              };
-//    Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
-//    Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
-//    [user updateChildValues:userDic];
-//}
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"SplashToChat"]) {
@@ -109,9 +99,9 @@
         chatVC.otherUserEmail = self.otherUserEmail;
         chatVC.currentUserEmail = self.currentUserEmail;
         if (self.indexOfCurrentUser % 2 == 0) {
-//            chatVC.topic = self.currentUser.topicID;
+            chatVC.isEven = YES;
         } else {
-//            chatVC.topic = self.otherUser.topicID;
+            chatVC.isEven = NO;
         }
     }
 }
