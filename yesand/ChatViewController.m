@@ -63,6 +63,11 @@
                 self.cloudMessages = [NSMutableArray new];
                 [self.cloudMessages addObjectsFromArray:self.currentUserMessages];
                 [self.tableView reloadData];
+                Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
+                Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
+                NSDictionary *userDic = @{@"isAvailable": @0
+                                          };
+                [user updateChildValues: userDic];
             }
         } withCancelBlock:^(NSError *error) {
             NSLog(@"%@", error.description);
@@ -85,6 +90,11 @@
                 self.cloudMessages = [NSMutableArray new];
                 [self.cloudMessages addObjectsFromArray:self.otherUserMessages];
                 [self.tableView reloadData];
+                Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
+                Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
+                NSDictionary *userDic = @{@"isAvailable": @0
+                                          };
+                [user updateChildValues: userDic];
             }
         } withCancelBlock:^(NSError *error) {
             NSLog(@"%@", error.description);
