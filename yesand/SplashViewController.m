@@ -20,6 +20,9 @@
 @property NSString *currentUserEmail;
 @property NSString *otherUserEmail;
 @property NSDictionary *otherUser;
+@property NSString *currentUserTopic;
+@property NSString *currentUserCharacterOne;
+@property NSString *currentUserCharacterTwo;
 @end
 
 @implementation SplashViewController
@@ -33,6 +36,10 @@
     [currentUserRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         self.currentUserEmail = snapshot.value[@"email"];
         self.currentUserLabel.text = snapshot.value[@"email"];
+        self.currentUserTopic = snapshot.value[@"topic name"];
+        self.currentUserCharacterOne = snapshot.value[@"character one"];
+        self.currentUserCharacterTwo = snapshot.value[@"character two"];
+
     }];
     Firebase *usersRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/users"];
 
@@ -67,14 +74,22 @@
         if (self.indexOfCurrentUser + 1 < self.availableUsers.count) {
             self.otherUser = self.availableUsers[self.indexOfCurrentUser + 1];
             self.otherUserEmail = [self.otherUser objectForKey:@"email"];
-            self.otherUserLabel.text = [self.otherUser objectForKey:@"email"];
+            self.currentUserCharacter.text = self.currentUserCharacterOne;
+            self.otherUserCharacter.text = self.currentUserCharacterTwo;
+            self.topicLabel.text = self.currentUserTopic;
         } else {
             self.otherUserLabel.text = @"Finding";
+            self.currentUserCharacter.text = @"Character";
+            self.otherUserCharacter.text = @"Character";
+            self.topicLabel.text = @"Topic";
         }
     } else {
         self.otherUser = self.availableUsers[self.indexOfCurrentUser - 1];
         self.otherUserEmail = [self.otherUser objectForKey:@"email"];
         self.otherUserLabel.text = [self.otherUser objectForKey:@"email"];
+        self.currentUserCharacter.text = [self.otherUser objectForKey:@"character two"];
+        self.otherUserCharacter.text = [self.otherUser objectForKey:@"character one"];
+        self.topicLabel.text = [self.otherUser objectForKey:@"topic name"];
     }
 }
 //
