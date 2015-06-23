@@ -83,7 +83,7 @@ withCompletionBlock:^(NSError *error, FAuthData *authData) {
                                   @"character one": @"test",
                                   @"character two": @"test",
                                   @"topic name":@"test",
-                                  @"username": [authData.providerData[@"email"] stringByReplacingOccurrencesOfString:@"." withString:@""]
+                                  @"username": self.usernameField.text
                                   };
 
         [[[self.myRootRef childByAppendingPath:@"users"]
