@@ -123,7 +123,10 @@
 
 -(void)viewWillDisappear:(BOOL)animated {
     NSString * currentUserString = [self.currentUserEmail stringByReplacingOccurrencesOfString:@"." withString:@""];
+    NSString * otherUserString = [self.otherUserEmail stringByReplacingOccurrencesOfString:@"." withString:@""];
     Firebase *currentConvo = [self.conversationsRef childByAppendingPath: currentUserString];
+    Firebase *otherConvo = [self.conversationsRef childByAppendingPath: otherUserString];
     [currentConvo removeValue];
+    [otherConvo removeValue];
 }
 @end
