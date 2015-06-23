@@ -15,13 +15,14 @@
 @property double keyboardHeight;
 @property NSMutableArray *localMessages;
 //@property Conversation *conversation;
-@property NSArray *cloudMessages;
+@property NSMutableArray *cloudMessages;
 @property Firebase *conversationsRef;
 @property (weak, nonatomic) IBOutlet UITextField *messageTextField;
 @property Firebase *convoRef;
 @property Firebase *rootRef;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textFieldBottomLayout;
-@property NSArray *testMessages;
+@property NSArray *currentUserMessages;
+@property NSArray *otherUserMessages;
 @end
 
 @implementation ChatViewController
@@ -30,25 +31,57 @@
     [super viewDidLoad];
     NSLog(@"----currentuser %@", self.currentUserEmail);
     NSLog(@"----otheruser %@", self.otherUserEmail);
-    self.rootRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
-    NSString *stringWithUID = [NSString stringWithFormat:@"https://yesand.firebaseio.com/conversations/%@", self.rootRef.authData.uid];
+//    NSString *stringWithEmail = [NSString stringWithFormat:@"https://yesand.firebaseio.com/conversations/%@", self.currentUserEmail];
     self.localMessages = [NSMutableArray new];
-    self.conversationsRef = [[Firebase alloc] initWithUrl:stringWithUID];
+    self.conversationsRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/conversations"];
 
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardDidShowNotification object:nil];
+
+
 }
 
 - (IBAction)onSendButtonTapped:(id)sender {
+    NSString * currentUserString = [self.currentUserEmail stringByReplacingOccurrencesOfString:@"." withString:@""];
+    NSString * otherUserString = [self.otherUserEmail stringByReplacingOccurrencesOfString:@"." withString:@""];
+    Firebase *currentConvo = [self.conversationsRef childByAppendingPath: currentUserString];
     [self.localMessages addObject:self.messageTextField.text];
     NSDictionary *conversation = @{
                                    @"messages": self.localMessages
                                    };
-    [self.conversationsRef setValue:conversation];
+    [currentConvo setValue:conversation];
 
     [self.messageTextField resignFirstResponder];
     self.textFieldBottomLayout.constant = 0;
     self.messageTextField.text = @"";
+
+    [currentConvo observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        NSLog(@"%@", snapshot.value[@"messages"]);
+        self.currentUserMessages = snapshot.value[@"messages"];
+        self.cloudMessages = [NSMutableArray new];
+        [self.cloudMessages addObjectsFromArray:self.currentUserMessages];
+        [self.tableView reloadData];
+    } withCancelBlock:^(NSError *error) {
+        NSLog(@"%@", error.description);
+    }];
+
+    Firebase *otherConvo = [self.conversationsRef childByAppendingPath: otherUserString];
+    [otherConvo observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        NSLog(@"%@", snapshot.value);
+        if (![snapshot.value isEqual:[NSNull null]]) {
+            self.otherUserMessages = snapshot.value[@"messages"];
+            [self.cloudMessages addObjectsFromArray:self.otherUserMessages];
+            [self.tableView reloadData];
+        }
+//        if (![snapshot.value[@"messages"] isEqual:[NSNull null]]) {
+//            NSLog(@"%@", snapshot.value[@"messages"]);
+//            self.otherUserMessages = snapshot.value[@"messages"];
+//            [self.cloudMessages addObjectsFromArray:self.otherUserMessages];
+//            [self.tableView reloadData];
+//        }
+    } withCancelBlock:^(NSError *error) {
+        NSLog(@"%@", error.description);
+    }];
 }
 
 #pragma mark - Scroll View Animation
@@ -77,11 +110,12 @@
 #pragma mark - Table View
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return self.cloudMessages.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MessageID"];
+    cell.textLabel.text = self.cloudMessages[indexPath.row];
     return cell;
 }
 @end
