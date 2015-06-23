@@ -28,6 +28,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"----currentuser %@", self.currentUserEmail);
+    NSLog(@"----otheruser %@", self.otherUserEmail);
     self.rootRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
     NSString *stringWithUID = [NSString stringWithFormat:@"https://yesand.firebaseio.com/conversations/%@", self.rootRef.authData.uid];
     self.localMessages = [NSMutableArray new];

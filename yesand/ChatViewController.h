@@ -10,5 +10,7 @@
 #import <Firebase/Firebase.h>
 #import "Conversation.h"
 @interface ChatViewController : UIViewController
+@property NSString *currentUserEmail;
+@property NSString *otherUserEmail;
 
 @end
