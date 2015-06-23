@@ -9,6 +9,7 @@
 #import "ProfileViewController.h"
 
 @interface ProfileViewController ()
+@property (weak, nonatomic) IBOutlet UITextField *editUsername;
 
 @end
 
