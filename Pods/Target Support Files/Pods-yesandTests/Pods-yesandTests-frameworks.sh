@@ -48,13 +48,11 @@ code_sign() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework 'AFNetworking.framework'
   install_framework 'FLKAutoLayout.framework'
   install_framework 'ORStackView.framework'
   install_framework 'SwiftyJSON.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework 'AFNetworking.framework'
   install_framework 'FLKAutoLayout.framework'
   install_framework 'ORStackView.framework'
   install_framework 'SwiftyJSON.framework'

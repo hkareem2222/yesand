@@ -83,7 +83,10 @@ withCompletionBlock:^(NSError *error, FAuthData *authData) {
                                   @"provider": authData.provider,
                                   @"email": authData.providerData[@"email"],
                                   @"isAvailable": @0,
-                                  @"updateAt": kFirebaseServerValueTimestamp
+                                  @"updateAt": kFirebaseServerValueTimestamp,
+                                  @"character one": @"test",
+                                  @"character two": @"test",
+                                  @"topic name":@"test"
                                   };
         // Create a child path with a key set to the uid underneath the "users" node
         // This creates a URL path like the following:
