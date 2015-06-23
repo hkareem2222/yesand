@@ -32,7 +32,7 @@
     NSLog(@"----otheruser %@", self.otherUserEmail);
     self.localMessages = [NSMutableArray new];
     self.conversationsRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/conversations"];
-
+    NSLog(self.isEven ? @"Yes" : @"No");
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardWillShowNotification object:nil];
 
@@ -44,40 +44,52 @@
 - (IBAction)onSendButtonTapped:(id)sender {
     NSString * currentUserString = [self.currentUserEmail stringByReplacingOccurrencesOfString:@"." withString:@""];
     NSString * otherUserString = [self.otherUserEmail stringByReplacingOccurrencesOfString:@"." withString:@""];
-    Firebase *currentConvo = [self.conversationsRef childByAppendingPath: currentUserString];
-    [self.localMessages addObject:self.messageTextField.text];
-    NSDictionary *conversation = @{
-                                   @"messages": self.localMessages
-                                   };
-    [currentConvo setValue:conversation];
+    if (self.isEven) {
+        Firebase *currentConvo = [self.conversationsRef childByAppendingPath: currentUserString];
+        [self.localMessages addObject:self.messageTextField.text];
+        NSDictionary *conversation = @{
+                                       @"messages": self.localMessages
+                                       };
+        [currentConvo setValue:conversation];
 
-    [self.messageTextField resignFirstResponder];
-    self.textFieldBottomLayout.constant = 0;
-    self.messageTextField.text = @"";
+        [self.messageTextField resignFirstResponder];
+        self.textFieldBottomLayout.constant = 0;
+        self.messageTextField.text = @"";
 
-    [currentConvo observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        if (![snapshot.value isEqual:[NSNull null]]) {
-            NSLog(@"%@", snapshot.value[@"messages"]);
-            self.currentUserMessages = snapshot.value[@"messages"];
-            self.cloudMessages = [NSMutableArray new];
-            [self.cloudMessages addObjectsFromArray:self.currentUserMessages];
-            [self.tableView reloadData];
-        }
-    } withCancelBlock:^(NSError *error) {
-        NSLog(@"%@", error.description);
-    }];
+        [currentConvo observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+            if (![snapshot.value isEqual:[NSNull null]]) {
+                NSLog(@"%@", snapshot.value[@"messages"]);
+                self.currentUserMessages = snapshot.value[@"messages"];
+                self.cloudMessages = [NSMutableArray new];
+                [self.cloudMessages addObjectsFromArray:self.currentUserMessages];
+                [self.tableView reloadData];
+            }
+        } withCancelBlock:^(NSError *error) {
+            NSLog(@"%@", error.description);
+        }];
+    } else {
+        Firebase *otherConvo = [self.conversationsRef childByAppendingPath: otherUserString];
+        [self.localMessages addObject:self.messageTextField.text];
+        NSDictionary *conversation = @{
+                                       @"messages": self.localMessages
+                                       };
+        [otherConvo setValue:conversation];
+        [self.messageTextField resignFirstResponder];
+        self.textFieldBottomLayout.constant = 0;
+        self.messageTextField.text = @"";
 
-    Firebase *otherConvo = [self.conversationsRef childByAppendingPath: otherUserString];
-    [otherConvo observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        NSLog(@"%@", snapshot.value);
-        if (![snapshot.value isEqual:[NSNull null]]) {
-            self.otherUserMessages = snapshot.value[@"messages"];
-            [self.cloudMessages addObjectsFromArray:self.otherUserMessages];
-            [self.tableView reloadData];
-        }
-    } withCancelBlock:^(NSError *error) {
-        NSLog(@"%@", error.description);
-    }];
+        [otherConvo observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+            NSLog(@"%@", snapshot.value);
+            if (![snapshot.value isEqual:[NSNull null]]) {
+                self.otherUserMessages = snapshot.value[@"messages"];
+                self.cloudMessages = [NSMutableArray new];
+                [self.cloudMessages addObjectsFromArray:self.otherUserMessages];
+                [self.tableView reloadData];
+            }
+        } withCancelBlock:^(NSError *error) {
+            NSLog(@"%@", error.description);
+        }];
+    }
 }
 
 #pragma mark - Scroll View Animation

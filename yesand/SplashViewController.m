@@ -100,9 +100,9 @@
         chatVC.otherUserEmail = self.otherUserEmail;
         chatVC.currentUserEmail = self.currentUserEmail;
         if (self.indexOfCurrentUser % 2 == 0) {
-//            chatVC.topic = self.currentUser.topicID;
+            chatVC.isEven = YES;
         } else {
-//            chatVC.topic = self.otherUser.topicID;
+            chatVC.isEven = NO;
         }
     }
 }
