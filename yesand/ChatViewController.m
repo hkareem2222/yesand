@@ -28,11 +28,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"----currentuser %@", self.currentUsername);
-    NSLog(@"----otheruser %@", self.otherUsername);
     self.localMessages = [NSMutableArray new];
     self.conversationsRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/conversations"];
-    NSLog(self.isEven ? @"Yes" : @"No");
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardWillShowNotification object:nil];
     self.cloudMessages = [NSMutableArray new];
@@ -50,28 +47,23 @@
 
         [self.convoRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
             if (![snapshot.value isEqual:[NSNull null]]) {
-                NSLog(@"%@", snapshot.value[@"messages"]);
                 self.currentUserMessages = snapshot.value[@"messages"];
                 self.cloudMessages = [NSMutableArray new];
                 [self.cloudMessages addObjectsFromArray:self.currentUserMessages];
                 [self.tableView reloadData];
             }
         } withCancelBlock:^(NSError *error) {
-            NSLog(@"%@", error.description);
         }];
     } else {
         self.convoRef = [self.conversationsRef childByAppendingPath: self.otherUsername];
 
-        [self.convoRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-            NSLog(@"%@", snapshot.value);
-            if (![snapshot.value isEqual:[NSNull null]]) {
+        [self.convoRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {            if (![snapshot.value isEqual:[NSNull null]]) {
                 self.otherUserMessages = snapshot.value[@"messages"];
                 self.cloudMessages = [NSMutableArray new];
                 [self.cloudMessages addObjectsFromArray:self.otherUserMessages];
                 [self.tableView reloadData];
             }
         } withCancelBlock:^(NSError *error) {
-            NSLog(@"%@", error.description);
         }];
     }
 }
@@ -107,10 +99,6 @@
     CGRect rawFrame      = [value CGRectValue];
     CGRect keyboardFrame = [self.view convertRect:rawFrame fromView:nil];
 
-    NSLog(@"keyboardFrame: %@", NSStringFromCGRect(keyboardFrame));
-    NSLog(@"keyboard height: %f", keyboardFrame.size.height);
-    NSLog(@"------------- %f", rawFrame.size.height);
-
     self.textFieldBottomLayout.constant = keyboardFrame.size.height - 50;
 }
 
@@ -131,5 +119,6 @@
     Firebase *otherConvo = [self.conversationsRef childByAppendingPath: self.otherUsername];
     [currentConvo removeValue];
     [otherConvo removeValue];
+    [self.convoRef removeAllObservers];
 }
 @end
