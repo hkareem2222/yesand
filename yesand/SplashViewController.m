@@ -17,8 +17,8 @@
 @property NSUInteger indexOfCurrentUser;
 @property (weak, nonatomic) IBOutlet UILabel *currentUserLabel;
 @property (weak, nonatomic) IBOutlet UILabel *otherUserLabel;
-@property NSString *currentUserEmail;
-@property NSString *otherUserEmail;
+@property NSString *currentUsername;
+@property NSString *otherUsername;
 @property NSDictionary *otherUser;
 @property NSString *currentUserTopic;
 @property NSString *currentUserCharacterOne;
@@ -34,8 +34,8 @@
     NSString *currentUserString = [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@", ref.authData.uid];
     Firebase *currentUserRef = [[Firebase alloc] initWithUrl:currentUserString];
     [currentUserRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        self.currentUserEmail = snapshot.value[@"email"];
-        self.currentUserLabel.text = snapshot.value[@"email"];
+        self.currentUsername = snapshot.value[@"username"];
+        self.currentUserLabel.text = snapshot.value[@"username"];
         self.currentUserTopic = snapshot.value[@"topic name"];
         self.currentUserCharacterOne = snapshot.value[@"character one"];
         self.currentUserCharacterTwo = snapshot.value[@"character two"];
@@ -63,7 +63,7 @@
 -(void)pairUsers {
     NSLog(@"---- PAIR USERS");
     for (NSDictionary *data in self.availableUsers) {
-        if ([self.currentUserEmail isEqualToString:[data objectForKey:@"email"]]) {
+        if ([self.currentUsername isEqualToString:[data objectForKey:@"username"]]) {
             self.indexOfCurrentUser = [self.availableUsers indexOfObject:data];
             NSLog(@"------ INDEX %lu", self.indexOfCurrentUser);
         }
@@ -72,8 +72,8 @@
     if (self.indexOfCurrentUser % 2 == 0) {
         if (self.indexOfCurrentUser + 1 < self.availableUsers.count) {
             self.otherUser = self.availableUsers[self.indexOfCurrentUser + 1];
-            self.otherUserEmail = [self.otherUser objectForKey:@"email"];
-            self.otherUserLabel.text = [self.otherUser objectForKey:@"email"];
+            self.otherUsername = [self.otherUser objectForKey:@"username"];
+            self.otherUserLabel.text = [self.otherUser objectForKey:@"username"];
             self.currentUserCharacter.text = self.currentUserCharacterOne;
             self.otherUserCharacter.text = self.currentUserCharacterTwo;
             self.topicLabel.text = self.currentUserTopic;
@@ -85,8 +85,8 @@
         }
     } else {
         self.otherUser = self.availableUsers[self.indexOfCurrentUser - 1];
-        self.otherUserEmail = [self.otherUser objectForKey:@"email"];
-        self.otherUserLabel.text = [self.otherUser objectForKey:@"email"];
+        self.otherUsername = [self.otherUser objectForKey:@"username"];
+        self.otherUserLabel.text = [self.otherUser objectForKey:@"username"];
         self.currentUserCharacter.text = [self.otherUser objectForKey:@"character two"];
         self.otherUserCharacter.text = [self.otherUser objectForKey:@"character one"];
         self.topicLabel.text = [self.otherUser objectForKey:@"topic name"];
@@ -96,8 +96,8 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"SplashToChat"]) {
         ChatViewController *chatVC = segue.destinationViewController;
-        chatVC.otherUserEmail = self.otherUserEmail;
-        chatVC.currentUserEmail = self.currentUserEmail;
+        chatVC.otherUsername = self.otherUsername;
+        chatVC.currentUsername = self.currentUsername;
         if (self.indexOfCurrentUser % 2 == 0) {
             chatVC.isEven = YES;
         } else {

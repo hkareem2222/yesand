@@ -28,24 +28,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"----currentuser %@", self.currentUserEmail);
-    NSLog(@"----otheruser %@", self.otherUserEmail);
+    NSLog(@"----currentuser %@", self.currentUsername);
+    NSLog(@"----otheruser %@", self.otherUsername);
     self.localMessages = [NSMutableArray new];
     self.conversationsRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/conversations"];
     NSLog(self.isEven ? @"Yes" : @"No");
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardWillShowNotification object:nil];
-
-
 }
 
 #pragma mark - Sending Message
 //move querying outside
 - (IBAction)onSendButtonTapped:(id)sender {
-    NSString * currentUserString = [self.currentUserEmail stringByReplacingOccurrencesOfString:@"." withString:@""];
-    NSString * otherUserString = [self.otherUserEmail stringByReplacingOccurrencesOfString:@"." withString:@""];
     if (self.isEven) {
-        Firebase *currentConvo = [self.conversationsRef childByAppendingPath: currentUserString];
+        Firebase *currentConvo = [self.conversationsRef childByAppendingPath: self.currentUsername];
         [self.localMessages addObject:self.messageTextField.text];
         NSDictionary *conversation = @{
                                        @"messages": self.localMessages
@@ -68,7 +64,7 @@
             NSLog(@"%@", error.description);
         }];
     } else {
-        Firebase *otherConvo = [self.conversationsRef childByAppendingPath: otherUserString];
+        Firebase *otherConvo = [self.conversationsRef childByAppendingPath: self.otherUsername];
         [self.localMessages addObject:self.messageTextField.text];
         NSDictionary *conversation = @{
                                        @"messages": self.localMessages
@@ -122,10 +118,8 @@
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
-    NSString * currentUserString = [self.currentUserEmail stringByReplacingOccurrencesOfString:@"." withString:@""];
-    NSString * otherUserString = [self.otherUserEmail stringByReplacingOccurrencesOfString:@"." withString:@""];
-    Firebase *currentConvo = [self.conversationsRef childByAppendingPath: currentUserString];
-    Firebase *otherConvo = [self.conversationsRef childByAppendingPath: otherUserString];
+    Firebase *currentConvo = [self.conversationsRef childByAppendingPath: self.currentUsername];
+    Firebase *otherConvo = [self.conversationsRef childByAppendingPath: self.otherUsername];
     [currentConvo removeValue];
     [otherConvo removeValue];
 }

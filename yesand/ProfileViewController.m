@@ -17,10 +17,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-
+    Firebase *ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com"];
+    NSString *currentUserString = [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@", ref.authData.uid];
+    Firebase *currentUserRef = [[Firebase alloc] initWithUrl:currentUserString];
+    [currentUserRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        self.navigationItem.title = snapshot.value[@"username"];
+    }];
+    
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor grayColor] forKey:NSForegroundColorAttributeName];
 }
+
+
 
 - (IBAction)onLogoutButtonPressed:(id)sender {
     Firebase *ref = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
