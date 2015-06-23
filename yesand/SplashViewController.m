@@ -29,7 +29,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // test
     self.availableUsers = [NSMutableArray new];
     Firebase *ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com"];
     NSString *currentUserString = [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@", ref.authData.uid];
