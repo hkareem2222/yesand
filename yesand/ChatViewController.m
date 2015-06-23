@@ -14,7 +14,6 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property double keyboardHeight;
 @property NSMutableArray *localMessages;
-//@property Conversation *conversation;
 @property NSMutableArray *cloudMessages;
 @property Firebase *conversationsRef;
 @property (weak, nonatomic) IBOutlet UITextField *messageTextField;
@@ -31,16 +30,17 @@
     [super viewDidLoad];
     NSLog(@"----currentuser %@", self.currentUserEmail);
     NSLog(@"----otheruser %@", self.otherUserEmail);
-//    NSString *stringWithEmail = [NSString stringWithFormat:@"https://yesand.firebaseio.com/conversations/%@", self.currentUserEmail];
     self.localMessages = [NSMutableArray new];
     self.conversationsRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/conversations"];
 
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardDidShowNotification object:nil];
+    [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardWillShowNotification object:nil];
 
 
 }
 
+#pragma mark - Sending Message
+//move querying outside
 - (IBAction)onSendButtonTapped:(id)sender {
     NSString * currentUserString = [self.currentUserEmail stringByReplacingOccurrencesOfString:@"." withString:@""];
     NSString * otherUserString = [self.otherUserEmail stringByReplacingOccurrencesOfString:@"." withString:@""];
@@ -56,11 +56,13 @@
     self.messageTextField.text = @"";
 
     [currentConvo observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        NSLog(@"%@", snapshot.value[@"messages"]);
-        self.currentUserMessages = snapshot.value[@"messages"];
-        self.cloudMessages = [NSMutableArray new];
-        [self.cloudMessages addObjectsFromArray:self.currentUserMessages];
-        [self.tableView reloadData];
+        if (![snapshot.value isEqual:[NSNull null]]) {
+            NSLog(@"%@", snapshot.value[@"messages"]);
+            self.currentUserMessages = snapshot.value[@"messages"];
+            self.cloudMessages = [NSMutableArray new];
+            [self.cloudMessages addObjectsFromArray:self.currentUserMessages];
+            [self.tableView reloadData];
+        }
     } withCancelBlock:^(NSError *error) {
         NSLog(@"%@", error.description);
     }];
@@ -73,12 +75,6 @@
             [self.cloudMessages addObjectsFromArray:self.otherUserMessages];
             [self.tableView reloadData];
         }
-//        if (![snapshot.value[@"messages"] isEqual:[NSNull null]]) {
-//            NSLog(@"%@", snapshot.value[@"messages"]);
-//            self.otherUserMessages = snapshot.value[@"messages"];
-//            [self.cloudMessages addObjectsFromArray:self.otherUserMessages];
-//            [self.tableView reloadData];
-//        }
     } withCancelBlock:^(NSError *error) {
         NSLog(@"%@", error.description);
     }];
@@ -101,12 +97,6 @@
     self.textFieldBottomLayout.constant = keyboardFrame.size.height - 50;
 }
 
-
-
--(void)textFieldDidBeginEditing:(UITextField *)textField {
-}
-
-
 #pragma mark - Table View
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -117,5 +107,11 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MessageID"];
     cell.textLabel.text = self.cloudMessages[indexPath.row];
     return cell;
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    NSString * currentUserString = [self.currentUserEmail stringByReplacingOccurrencesOfString:@"." withString:@""];
+    Firebase *currentConvo = [self.conversationsRef childByAppendingPath: currentUserString];
+    [currentConvo removeValue];
 }
 @end

@@ -74,16 +74,6 @@
         self.otherUserLabel.text = [self.otherUser objectForKey:@"email"];
     }
 }
-//
-//-(void)unpairUsers {
-//    NSArray *pairedUsers = @[self.currentUserEmail, @"not paired"];
-//    self.otherUserLabel.text = @"not paired";
-//    NSDictionary *userDic = @{@"isPair": @0
-//                              };
-//    Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
-//    Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
-//    [user updateChildValues:userDic];
-//}
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"SplashToChat"]) {
