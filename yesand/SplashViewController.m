@@ -34,6 +34,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     self.ifCalled = NO;
     self.availableUsers = [NSMutableArray new];
     self.ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com"];
@@ -77,7 +78,6 @@
     for (NSDictionary *data in self.availableUsers) {
         if ([self.currentUsername isEqualToString:[data objectForKey:@"username"]]) {
             self.indexOfCurrentUser = [self.availableUsers indexOfObject:data];
-            NSLog(@"------ INDEX %lu", self.indexOfCurrentUser);
         }
     }
 
@@ -120,18 +120,6 @@
 -(void)segueToChat {
     [self performSegueWithIdentifier:@"SplashToChat" sender:self];
 }
-
-
-//-(void)countdownToScene {
-//    NSLog(@"inside count down -- %i", self.countdownTime);
-//    if (self.countdownTime == 0) {
-//        self.countdownTime = 7;
-//        [self stopTimer];
-//        [self performSegueWithIdentifier:@"SplashToChat" sender:self];
-//    } else {
-//        self.countdownTime--;
-//    }
-//}
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"SplashToChat"]) {
