@@ -138,8 +138,6 @@
 			children = (
 				BF4F90871B39F0D600A93680 /* AudienceViewController.h */,
 				BF4F90881B39F0D600A93680 /* AudienceViewController.m */,
-				F920C12E1B3752A5001EBC22 /* SplashViewController.h */,
-				F920C12F1B3752A5001EBC22 /* SplashViewController.m */,
 				BF372B441B3B1DEA00D7AE0C /* RateView.h */,
 				BF372B451B3B1DEA00D7AE0C /* RateView.m */,
 				BF4F908A1B39FA7900A93680 /* RatingViewController.h */,
@@ -152,6 +150,8 @@
 				BF4F90851B39E4EC00A93680 /* EditProfileViewController.m */,
 				85963F821B34C8F7006E2868 /* HomeViewController.h */,
 				85963F831B34C8F7006E2868 /* HomeViewController.m */,
+				F920C12E1B3752A5001EBC22 /* SplashViewController.h */,
+				F920C12F1B3752A5001EBC22 /* SplashViewController.m */,
 				85014AAA1B35BD7400E190C8 /* ChatViewController.h */,
 				85014AAB1B35BD7400E190C8 /* ChatViewController.m */,
 			);

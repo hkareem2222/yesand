@@ -26,10 +26,10 @@
     [currentUserRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         self.navigationItem.title = snapshot.value[@"username"];
         self.usernameField.text = snapshot.value[@"username"];
-//        self.nameField.text = snapshot.value[@"name"];
-//        self.taglineField.text = snapshot.value[@"tagline"];
-//        self.locationField.text = snapshot.value[@"location"];
-//        self.websiteField.text = snapshot.value[@"website"];
+        self.nameField.text = snapshot.value[@"name"];
+        self.taglineField.text = snapshot.value[@"tagline"];
+        self.locationField.text = snapshot.value[@"location"];
+        self.websiteField.text = snapshot.value[@"website"];
     }];
 
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
@@ -46,14 +46,15 @@
 - (IBAction)onSaveButtonPressed:(UIBarButtonItem *)sender {
     Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
     Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
-    NSDictionary *userDic = @{@"username": self.usernameField.text
-//                              @"name": self.nameField.text,
-//                              @"tagline": self.taglineField.text,
-//                              @"location": self.locationField.text,
-//                              @"website": self.websiteField.text
+    NSDictionary *userDic = @{@"username": self.usernameField.text,
+                              @"name": self.nameField.text,
+                              @"tagline": self.taglineField.text,
+                              @"location": self.locationField.text,
+                              @"website": self.websiteField.text
                               };
     [user updateChildValues:userDic];
     NSLog(@"tapped");
+    [self performSegueWithIdentifier:@"UnwindToProfile" sender:sender];
 }
 
 @end

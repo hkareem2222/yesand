@@ -22,6 +22,10 @@
 @property NSArray *currentUserMessages;
 @property NSArray *otherUserMessages;
 @property Firebase *sceneConvo;
+@property BOOL ifCalled;
+@property NSMutableArray *availableUsers;
+@property Firebase *ref;
+@property Firebase *usersRef;
 @end
 
 @implementation ChatViewController
@@ -29,6 +33,58 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.localMessages = [NSMutableArray new];
+
+
+//    self.ifCalled = NO;
+//    self.availableUsers = [NSMutableArray new];
+//    self.ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com"];
+//    NSString *currentUserString = [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@", self.ref.authData.uid];
+//    Firebase *currentUserRef = [[Firebase alloc] initWithUrl:currentUserString];
+//    [currentUserRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+//        self.currentUsername = snapshot.value[@"username"];
+//        self.currentUserLabel.text = snapshot.value[@"username"];
+//        self.currentUserTopic = snapshot.value[@"topic name"];
+//        self.currentUserCharacterOne = snapshot.value[@"character one"];
+//        self.currentUserCharacterTwo = snapshot.value[@"character two"];
+//    }];
+//    self.usersRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/users"];
+//
+//    // Retrieve new posts as they are added to firebase
+//    [self.usersRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+//        NSMutableArray *usersArray = [NSMutableArray new];
+//        for (FDataSnapshot *user in snapshot.children) {
+//            if ([user.value[@"isAvailable"] isEqualToNumber:@1]) {
+//                [usersArray addObject:user.value];
+//            }
+//        }
+//        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"updateAt" ascending:YES];
+//        NSArray *arrayOfDescriptors = [NSArray arrayWithObject:sortDescriptor];
+//
+//        [usersArray sortUsingDescriptors: arrayOfDescriptors];
+//        self.availableUsers = usersArray;
+//        [self pairUsers];
+//        NSLog(@"------- AVAILABLE %@", self.availableUsers);
+//    }];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     self.conversationsRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/conversations"];
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardWillShowNotification object:nil];
