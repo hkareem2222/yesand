@@ -26,7 +26,6 @@
 @property Firebase *usersRef;
 @property Firebase *ref;
 @property int countdownTime;
-@property NSTimer *timerOne;
 @property BOOL ifCalled;
 @end
 
@@ -118,6 +117,7 @@
 -(void)segueToChat {
     [self performSegueWithIdentifier:@"SplashToChat" sender:self];
 }
+
 
 //-(void)countdownToScene {
 //    NSLog(@"inside count down -- %i", self.countdownTime);
