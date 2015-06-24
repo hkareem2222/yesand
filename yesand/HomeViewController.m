@@ -17,6 +17,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
+
     //listening for Scenes
     Firebase *scenesConvo = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/scenes"];
     [scenesConvo observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
@@ -49,7 +51,7 @@
 }
 
 
-- (IBAction)onYesAndTapped:(UIButton *)sender {
+- (IBAction)onYesAndTapped:(UIBarButtonItem *)sender {
     Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
     Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
     NSDictionary *userDic = @{@"isAvailable": @1,
@@ -59,6 +61,7 @@
                                   @"updateAt": kFirebaseServerValueTimestamp
                                   };
     [user updateChildValues:userDic];
+    [self performSegueWithIdentifier:@"HomeToSplash" sender:sender];
 }
 
 #pragma mark - Table View
