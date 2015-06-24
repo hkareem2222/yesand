@@ -12,5 +12,6 @@
 @interface ChatViewController : UIViewController
 @property NSString *currentUsername;
 @property NSString *otherUsername;
+@property NSString *otherAuthuid;
 @property BOOL isEven;
 @end

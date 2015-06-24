@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *otherUserLabel;
 @property NSString *currentUsername;
 @property NSString *otherUsername;
+@property NSString *otherAuthuid;
 @property NSDictionary *otherUser;
 @property NSString *currentUserTopic;
 @property NSString *currentUserCharacterOne;
@@ -85,6 +86,7 @@
             self.otherUser = self.availableUsers[self.indexOfCurrentUser + 1];
             self.otherUsername = [self.otherUser objectForKey:@"username"];
             self.otherUserLabel.text = [self.otherUser objectForKey:@"username"];
+            self.otherAuthuid = [self.otherUser objectForKey:@"authuid"];
             self.currentUserCharacter.text = self.currentUserCharacterOne;
             self.otherUserCharacter.text = self.currentUserCharacterTwo;
             self.topicLabel.text = self.currentUserTopic;
@@ -104,6 +106,7 @@
         self.otherUser = self.availableUsers[self.indexOfCurrentUser - 1];
         self.otherUsername = [self.otherUser objectForKey:@"username"];
         self.otherUserLabel.text = [self.otherUser objectForKey:@"username"];
+        self.otherAuthuid = [self.otherUser objectForKey:@"authuid"];
         self.currentUserCharacter.text = [self.otherUser objectForKey:@"character two"];
         self.otherUserCharacter.text = [self.otherUser objectForKey:@"character one"];
         self.topicLabel.text = [self.otherUser objectForKey:@"topic name"];
@@ -135,6 +138,7 @@
         ChatViewController *chatVC = segue.destinationViewController;
         chatVC.otherUsername = self.otherUsername;
         chatVC.currentUsername = self.currentUsername;
+        chatVC.otherAuthuid = self.otherAuthuid;
         if (self.indexOfCurrentUser % 2 == 0) {
             chatVC.isEven = YES;
         } else {

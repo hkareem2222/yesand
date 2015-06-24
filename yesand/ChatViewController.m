@@ -34,9 +34,6 @@
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardWillShowNotification object:nil];
     self.cloudMessages = [NSMutableArray new];
-
-    //shitty way to do it change later
-    [self performSelector:@selector(makeNotAvailable) withObject:nil afterDelay:10.0];
     [self queryConversation];
 }
 
@@ -75,7 +72,8 @@
         //setting up conversation model and query
         self.convoRef = [self.conversationsRef childByAppendingPath: self.otherUsername];
 
-        [self.convoRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {            if (![snapshot.value isEqual:[NSNull null]]) {
+        [self.convoRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+            if (![snapshot.value isEqual:[NSNull null]]) {
                 self.otherUserMessages = snapshot.value[@"messages"];
                 self.cloudMessages = [NSMutableArray new];
                 [self.cloudMessages addObjectsFromArray:self.otherUserMessages];
@@ -102,9 +100,11 @@
 -(void)makeNotAvailable {
     Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
     Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
+    Firebase *otherUser = [usersRef childByAppendingPath:self.otherAuthuid];
     NSDictionary *userDic = @{@"isAvailable": @0
                               };
     [user updateChildValues: userDic];
+    [otherUser updateChildValues: userDic];
 }
 
 #pragma mark - Scroll View Animation
@@ -133,6 +133,7 @@
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
+    [self makeNotAvailable];
     if (self.isEven) {
         NSDictionary *sceneMessages = @{
                                         @"isLive": @0

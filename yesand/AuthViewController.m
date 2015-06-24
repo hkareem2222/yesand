@@ -95,7 +95,8 @@ withCompletionBlock:^(NSError *error, FAuthData *authData) {
                                   @"updateAt": kFirebaseServerValueTimestamp,
                                   @"character one": @"test",
                                   @"character two": @"test",
-                                  @"topic name":@"test",
+                                  @"topic name": @"test",
+                                  @"authuid": authData.uid,
                                   @"username": self.usernameField.text
                                   };
 
