@@ -17,10 +17,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *profileSubheadingLabel;
 @property (weak, nonatomic) IBOutlet UILabel *profileLinkLabel;
 
-
-
-
-
 @end
 
 @implementation ProfileViewController

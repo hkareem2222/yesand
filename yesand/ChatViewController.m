@@ -10,7 +10,6 @@
 
 @interface ChatViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property double keyboardHeight;
 @property NSMutableArray *localMessages;
