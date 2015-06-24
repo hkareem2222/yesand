@@ -10,13 +10,27 @@
 
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate>
 @property NSDictionary *topic;
+@property NSArray *liveScenes;
 @end
 
 @implementation HomeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Get a reference to our posts
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
+
+    //listening for Scenes
+    Firebase *scenesConvo = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/scenes"];
+    [scenesConvo observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        if (![snapshot.value isEqual:[NSNull null]]) {
+            NSLog(@"scene snapshot.value: %@", snapshot.value);
+//            if ([snapshot.value[@"isLive"] isEqualToNumber:@1]) {
+//                self.liveScenes = snapshot.value[@"]
+//            }
+        }
+    } withCancelBlock:^(NSError *error) {
+        NSLog(@"%@", error.description);
+    }];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -37,7 +51,7 @@
 }
 
 
-- (IBAction)onYesAndTapped:(UIButton *)sender {
+- (IBAction)onYesAndTapped:(UIBarButtonItem *)sender {
     Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
     Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
     NSDictionary *userDic = @{@"isAvailable": @1,
@@ -47,6 +61,7 @@
                                   @"updateAt": kFirebaseServerValueTimestamp
                                   };
     [user updateChildValues:userDic];
+    [self performSegueWithIdentifier:@"HomeToSplash" sender:sender];
 }
 
 #pragma mark - Table View

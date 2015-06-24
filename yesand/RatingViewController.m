@@ -1,21 +1,22 @@
 //
-//  EditProfileViewController.m
+//  RatingViewController.m
 //  yesand
 //
 //  Created by Tom Carmona on 6/23/15.
 //  Copyright (c) 2015 Meduse. All rights reserved.
 //
 
-#import "EditProfileViewController.h"
+#import "RatingViewController.h"
 
-@interface EditProfileViewController ()
+@interface RatingViewController ()
 
 @end
 
-@implementation EditProfileViewController
+@implementation RatingViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
 
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
 

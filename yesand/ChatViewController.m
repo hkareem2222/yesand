@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textFieldBottomLayout;
 @property NSArray *currentUserMessages;
 @property NSArray *otherUserMessages;
+@property Firebase *sceneConvo;
 @end
 
 @implementation ChatViewController
@@ -43,18 +44,35 @@
 
 -(void)queryConversation {
     if (self.isEven) {
+        //setting up scene model for even only
+        Firebase *scenesConvo = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/scenes"];
+        NSDictionary *sceneDic = @{
+                                   @"topicName": @"topicName",
+                                   @"characterOne": @"characterOne",
+                                   @"characterTwo": @"characterTwo",
+                                   @"isLive": @1,
+                                   @"messages": @[@"test"]
+                                   };
+        self.sceneConvo = [scenesConvo childByAutoId];
+        [self.sceneConvo setValue:sceneDic];
+        //setting up conversation model and query
         self.convoRef = [self.conversationsRef childByAppendingPath: self.currentUsername];
-
+        
         [self.convoRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
             if (![snapshot.value isEqual:[NSNull null]]) {
                 self.currentUserMessages = snapshot.value[@"messages"];
                 self.cloudMessages = [NSMutableArray new];
                 [self.cloudMessages addObjectsFromArray:self.currentUserMessages];
+                NSDictionary *sceneMessages = @{
+                                               @"messages": self.cloudMessages
+                                               };
+                [self.sceneConvo updateChildValues:sceneMessages];
                 [self.tableView reloadData];
             }
         } withCancelBlock:^(NSError *error) {
         }];
     } else {
+        //setting up conversation model and query
         self.convoRef = [self.conversationsRef childByAppendingPath: self.otherUsername];
 
         [self.convoRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {            if (![snapshot.value isEqual:[NSNull null]]) {
@@ -115,6 +133,12 @@
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
+    if (self.isEven) {
+        NSDictionary *sceneMessages = @{
+                                        @"isLive": @0
+                                        };
+        [self.sceneConvo updateChildValues:sceneMessages];
+    }
     Firebase *currentConvo = [self.conversationsRef childByAppendingPath: self.currentUsername];
     Firebase *otherConvo = [self.conversationsRef childByAppendingPath: self.otherUsername];
     [currentConvo removeValue];

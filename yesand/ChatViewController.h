@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Firebase/Firebase.h>
-#import "Conversation.h"
+
 @interface ChatViewController : UIViewController
 @property NSString *currentUsername;
 @property NSString *otherUsername;
