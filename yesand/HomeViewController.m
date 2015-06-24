@@ -10,13 +10,25 @@
 
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate>
 @property NSDictionary *topic;
+@property NSArray *liveScenes;
 @end
 
 @implementation HomeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Get a reference to our posts
+    //listening for Scenes
+    Firebase *scenesConvo = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/scenes"];
+    [scenesConvo observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        if (![snapshot.value isEqual:[NSNull null]]) {
+            NSLog(@"scene snapshot.value: %@", snapshot.value);
+//            if ([snapshot.value[@"isLive"] isEqualToNumber:@1]) {
+//                self.liveScenes = snapshot.value[@"]
+//            }
+        }
+    } withCancelBlock:^(NSError *error) {
+        NSLog(@"%@", error.description);
+    }];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
