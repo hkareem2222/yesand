@@ -11,6 +11,8 @@
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate>
 @property NSDictionary *topic;
 @property NSArray *liveScenes;
+@property Firebase *ref;
+@property NSString *timeStamp;
 @end
 
 @implementation HomeViewController
