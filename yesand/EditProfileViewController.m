@@ -34,6 +34,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)onSaveButtonPressed:(UIBarButtonItem *)sender {
+    [self performSegueWithIdentifier:@"UnwindToProfile" sender:sender];
 }
 
 /*
