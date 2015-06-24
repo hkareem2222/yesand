@@ -26,8 +26,8 @@
 @property Firebase *usersRef;
 @property Firebase *ref;
 @property int countdownTime;
-@property NSTimer *timerOne;
-@property NSTimer *timerTwo;
+//@property NSTimer *timerOne;
+//@property NSTimer *timerTwo;
 @end
 
 @implementation SplashViewController
@@ -35,7 +35,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.countdownTime = 7;
-    [self stopTimer];
+    //[self stopTimer];
     self.availableUsers = [NSMutableArray new];
     self.ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com"];
     NSString *currentUserString = [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@", self.ref.authData.uid];
@@ -90,17 +90,17 @@
             self.currentUserCharacter.text = self.currentUserCharacterOne;
             self.otherUserCharacter.text = self.currentUserCharacterTwo;
             self.topicLabel.text = self.currentUserTopic;
-            self.timerOne = [NSTimer scheduledTimerWithTimeInterval:1.0
-                                                             target:self
-                                                           selector:@selector(countdownToScene)
-                                                           userInfo:nil
-                                                            repeats:YES];
+           // self.timerOne = [NSTimer scheduledTimerWithTimeInterval:1.0
+            //                                                 target:self
+             //                                              selector:@selector(countdownToScene)
+             //                                              userInfo:nil
+              //                                              repeats:YES];
         } else {
             self.otherUserLabel.text = @"Finding";
             self.currentUserCharacter.text = @"Character";
             self.otherUserCharacter.text = @"Character";
             self.topicLabel.text = @"Topic";
-            [self stopTimer];
+          //  [self stopTimer];
         }
     } else {
         self.otherUser = self.availableUsers[self.indexOfCurrentUser - 1];
@@ -109,34 +109,34 @@
         self.currentUserCharacter.text = [self.otherUser objectForKey:@"character two"];
         self.otherUserCharacter.text = [self.otherUser objectForKey:@"character one"];
         self.topicLabel.text = [self.otherUser objectForKey:@"topic name"];
-        self.timerTwo = [NSTimer scheduledTimerWithTimeInterval:1.0
-                                                         target:self
-                                                       selector:@selector(countdownToScene)
-                                                       userInfo:nil
-                                                        repeats:YES];
+       // self.timerTwo = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                   //                      target:self
+                                     //                  selector:@selector(countdownToScene)
+                                      //                 userInfo:nil
+                                      //                  repeats:YES];
     }
 }
 
--(void)countdownToScene {
-    NSLog(@"inside count down -- %i", self.countdownTime);
-    if (self.countdownTime == 0) {
-        self.countdownTime = 7;
-        [self stopTimer];
-        [self performSegueWithIdentifier:@"SplashToChat" sender:self];
-    } else {
-        self.countdownTime--;
-    }
-}
+//-(void)countdownToScene {
+    //NSLog(@"inside count down -- %i", self.countdownTime);
+    //if (self.countdownTime == 0) {
+    //    self.countdownTime = 7;
+    //    [self stopTimer];
+    //    [self performSegueWithIdentifier:@"SplashToChat" sender:self];
+   // } else {
+   //     self.countdownTime--;
+  //  }
+//}
 
--(void)stopTimer {
-    if (self.timerOne) {
-        [self.timerOne invalidate];
-        self.timerOne = nil;
-    } else if (self.timerTwo) {
-        [self.timerTwo invalidate];
-        self.timerTwo = nil;
-    }
-}
+//-(void)stopTimer {
+   // if (self.timerOne) {
+    //    [self.timerOne invalidate];
+    //    self.timerOne = nil;
+   // } else if (self.timerTwo) {
+    //    [self.timerTwo invalidate];
+    //    self.timerTwo = nil;
+    //}
+//}
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"SplashToChat"]) {
