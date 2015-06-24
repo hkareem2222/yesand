@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *signUpButton;
 @property (weak, nonatomic) IBOutlet UIButton *logInButton;
 @property Firebase *myRootRef;
+@property (weak, nonatomic) IBOutlet UINavigationBar *loginBar;
+
 @end
 
 @implementation AuthViewController
@@ -31,6 +33,15 @@
             NSLog(@"no user logged in");
         }
     }];
+
+//    UIImage *image = [UIImage imageNamed:@"TestLogo.png"];
+//    self.navigationItem.titleView = [[UIImageView alloc]initWithImage:image];
+
+    self.loginBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
+
+    self.loginBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
+
+    
 }
 
 #pragma mark - Button Actions 
