@@ -7,7 +7,7 @@
 //
 
 #import "ChatViewController.h"
-
+#import "RatingViewController.h"
 @interface ChatViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -284,6 +284,13 @@
 - (IBAction)onEndSceneTapped:(UIBarButtonItem *)sender {
         NSLog(@"end tapped");
     [self performSegueWithIdentifier:@"SplashChatToRatings" sender:sender];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"SplashChatToRatings"]) {
+        RatingViewController *ratingVC = segue.destinationViewController;
+        ratingVC.otherAuthuid = self.otherAuthuid;
+    }
 }
 
 #pragma mark - Table View

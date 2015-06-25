@@ -14,7 +14,6 @@
 
 @property (weak, nonatomic) IBOutlet RateView *rateView;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
-@property NSString *otherAuthuid;
 @property NSArray *ratings;
 @property NSMutableArray *otherUserRatings;
 @end
