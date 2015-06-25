@@ -242,22 +242,6 @@
     self.messageTextField.text = @"";
 }
 
-//hacky way to do things but will change later
--(void)makeNotAvailable {
-    Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
-    Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
-    NSDictionary *userDic = @{@"isAvailable": @0
-                              };
-    [user updateChildValues: userDic];
-
-    if (self.isSplashHidden) {
-        Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
-        Firebase *otherUser = [usersRef childByAppendingPath:self.otherAuthuid];
-        [otherUser updateChildValues:userDic];
-    }
-
-}
-
 #pragma mark - Scroll View Animation
 
 -(void)keyboardOnScreen:(NSNotification *)notification
@@ -293,7 +277,29 @@
     return cell;
 }
 
+#pragma mark - Disappearing
+
+//hacky way to do things but will change later
+-(void)makeNotAvailable {
+    NSLog(@"000 Start");
+    Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
+    Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
+    NSDictionary *userDic = @{@"isAvailable": @0
+                              };
+    [user updateChildValues: userDic];
+    NSLog(@"--- current user save");
+
+    if (self.isSplashHidden) {
+        Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
+        Firebase *otherUser = [usersRef childByAppendingPath:self.otherAuthuid];
+        [otherUser updateChildValues:userDic];
+        NSLog(@"--- other user save");
+    }
+    
+}
+
 -(void)viewWillDisappear:(BOOL)animated {
+    NSLog(@"--- START disappear");
     [self makeNotAvailable];
     if (self.isSplashHidden) {
         NSLog(@"---- disapear splash hidden to even ");
@@ -302,6 +308,7 @@
                                             @"isLive": @0
                                             };
             [self.sceneConvo updateChildValues:sceneMessages];
+            NSLog(@"--- other user save inside live");
         }
         Firebase *currentConvo = [self.conversationsRef childByAppendingPath: self.currentUsername];
         Firebase *otherConvo = [self.conversationsRef childByAppendingPath: self.otherUsername];
@@ -309,6 +316,7 @@
         [otherConvo removeValue];
         [self.usersRef removeAllObservers];
         [self.convoRef removeAllObservers];
+        NSLog(@"--- end");
     }
 }
 @end
