@@ -97,7 +97,13 @@ withCompletionBlock:^(NSError *error, FAuthData *authData) {
                                   @"character two": @"test",
                                   @"topic name": @"test",
                                   @"authuid": authData.uid,
-                                  @"username": self.usernameField.text
+                                  @"username": self.usernameField.text,
+                                  @"name": @" ",
+                                  @"tagline": @" ",
+                                  @"location": @" ",
+                                  @"website": @" ",
+                                  @"rating": @"3",
+                                  @"rating avg": @"3"
                                   };
 
         [[[self.myRootRef childByAppendingPath:@"users"]
