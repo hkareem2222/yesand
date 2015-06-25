@@ -55,6 +55,7 @@
 
         NSArray *topics = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError];
         self.topic = topics[arc4random_uniform((int)topics.count)];
+                               NSLog(@"%@", self.topic);
     }];
 }
 
@@ -69,7 +70,8 @@
                                   @"updateAt": kFirebaseServerValueTimestamp
                                   };
     [user updateChildValues:userDic];
-    [self performSegueWithIdentifier:@"HomeToSplash" sender:sender];
+    NSLog(@"button tapped");
+    [self performSegueWithIdentifier:@"HomeToSplashChat" sender:sender];
 }
 
 #pragma mark - Table View

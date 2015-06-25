@@ -109,8 +109,6 @@
     [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardWillShowNotification object:nil];
     self.cloudMessages = [NSMutableArray new];
 
-    [self queryConversation];
-
     //---------------------------------endsHere
 }
 
@@ -165,6 +163,8 @@
 -(void)splashViewDisappear {
     self.splashView.alpha = 0.0;
     self.isSplashHidden = YES;
+    [self.usersRef removeAllObservers];
+    [self queryConversation];
 }
 //------------------------------------------ends here
 
@@ -264,6 +264,9 @@
     cell.textLabel.text = self.cloudMessages[indexPath.row];
     return cell;
 }
+- (IBAction)onEndSceneButtonPressed:(id)sender {
+    [self performSegueWithIdentifier:@"UnwindToHome" sender:sender];
+}
 
 -(void)viewWillDisappear:(BOOL)animated {
     [self makeNotAvailable];
@@ -278,6 +281,5 @@
     [currentConvo removeValue];
     [otherConvo removeValue];
     [self.convoRef removeAllObservers];
-    [self.usersRef removeAllObservers];
 }
 @end
