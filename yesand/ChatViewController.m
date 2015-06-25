@@ -7,7 +7,7 @@
 //
 
 #import "ChatViewController.h"
-
+#import "RatingViewController.h"
 @interface ChatViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -197,34 +197,40 @@
         self.sceneConvo = [scenesConvo childByAutoId];
         [self.sceneConvo setValue:sceneDic];
         //setting up conversation model and query
-        self.convoRef = [self.conversationsRef childByAppendingPath: self.currentUsername];
-        
-        [self.convoRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-            if (![snapshot.value isEqual:[NSNull null]]) {
-                self.currentUserMessages = snapshot.value[@"messages"];
-                self.cloudMessages = [NSMutableArray new];
-                [self.cloudMessages addObjectsFromArray:self.currentUserMessages];
-                NSDictionary *sceneMessages = @{
-                                               @"messages": self.cloudMessages
-                                               };
-                [self.sceneConvo updateChildValues:sceneMessages];
-                [self.tableView reloadData];
-            }
-        } withCancelBlock:^(NSError *error) {
-        }];
+        if (self.currentUsername != nil) {
+            NSLog(@"----------------%@", self.currentUsername);
+            self.convoRef = [self.conversationsRef childByAppendingPath: self.currentUsername];
+
+            [self.convoRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+                if (![snapshot.value isEqual:[NSNull null]]) {
+                    self.currentUserMessages = snapshot.value[@"messages"];
+                    self.cloudMessages = [NSMutableArray new];
+                    [self.cloudMessages addObjectsFromArray:self.currentUserMessages];
+                    NSDictionary *sceneMessages = @{
+                                                    @"messages": self.cloudMessages
+                                                    };
+                    [self.sceneConvo updateChildValues:sceneMessages];
+                    [self.tableView reloadData];
+                }
+            } withCancelBlock:^(NSError *error) {
+            }];
+        }
     } else {
         //setting up conversation model and query
-        self.convoRef = [self.conversationsRef childByAppendingPath: self.otherUsername];
+        if (self.otherUsername != nil) {
+            NSLog(@"----------------%@", self.otherUsername);
+            self.convoRef = [self.conversationsRef childByAppendingPath: self.otherUsername];
 
-        [self.convoRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-            if (![snapshot.value isEqual:[NSNull null]]) {
-                self.otherUserMessages = snapshot.value[@"messages"];
-                self.cloudMessages = [NSMutableArray new];
-                [self.cloudMessages addObjectsFromArray:self.otherUserMessages];
-                [self.tableView reloadData];
-            }
-        } withCancelBlock:^(NSError *error) {
-        }];
+            [self.convoRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+                if (![snapshot.value isEqual:[NSNull null]]) {
+                    self.otherUserMessages = snapshot.value[@"messages"];
+                    self.cloudMessages = [NSMutableArray new];
+                    [self.cloudMessages addObjectsFromArray:self.otherUserMessages];
+                    [self.tableView reloadData];
+                }
+            } withCancelBlock:^(NSError *error) {
+            }];
+        }
     }
 }
 
@@ -240,6 +246,27 @@
     [self.messageTextField resignFirstResponder];
     self.textFieldBottomLayout.constant = 0;
     self.messageTextField.text = @"";
+}
+
+-(void)makeNotAvailable {
+    Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
+    NSDictionary *userDic = @{@"isAvailable": @0
+                            };
+    if (usersRef.authData.uid != nil) {
+        NSLog(@"----------------%@", usersRef.authData.uid);
+        Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
+        [user updateChildValues: userDic];
+    }
+
+    if (self.isSplashHidden) {
+        if (self.otherAuthuid != nil) {
+            NSLog(@"----------------%@", self.otherAuthuid);
+            Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
+            Firebase *otherUser = [usersRef childByAppendingPath:self.otherAuthuid];
+            [otherUser updateChildValues:userDic];
+        }
+    }
+
 }
 
 #pragma mark - Scroll View Animation
@@ -262,7 +289,15 @@
 }
 
 - (IBAction)onEndSceneTapped:(UIBarButtonItem *)sender {
+        NSLog(@"end tapped");
     [self performSegueWithIdentifier:@"SplashChatToRatings" sender:sender];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"SplashChatToRatings"]) {
+        RatingViewController *ratingVC = segue.destinationViewController;
+        ratingVC.otherAuthuid = self.otherAuthuid;
+    }
 }
 
 #pragma mark - Table View
@@ -278,25 +313,6 @@
 }
 
 #pragma mark - Disappearing
-
-//hacky way to do things but will change later
--(void)makeNotAvailable {
-    NSLog(@"000 Start");
-    Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
-    Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
-    NSDictionary *userDic = @{@"isAvailable": @0
-                              };
-    [user updateChildValues: userDic];
-    NSLog(@"--- current user save");
-
-    if (self.isSplashHidden) {
-        Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
-        Firebase *otherUser = [usersRef childByAppendingPath:self.otherAuthuid];
-        [otherUser updateChildValues:userDic];
-        NSLog(@"--- other user save");
-    }
-    
-}
 
 -(void)viewWillDisappear:(BOOL)animated {
     NSLog(@"--- START disappear");
