@@ -35,6 +35,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *currentUserCharacter;
 @property (weak, nonatomic) IBOutlet UIView *splashView;
 @property (weak, nonatomic) IBOutlet UILabel *otherUserCharacter;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelBarButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *endSceneBarButton;
 @property NSDictionary *otherUser;
 @property BOOL isSplashHidden;
 @property NSString *otherAuthuid;
@@ -45,8 +47,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.isSplashHidden = NO;
+    self.endSceneBarButton.enabled = NO;
+    self.endSceneBarButton.title = @"";
     //----------------------------------splashviewstuff
-
     self.ifCalled = NO;
     self.availableUsers = [NSMutableArray new];
     self.ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com"];
@@ -162,6 +165,10 @@
 -(void)splashViewDisappear {
     self.splashView.alpha = 0.0;
     self.isSplashHidden = YES;
+    self.endSceneBarButton.title = @"End Scene";
+    self.endSceneBarButton.enabled = YES;
+    self.cancelBarButton.title = @"";
+    self.cancelBarButton.enabled = NO;
     [self.usersRef removeAllObservers];
     [self queryConversation];
 }
@@ -214,6 +221,8 @@
     }
 }
 
+
+
 #pragma mark - Sending Message
 - (IBAction)onSendButtonTapped:(id)sender {
     [self.cloudMessages addObject:self.messageTextField.text];
@@ -230,14 +239,16 @@
 -(void)makeNotAvailable {
     Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
     Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
-    Firebase *otherUser = [usersRef childByAppendingPath:self.otherAuthuid];
     NSDictionary *userDic = @{@"isAvailable": @0
                               };
     [user updateChildValues: userDic];
+
     if (self.isSplashHidden) {
+        Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
         Firebase *otherUser = [usersRef childByAppendingPath:self.otherAuthuid];
         [otherUser updateChildValues:userDic];
     }
+
 }
 
 #pragma mark - Scroll View Animation
@@ -251,6 +262,16 @@
     CGRect keyboardFrame = [self.view convertRect:rawFrame fromView:nil];
 
     self.textFieldBottomLayout.constant = keyboardFrame.size.height - 50;
+}
+
+#pragma mark - Segues
+
+- (IBAction)onCancelTapped:(UIBarButtonItem *)sender {
+    [self performSegueWithIdentifier:@"UnwindToHome" sender:sender];
+}
+
+- (IBAction)onEndSceneTapped:(UIBarButtonItem *)sender {
+    [self performSegueWithIdentifier:@"SplashChatToRatings" sender:sender];
 }
 
 #pragma mark - Table View
@@ -270,16 +291,20 @@
 
 -(void)viewWillDisappear:(BOOL)animated {
     [self makeNotAvailable];
-    if (self.isEven) {
-        NSDictionary *sceneMessages = @{
-                                        @"isLive": @0
-                                        };
-        [self.sceneConvo updateChildValues:sceneMessages];
+    if (self.isSplashHidden) {
+        NSLog(@"---- disapear splash hidden to even ");
+        if (self.isEven) {
+            NSDictionary *sceneMessages = @{
+                                            @"isLive": @0
+                                            };
+            [self.sceneConvo updateChildValues:sceneMessages];
+        }
+        Firebase *currentConvo = [self.conversationsRef childByAppendingPath: self.currentUsername];
+        Firebase *otherConvo = [self.conversationsRef childByAppendingPath: self.otherUsername];
+        [currentConvo removeValue];
+        [otherConvo removeValue];
+        [self.usersRef removeAllObservers];
+        [self.convoRef removeAllObservers];
     }
-    Firebase *currentConvo = [self.conversationsRef childByAppendingPath: self.currentUsername];
-    Firebase *otherConvo = [self.conversationsRef childByAppendingPath: self.otherUsername];
-    [currentConvo removeValue];
-    [otherConvo removeValue];
-    [self.convoRef removeAllObservers];
 }
 @end
