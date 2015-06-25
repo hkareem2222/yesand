@@ -252,7 +252,7 @@
     CGRect rawFrame      = [value CGRectValue];
     CGRect keyboardFrame = [self.view convertRect:rawFrame fromView:nil];
 
-    self.textFieldBottomLayout.constant = keyboardFrame.size.height - 50;
+    self.textFieldBottomLayout.constant = keyboardFrame.size.height; //- 50;
 }
 
 #pragma mark - Segues
