@@ -36,5 +36,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationAlwayUsageDescription</key>
+	<string>Share your location to show nearest comedy clubs</string>
 </dict>
 </plist>
