@@ -318,27 +318,21 @@
     [self performSegueWithIdentifier:@"UnwindToHome" sender:sender];
 }
 -(void)viewWillDisappear:(BOOL)animated {
-//    NSLog(@"view disappear");
-//    [self makeNotAvailable];
-////    if (self.isSplashHidden) {
-////        NSLog(@"---- disapear splash hidden to even ");
-////        if (self.isEven) {
-////            NSDictionary *sceneMessages = @{
-////                                            @"isLive": @0
-////                                            };
-////            [self.sceneConvo updateChildValues:sceneMessages];
-////        }
-////        if (self.currentUsername != nil) {
-////            NSLog(@"----------------%@", self.currentUsername);
-////            Firebase *currentConvo = [self.conversationsRef childByAppendingPath:self.currentUsername];
-////            [currentConvo removeValue];
-////        }
-////        if (self.otherUsername != nil) {
-////            NSLog(@"----------------%@", self.otherUsername);
-////            Firebase *otherConvo = [self.conversationsRef childByAppendingPath:self.otherUsername];
-////            [otherConvo removeValue];
-////        }
-////        [self.convoRef removeAllObservers];
-////    }
+    [self makeNotAvailable];
+    if (self.isSplashHidden) {
+        NSLog(@"---- disapear splash hidden to even ");
+        if (self.isEven) {
+            NSDictionary *sceneMessages = @{
+                                            @"isLive": @0
+                                            };
+            [self.sceneConvo updateChildValues:sceneMessages];
+        }
+        Firebase *currentConvo = [self.conversationsRef childByAppendingPath: self.currentUsername];
+        Firebase *otherConvo = [self.conversationsRef childByAppendingPath: self.otherUsername];
+        [currentConvo removeValue];
+        [otherConvo removeValue];
+        [self.usersRef removeAllObservers];
+        [self.convoRef removeAllObservers];
+    }
 }
 @end
