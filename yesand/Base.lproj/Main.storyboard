@@ -447,8 +447,8 @@
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="6vw-IJ-lPS"/>
                                 </connections>
                             </mapView>
-                            <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="IQr-Iz-FX1">
-                                <rect key="frame" x="0.0" y="312" width="600" height="239"/>
+                            <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="IQr-Iz-FX1">
+                                <rect key="frame" x="0.0" y="264" width="600" height="287"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LiveID" id="E3e-dL-V3U" customClass="HomeToAudienceSegue">
@@ -464,16 +464,43 @@
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="zTF-9F-R6i"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T4w-qQ-IcL">
-                                <rect key="frame" x="0.0" y="216" width="346" height="133"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T4w-qQ-IcL">
+                                <rect key="frame" x="0.0" y="214" width="600" height="50"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="QTZ-cM-tnE">
+                                        <rect key="frame" x="213" y="11" width="175" height="29"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="28" id="2p7-uz-GbW"/>
+                                            <constraint firstAttribute="width" constant="175" id="rjZ-lt-jTT"/>
+                                        </constraints>
+                                        <segments>
+                                            <segment title="Live Scenes"/>
+                                            <segment title="Hot Scenes"/>
+                                        </segments>
+                                        <color key="tintColor" red="0.96470588239999999" green="0.35294117650000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </segmentedControl>
+                                </subviews>
                                 <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="QTZ-cM-tnE" firstAttribute="top" secondItem="T4w-qQ-IcL" secondAttribute="top" constant="11" id="1CO-6o-p4s"/>
+                                    <constraint firstAttribute="bottom" secondItem="QTZ-cM-tnE" secondAttribute="bottom" constant="11" id="Bvj-mE-sxh"/>
+                                    <constraint firstAttribute="centerX" secondItem="QTZ-cM-tnE" secondAttribute="centerX" id="EiB-mG-fLK"/>
+                                    <constraint firstAttribute="height" constant="50" id="uTL-DM-Irl"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="max-fw-xhT" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="5Cw-iL-v6u"/>
+                            <constraint firstAttribute="trailing" secondItem="IQr-Iz-FX1" secondAttribute="trailing" id="Hje-DZ-Djb"/>
+                            <constraint firstItem="T4w-qQ-IcL" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="O8W-6o-FFM"/>
+                            <constraint firstItem="IQr-Iz-FX1" firstAttribute="top" secondItem="T4w-qQ-IcL" secondAttribute="bottom" id="XLB-Yf-vjd"/>
                             <constraint firstItem="max-fw-xhT" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="ZWy-mu-8YI"/>
                             <constraint firstAttribute="trailing" secondItem="max-fw-xhT" secondAttribute="trailing" id="fO4-Ly-j03"/>
+                            <constraint firstItem="IQr-Iz-FX1" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="jlW-YB-len"/>
+                            <constraint firstAttribute="trailing" secondItem="T4w-qQ-IcL" secondAttribute="trailing" id="mPd-G7-Llr"/>
+                            <constraint firstItem="T4w-qQ-IcL" firstAttribute="top" secondItem="max-fw-xhT" secondAttribute="bottom" id="tSi-Za-yWM"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="IQr-Iz-FX1" secondAttribute="bottom" id="xFh-XJ-AYB"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="r2y-wN-Tbp">
