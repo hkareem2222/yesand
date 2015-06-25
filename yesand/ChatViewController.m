@@ -37,6 +37,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *otherUserCharacter;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelBarButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *endSceneBarButton;
+@property (weak, nonatomic) IBOutlet UINavigationBar *sceneNavBar;
 @property NSDictionary *otherUser;
 @property BOOL isSplashHidden;
 @property NSString *otherAuthuid;
@@ -49,6 +50,12 @@
     self.isSplashHidden = NO;
     self.endSceneBarButton.enabled = NO;
     self.endSceneBarButton.title = @"";
+    self.sceneNavBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
+
+    self.sceneNavBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
+
+    self.sceneNavBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
+
     //----------------------------------splashviewstuff
     self.ifCalled = NO;
     self.availableUsers = [NSMutableArray new];
@@ -284,9 +291,6 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MessageID"];
     cell.textLabel.text = self.cloudMessages[indexPath.row];
     return cell;
-}
-- (IBAction)onEndSceneButtonPressed:(id)sender {
-    [self performSegueWithIdentifier:@"UnwindToHome" sender:sender];
 }
 
 -(void)viewWillDisappear:(BOOL)animated {

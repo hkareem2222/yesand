@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *profileHeadingLabel;
 @property (weak, nonatomic) IBOutlet UILabel *profileSubheadingLabel;
 @property (weak, nonatomic) IBOutlet UILabel *profileLinkLabel;
+@property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 
 @end
 
@@ -41,6 +42,7 @@
         self.profileHeadingLabel.text = snapshot.value[@"name"];
         self.profileSubheadingLabel.text = snapshot.value[@"tagline"];
         self.profileLinkLabel.text = snapshot.value[@"website"];
+        self.locationLabel.text = snapshot.value[@"location"];
     }];
 }
 
