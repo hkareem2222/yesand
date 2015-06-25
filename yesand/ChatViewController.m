@@ -35,6 +35,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *currentUserCharacter;
 @property (weak, nonatomic) IBOutlet UIView *splashView;
 @property (weak, nonatomic) IBOutlet UILabel *otherUserCharacter;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelBarButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *endSceneBarButton;
+@property (weak, nonatomic) IBOutlet UINavigationBar *sceneNavBar;
 @property NSDictionary *otherUser;
 @property BOOL isSplashHidden;
 @property NSString *otherAuthuid;
@@ -45,8 +48,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.isSplashHidden = NO;
-    //----------------------------------splashviewstuff
+    self.endSceneBarButton.enabled = NO;
+    self.endSceneBarButton.title = @"";
+    self.sceneNavBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
 
+    self.sceneNavBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
+
+    self.sceneNavBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
+
+    //----------------------------------splashviewstuff
     self.ifCalled = NO;
     self.availableUsers = [NSMutableArray new];
     self.ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com"];
@@ -162,6 +172,10 @@
 -(void)splashViewDisappear {
     self.splashView.alpha = 0.0;
     self.isSplashHidden = YES;
+    self.endSceneBarButton.title = @"End Scene";
+    self.endSceneBarButton.enabled = YES;
+    self.cancelBarButton.title = @"";
+    self.cancelBarButton.enabled = NO;
     [self.usersRef removeAllObservers];
     [self queryConversation];
 }
@@ -214,6 +228,8 @@
     }
 }
 
+
+
 #pragma mark - Sending Message
 - (IBAction)onSendButtonTapped:(id)sender {
     [self.cloudMessages addObject:self.messageTextField.text];
@@ -224,20 +240,6 @@
     [self.messageTextField resignFirstResponder];
     self.textFieldBottomLayout.constant = 0;
     self.messageTextField.text = @"";
-}
-
-//hacky way to do things but will change later
--(void)makeNotAvailable {
-    Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
-    Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
-    Firebase *otherUser = [usersRef childByAppendingPath:self.otherAuthuid];
-    NSDictionary *userDic = @{@"isAvailable": @0
-                              };
-    [user updateChildValues: userDic];
-    if (self.isSplashHidden) {
-        Firebase *otherUser = [usersRef childByAppendingPath:self.otherAuthuid];
-        [otherUser updateChildValues:userDic];
-    }
 }
 
 #pragma mark - Scroll View Animation
@@ -253,6 +255,16 @@
     self.textFieldBottomLayout.constant = keyboardFrame.size.height - 50;
 }
 
+#pragma mark - Segues
+
+- (IBAction)onCancelTapped:(UIBarButtonItem *)sender {
+    [self performSegueWithIdentifier:@"UnwindToHome" sender:sender];
+}
+
+- (IBAction)onEndSceneTapped:(UIBarButtonItem *)sender {
+    [self performSegueWithIdentifier:@"SplashChatToRatings" sender:sender];
+}
+
 #pragma mark - Table View
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -264,22 +276,47 @@
     cell.textLabel.text = self.cloudMessages[indexPath.row];
     return cell;
 }
-- (IBAction)onEndSceneButtonPressed:(id)sender {
-    [self performSegueWithIdentifier:@"UnwindToHome" sender:sender];
+
+#pragma mark - Disappearing
+
+//hacky way to do things but will change later
+-(void)makeNotAvailable {
+    NSLog(@"000 Start");
+    Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
+    Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
+    NSDictionary *userDic = @{@"isAvailable": @0
+                              };
+    [user updateChildValues: userDic];
+    NSLog(@"--- current user save");
+
+    if (self.isSplashHidden) {
+        Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
+        Firebase *otherUser = [usersRef childByAppendingPath:self.otherAuthuid];
+        [otherUser updateChildValues:userDic];
+        NSLog(@"--- other user save");
+    }
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
+    NSLog(@"--- START disappear");
     [self makeNotAvailable];
-    if (self.isEven) {
-        NSDictionary *sceneMessages = @{
-                                        @"isLive": @0
-                                        };
-        [self.sceneConvo updateChildValues:sceneMessages];
+    if (self.isSplashHidden) {
+        NSLog(@"---- disapear splash hidden to even ");
+        if (self.isEven) {
+            NSDictionary *sceneMessages = @{
+                                            @"isLive": @0
+                                            };
+            [self.sceneConvo updateChildValues:sceneMessages];
+            NSLog(@"--- other user save inside live");
+        }
+        Firebase *currentConvo = [self.conversationsRef childByAppendingPath: self.currentUsername];
+        Firebase *otherConvo = [self.conversationsRef childByAppendingPath: self.otherUsername];
+        [currentConvo removeValue];
+        [otherConvo removeValue];
+        [self.usersRef removeAllObservers];
+        [self.convoRef removeAllObservers];
+        NSLog(@"--- end");
     }
-    Firebase *currentConvo = [self.conversationsRef childByAppendingPath: self.currentUsername];
-    Firebase *otherConvo = [self.conversationsRef childByAppendingPath: self.otherUsername];
-    [currentConvo removeValue];
-    [otherConvo removeValue];
-    [self.convoRef removeAllObservers];
 }
 @end

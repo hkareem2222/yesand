@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *taglineField;
 @property (weak, nonatomic) IBOutlet UITextField *locationField;
 @property (weak, nonatomic) IBOutlet UITextField *websiteField;
+@property (weak, nonatomic) IBOutlet UINavigationBar *editNavBar;
 
 @end
 
@@ -32,9 +33,11 @@
         self.websiteField.text = snapshot.value[@"website"];
     }];
 
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
+    self.editNavBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
 
-    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
+    self.editNavBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
+
+    self.editNavBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
 }
 - (IBAction)onChangeButtonPressed:(id)sender {
 }
@@ -56,5 +59,10 @@
     NSLog(@"tapped");
     [self performSegueWithIdentifier:@"UnwindToProfile" sender:sender];
 }
+
+- (IBAction)onCancelPressed:(UIBarButtonItem *)sender {
+    [self performSegueWithIdentifier:@"UnwindToProfile" sender:sender];
+}
+
 
 @end

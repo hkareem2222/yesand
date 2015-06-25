@@ -91,10 +91,11 @@
         cell.backgroundColor = [UIColor colorWithRed:236/255.0 green:240/255.0 blue:241/255.0 alpha:1.0];
         tableView.separatorColor = [UIColor colorWithRed:52/255.0 green:73/255.0 blue:94/255.0 alpha:1.0];
         return cell;
-    } else {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HotID"];
-        return cell;
-    }
+    } //else {
+//        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HotID"];
+//        return cell;
+//    }
+    return nil;
 }
 
 #pragma mark - Segue
