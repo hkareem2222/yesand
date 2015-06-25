@@ -57,4 +57,9 @@
     [self performSegueWithIdentifier:@"UnwindToProfile" sender:sender];
 }
 
+- (IBAction)onCancelPressed:(UIBarButtonItem *)sender {
+    [self performSegueWithIdentifier:@"UnwindToProfile" sender:sender];
+}
+
+
 @end

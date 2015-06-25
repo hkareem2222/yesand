@@ -30,6 +30,8 @@
      self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
 }
 
+
+
 -(void)viewDidAppear:(BOOL)animated {
     Firebase *ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com"];
     NSString *currentUserString = [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@", ref.authData.uid];
@@ -42,7 +44,9 @@
     }];
 }
 
-
+- (IBAction)onEditProfilePressed:(UIButton *)sender {
+    [self performSegueWithIdentifier:@"ProfileToEdit" sender:sender];
+}
 
 - (IBAction)onLogoutButtonPressed:(id)sender {
     Firebase *ref = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
