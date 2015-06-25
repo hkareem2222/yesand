@@ -282,6 +282,7 @@
 }
 
 - (IBAction)onEndSceneTapped:(UIBarButtonItem *)sender {
+        NSLog(@"end tapped");
     [self performSegueWithIdentifier:@"SplashChatToRatings" sender:sender];
 }
 
@@ -298,6 +299,7 @@
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
+    NSLog(@"disappear");
     [self makeNotAvailable];
     if (self.isSplashHidden) {
         NSLog(@"---- disapear splash hidden to even ");
