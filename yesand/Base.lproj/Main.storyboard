@@ -77,21 +77,21 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JNd-Nl-Xwd">
                                         <rect key="frame" x="0.0" y="143" width="600" height="250"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Role" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYb-8U-wbN">
-                                                <rect key="frame" x="442" y="18" width="150" height="22"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="150" id="XIF-oo-GGc"/>
-                                                    <constraint firstAttribute="height" constant="22" id="zpS-7a-UrH"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Role" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ab1-Jx-q2U">
                                                 <rect key="frame" x="8" y="18" width="150" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="150" id="Cdh-Ad-rbD"/>
                                                     <constraint firstAttribute="height" constant="22" id="b0l-tB-WhZ"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Role" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYb-8U-wbN">
+                                                <rect key="frame" x="442" y="18" width="150" height="22"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="150" id="XIF-oo-GGc"/>
+                                                    <constraint firstAttribute="height" constant="22" id="zpS-7a-UrH"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -171,16 +171,18 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="mTd-Ps-BvJ">
-                        <barButtonItem key="rightBarButtonItem" title="End Scene" id="sRV-36-8d3">
-                            <connections>
-                                <segue destination="hKZ-s2-gAP" kind="show" id="Hf7-ou-SYk"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="End Scene" id="sRV-36-8d3"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="currentUserCharacter" destination="ab1-Jx-q2U" id="T3g-nH-ZgN"/>
+                        <outlet property="currentUserLabel" destination="aVr-Kk-xFh" id="Vnd-v2-Lzc"/>
                         <outlet property="messageTextField" destination="Q0g-z5-x7R" id="4fU-sr-keD"/>
+                        <outlet property="otherUserCharacter" destination="QYb-8U-wbN" id="W66-qd-caz"/>
+                        <outlet property="otherUserLabel" destination="dKD-ei-26W" id="JoS-VD-Zne"/>
+                        <outlet property="splashView" destination="vNX-0S-IY4" id="LkS-aa-vIV"/>
                         <outlet property="tableView" destination="3DB-k2-6om" id="Tgp-UU-92M"/>
                         <outlet property="textFieldBottomLayout" destination="VF5-wz-h0i" id="IJT-3W-Ipy"/>
+                        <segue destination="hKZ-s2-gAP" kind="show" identifier="SplashChatToRatings" id="eC8-w8-aXa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XKv-Uf-MLO" userLabel="First Responder" sceneMemberID="firstResponder"/>
