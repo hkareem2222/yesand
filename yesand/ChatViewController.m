@@ -281,6 +281,10 @@
     [self performSegueWithIdentifier:@"UnwindToHome" sender:sender];
 }
 
+- (IBAction)onEndSceneTapped:(UIBarButtonItem *)sender {
+    [self performSegueWithIdentifier:@"SplashChatToRatings" sender:sender];
+}
+
 #pragma mark - Table View
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -292,31 +296,7 @@
     cell.textLabel.text = self.cloudMessages[indexPath.row];
     return cell;
 }
-- (IBAction)onEndSceneButtonPressed:(id)sender {
-    NSLog(@"endScene");
-    [self makeNotAvailable];
-    if (self.isSplashHidden) {
-        NSLog(@"---- disapear splash hidden to even ");
-        if (self.isEven) {
-            NSDictionary *sceneMessages = @{
-                                            @"isLive": @0
-                                            };
-            [self.sceneConvo updateChildValues:sceneMessages];
-        }
-        if (self.currentUsername != nil) {
-            NSLog(@"----------------%@", self.currentUsername);
-            Firebase *currentConvo = [self.conversationsRef childByAppendingPath:self.currentUsername];
-            [currentConvo removeValue];
-        }
-        if (self.otherUsername != nil) {
-            NSLog(@"----------------%@", self.otherUsername);
-            Firebase *otherConvo = [self.conversationsRef childByAppendingPath:self.otherUsername];
-            [otherConvo removeValue];
-        }
-        [self.convoRef removeAllObservers];
-    }
-    [self performSegueWithIdentifier:@"UnwindToHome" sender:sender];
-}
+
 -(void)viewWillDisappear:(BOOL)animated {
     [self makeNotAvailable];
     if (self.isSplashHidden) {
