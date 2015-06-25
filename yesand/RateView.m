@@ -130,11 +130,11 @@
 - (void)handleTouchAtLocation:(CGPoint)touchLocation {
     if (!self.editable) return;
 
-    int newRating = 0;
-    for(int i = self.imageViews.count - 1; i >= 0; i--) {
+    unsigned long newRating = 0;
+    for(unsigned long i = self.imageViews.count - 1; i >= 0; i--) {
         UIImageView *imageView = [self.imageViews objectAtIndex:i];
         if (touchLocation.x > imageView.frame.origin.x) {
-            newRating = i+1;
+            newRating = i + 1;
             break;
         }
     }

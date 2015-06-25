@@ -10,7 +10,6 @@
 
 @interface ChatViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property double keyboardHeight;
 @property NSMutableArray *localMessages;
@@ -203,7 +202,8 @@
         //setting up conversation model and query
         self.convoRef = [self.conversationsRef childByAppendingPath: self.otherUsername];
 
-        [self.convoRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {            if (![snapshot.value isEqual:[NSNull null]]) {
+        [self.convoRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+            if (![snapshot.value isEqual:[NSNull null]]) {
                 self.otherUserMessages = snapshot.value[@"messages"];
                 self.cloudMessages = [NSMutableArray new];
                 [self.cloudMessages addObjectsFromArray:self.otherUserMessages];
@@ -230,6 +230,7 @@
 -(void)makeNotAvailable {
     Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
     Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
+    Firebase *otherUser = [usersRef childByAppendingPath:self.otherAuthuid];
     NSDictionary *userDic = @{@"isAvailable": @0
                               };
     [user updateChildValues: userDic];
@@ -237,7 +238,6 @@
         Firebase *otherUser = [usersRef childByAppendingPath:self.otherAuthuid];
         [otherUser updateChildValues:userDic];
     }
-
 }
 
 #pragma mark - Scroll View Animation
