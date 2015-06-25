@@ -37,6 +37,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *otherUserCharacter;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelBarButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *endSceneBarButton;
+@property (weak, nonatomic) IBOutlet UINavigationBar *sceneNavBar;
 @property NSDictionary *otherUser;
 @property BOOL isSplashHidden;
 @property NSString *otherAuthuid;
@@ -49,6 +50,12 @@
     self.isSplashHidden = NO;
     self.endSceneBarButton.enabled = NO;
     self.endSceneBarButton.title = @"";
+    self.sceneNavBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
+
+    self.sceneNavBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
+
+    self.sceneNavBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
+
     //----------------------------------splashviewstuff
     self.ifCalled = NO;
     self.availableUsers = [NSMutableArray new];
@@ -305,8 +312,10 @@
     return cell;
 }
 
+#pragma mark - Disappearing
+
 -(void)viewWillDisappear:(BOOL)animated {
-    NSLog(@"disappear");
+    NSLog(@"--- START disappear");
     [self makeNotAvailable];
     if (self.isSplashHidden) {
         NSLog(@"---- disapear splash hidden to even ");
@@ -315,6 +324,7 @@
                                             @"isLive": @0
                                             };
             [self.sceneConvo updateChildValues:sceneMessages];
+            NSLog(@"--- other user save inside live");
         }
         Firebase *currentConvo = [self.conversationsRef childByAppendingPath: self.currentUsername];
         Firebase *otherConvo = [self.conversationsRef childByAppendingPath: self.otherUsername];
@@ -322,6 +332,7 @@
         [otherConvo removeValue];
         [self.usersRef removeAllObservers];
         [self.convoRef removeAllObservers];
+        NSLog(@"--- end");
     }
 }
 @end

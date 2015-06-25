@@ -14,6 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet RateView *rateView;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+@property (weak, nonatomic) IBOutlet UIButton *submitButton;
 @property NSArray *ratings;
 @property NSMutableArray *otherUserRatings;
 @end
@@ -22,6 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.submitButton.enabled = NO;
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
 
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
@@ -42,7 +44,7 @@
 
 - (void)rateView:(RateView *)rateView ratingDidChange:(float)rating {
 
-
+    self.submitButton.enabled = YES;
     if (self.rateView.rating == 0) {
         self.statusLabel.text = [NSString stringWithFormat:@""];
     }
@@ -90,6 +92,15 @@
                                    @"rating avg": overallRating
                                    };
     [otherUser updateChildValues:ratingUpdate];
+}
+
+- (IBAction)onSubmitRatingTapped:(UIButton *)sender {
+    [self storeRatingValueForOtherUser];
+    [self performSegueWithIdentifier:@"UnwindToHomeFromRating" sender:sender];
+}
+
+- (IBAction)onReportUserTapped:(UIButton *)sender {
+    // Set up logic for alert view saying are you sure you want to report user
 }
 
 /*
