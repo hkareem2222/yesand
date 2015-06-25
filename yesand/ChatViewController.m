@@ -190,34 +190,40 @@
         self.sceneConvo = [scenesConvo childByAutoId];
         [self.sceneConvo setValue:sceneDic];
         //setting up conversation model and query
-        self.convoRef = [self.conversationsRef childByAppendingPath: self.currentUsername];
-        
-        [self.convoRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-            if (![snapshot.value isEqual:[NSNull null]]) {
-                self.currentUserMessages = snapshot.value[@"messages"];
-                self.cloudMessages = [NSMutableArray new];
-                [self.cloudMessages addObjectsFromArray:self.currentUserMessages];
-                NSDictionary *sceneMessages = @{
-                                               @"messages": self.cloudMessages
-                                               };
-                [self.sceneConvo updateChildValues:sceneMessages];
-                [self.tableView reloadData];
-            }
-        } withCancelBlock:^(NSError *error) {
-        }];
+        if (self.currentUsername != nil) {
+            NSLog(@"----------------%@", self.currentUsername);
+            self.convoRef = [self.conversationsRef childByAppendingPath: self.currentUsername];
+
+            [self.convoRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+                if (![snapshot.value isEqual:[NSNull null]]) {
+                    self.currentUserMessages = snapshot.value[@"messages"];
+                    self.cloudMessages = [NSMutableArray new];
+                    [self.cloudMessages addObjectsFromArray:self.currentUserMessages];
+                    NSDictionary *sceneMessages = @{
+                                                    @"messages": self.cloudMessages
+                                                    };
+                    [self.sceneConvo updateChildValues:sceneMessages];
+                    [self.tableView reloadData];
+                }
+            } withCancelBlock:^(NSError *error) {
+            }];
+        }
     } else {
         //setting up conversation model and query
-        self.convoRef = [self.conversationsRef childByAppendingPath: self.otherUsername];
+        if (self.otherUsername != nil) {
+            NSLog(@"----------------%@", self.otherUsername);
+            self.convoRef = [self.conversationsRef childByAppendingPath: self.otherUsername];
 
-        [self.convoRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-            if (![snapshot.value isEqual:[NSNull null]]) {
-                self.otherUserMessages = snapshot.value[@"messages"];
-                self.cloudMessages = [NSMutableArray new];
-                [self.cloudMessages addObjectsFromArray:self.otherUserMessages];
-                [self.tableView reloadData];
-            }
-        } withCancelBlock:^(NSError *error) {
-        }];
+            [self.convoRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+                if (![snapshot.value isEqual:[NSNull null]]) {
+                    self.otherUserMessages = snapshot.value[@"messages"];
+                    self.cloudMessages = [NSMutableArray new];
+                    [self.cloudMessages addObjectsFromArray:self.otherUserMessages];
+                    [self.tableView reloadData];
+                }
+            } withCancelBlock:^(NSError *error) {
+            }];
+        }
     }
 }
 
@@ -235,18 +241,23 @@
     self.messageTextField.text = @"";
 }
 
-//hacky way to do things but will change later
 -(void)makeNotAvailable {
     Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
-    Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
     NSDictionary *userDic = @{@"isAvailable": @0
-                              };
-    [user updateChildValues: userDic];
+                            };
+    if (usersRef.authData.uid != nil) {
+        NSLog(@"----------------%@", usersRef.authData.uid);
+        Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
+        [user updateChildValues: userDic];
+    }
 
     if (self.isSplashHidden) {
-        Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
-        Firebase *otherUser = [usersRef childByAppendingPath:self.otherAuthuid];
-        [otherUser updateChildValues:userDic];
+        if (self.otherAuthuid != nil) {
+            NSLog(@"----------------%@", self.otherAuthuid);
+            Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
+            Firebase *otherUser = [usersRef childByAppendingPath:self.otherAuthuid];
+            [otherUser updateChildValues:userDic];
+        }
     }
 
 }
@@ -270,10 +281,6 @@
     [self performSegueWithIdentifier:@"UnwindToHome" sender:sender];
 }
 
-- (IBAction)onEndSceneTapped:(UIBarButtonItem *)sender {
-    [self performSegueWithIdentifier:@"SplashChatToRatings" sender:sender];
-}
-
 #pragma mark - Table View
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -286,10 +293,7 @@
     return cell;
 }
 - (IBAction)onEndSceneButtonPressed:(id)sender {
-    [self performSegueWithIdentifier:@"UnwindToHome" sender:sender];
-}
-
--(void)viewWillDisappear:(BOOL)animated {
+    NSLog(@"endScene");
     [self makeNotAvailable];
     if (self.isSplashHidden) {
         NSLog(@"---- disapear splash hidden to even ");
@@ -299,12 +303,42 @@
                                             };
             [self.sceneConvo updateChildValues:sceneMessages];
         }
-        Firebase *currentConvo = [self.conversationsRef childByAppendingPath: self.currentUsername];
-        Firebase *otherConvo = [self.conversationsRef childByAppendingPath: self.otherUsername];
-        [currentConvo removeValue];
-        [otherConvo removeValue];
-        [self.usersRef removeAllObservers];
+        if (self.currentUsername != nil) {
+            NSLog(@"----------------%@", self.currentUsername);
+            Firebase *currentConvo = [self.conversationsRef childByAppendingPath:self.currentUsername];
+            [currentConvo removeValue];
+        }
+        if (self.otherUsername != nil) {
+            NSLog(@"----------------%@", self.otherUsername);
+            Firebase *otherConvo = [self.conversationsRef childByAppendingPath:self.otherUsername];
+            [otherConvo removeValue];
+        }
         [self.convoRef removeAllObservers];
     }
+    [self performSegueWithIdentifier:@"UnwindToHome" sender:sender];
+}
+-(void)viewWillDisappear:(BOOL)animated {
+//    NSLog(@"view disappear");
+//    [self makeNotAvailable];
+////    if (self.isSplashHidden) {
+////        NSLog(@"---- disapear splash hidden to even ");
+////        if (self.isEven) {
+////            NSDictionary *sceneMessages = @{
+////                                            @"isLive": @0
+////                                            };
+////            [self.sceneConvo updateChildValues:sceneMessages];
+////        }
+////        if (self.currentUsername != nil) {
+////            NSLog(@"----------------%@", self.currentUsername);
+////            Firebase *currentConvo = [self.conversationsRef childByAppendingPath:self.currentUsername];
+////            [currentConvo removeValue];
+////        }
+////        if (self.otherUsername != nil) {
+////            NSLog(@"----------------%@", self.otherUsername);
+////            Firebase *otherConvo = [self.conversationsRef childByAppendingPath:self.otherUsername];
+////            [otherConvo removeValue];
+////        }
+////        [self.convoRef removeAllObservers];
+////    }
 }
 @end
