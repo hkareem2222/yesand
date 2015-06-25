@@ -35,7 +35,6 @@
 		BF4F90891B39F0D600A93680 /* AudienceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF4F90881B39F0D600A93680 /* AudienceViewController.m */; };
 		BF4F908C1B39FA7900A93680 /* RatingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF4F908B1B39FA7900A93680 /* RatingViewController.m */; };
 		DC7564BA9797941C8EBD4026 /* Pods_yesand.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5504428874710937E23AD880 /* Pods_yesand.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		F920C1301B3752A5001EBC22 /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F920C12F1B3752A5001EBC22 /* SplashViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,8 +95,6 @@
 		BF4F90881B39F0D600A93680 /* AudienceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudienceViewController.m; sourceTree = "<group>"; };
 		BF4F908A1B39FA7900A93680 /* RatingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatingViewController.h; sourceTree = "<group>"; };
 		BF4F908B1B39FA7900A93680 /* RatingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatingViewController.m; sourceTree = "<group>"; };
-		F920C12E1B3752A5001EBC22 /* SplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashViewController.h; sourceTree = "<group>"; };
-		F920C12F1B3752A5001EBC22 /* SplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,8 +154,6 @@
 				BF372B831B3C402500D7AE0C /* ClubViewController.m */,
 				BF4F90871B39F0D600A93680 /* AudienceViewController.h */,
 				BF4F90881B39F0D600A93680 /* AudienceViewController.m */,
-				F920C12E1B3752A5001EBC22 /* SplashViewController.h */,
-				F920C12F1B3752A5001EBC22 /* SplashViewController.m */,
 				BF372B441B3B1DEA00D7AE0C /* RateView.h */,
 				BF372B451B3B1DEA00D7AE0C /* RateView.m */,
 				BF4F908A1B39FA7900A93680 /* RatingViewController.h */,
@@ -462,7 +457,6 @@
 				85963FA51B359D9C006E2868 /* AuthViewController.m in Sources */,
 				85963F7E1B34C8F7006E2868 /* AppDelegate.m in Sources */,
 				85963F841B34C8F7006E2868 /* HomeViewController.m in Sources */,
-				F920C1301B3752A5001EBC22 /* SplashViewController.m in Sources */,
 				85014AA81B35AE8E00E190C8 /* ProfileViewController.m in Sources */,
 				BF4F908C1B39FA7900A93680 /* RatingViewController.m in Sources */,
 				BF372B461B3B1DEA00D7AE0C /* RateView.m in Sources */,

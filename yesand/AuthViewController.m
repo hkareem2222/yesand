@@ -201,8 +201,15 @@ withCompletionBlock:^(NSError *error, FAuthData *authData) {
                                   @"updateAt": kFirebaseServerValueTimestamp,
                                   @"character one": @"test",
                                   @"character two": @"test",
-                                  @"topic name":@"test",
-                                  @"username": self.usernameField.text
+                                  @"topic name": @"test",
+                                  @"authuid": authData.uid,
+                                  @"username": self.usernameField.text,
+                                  @"name": @" ",
+                                  @"tagline": @" ",
+                                  @"location": @" ",
+                                  @"website": @" ",
+                                  @"rating": @"3",
+                                  @"rating avg": @"3"
                                   };
 
         [[[self.myRootRef childByAppendingPath:@"users"]

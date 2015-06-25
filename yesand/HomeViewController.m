@@ -13,7 +13,8 @@
 @property Firebase *ref;
 @property NSString *timeStamp;
 @property NSMutableArray *liveScenes;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITableView *liveTableView;
+@property (weak, nonatomic) IBOutlet UITableView *hotTableView;
 @end
 
 @implementation HomeViewController
@@ -33,7 +34,7 @@
                     [self.liveScenes addObject:scene.value[@"topicName"]];
                 }
             }
-            [self.tableView reloadData];
+            [self.liveTableView reloadData];
         }
     } withCancelBlock:^(NSError *error) {
         NSLog(@"%@", error.description);
@@ -54,6 +55,7 @@
 
         NSArray *topics = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError];
         self.topic = topics[arc4random_uniform((int)topics.count)];
+                               NSLog(@"%@", self.topic);
     }];
 }
 
@@ -68,19 +70,31 @@
                                   @"updateAt": kFirebaseServerValueTimestamp
                                   };
     [user updateChildValues:userDic];
-    [self performSegueWithIdentifier:@"HomeToSplash" sender:sender];
+    NSLog(@"button tapped");
+    [self performSegueWithIdentifier:@"HomeToSplashChat" sender:sender];
 }
 
 #pragma mark - Table View
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.liveScenes.count;
+    if (self.liveTableView) {
+        return self.liveScenes.count;
+    } else {
+        return 0;
+    }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TrendingID"];
-    cell.textLabel.text = self.liveScenes[indexPath.row];
-    return cell;
+    if (self.liveTableView) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LiveID"];
+        cell.textLabel.text = self.liveScenes[indexPath.row];
+        cell.backgroundColor = [UIColor colorWithRed:236/255.0 green:240/255.0 blue:241/255.0 alpha:1.0];
+        tableView.separatorColor = [UIColor colorWithRed:52/255.0 green:73/255.0 blue:94/255.0 alpha:1.0];
+        return cell;
+    } else {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HotID"];
+        return cell;
+    }
 }
 
 #pragma mark - Segue

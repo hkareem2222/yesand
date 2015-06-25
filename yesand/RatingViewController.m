@@ -8,14 +8,15 @@
 
 #import "RatingViewController.h"
 #import "RateView.h"
-
+#import <Firebase/Firebase.h>
 
 @interface RatingViewController () <RateViewDelegate>
 
 @property (weak, nonatomic) IBOutlet RateView *rateView;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
-
-
+@property NSString *otherAuthuid;
+@property NSArray *ratings;
+@property NSMutableArray *otherUserRatings;
 @end
 
 @implementation RatingViewController
@@ -37,6 +38,7 @@
     self.rateView.delegate = self;
 
     [self rateView];
+    [self pullOtherUserRating];
 }
 
 - (void)rateView:(RateView *)rateView ratingDidChange:(float)rating {
@@ -62,12 +64,34 @@
     }
 }
 
+-(void)pullOtherUserRating {
+    Firebase *ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
+    Firebase *otherUser = [ref childByAppendingPath:self.otherAuthuid];
+    [otherUser observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+            self.ratings = snapshot.value[@"rating"];
+            self.otherUserRatings = [NSMutableArray new];
+            [self.otherUserRatings addObjectsFromArray:self.ratings];
+    //        [self storeRatingValueForOtherUser];
+        }];
+}
 
-
-
-
-//    self.statusLabel.text = [NSString stringWithFormat:@"Rating: %f", self.rateView.rating];
-//}
+// On save rating button tapped call this method below
+-(void)storeRatingValueForOtherUser {
+    Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
+    Firebase *otherUser = [usersRef childByAppendingPath:self.otherAuthuid];
+    NSNumber *starRating = [NSNumber numberWithFloat:self.rateView.rating];
+    [self.otherUserRatings addObject:starRating];
+    NSNumber *totalRating = @0;
+    for (NSNumber *number in self.otherUserRatings) {
+            totalRating = [NSNumber numberWithFloat:([totalRating floatValue] + [number floatValue])];
+        }
+    NSNumber *overallRating = [NSNumber numberWithFloat:([totalRating floatValue] / self.otherUserRatings.count)];
+    NSDictionary *ratingUpdate = @{
+                                   @"rating": self.otherUserRatings,
+                                   @"rating avg": overallRating
+                                   };
+    [otherUser updateChildValues:ratingUpdate];
+}
 
 /*
 #pragma mark - Navigation
