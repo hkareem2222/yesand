@@ -471,13 +471,13 @@
                                 <rect key="frame" x="0.0" y="264" width="600" height="287"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="SceneID" textLabel="2nS-wJ-xJm" style="IBUITableViewCellStyleDefault" id="E3e-dL-V3U" customClass="HomeTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="SceneID" textLabel="5Ee-5w-M5i" style="IBUITableViewCellStyleDefault" id="E3e-dL-V3U" customClass="HomeTableViewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" tableViewCell="E3e-dL-V3U" id="bQB-Jo-SjJ">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2nS-wJ-xJm">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5Ee-5w-M5i">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -537,7 +537,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="r2y-wN-Tbp">
                         <nil key="title"/>
-                        <barButtonItem key="rightBarButtonItem" title="New Scene" id="B8d-5T-pJp">
+                        <barButtonItem key="rightBarButtonItem" image="NewSceneIcon" id="B8d-5T-pJp">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="onYesAndTapped:" destination="vXZ-lx-hvc" id="pjm-sv-GBx"/>
@@ -1207,6 +1207,7 @@
     <resources>
         <image name="HomeIcon" width="35" height="35"/>
         <image name="MaskIcon" width="28" height="35"/>
+        <image name="NewSceneIcon" width="27" height="26"/>
         <image name="SearchIcon" width="35" height="35"/>
         <image name="profilepic" width="359" height="360"/>
     </resources>
