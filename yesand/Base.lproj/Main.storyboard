@@ -537,7 +537,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="r2y-wN-Tbp">
                         <nil key="title"/>
-                        <barButtonItem key="rightBarButtonItem" image="NewSceneIcon" id="B8d-5T-pJp">
+                        <barButtonItem key="rightBarButtonItem" image="NewIcon" id="B8d-5T-pJp">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="onNewSceneTapped:" destination="vXZ-lx-hvc" id="C5j-ad-A1Z"/>
@@ -1201,7 +1201,7 @@
     <resources>
         <image name="HomeIcon" width="35" height="35"/>
         <image name="MaskIcon" width="28" height="35"/>
-        <image name="NewSceneIcon" width="27" height="26"/>
+        <image name="NewIcon" width="30" height="32"/>
         <image name="SearchIcon" width="35" height="35"/>
         <image name="profilepic" width="359" height="360"/>
     </resources>
