@@ -7,14 +7,21 @@
 //
 
 #import "HomeViewController.h"
+#import "AudienceViewController.h"
+#import "HomeTableViewCell.h"
+#import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface HomeViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, MKMapViewDelegate>
 @property NSDictionary *topic;
+@property CLLocationManager *locationManager;
 @property Firebase *ref;
 @property NSString *timeStamp;
-@property NSMutableArray *liveScenes;
+@property NSMutableArray *scenes;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+@property NSString *selectedScene;
+@property BOOL isUserLocated;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sceneBarButton;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @end
@@ -23,6 +30,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //-------map stuff
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    [self.locationManager requestWhenInUseAuthorization];
+    [self.locationManager startUpdatingLocation];
+    self.mapView.showsUserLocation = YES;
+    self.mapView.mapType = MKMapTypeStandard;
+    self.mapView.delegate = self;
+    //------ends here
     self.sceneBarButton.enabled = NO;
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
 
@@ -30,10 +46,14 @@
     Firebase *scenesConvo = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/scenes"];
     [scenesConvo observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         if (![snapshot.value isEqual:[NSNull null]]) {
-            self.liveScenes = [NSMutableArray new];
+            self.scenes = [NSMutableArray new];;
             for (FDataSnapshot *scene in snapshot.children) {
                 if ([scene.value[@"isLive"] isEqualToNumber:@1]) {
-                    [self.liveScenes addObject:scene.value[@"topicName"]];
+                    NSDictionary *sceneDic = @{
+                                               @"sceneID": scene.key,
+                                               @"topicName": scene.value[@"topicName"]
+                                               };
+                    [self.scenes addObject:sceneDic];
                 }
             }
             [self.tableView reloadData];
@@ -48,6 +68,38 @@
 }
 - (IBAction)onSegmentedIndexTapped:(UISegmentedControl *)sender {
     [self.tableView reloadData];
+}
+
+#pragma mark - Core Location/Map View
+
+-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    NSLog(@"%@", error);
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    if (!self.isUserLocated) {
+        for (CLLocation *location in locations) {
+            if (location.verticalAccuracy < 1000 && location.horizontalAccuracy < 1000) {
+                NSLog(@"user located");
+//                [self reverseGeoCode:location];
+                [self.locationManager stopUpdatingLocation];
+            }
+        }
+        self.isUserLocated = !self.isUserLocated;
+    }
+}
+
+- (void)mapView:(MKMapView *)aMapView didUpdateUserLocation:(MKUserLocation *)aUserLocation {
+    MKCoordinateRegion region;
+    MKCoordinateSpan span;
+    span.latitudeDelta = 0.005;
+    span.longitudeDelta = 0.005;
+    CLLocationCoordinate2D location;
+    location.latitude = aUserLocation.coordinate.latitude;
+    location.longitude = aUserLocation.coordinate.longitude;
+    region.span = span;
+    region.center = location;
+    [aMapView setRegion:region animated:YES];
 }
 
 -(void)retrieveNewTopic {
@@ -82,7 +134,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.segmentedControl.selectedSegmentIndex == 0) {
-        return self.liveScenes.count;
+        return self.scenes.count;
     } else {
         return 0;
     }
@@ -91,22 +143,37 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     if (self.segmentedControl.selectedSegmentIndex == 0) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
-        cell.textLabel.text = self.liveScenes[indexPath.row];
+        HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
+        NSDictionary *sceneDic = self.scenes[indexPath.row];
+        cell.textLabel.text = [sceneDic objectForKey:@"topicName"];
+        cell.sceneID = [sceneDic objectForKey:@"sceneID"];
         cell.backgroundColor = [UIColor colorWithRed:236/255.0 green:240/255.0 blue:241/255.0 alpha:1.0];
         tableView.separatorColor = [UIColor colorWithRed:52/255.0 green:73/255.0 blue:94/255.0 alpha:1.0];
         cell.imageView.image = [UIImage imageNamed:@"red"];
         cell.imageView.frame = CGRectMake(0, 0, 32, 32);
         return cell;
     } else {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
+        HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
         return cell;
     }
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    HomeTableViewCell *cell = (HomeTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    self.selectedScene = cell.sceneID;
+    [self performSegueWithIdentifier:@"HomeToAudience" sender:cell];
 }
 
 #pragma mark - Segue
 
 -(IBAction)unwindToHome:(UIStoryboardSegue *)segue {
     NSLog(@"unwindTOHome");
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"HomeToAudience"]) {
+        AudienceViewController *audienceVC = segue.destinationViewController;
+        audienceVC.sceneID = self.selectedScene;
+    }
 }
 @end

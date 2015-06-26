@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface AudienceViewController : UIViewController
-
+@property NSString *sceneID;
 @end
