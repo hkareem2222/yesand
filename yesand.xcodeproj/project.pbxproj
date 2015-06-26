@@ -159,8 +159,6 @@
 			children = (
 				BF372B921B3CD71100D7AE0C /* SearchViewController.h */,
 				BF372B931B3CD71100D7AE0C /* SearchViewController.m */,
-				BF372B8C1B3C545300D7AE0C /* TwitterAuthHelper.h */,
-				BF372B8D1B3C545300D7AE0C /* TwitterAuthHelper.m */,
 				BF372B821B3C402500D7AE0C /* ClubViewController.h */,
 				BF372B831B3C402500D7AE0C /* ClubViewController.m */,
 				BF4F90871B39F0D600A93680 /* AudienceViewController.h */,
@@ -270,6 +268,8 @@
 				BF372B901B3CD59F00D7AE0C /* TabBar.m */,
 				BF372B441B3B1DEA00D7AE0C /* RateView.h */,
 				BF372B451B3B1DEA00D7AE0C /* RateView.m */,
+				BF372B8C1B3C545300D7AE0C /* TwitterAuthHelper.h */,
+				BF372B8D1B3C545300D7AE0C /* TwitterAuthHelper.m */,
 			);
 			name = "Custom Classes";
 			sourceTree = "<group>";

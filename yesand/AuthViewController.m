@@ -36,6 +36,7 @@
             NSLog(@"no user logged in");
         }
     }];
+    self.loginBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
 
 //    UIImage *image = [UIImage imageNamed:@"TestLogo.png"];
 //    self.navigationItem.titleView = [[UIImageView alloc]initWithImage:image];
