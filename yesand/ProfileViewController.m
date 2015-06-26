@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *profileSubheadingLabel;
 @property (weak, nonatomic) IBOutlet UILabel *profileLinkLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 
 @end
 
