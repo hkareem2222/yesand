@@ -13,8 +13,8 @@
 @property Firebase *ref;
 @property NSString *timeStamp;
 @property NSMutableArray *liveScenes;
-@property (weak, nonatomic) IBOutlet UITableView *liveTableView;
-@property (weak, nonatomic) IBOutlet UITableView *hotTableView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @end
 
 @implementation HomeViewController
@@ -34,7 +34,7 @@
                     [self.liveScenes addObject:scene.value[@"topicName"]];
                 }
             }
-            [self.liveTableView reloadData];
+            [self.tableView reloadData];
         }
     } withCancelBlock:^(NSError *error) {
         NSLog(@"%@", error.description);
@@ -43,6 +43,9 @@
 
 -(void)viewDidAppear:(BOOL)animated {
     [self retrieveNewTopic];
+}
+- (IBAction)onSegmentedIndexTapped:(UISegmentedControl *)sender {
+    [self.tableView reloadData];
 }
 
 -(void)retrieveNewTopic {
@@ -77,7 +80,7 @@
 #pragma mark - Table View
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.liveTableView) {
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
         return self.liveScenes.count;
     } else {
         return 0;
@@ -85,17 +88,19 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.liveTableView) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LiveID"];
+    tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
         cell.textLabel.text = self.liveScenes[indexPath.row];
         cell.backgroundColor = [UIColor colorWithRed:236/255.0 green:240/255.0 blue:241/255.0 alpha:1.0];
         tableView.separatorColor = [UIColor colorWithRed:52/255.0 green:73/255.0 blue:94/255.0 alpha:1.0];
+        cell.imageView.image = [UIImage imageNamed:@"red"];
+        cell.imageView.frame = CGRectMake(0, 0, 32, 32);
         return cell;
-    } //else {
-//        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HotID"];
-//        return cell;
-//    }
-    return nil;
+    } else {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
+        return cell;
+    }
 }
 
 #pragma mark - Segue
