@@ -22,7 +22,7 @@
     NSString *sceneURL = [NSString stringWithFormat:@"https://yesand.firebaseio.com/scenes/%@", self.sceneID];
     Firebase *scenesConvo = [[Firebase alloc] initWithUrl:sceneURL];
     [scenesConvo observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        if (![snapshot.value isEqual:[NSNull null]]) {
+        if (![snapshot.value[@"messages"] isEqual:[NSNull null]]) {
             self.messages = snapshot.value[@"messages"];
             [self.tableView reloadData];
         }

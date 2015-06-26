@@ -190,8 +190,6 @@
          topicLabel.text = [sceneDic objectForKey:@"topicName"];
         cell.backgroundColor = [UIColor colorWithRed:236/255.0 green:240/255.0 blue:241/255.0 alpha:1.0];
         tableView.separatorColor = [UIColor colorWithRed:52/255.0 green:73/255.0 blue:94/255.0 alpha:1.0];
-//        cell.imageView.image = [UIImage imageNamed:@"red"];
-//        cell.imageView.frame = CGRectMake(0, 0, 32, 32);
         UILabel *colorLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 5.0, 44.0)];
         [cell.contentView addSubview:colorLabel];
         colorLabel.backgroundColor = [self.colors objectAtIndex:indexPath.row];
