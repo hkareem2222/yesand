@@ -18,8 +18,6 @@
 @property Firebase *myRootRef;
 @property (weak, nonatomic) IBOutlet UINavigationBar *loginBar;
 @property TwitterAuthHelper *twitterAuthHelper;
-
-
 @end
 
 @implementation AuthViewController
