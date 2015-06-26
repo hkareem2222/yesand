@@ -782,6 +782,7 @@
                         <outlet property="followingCountLabel" destination="oMA-Ip-lsh" id="1Kq-jb-FIA"/>
                         <outlet property="locationLabel" destination="kGD-uh-Z3K" id="LpS-fO-nAQ"/>
                         <outlet property="profileHeadingLabel" destination="roW-jg-Mfv" id="Fna-MA-MJw"/>
+                        <outlet property="profileImageView" destination="eHi-d4-Xll" id="HGS-dL-LCz"/>
                         <outlet property="profileLinkLabel" destination="P7v-le-Emz" id="55B-Rf-iit"/>
                         <outlet property="profileSubheadingLabel" destination="tlD-WR-8d0" id="TPg-GN-M8h"/>
                         <outlet property="starsCountLabel" destination="TMW-bO-TBm" id="hye-70-qmL"/>
