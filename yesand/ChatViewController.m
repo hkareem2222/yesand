@@ -320,6 +320,12 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MessageID"];
+//    cell.textLabel.font = [UIFont systemFontOfSize:12];
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    cell.textLabel.numberOfLines = 0;
+    if (indexPath.row  % 2 == 0) {
+        cell.backgroundColor = [UIColor colorWithRed:255/255.0 green:215/255.0 blue:215/255.0 alpha:1.0];
+    }
     cell.textLabel.text = self.cloudMessages[indexPath.row];
     return cell;
 }

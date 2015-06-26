@@ -194,7 +194,8 @@
         HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
         NSDictionary *sceneDic = self.scenes[indexPath.row];
         cell.sceneID = [sceneDic objectForKey:@"sceneID"];
-
+        cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        cell.textLabel.numberOfLines = 0;
         UILabel *topicLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 13.0, 220.0, 20.0)];
         [cell.contentView addSubview:topicLabel];
          topicLabel.text = [sceneDic objectForKey:@"topicName"];
