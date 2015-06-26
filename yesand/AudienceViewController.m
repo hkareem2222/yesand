@@ -18,6 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     NSLog(@"selected scene id %@", self.sceneID);
     NSString *sceneURL = [NSString stringWithFormat:@"https://yesand.firebaseio.com/scenes/%@", self.sceneID];
     Firebase *scenesConvo = [[Firebase alloc] initWithUrl:sceneURL];

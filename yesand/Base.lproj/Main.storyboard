@@ -427,13 +427,12 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="audienceNavBar" destination="W5K-zs-1nX" id="ZSG-r6-AxY"/>
                         <outlet property="tableView" destination="W5K-zs-1nX" id="bVw-Go-vH8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qqw-Td-Mbi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2507" y="-1388"/>
+            <point key="canvasLocation" x="2515" y="-1388"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="ufC-wZ-h7g">
