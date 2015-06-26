@@ -289,7 +289,6 @@
 }
 
 - (IBAction)onEndSceneTapped:(UIBarButtonItem *)sender {
-        NSLog(@"end tapped");
     [self performSegueWithIdentifier:@"SplashChatToRatings" sender:sender];
 }
 
@@ -315,16 +314,13 @@
 #pragma mark - Disappearing
 
 -(void)viewWillDisappear:(BOOL)animated {
-    NSLog(@"--- START disappear");
     [self makeNotAvailable];
     if (self.isSplashHidden) {
-        NSLog(@"---- disapear splash hidden to even ");
         if (self.isEven) {
             NSDictionary *sceneMessages = @{
                                             @"isLive": @0
                                             };
             [self.sceneConvo updateChildValues:sceneMessages];
-            NSLog(@"--- other user save inside live");
         }
         Firebase *currentConvo = [self.conversationsRef childByAppendingPath: self.currentUsername];
         Firebase *otherConvo = [self.conversationsRef childByAppendingPath: self.otherUsername];
@@ -332,7 +328,6 @@
         [otherConvo removeValue];
         [self.usersRef removeAllObservers];
         [self.convoRef removeAllObservers];
-        NSLog(@"--- end");
     }
 }
 @end
