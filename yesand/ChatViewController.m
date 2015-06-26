@@ -38,6 +38,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelBarButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *endSceneBarButton;
 @property (weak, nonatomic) IBOutlet UINavigationBar *sceneNavBar;
+@property (weak, nonatomic) IBOutlet UILabel *topicLabel;
 @property NSDictionary *otherUser;
 @property BOOL isSplashHidden;
 @property NSString *otherAuthuid;
@@ -139,7 +140,7 @@
             self.otherAuthuid = [self.otherUser objectForKey:@"authuid"];
             self.currentUserCharacter.text = self.currentUserCharacterOne;
             self.otherUserCharacter.text = self.currentUserCharacterTwo;
-            self.title = self.currentUserTopic;
+            self.topicLabel.text = [NSString stringWithFormat:@"Topic: %@", self.currentUserTopic];
             self.isEven = YES;
             if (!self.ifCalled) {
                 [self performSelector:@selector(splashViewDisappear) withObject:nil afterDelay:10.0];
@@ -149,7 +150,7 @@
             self.otherUserLabel.text = @"Finding";
             self.currentUserCharacter.text = @"Character";
             self.otherUserCharacter.text = @"Character";
-            self.title = @"Topic";
+            self.topicLabel.text = @"Topic:";
             self.ifCalled = NO;
             [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(splashViewDisappear) object:nil];
         }
@@ -160,7 +161,7 @@
         self.otherUserLabel.text = [self.otherUser objectForKey:@"username"];
         self.currentUserCharacter.text = [self.otherUser objectForKey:@"character two"];
         self.otherUserCharacter.text = [self.otherUser objectForKey:@"character one"];
-        self.title = [self.otherUser objectForKey:@"topic name"];
+        self.topicLabel.text = [NSString stringWithFormat:@"Topic: %@", [self.otherUser objectForKey:@"topic name"]]
         self.isEven = NO;
         if (!self.ifCalled) {
             [self performSelector:@selector(splashViewDisappear) withObject:nil afterDelay:10.0];

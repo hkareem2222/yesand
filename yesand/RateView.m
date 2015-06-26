@@ -138,7 +138,6 @@
             break;
         }
     }
-
     self.rating = newRating;
 }
 
