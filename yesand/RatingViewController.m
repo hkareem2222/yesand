@@ -14,7 +14,9 @@
 
 @property (weak, nonatomic) IBOutlet RateView *rateView;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
-@property (weak, nonatomic) IBOutlet UIButton *submitButton;
+@property (weak, nonatomic) IBOutlet UIButton *returnToHomeButton;
+@property (weak, nonatomic) IBOutlet UIButton *sceneNewButton;
+@property (weak, nonatomic) IBOutlet UILabel *feedbackLabel;
 @property NSArray *ratings;
 @property NSMutableArray *otherUserRatings;
 @end
@@ -23,7 +25,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.submitButton.enabled = NO;
+    self.sceneNewButton.enabled = NO;
+    self.returnToHomeButton.enabled = NO;
+    self.feedbackLabel.hidden = YES;
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
 
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
@@ -44,7 +48,9 @@
 
 - (void)rateView:(RateView *)rateView ratingDidChange:(float)rating {
 
-    self.submitButton.enabled = YES;
+    self.sceneNewButton.enabled = YES;
+    self.returnToHomeButton.enabled = YES;
+    self.feedbackLabel.hidden = NO;
     if (self.rateView.rating == 0) {
         self.statusLabel.text = [NSString stringWithFormat:@""];
     }
@@ -94,23 +100,20 @@
     [otherUser updateChildValues:ratingUpdate];
 }
 
-- (IBAction)onSubmitRatingTapped:(UIButton *)sender {
+- (IBAction)onReturnToHomeTapped:(UIButton *)sender {
     [self storeRatingValueForOtherUser];
     [self performSegueWithIdentifier:@"UnwindToHomeFromRating" sender:sender];
 }
 
+- (IBAction)onNewSceneTapped:(UIButton *)sender {
+//    Eventually we need to setup logic that makes the splash screen reappear and handle all the isAvailable logic
+//    [self storeRatingValueForOtherUser];
+//    [self performSegueWithIdentifier:@"UnwindToChatFromRating" sender:sender];
+}
+
+
 - (IBAction)onReportUserTapped:(UIButton *)sender {
     // Set up logic for alert view saying are you sure you want to report user
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

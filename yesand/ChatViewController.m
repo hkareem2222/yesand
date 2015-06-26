@@ -312,6 +312,10 @@
     }
 }
 
+-(IBAction)unwindToChatFromRating:(UIStoryboardSegue *)segue {
+    NSLog(@"unwindToChat");
+}
+
 #pragma mark - Table View
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
