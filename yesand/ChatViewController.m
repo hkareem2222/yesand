@@ -161,7 +161,7 @@
         self.otherUserLabel.text = [self.otherUser objectForKey:@"username"];
         self.currentUserCharacter.text = [self.otherUser objectForKey:@"character two"];
         self.otherUserCharacter.text = [self.otherUser objectForKey:@"character one"];
-        self.topicLabel.text = [NSString stringWithFormat:@"Topic: %@", [self.otherUser objectForKey:@"topic name"]]
+        self.topicLabel.text = [NSString stringWithFormat:@"Topic: %@", [self.otherUser objectForKey:@"topic name"]];
         self.isEven = NO;
         if (!self.ifCalled) {
             [self performSelector:@selector(splashViewDisappear) withObject:nil afterDelay:10.0];

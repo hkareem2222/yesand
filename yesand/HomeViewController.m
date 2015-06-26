@@ -8,22 +8,31 @@
 
 #import "HomeViewController.h"
 #import "AudienceViewController.h"
+#import "HomeTableViewCell.h"
+#import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface HomeViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
 @property NSDictionary *topic;
+@property CLLocationManager *locationManager;
 @property Firebase *ref;
 @property NSString *timeStamp;
 @property NSMutableArray *scenes;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property NSString *selectedScene;
+@property BOOL isUserLocated;
 @end
 
 @implementation HomeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    [self.locationManager requestWhenInUseAuthorization];
+    [self.locationManager startUpdatingLocation];
+    
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
 
     //listening for Scenes
@@ -52,6 +61,25 @@
 }
 - (IBAction)onSegmentedIndexTapped:(UISegmentedControl *)sender {
     [self.tableView reloadData];
+}
+
+#pragma mark - Core Location 
+
+-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    NSLog(@"%@", error);
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    if (!self.isUserLocated) {
+        for (CLLocation *location in locations) {
+            if (location.verticalAccuracy < 1000 && location.horizontalAccuracy < 1000) {
+                NSLog(@"user located");
+//                [self reverseGeoCode:location];
+                [self.locationManager stopUpdatingLocation];
+            }
+        }
+        self.isUserLocated = !self.isUserLocated;
+    }
 }
 
 -(void)retrieveNewTopic {
@@ -96,24 +124,24 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     if (self.segmentedControl.selectedSegmentIndex == 0) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
+        HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
         NSDictionary *sceneDic = self.scenes[indexPath.row];
         cell.textLabel.text = [sceneDic objectForKey:@"topicName"];
-        cell.detailTextLabel.text = [sceneDic objectForKey:@"sceneID"];
+        cell.sceneID = [sceneDic objectForKey:@"sceneID"];
         cell.backgroundColor = [UIColor colorWithRed:236/255.0 green:240/255.0 blue:241/255.0 alpha:1.0];
         tableView.separatorColor = [UIColor colorWithRed:52/255.0 green:73/255.0 blue:94/255.0 alpha:1.0];
         cell.imageView.image = [UIImage imageNamed:@"red"];
         cell.imageView.frame = CGRectMake(0, 0, 32, 32);
         return cell;
     } else {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
+        HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
         return cell;
     }
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    self.selectedScene = cell.detailTextLabel.text;
+    HomeTableViewCell *cell = (HomeTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    self.selectedScene = cell.sceneID;
     [self performSegueWithIdentifier:@"HomeToAudience" sender:cell];
 }
 
