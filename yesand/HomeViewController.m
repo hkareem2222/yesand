@@ -15,12 +15,15 @@
 @property NSMutableArray *liveScenes;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+@property (nonatomic) NSArray *colors;
 @end
 
 @implementation HomeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.colors = [NSArray arrayWithObjects:[UIColor colorWithRed:3 green:201 blue:169 alpha:1.0], [UIColor colorWithRed:25 green:181 blue:254 alpha:1.0],                  [UIColor colorWithRed:242 green:120 blue:75 alpha:1.0], [UIColor colorWithRed:155 green:89 blue:182 alpha:1.0], nil];
 
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
 
@@ -92,7 +95,7 @@
     if (self.segmentedControl.selectedSegmentIndex == 0) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
 
-        UILabel *topicLabel = [[UILabel alloc] initWithFrame:CGRectMake(90.0, 20.0, 220.0, 15.0)];
+        UILabel *topicLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 13.0, 220.0, 20.0)];
         [cell.contentView addSubview:topicLabel];
          topicLabel.text = self.liveScenes[indexPath.row];
 //        cell.textLabel.text = self.liveScenes[indexPath.row];
@@ -100,9 +103,9 @@
         tableView.separatorColor = [UIColor colorWithRed:52/255.0 green:73/255.0 blue:94/255.0 alpha:1.0];
 //        cell.imageView.image = [UIImage imageNamed:@"red"];
 //        cell.imageView.frame = CGRectMake(0, 0, 32, 32);
-        UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake(-20.0, 0.0, 44.0, 44.0)];
-        [cell.contentView addSubview:photo];
-        photo.image = [UIImage imageNamed:@"emerald"];
+        UILabel *colorLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 5.0, 44.0)];
+        [cell.contentView addSubview:colorLabel];
+        colorLabel.backgroundColor = [self.colors objectAtIndex:indexPath.row];
         return cell;
     } else {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
