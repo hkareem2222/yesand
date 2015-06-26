@@ -12,7 +12,7 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
+@interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, MKMapViewDelegate>
 @property NSDictionary *topic;
 @property CLLocationManager *locationManager;
 @property Firebase *ref;
@@ -30,11 +30,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //-------map stuff
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager startUpdatingLocation];
-
+    self.mapView.showsUserLocation = YES;
+    self.mapView.mapType = MKMapTypeStandard;
+    self.mapView.delegate = self;
+    //------ends here
     self.sceneBarButton.enabled = NO;
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
 
@@ -66,7 +70,7 @@
     [self.tableView reloadData];
 }
 
-#pragma mark - Core Location 
+#pragma mark - Core Location/Map View
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     NSLog(@"%@", error);
@@ -83,6 +87,19 @@
         }
         self.isUserLocated = !self.isUserLocated;
     }
+}
+
+- (void)mapView:(MKMapView *)aMapView didUpdateUserLocation:(MKUserLocation *)aUserLocation {
+    MKCoordinateRegion region;
+    MKCoordinateSpan span;
+    span.latitudeDelta = 0.005;
+    span.longitudeDelta = 0.005;
+    CLLocationCoordinate2D location;
+    location.latitude = aUserLocation.coordinate.latitude;
+    location.longitude = aUserLocation.coordinate.longitude;
+    region.span = span;
+    region.center = location;
+    [aMapView setRegion:region animated:YES];
 }
 
 -(void)retrieveNewTopic {
