@@ -7,14 +7,16 @@
 //
 
 #import "HomeViewController.h"
+#import "AudienceViewController.h"
 
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate>
 @property NSDictionary *topic;
 @property Firebase *ref;
 @property NSString *timeStamp;
-@property NSMutableArray *liveScenes;
+@property NSMutableArray *scenes;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+@property NSString *selectedScene;
 @end
 
 @implementation HomeViewController
@@ -28,10 +30,14 @@
     Firebase *scenesConvo = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/scenes"];
     [scenesConvo observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         if (![snapshot.value isEqual:[NSNull null]]) {
-            self.liveScenes = [NSMutableArray new];
+            self.scenes = [NSMutableArray new];;
             for (FDataSnapshot *scene in snapshot.children) {
                 if ([scene.value[@"isLive"] isEqualToNumber:@1]) {
-                    [self.liveScenes addObject:scene.value[@"topicName"]];
+                    NSDictionary *sceneDic = @{
+                                               @"sceneID": scene.key,
+                                               @"topicName": scene.value[@"topicName"]
+                                               };
+                    [self.scenes addObject:sceneDic];
                 }
             }
             [self.tableView reloadData];
@@ -81,7 +87,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.segmentedControl.selectedSegmentIndex == 0) {
-        return self.liveScenes.count;
+        return self.scenes.count;
     } else {
         return 0;
     }
@@ -91,7 +97,9 @@
     tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     if (self.segmentedControl.selectedSegmentIndex == 0) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
-        cell.textLabel.text = self.liveScenes[indexPath.row];
+        NSDictionary *sceneDic = self.scenes[indexPath.row];
+        cell.textLabel.text = [sceneDic objectForKey:@"topicName"];
+        cell.detailTextLabel.text = [sceneDic objectForKey:@"sceneID"];
         cell.backgroundColor = [UIColor colorWithRed:236/255.0 green:240/255.0 blue:241/255.0 alpha:1.0];
         tableView.separatorColor = [UIColor colorWithRed:52/255.0 green:73/255.0 blue:94/255.0 alpha:1.0];
         cell.imageView.image = [UIImage imageNamed:@"red"];
@@ -103,9 +111,22 @@
     }
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    self.selectedScene = cell.detailTextLabel.text;
+    [self performSegueWithIdentifier:@"HomeToAudience" sender:cell];
+}
+
 #pragma mark - Segue
 
 -(IBAction)unwindToHome:(UIStoryboardSegue *)segue {
     NSLog(@"unwindTOHome");
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"HomeToAudience"]) {
+        AudienceViewController *audienceVC = segue.destinationViewController;
+        audienceVC.sceneID = self.selectedScene;
+    }
 }
 @end
