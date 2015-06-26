@@ -178,6 +178,18 @@
     self.cancelBarButton.enabled = NO;
     [self.usersRef removeAllObservers];
     [self queryConversation];
+    Firebase *otherUserRef = [[Firebase alloc] initWithUrl: [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@",self.otherAuthuid]];
+    [otherUserRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        if ([snapshot.value[@"isAvailable"] isEqualToNumber:@0]) {
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ left the scene", self.otherUsername] message:nil preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *continueAction = [UIAlertAction actionWithTitle:@"Continue" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+                [self performSegueWithIdentifier:@"SplashChatToRatings" sender:self];
+            }];
+            [alert addAction:continueAction];
+            [self presentViewController:alert animated:YES completion:nil];
+            [otherUserRef removeAllObservers];
+        }
+    }];
 }
 //------------------------------------------ends here
 
