@@ -24,6 +24,7 @@
 @property BOOL isUserLocated;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sceneBarButton;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (nonatomic) NSArray *colors;
 @end
 
 @implementation HomeViewController
@@ -55,6 +56,16 @@
     [self.mapView setRegion:region];
     //------ends here
     self.sceneBarButton.enabled = NO;
+
+    self.colors = [NSArray arrayWithObjects:[UIColor colorWithRed:3/255.0 green:201/255.0 blue:169/255.0 alpha:1.0], [UIColor colorWithRed:25/255.0 green:181/255.0 blue:254/255.0 alpha:1.0], [UIColor colorWithRed:242/255.0 green:120/255.0 blue:75/255.0 alpha:1.0], [UIColor colorWithRed:155/255.0 green:89/255.0 blue:182 /255.0 alpha:1.0], nil];
+
+//    self.colors = [NSMutableArray arrayWithObjects:[UIColor redColor],
+//                   [UIColor orangeColor],
+//                   [UIColor yellowColor], [UIColor greenColor],
+//                   [UIColor blueColor], [UIColor magentaColor],
+//                   [UIColor purpleColor],
+//                   nil];
+
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
 
     //listening for Scenes
@@ -172,12 +183,18 @@
     if (self.segmentedControl.selectedSegmentIndex == 0) {
         HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
         NSDictionary *sceneDic = self.scenes[indexPath.row];
-        cell.textLabel.text = [sceneDic objectForKey:@"topicName"];
         cell.sceneID = [sceneDic objectForKey:@"sceneID"];
+
+        UILabel *topicLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 13.0, 220.0, 20.0)];
+        [cell.contentView addSubview:topicLabel];
+         topicLabel.text = [sceneDic objectForKey:@"topicName"];
         cell.backgroundColor = [UIColor colorWithRed:236/255.0 green:240/255.0 blue:241/255.0 alpha:1.0];
         tableView.separatorColor = [UIColor colorWithRed:52/255.0 green:73/255.0 blue:94/255.0 alpha:1.0];
-        cell.imageView.image = [UIImage imageNamed:@"red"];
-        cell.imageView.frame = CGRectMake(0, 0, 32, 32);
+//        cell.imageView.image = [UIImage imageNamed:@"red"];
+//        cell.imageView.frame = CGRectMake(0, 0, 32, 32);
+        UILabel *colorLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 5.0, 44.0)];
+        [cell.contentView addSubview:colorLabel];
+        colorLabel.backgroundColor = [self.colors objectAtIndex:indexPath.row];
         return cell;
     } else {
         HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
