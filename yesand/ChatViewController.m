@@ -334,7 +334,7 @@
                                             };
             [self.sceneConvo updateChildValues:sceneMessages];
         }
-        Firebase *currentConvo = [self.conversationsRef childByAppendingPath: self.currentUsername];
+        Firebase *currentConvo = [se    lf.conversationsRef childByAppendingPath: self.currentUsername];
         Firebase *otherConvo = [self.conversationsRef childByAppendingPath: self.otherUsername];
         [currentConvo removeValue];
         [otherConvo removeValue];
