@@ -201,9 +201,9 @@
         //setting up scene model for even only
         Firebase *scenesConvo = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/scenes"];
         NSDictionary *sceneDic = @{
-                                   @"topicName": @"topicName",
-                                   @"characterOne": @"characterOne",
-                                   @"characterTwo": @"characterTwo",
+                                   @"topicName": self.currentUserTopic,
+                                   @"characterOne": self.currentUserCharacterOne,
+                                   @"characterTwo": self.currentUserCharacterTwo,
                                    @"isLive": @1,
                                    @"messages": @[@"test"]
                                    };
