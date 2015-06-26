@@ -37,6 +37,7 @@
 		BF4F90891B39F0D600A93680 /* AudienceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF4F90881B39F0D600A93680 /* AudienceViewController.m */; };
 		BF4F908C1B39FA7900A93680 /* RatingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF4F908B1B39FA7900A93680 /* RatingViewController.m */; };
 		DC7564BA9797941C8EBD4026 /* Pods_yesand.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5504428874710937E23AD880 /* Pods_yesand.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		F99E11F11B3DACFD00A75738 /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F99E11F01B3DACFD00A75738 /* HomeTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +102,8 @@
 		BF4F90881B39F0D600A93680 /* AudienceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudienceViewController.m; sourceTree = "<group>"; };
 		BF4F908A1B39FA7900A93680 /* RatingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatingViewController.h; sourceTree = "<group>"; };
 		BF4F908B1B39FA7900A93680 /* RatingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatingViewController.m; sourceTree = "<group>"; };
+		F99E11EF1B3DACFD00A75738 /* HomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableViewCell.h; sourceTree = "<group>"; };
+		F99E11F01B3DACFD00A75738 /* HomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,16 +159,10 @@
 			children = (
 				BF372B921B3CD71100D7AE0C /* SearchViewController.h */,
 				BF372B931B3CD71100D7AE0C /* SearchViewController.m */,
-				BF372B8F1B3CD59F00D7AE0C /* TabBar.h */,
-				BF372B901B3CD59F00D7AE0C /* TabBar.m */,
-				BF372B8C1B3C545300D7AE0C /* TwitterAuthHelper.h */,
-				BF372B8D1B3C545300D7AE0C /* TwitterAuthHelper.m */,
 				BF372B821B3C402500D7AE0C /* ClubViewController.h */,
 				BF372B831B3C402500D7AE0C /* ClubViewController.m */,
 				BF4F90871B39F0D600A93680 /* AudienceViewController.h */,
 				BF4F90881B39F0D600A93680 /* AudienceViewController.m */,
-				BF372B441B3B1DEA00D7AE0C /* RateView.h */,
-				BF372B451B3B1DEA00D7AE0C /* RateView.m */,
 				BF4F908A1B39FA7900A93680 /* RatingViewController.h */,
 				BF4F908B1B39FA7900A93680 /* RatingViewController.m */,
 				85963FA31B359D9C006E2868 /* AuthViewController.h */,
@@ -208,6 +205,7 @@
 			children = (
 				85963F7C1B34C8F7006E2868 /* AppDelegate.h */,
 				85963F7D1B34C8F7006E2868 /* AppDelegate.m */,
+				F99E11F21B3DAD0900A75738 /* Models */,
 				85014AA91B35AEAB00E190C8 /* Controllers */,
 				85014AA51B35A07500E190C8 /* DangerZone!! */,
 				85963F881B34C8F7006E2868 /* Images.xcassets */,
@@ -259,6 +257,21 @@
 				768A60BFCBC5945ED10E215F /* Pods_yesandTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F99E11F21B3DAD0900A75738 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F99E11EF1B3DACFD00A75738 /* HomeTableViewCell.h */,
+				F99E11F01B3DACFD00A75738 /* HomeTableViewCell.m */,
+				BF372B8F1B3CD59F00D7AE0C /* TabBar.h */,
+				BF372B901B3CD59F00D7AE0C /* TabBar.m */,
+				BF372B441B3B1DEA00D7AE0C /* RateView.h */,
+				BF372B451B3B1DEA00D7AE0C /* RateView.m */,
+				BF372B8C1B3C545300D7AE0C /* TwitterAuthHelper.h */,
+				BF372B8D1B3C545300D7AE0C /* TwitterAuthHelper.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -470,6 +483,7 @@
 				BF372B941B3CD71100D7AE0C /* SearchViewController.m in Sources */,
 				85014AA81B35AE8E00E190C8 /* ProfileViewController.m in Sources */,
 				BF4F908C1B39FA7900A93680 /* RatingViewController.m in Sources */,
+				F99E11F11B3DACFD00A75738 /* HomeTableViewCell.m in Sources */,
 				BF372B461B3B1DEA00D7AE0C /* RateView.m in Sources */,
 				BF4F90891B39F0D600A93680 /* AudienceViewController.m in Sources */,
 				BF372B911B3CD59F00D7AE0C /* TabBar.m in Sources */,
