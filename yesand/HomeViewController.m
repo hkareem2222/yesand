@@ -15,13 +15,15 @@
 @property NSMutableArray *liveScenes;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *sceneBarButton;
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @end
 
 @implementation HomeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.sceneBarButton.enabled = NO;
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
 
     //listening for Scenes
@@ -58,12 +60,12 @@
 
         NSArray *topics = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError];
         self.topic = topics[arc4random_uniform((int)topics.count)];
-                               NSLog(@"%@", self.topic);
+       self.sceneBarButton.enabled = YES;
     }];
 }
 
 
-- (IBAction)onYesAndTapped:(UIBarButtonItem *)sender {
+- (IBAction)onNewSceneTapped:(UIBarButtonItem *)sender {
     Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
     Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
     NSDictionary *userDic = @{@"isAvailable": @1,
@@ -73,7 +75,6 @@
                                   @"updateAt": kFirebaseServerValueTimestamp
                                   };
     [user updateChildValues:userDic];
-    NSLog(@"button tapped");
     [self performSegueWithIdentifier:@"HomeToSplashChat" sender:sender];
 }
 

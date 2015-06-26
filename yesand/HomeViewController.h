@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Firebase/Firebase.h>
+#import <MapKit/MapKit.h>
 
 @interface HomeViewController : UIViewController
 
