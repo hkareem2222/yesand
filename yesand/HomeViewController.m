@@ -57,14 +57,7 @@
     //------ends here
     self.sceneBarButton.enabled = NO;
 
-    self.colors = [NSArray arrayWithObjects:[UIColor colorWithRed:3/255.0 green:201/255.0 blue:169/255.0 alpha:1.0], [UIColor colorWithRed:25/255.0 green:181/255.0 blue:254/255.0 alpha:1.0], [UIColor colorWithRed:242/255.0 green:120/255.0 blue:75/255.0 alpha:1.0], [UIColor colorWithRed:155/255.0 green:89/255.0 blue:182 /255.0 alpha:1.0], [UIColor colorWithRed:3/255.0 green:201/255.0 blue:169/255.0 alpha:1.0], [UIColor colorWithRed:25/255.0 green:181/255.0 blue:254/255.0 alpha:1.0], [UIColor colorWithRed:242/255.0 green:120/255.0 blue:75/255.0 alpha:1.0], [UIColor colorWithRed:155/255.0 green:89/255.0 blue:182 /255.0 alpha:1.0], nil];
-
-//    self.colors = [NSMutableArray arrayWithObjects:[UIColor redColor],
-//                   [UIColor orangeColor],
-//                   [UIColor yellowColor], [UIColor greenColor],
-//                   [UIColor blueColor], [UIColor magentaColor],
-//                   [UIColor purpleColor],
-//                   nil];
+    self.colors = [NSArray arrayWithObjects:[UIColor colorWithRed:3/255.0 green:201/255.0 blue:169/255.0 alpha:1.0], [UIColor colorWithRed:25/255.0 green:181/255.0 blue:254/255.0 alpha:1.0], [UIColor colorWithRed:242/255.0 green:120/255.0 blue:75/255.0 alpha:1.0], [UIColor colorWithRed:155/255.0 green:89/255.0 blue:182 /255.0 alpha:1.0], [UIColor colorWithRed:3/255.0 green:201/255.0 blue:169/255.0 alpha:1.0], [UIColor colorWithRed:25/255.0 green:181/255.0 blue:254/255.0 alpha:1.0], [UIColor colorWithRed:242/255.0 green:120/255.0 blue:75/255.0 alpha:1.0], [UIColor colorWithRed:155/255.0 green:89/255.0 blue:182 /255.0 alpha:1.0], [UIColor colorWithRed:3/255.0 green:201/255.0 blue:169/255.0 alpha:1.0], [UIColor colorWithRed:25/255.0 green:181/255.0 blue:254/255.0 alpha:1.0], [UIColor colorWithRed:242/255.0 green:120/255.0 blue:75/255.0 alpha:1.0], [UIColor colorWithRed:155/255.0 green:89/255.0 blue:182 /255.0 alpha:1.0], nil];
 
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
 
