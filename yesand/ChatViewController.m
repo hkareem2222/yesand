@@ -38,6 +38,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelBarButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *endSceneBarButton;
 @property (weak, nonatomic) IBOutlet UINavigationBar *sceneNavBar;
+@property (weak, nonatomic) IBOutlet UILabel *topicLabel;
 @property NSDictionary *otherUser;
 @property BOOL isSplashHidden;
 @property NSString *otherAuthuid;
@@ -139,7 +140,7 @@
             self.otherAuthuid = [self.otherUser objectForKey:@"authuid"];
             self.currentUserCharacter.text = self.currentUserCharacterOne;
             self.otherUserCharacter.text = self.currentUserCharacterTwo;
-            self.title = self.currentUserTopic;
+            self.topicLabel.text = [NSString stringWithFormat:@"Topic: %@", self.currentUserTopic];
             self.isEven = YES;
             if (!self.ifCalled) {
                 [self performSelector:@selector(splashViewDisappear) withObject:nil afterDelay:10.0];
@@ -149,7 +150,7 @@
             self.otherUserLabel.text = @"Finding";
             self.currentUserCharacter.text = @"Character";
             self.otherUserCharacter.text = @"Character";
-            self.title = @"Topic";
+            self.topicLabel.text = @"Topic:";
             self.ifCalled = NO;
             [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(splashViewDisappear) object:nil];
         }
@@ -160,7 +161,7 @@
         self.otherUserLabel.text = [self.otherUser objectForKey:@"username"];
         self.currentUserCharacter.text = [self.otherUser objectForKey:@"character two"];
         self.otherUserCharacter.text = [self.otherUser objectForKey:@"character one"];
-        self.title = [self.otherUser objectForKey:@"topic name"];
+        self.topicLabel.text = [NSString stringWithFormat:@"Topic: %@", [self.otherUser objectForKey:@"topic name"]]
         self.isEven = NO;
         if (!self.ifCalled) {
             [self performSelector:@selector(splashViewDisappear) withObject:nil afterDelay:10.0];
@@ -178,6 +179,18 @@
     self.cancelBarButton.enabled = NO;
     [self.usersRef removeAllObservers];
     [self queryConversation];
+    Firebase *otherUserRef = [[Firebase alloc] initWithUrl: [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@",self.otherAuthuid]];
+    [otherUserRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        if ([snapshot.value[@"isAvailable"] isEqualToNumber:@0]) {
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ left the scene", self.otherUsername] message:nil preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *continueAction = [UIAlertAction actionWithTitle:@"Continue" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+                [self performSegueWithIdentifier:@"SplashChatToRatings" sender:self];
+            }];
+            [alert addAction:continueAction];
+            [self presentViewController:alert animated:YES completion:nil];
+            [otherUserRef removeAllObservers];
+        }
+    }];
 }
 //------------------------------------------ends here
 
@@ -289,7 +302,6 @@
 }
 
 - (IBAction)onEndSceneTapped:(UIBarButtonItem *)sender {
-        NSLog(@"end tapped");
     [self performSegueWithIdentifier:@"SplashChatToRatings" sender:sender];
 }
 
@@ -315,16 +327,13 @@
 #pragma mark - Disappearing
 
 -(void)viewWillDisappear:(BOOL)animated {
-    NSLog(@"--- START disappear");
     [self makeNotAvailable];
     if (self.isSplashHidden) {
-        NSLog(@"---- disapear splash hidden to even ");
         if (self.isEven) {
             NSDictionary *sceneMessages = @{
                                             @"isLive": @0
                                             };
             [self.sceneConvo updateChildValues:sceneMessages];
-            NSLog(@"--- other user save inside live");
         }
         Firebase *currentConvo = [self.conversationsRef childByAppendingPath: self.currentUsername];
         Firebase *otherConvo = [self.conversationsRef childByAppendingPath: self.otherUsername];
@@ -332,7 +341,6 @@
         [otherConvo removeValue];
         [self.usersRef removeAllObservers];
         [self.convoRef removeAllObservers];
-        NSLog(@"--- end");
     }
 }
 @end

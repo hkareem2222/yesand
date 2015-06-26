@@ -208,7 +208,7 @@ withCompletionBlock:^(NSError *error, FAuthData *authData) {
                                   @"tagline": @" ",
                                   @"location": @" ",
                                   @"website": @" ",
-                                  @"rating": @"3",
+                                  @"rating": @[@3,@3],
                                   @"rating avg": @"3"
                                   };
 

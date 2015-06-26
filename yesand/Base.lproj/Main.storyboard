@@ -153,11 +153,22 @@
                                             <constraint firstItem="ab1-Jx-q2U" firstAttribute="leading" secondItem="JNd-Nl-Xwd" secondAttribute="leading" constant="25" id="v0V-dV-Wr0"/>
                                         </constraints>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Topic: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oF1-BE-4Le">
+                                        <rect key="frame" x="15" y="19" width="45.5" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="22" id="X8Y-88-Wud"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.60000002384185791" green="0.60000002384185791" blue="0.60000002384185791" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="oF1-BE-4Le" firstAttribute="leading" secondItem="vNX-0S-IY4" secondAttribute="leading" constant="15" id="44S-gn-e7P"/>
                                     <constraint firstAttribute="bottom" secondItem="JNd-Nl-Xwd" secondAttribute="bottom" constant="60" id="58H-6j-i9y"/>
                                     <constraint firstItem="JNd-Nl-Xwd" firstAttribute="top" secondItem="vNX-0S-IY4" secondAttribute="top" constant="60" id="TFU-BQ-iAc"/>
+                                    <constraint firstItem="oF1-BE-4Le" firstAttribute="top" secondItem="vNX-0S-IY4" secondAttribute="top" constant="19" id="ZSp-I9-tD1"/>
                                     <constraint firstAttribute="centerX" secondItem="Ybr-TG-qsx" secondAttribute="centerX" id="kHy-68-fiN"/>
                                     <constraint firstItem="JNd-Nl-Xwd" firstAttribute="leading" secondItem="vNX-0S-IY4" secondAttribute="leading" id="kkp-CO-57g"/>
                                     <constraint firstAttribute="trailing" secondItem="JNd-Nl-Xwd" secondAttribute="trailing" id="urn-TG-uAq"/>
@@ -170,7 +181,7 @@
                                     <constraint firstAttribute="height" constant="55" id="Eby-cr-mCX"/>
                                 </constraints>
                                 <items>
-                                    <navigationItem title="New Scene" id="qTC-bV-Rck">
+                                    <navigationItem title="New Yes, And Scene" id="qTC-bV-Rck">
                                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="Hcf-Tl-Yzs">
                                             <connections>
                                                 <action selector="onCancelTapped:" destination="awu-7r-M4L" id="EKY-jR-uab"/>
@@ -222,6 +233,7 @@
                         <outlet property="splashView" destination="vNX-0S-IY4" id="LkS-aa-vIV"/>
                         <outlet property="tableView" destination="3DB-k2-6om" id="Tgp-UU-92M"/>
                         <outlet property="textFieldBottomLayout" destination="gER-Mu-mia" id="5Tj-R3-39f"/>
+                        <outlet property="topicLabel" destination="oF1-BE-4Le" id="3Sy-7N-TXN"/>
                         <segue destination="KsM-7z-ZzQ" kind="unwind" identifier="UnwindToHome" unwindAction="unwindToHome:" id="e6w-2F-LsK"/>
                         <segue destination="hKZ-s2-gAP" kind="presentation" identifier="SplashChatToRatings" id="AyT-Gp-OWn"/>
                     </connections>
@@ -459,7 +471,7 @@
                                 <rect key="frame" x="0.0" y="264" width="600" height="287"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="SceneID" textLabel="2nS-wJ-xJm" style="IBUITableViewCellStyleDefault" id="E3e-dL-V3U" customClass="HomeToAudienceSegue">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="SceneID" textLabel="2nS-wJ-xJm" style="IBUITableViewCellStyleDefault" id="E3e-dL-V3U" customClass="HomeTableViewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" tableViewCell="E3e-dL-V3U" id="bQB-Jo-SjJ">
