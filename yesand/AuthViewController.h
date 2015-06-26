@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <Firebase/Firebase.h>
 
-@interface AuthViewController : UIViewController
+@interface AuthViewController : UIViewController <UIActionSheetDelegate>
 
 @end
