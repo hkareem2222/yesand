@@ -38,6 +38,21 @@
     self.mapView.showsUserLocation = YES;
     self.mapView.mapType = MKMapTypeStandard;
     self.mapView.delegate = self;
+    NSDictionary *comedyLocationsDic = @{
+                                         @"latitude": @41.912375,
+                                         @"longitude": @-87.634002
+                                         };
+    NSArray *comedyLocations = @[comedyLocationsDic];
+    NSNumber *latitude = comedyLocations.firstObject[@"latitude"];
+    NSNumber *longitude = comedyLocations.firstObject[@"longitude"];
+
+    MKPointAnnotation *annotation = [MKPointAnnotation new];
+    annotation.coordinate = CLLocationCoordinate2DMake(latitude.doubleValue, longitude.doubleValue);
+    annotation.title = @"Second City Theater";
+    [self.mapView addAnnotation:annotation];
+
+    MKCoordinateRegion region = MKCoordinateRegionMake(annotation.coordinate, MKCoordinateSpanMake(0.05, 0.05));
+    [self.mapView setRegion:region];
     //------ends here
     self.sceneBarButton.enabled = NO;
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
@@ -89,17 +104,29 @@
     }
 }
 
-- (void)mapView:(MKMapView *)aMapView didUpdateUserLocation:(MKUserLocation *)aUserLocation {
-    MKCoordinateRegion region;
-    MKCoordinateSpan span;
-    span.latitudeDelta = 0.005;
-    span.longitudeDelta = 0.005;
-    CLLocationCoordinate2D location;
-    location.latitude = aUserLocation.coordinate.latitude;
-    location.longitude = aUserLocation.coordinate.longitude;
-    region.span = span;
-    region.center = location;
-    [aMapView setRegion:region animated:YES];
+//- (void)mapView:(MKMapView *)aMapView didUpdateUserLocation:(MKUserLocation *)aUserLocation {
+//    MKCoordinateRegion region;
+//    MKCoordinateSpan span;
+//    span.latitudeDelta = 0.005;
+//    span.longitudeDelta = 0.005;
+//    CLLocationCoordinate2D location;
+//    location.latitude = aUserLocation.coordinate.latitude;
+//    location.longitude = aUserLocation.coordinate.longitude;
+//    region.span = span;
+//    region.center = location;
+//    [aMapView setRegion:region animated:YES];
+//}
+
+-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    MKPinAnnotationView *pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:nil];
+    if (![annotation isEqual:mapView.userLocation]) {
+//        pin.image = [UIImage imageNamed:@"bikeImage"];
+        pin.canShowCallout = YES;
+        pin.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        return pin;
+
+    }
+    return nil;
 }
 
 -(void)retrieveNewTopic {
