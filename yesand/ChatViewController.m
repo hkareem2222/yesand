@@ -156,7 +156,7 @@
             self.otherUserCharacter.text = @"Character";
             self.topicLabel.text = @"Topic:";
             self.ifCalled = NO;
-            self.otherUserImageView.image = [UIImage imageNamed:@"thumbsup.png"];
+            self.otherUserImageView.image = [UIImage imageNamed:@"MaskIndicator.png"];
             [self rotateSecondImageView];
             [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(splashViewDisappear) object:nil];
         }

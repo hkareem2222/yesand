@@ -128,7 +128,7 @@
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thumbsup" translatesAutoresizingMaskIntoConstraints="NO" id="MkJ-pM-DXU">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MaskIndicator" translatesAutoresizingMaskIntoConstraints="NO" id="MkJ-pM-DXU">
                                                 <rect key="frame" x="300" y="147" width="300" height="128"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="128" id="uqd-jc-DUi"/>
@@ -1200,9 +1200,9 @@
     <resources>
         <image name="HomeIcon" width="35" height="35"/>
         <image name="MaskIcon" width="28" height="35"/>
+        <image name="MaskIndicator" width="399" height="498"/>
         <image name="NewIcon" width="30" height="32"/>
         <image name="SearchIcon" width="35" height="35"/>
         <image name="profilepic" width="359" height="360"/>
-        <image name="thumbsup" width="256" height="256"/>
     </resources>
 </document>
