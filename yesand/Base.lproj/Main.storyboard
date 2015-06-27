@@ -662,7 +662,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="roW-jg-Mfv">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="roW-jg-Mfv">
                                 <rect key="frame" x="162" y="86" width="347" height="39"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="39" id="QqY-wt-1eI"/>
@@ -671,22 +671,6 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R5M-oA-Ebn">
-                                <rect key="frame" x="517" y="74" width="75" height="30"/>
-                                <color key="backgroundColor" red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="pCB-RU-3oP"/>
-                                    <constraint firstAttribute="width" constant="75" id="wjX-8f-rW7"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                <state key="normal" title="Edit Profile">
-                                    <color key="titleColor" red="0.96969696969999997" green="0.96969696969999997" blue="0.96969696969999997" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="onEditProfilePressed:" destination="DSd-uC-qSp" eventType="touchUpInside" id="EiR-0w-WOj"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="aMQ-tW-yfL">
                                 <rect key="frame" x="0.0" y="284" width="600" height="267"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -728,7 +712,6 @@
                             <constraint firstItem="P7v-le-Emz" firstAttribute="leading" secondItem="eHi-d4-Xll" secondAttribute="trailing" constant="16" id="4Yy-3a-Vwe"/>
                             <constraint firstItem="qDa-nw-XG8" firstAttribute="leading" secondItem="5MU-Ba-TqL" secondAttribute="leading" id="8Uv-kw-dcm"/>
                             <constraint firstItem="DrC-kF-zVr" firstAttribute="leading" secondItem="qH4-2Z-AbA" secondAttribute="trailing" id="AH2-Os-j0M"/>
-                            <constraint firstItem="R5M-oA-Ebn" firstAttribute="top" secondItem="XX8-Az-woW" secondAttribute="bottom" constant="10" id="B1c-45-8Hc"/>
                             <constraint firstItem="ph7-dZ-J3r" firstAttribute="leading" secondItem="r0X-rm-ubz" secondAttribute="trailing" id="Df1-x0-cge"/>
                             <constraint firstItem="aMQ-tW-yfL" firstAttribute="leading" secondItem="5MU-Ba-TqL" secondAttribute="leading" id="FnW-As-wFM"/>
                             <constraint firstItem="TMW-bO-TBm" firstAttribute="leading" secondItem="5MU-Ba-TqL" secondAttribute="leading" id="G8B-rE-Qek"/>
@@ -748,7 +731,6 @@
                             <constraint firstItem="DrC-kF-zVr" firstAttribute="width" secondItem="oMA-Ip-lsh" secondAttribute="width" id="WX2-iW-Ohq"/>
                             <constraint firstItem="P7v-le-Emz" firstAttribute="top" secondItem="kGD-uh-Z3K" secondAttribute="bottom" constant="5" id="YWA-wH-2gf"/>
                             <constraint firstItem="DrC-kF-zVr" firstAttribute="top" secondItem="oMA-Ip-lsh" secondAttribute="bottom" id="Ylp-7C-MqY"/>
-                            <constraint firstItem="R5M-oA-Ebn" firstAttribute="leading" secondItem="roW-jg-Mfv" secondAttribute="trailing" constant="8" id="Zvj-JS-jkL"/>
                             <constraint firstItem="qDa-nw-XG8" firstAttribute="top" secondItem="TMW-bO-TBm" secondAttribute="bottom" id="cBg-9d-BAv"/>
                             <constraint firstItem="roW-jg-Mfv" firstAttribute="leading" secondItem="eHi-d4-Xll" secondAttribute="trailing" constant="16" id="cvn-mC-ypJ"/>
                             <constraint firstItem="oMA-Ip-lsh" firstAttribute="leading" secondItem="ph7-dZ-J3r" secondAttribute="trailing" id="hNa-au-5TW"/>
@@ -764,14 +746,17 @@
                             <constraint firstItem="Lub-YG-Glf" firstAttribute="leading" secondItem="qDa-nw-XG8" secondAttribute="trailing" id="wNH-iF-sWh"/>
                             <constraint firstItem="tlD-WR-8d0" firstAttribute="leading" secondItem="eHi-d4-Xll" secondAttribute="trailing" constant="16" id="wuX-PV-KUj"/>
                             <constraint firstItem="kGD-uh-Z3K" firstAttribute="top" secondItem="tlD-WR-8d0" secondAttribute="bottom" constant="5" id="y1Q-e1-Ktf"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="R5M-oA-Ebn" secondAttribute="trailing" constant="-8" id="yex-Lu-b9o"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="K0h-w6-sAo">
-                        <barButtonItem key="rightBarButtonItem" title="Logout" id="6k4-B0-AX7">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="jjO-Ch-RxZ">
                             <connections>
-                                <action selector="onLogoutButtonPressed:" destination="DSd-uC-qSp" id="Ut5-RR-6Xw"/>
-                                <segue destination="o1v-yz-VNm" kind="unwind" identifier="ProfileToAuth" unwindAction="unwindToAuth:" id="rhj-dY-HlI"/>
+                                <action selector="onLogoutButtonPressed:" destination="DSd-uC-qSp" id="LOo-aH-Umd"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Edit Profile" id="6k4-B0-AX7">
+                            <connections>
+                                <action selector="onEditProfilePressed:" destination="DSd-uC-qSp" id="sg2-ku-126"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -786,6 +771,7 @@
                         <outlet property="starsCountLabel" destination="TMW-bO-TBm" id="hye-70-qmL"/>
                         <outlet property="upVotesCountLabel" destination="r0X-rm-ubz" id="kmx-Nr-gbb"/>
                         <segue destination="148-S7-Huy" kind="presentation" identifier="ProfileToEdit" id="OrS-Ky-3T9"/>
+                        <segue destination="o1v-yz-VNm" kind="unwind" identifier="UnwindToAuthFromProfile" unwindAction="unwindToAuth:" id="kPR-X1-BNS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mpt-su-ezl" userLabel="First Responder" sceneMemberID="firstResponder"/>

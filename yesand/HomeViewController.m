@@ -32,6 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //-------map stuff
+    NSLog(@"---- VIEW DID LOAD");
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     [self.locationManager requestWhenInUseAuthorization];
