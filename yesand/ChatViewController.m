@@ -11,14 +11,25 @@
 @interface ChatViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITextField *messageTextField;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textFieldBottomLayout;
+@property (weak, nonatomic) IBOutlet UILabel *currentUserLabel;
+@property (weak, nonatomic) IBOutlet UILabel *otherUserLabel;
+@property (weak, nonatomic) IBOutlet UILabel *currentUserCharacter;
+@property (weak, nonatomic) IBOutlet UIView *splashView;
+@property (weak, nonatomic) IBOutlet UILabel *otherUserCharacter;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelBarButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *endSceneBarButton;
+@property (weak, nonatomic) IBOutlet UINavigationBar *sceneNavBar;
+@property (weak, nonatomic) IBOutlet UILabel *topicLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *currentUserImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *otherUserImageView;
 @property double keyboardHeight;
 @property NSMutableArray *localMessages;
 @property NSMutableArray *cloudMessages;
 @property Firebase *conversationsRef;
-@property (weak, nonatomic) IBOutlet UITextField *messageTextField;
 @property Firebase *convoRef;
 @property Firebase *rootRef;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textFieldBottomLayout;
 @property NSArray *currentUserMessages;
 @property NSArray *otherUserMessages;
 @property Firebase *sceneConvo;
@@ -29,16 +40,7 @@
 @property NSString *currentUserCharacterOne;
 @property Firebase *usersRef;
 @property NSString *currentUserTopic;
-@property (weak, nonatomic) IBOutlet UILabel *currentUserLabel;
-@property (weak, nonatomic) IBOutlet UILabel *otherUserLabel;
 @property NSInteger indexOfCurrentUser;
-@property (weak, nonatomic) IBOutlet UILabel *currentUserCharacter;
-@property (weak, nonatomic) IBOutlet UIView *splashView;
-@property (weak, nonatomic) IBOutlet UILabel *otherUserCharacter;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelBarButton;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *endSceneBarButton;
-@property (weak, nonatomic) IBOutlet UINavigationBar *sceneNavBar;
-@property (weak, nonatomic) IBOutlet UILabel *topicLabel;
 @property NSDictionary *otherUser;
 @property BOOL isSplashHidden;
 @property NSString *otherAuthuid;
@@ -142,6 +144,8 @@
             self.otherUserCharacter.text = self.currentUserCharacterTwo;
             self.topicLabel.text = [NSString stringWithFormat:@"Topic: %@", self.currentUserTopic];
             self.isEven = YES;
+            [self.otherUserImageView.layer removeAllAnimations];
+            self.otherUserImageView.image = [UIImage imageNamed:@"profilepic2.png"];
             if (!self.ifCalled) {
                 [self performSelector:@selector(splashViewDisappear) withObject:nil afterDelay:10.0];
                 self.ifCalled = YES;
@@ -152,6 +156,8 @@
             self.otherUserCharacter.text = @"Character";
             self.topicLabel.text = @"Topic:";
             self.ifCalled = NO;
+            self.otherUserImageView.image = [UIImage imageNamed:@"thumbsup.png"];
+            [self rotateSecondImageView];
             [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(splashViewDisappear) object:nil];
         }
     } else {
@@ -167,6 +173,8 @@
             [self performSelector:@selector(splashViewDisappear) withObject:nil afterDelay:10.0];
             self.ifCalled = YES;
         }
+        [self.otherUserImageView.layer removeAllAnimations];
+        self.otherUserImageView.image = [UIImage imageNamed:@"profilepic2.png"];
     }
 }
 
@@ -353,4 +361,21 @@
         [self.convoRef removeAllObservers];
     }
 }
+
+#pragma mark - Animation with image
+
+- (void)rotateSecondImageView {
+    CABasicAnimation *rotation;
+    rotation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+    rotation.fromValue = [NSNumber numberWithFloat:0];
+    rotation.toValue = [NSNumber numberWithFloat:(2 * M_PI)];
+    rotation.duration = 2.0f; // Speed
+    rotation.repeatCount = HUGE_VALF; // Repeat forever until remove animation
+    [self.otherUserImageView.layer removeAllAnimations];
+    [self.otherUserImageView.layer addAnimation:rotation forKey:@"Spin"];
+}
+
+//  To remove animation
+// [self.imageview.layer removeAllAnimations]
+
 @end
