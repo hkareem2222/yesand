@@ -1,6 +1,0 @@
-framework module FLKAutoLayout {
-  umbrella header "Pods-yesandTests-FLKAutoLayout-umbrella.h"
-
-  export *
-  module * { export * }
-}
