@@ -1089,7 +1089,7 @@
             </objects>
             <point key="canvasLocation" x="397" y="-328"/>
         </scene>
-        <!--Notifications View Controller-->
+        <!--Gosh darn it, people like you!-->
         <scene sceneID="JTB-2i-ub0">
             <objects>
                 <viewController id="RwB-hF-DBk" customClass="NotificationsViewController" sceneMemberID="viewController">
@@ -1126,7 +1126,7 @@
                             <constraint firstItem="hyL-mc-hF8" firstAttribute="leading" secondItem="sSN-it-eEK" secondAttribute="leadingMargin" constant="-16" id="TmG-qy-agP"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="fla-Ux-ri5"/>
+                    <navigationItem key="navigationItem" title="Gosh darn it, people like you!" id="fla-Ux-ri5"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3OR-4A-7yP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1230,11 +1230,11 @@
             </objects>
             <point key="canvasLocation" x="2630" y="-1418"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="tSn-a8-P3A">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hhR-NU-cJA" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="JRd-xB-PYP"/>
+                    <tabBarItem key="tabBarItem" title="" image="graystar" id="JRd-xB-PYP"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="LRV-jq-Uzc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1256,6 +1256,7 @@
         <image name="MaskIndicator" width="399" height="498"/>
         <image name="NewIcon" width="30" height="32"/>
         <image name="SearchIcon" width="35" height="35"/>
+        <image name="graystar" width="32" height="32"/>
         <image name="profilepic" width="359" height="360"/>
     </resources>
     <inferredMetricsTieBreakers>
