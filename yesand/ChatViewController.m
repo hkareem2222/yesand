@@ -11,14 +11,24 @@
 @interface ChatViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITextField *messageTextField;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textFieldBottomLayout;
+@property (weak, nonatomic) IBOutlet UILabel *currentUserLabel;
+@property (weak, nonatomic) IBOutlet UILabel *otherUserLabel;
+@property (weak, nonatomic) IBOutlet UILabel *currentUserCharacter;
+@property (weak, nonatomic) IBOutlet UIView *splashView;
+@property (weak, nonatomic) IBOutlet UILabel *otherUserCharacter;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelBarButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *endSceneBarButton;
+@property (weak, nonatomic) IBOutlet UILabel *topicLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *currentUserImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *otherUserImageView;
 @property double keyboardHeight;
 @property NSMutableArray *localMessages;
 @property NSMutableArray *cloudMessages;
 @property Firebase *conversationsRef;
-@property (weak, nonatomic) IBOutlet UITextField *messageTextField;
 @property Firebase *convoRef;
 @property Firebase *rootRef;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textFieldBottomLayout;
 @property NSArray *currentUserMessages;
 @property NSArray *otherUserMessages;
 @property Firebase *sceneConvo;
@@ -29,19 +39,11 @@
 @property NSString *currentUserCharacterOne;
 @property Firebase *usersRef;
 @property NSString *currentUserTopic;
-@property (weak, nonatomic) IBOutlet UILabel *currentUserLabel;
-@property (weak, nonatomic) IBOutlet UILabel *otherUserLabel;
 @property NSInteger indexOfCurrentUser;
-@property (weak, nonatomic) IBOutlet UILabel *currentUserCharacter;
-@property (weak, nonatomic) IBOutlet UIView *splashView;
-@property (weak, nonatomic) IBOutlet UILabel *otherUserCharacter;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelBarButton;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *endSceneBarButton;
-@property (weak, nonatomic) IBOutlet UINavigationBar *sceneNavBar;
-@property (weak, nonatomic) IBOutlet UILabel *topicLabel;
 @property NSDictionary *otherUser;
 @property BOOL isSplashHidden;
 @property NSString *otherAuthuid;
+@property NSDictionary *topic;
 @end
 
 @implementation ChatViewController
@@ -50,12 +52,13 @@
     [super viewDidLoad];
     self.isSplashHidden = NO;
     self.endSceneBarButton.enabled = NO;
+    self.tabBarController.tabBar.hidden = YES;
     self.endSceneBarButton.title = @"";
-    self.sceneNavBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
+    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
 
-    self.sceneNavBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
 
-    self.sceneNavBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
 
     //----------------------------------splashviewstuff
     self.ifCalled = NO;
@@ -123,7 +126,39 @@
 }
 
 //----------------------------------------splashscreenstuff
-#pragma mark - Pair Users 
+
+#pragma mark - TOPIC GENERATION
+-(void)viewDidAppear:(BOOL)animated {
+    [self retrieveNewTopic];
+}
+
+-(void)saveNewTopic {
+    Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
+    Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
+    NSDictionary *userDic = @{@"isAvailable": @1,
+                              @"character one": [self.topic objectForKey:@"character one"],
+                              @"character two": [self.topic objectForKey:@"character two"],
+                              @"topic name": [self.topic objectForKey:@"name"],
+                              @"updateAt": kFirebaseServerValueTimestamp
+                              };
+    [user updateChildValues:userDic];
+}
+
+-(void)retrieveNewTopic {
+    NSURL *url = [NSURL URLWithString:@"https://api.myjson.com/bins/1pt90"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+
+                               NSArray *topics = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError];
+                               self.topic = topics[arc4random_uniform((int)topics.count)];
+                               [self saveNewTopic];
+                           }];
+}
+
+#pragma mark - Pair Users
 -(void)pairUsers {
     NSLog(@"---- PAIR USERS");
     for (NSDictionary *data in self.availableUsers) {
@@ -142,6 +177,8 @@
             self.otherUserCharacter.text = self.currentUserCharacterTwo;
             self.topicLabel.text = [NSString stringWithFormat:@"Topic: %@", self.currentUserTopic];
             self.isEven = YES;
+            [self.otherUserImageView.layer removeAllAnimations];
+            self.otherUserImageView.image = [UIImage imageNamed:@"profilepic2.png"];
             if (!self.ifCalled) {
                 [self performSelector:@selector(splashViewDisappear) withObject:nil afterDelay:10.0];
                 self.ifCalled = YES;
@@ -152,6 +189,8 @@
             self.otherUserCharacter.text = @"Character";
             self.topicLabel.text = @"Topic:";
             self.ifCalled = NO;
+            self.otherUserImageView.image = [UIImage imageNamed:@"MaskIndicator.png"];
+            [self rotateSecondImageView];
             [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(splashViewDisappear) object:nil];
         }
     } else {
@@ -167,6 +206,8 @@
             [self performSelector:@selector(splashViewDisappear) withObject:nil afterDelay:10.0];
             self.ifCalled = YES;
         }
+        [self.otherUserImageView.layer removeAllAnimations];
+        self.otherUserImageView.image = [UIImage imageNamed:@"profilepic2.png"];
     }
 }
 
@@ -298,7 +339,8 @@
 #pragma mark - Segues
 
 - (IBAction)onCancelTapped:(UIBarButtonItem *)sender {
-    [self performSegueWithIdentifier:@"UnwindToHome" sender:sender];
+//    [self performSegueWithIdentifier:@"UnwindToHome" sender:sender];
+    [self performSegueWithIdentifier:@"ChatToHomeTest" sender:sender];
 }
 
 - (IBAction)onEndSceneTapped:(UIBarButtonItem *)sender {
@@ -310,6 +352,10 @@
         RatingViewController *ratingVC = segue.destinationViewController;
         ratingVC.otherAuthuid = self.otherAuthuid;
     }
+}
+
+-(IBAction)unwindToChatFromRating:(UIStoryboardSegue *)segue {
+    NSLog(@"unwindToChat");
 }
 
 #pragma mark - Table View
@@ -349,4 +395,21 @@
         [self.convoRef removeAllObservers];
     }
 }
+
+#pragma mark - Animation with image
+
+- (void)rotateSecondImageView {
+    CABasicAnimation *rotation;
+    rotation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+    rotation.fromValue = [NSNumber numberWithFloat:0];
+    rotation.toValue = [NSNumber numberWithFloat:(2 * M_PI)];
+    rotation.duration = 2.0f; // Speed
+    rotation.repeatCount = HUGE_VALF; // Repeat forever until remove animation
+    [self.otherUserImageView.layer removeAllAnimations];
+    [self.otherUserImageView.layer addAnimation:rotation forKey:@"Spin"];
+}
+
+//  To remove animation
+// [self.imageview.layer removeAllAnimations]
+
 @end

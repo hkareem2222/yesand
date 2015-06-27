@@ -13,7 +13,6 @@
 #import <CoreLocation/CoreLocation.h>
 
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, MKMapViewDelegate>
-@property NSDictionary *topic;
 @property CLLocationManager *locationManager;
 @property Firebase *ref;
 @property NSString *timeStamp;
@@ -22,7 +21,6 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property NSString *selectedScene;
 @property BOOL isUserLocated;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *sceneBarButton;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic) NSArray *colors;
 @end
@@ -32,6 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //-------map stuff
+    NSLog(@"---- VIEW DID LOAD");
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     [self.locationManager requestWhenInUseAuthorization];
@@ -55,7 +54,6 @@
     MKCoordinateRegion region = MKCoordinateRegionMake(annotation.coordinate, MKCoordinateSpanMake(0.05, 0.05));
     [self.mapView setRegion:region];
     //------ends here
-    self.sceneBarButton.enabled = NO;
 
     self.colors = [NSArray arrayWithObjects:[UIColor colorWithRed:3/255.0 green:201/255.0 blue:169/255.0 alpha:1.0], [UIColor colorWithRed:25/255.0 green:181/255.0 blue:254/255.0 alpha:1.0], [UIColor colorWithRed:242/255.0 green:120/255.0 blue:75/255.0 alpha:1.0], [UIColor colorWithRed:155/255.0 green:89/255.0 blue:182 /255.0 alpha:1.0], [UIColor colorWithRed:3/255.0 green:201/255.0 blue:169/255.0 alpha:1.0], [UIColor colorWithRed:25/255.0 green:181/255.0 blue:254/255.0 alpha:1.0], [UIColor colorWithRed:242/255.0 green:120/255.0 blue:75/255.0 alpha:1.0], [UIColor colorWithRed:155/255.0 green:89/255.0 blue:182 /255.0 alpha:1.0], [UIColor colorWithRed:3/255.0 green:201/255.0 blue:169/255.0 alpha:1.0], [UIColor colorWithRed:25/255.0 green:181/255.0 blue:254/255.0 alpha:1.0], [UIColor colorWithRed:242/255.0 green:120/255.0 blue:75/255.0 alpha:1.0], [UIColor colorWithRed:155/255.0 green:89/255.0 blue:182 /255.0 alpha:1.0], nil];
 
@@ -99,9 +97,6 @@
     }
 }
 
--(void)viewDidAppear:(BOOL)animated {
-    [self retrieveNewTopic];
-}
 - (IBAction)onSegmentedIndexTapped:(UISegmentedControl *)sender {
     [self.tableView reloadData];
 }
@@ -148,34 +143,6 @@
 
     }
     return nil;
-}
-
--(void)retrieveNewTopic {
-    NSURL *url = [NSURL URLWithString:@"https://api.myjson.com/bins/1pt90"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-
-        NSArray *topics = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError];
-        self.topic = topics[arc4random_uniform((int)topics.count)];
-       self.sceneBarButton.enabled = YES;
-    }];
-}
-
-
-- (IBAction)onNewSceneTapped:(UIBarButtonItem *)sender {
-    Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
-    Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
-    NSDictionary *userDic = @{@"isAvailable": @1,
-                              @"character one": [self.topic objectForKey:@"character one"],
-                              @"character two": [self.topic objectForKey:@"character two"],
-                              @"topic name": [self.topic objectForKey:@"name"],
-                                  @"updateAt": kFirebaseServerValueTimestamp
-                                  };
-    [user updateChildValues:userDic];
-    [self performSegueWithIdentifier:@"HomeToSplashChat" sender:sender];
 }
 
 #pragma mark - Table View

@@ -18,7 +18,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *profileLinkLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
-
 @end
 
 @implementation ProfileViewController
@@ -47,13 +46,14 @@
     }];
 }
 
-- (IBAction)onEditProfilePressed:(UIButton *)sender {
+- (IBAction)onEditProfilePressed:(UIBarButtonItem *)sender {
     [self performSegueWithIdentifier:@"ProfileToEdit" sender:sender];
 }
 
-- (IBAction)onLogoutButtonPressed:(id)sender {
+- (IBAction)onLogoutButtonPressed:(UIBarButtonItem *)sender {
     Firebase *ref = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
     [ref unauth];
+    [self performSegueWithIdentifier:@"UnwindToAuthFromProfile" sender:sender];
 }
 
 -(IBAction)unwindToProfile:(UIStoryboardSegue *)segue {

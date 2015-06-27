@@ -14,6 +14,7 @@
 		85014AA41B359F9700E190C8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85014AA31B359F9700E190C8 /* SystemConfiguration.framework */; };
 		85014AA81B35AE8E00E190C8 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85014AA71B35AE8E00E190C8 /* ProfileViewController.m */; };
 		85014AAC1B35BD7400E190C8 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85014AAB1B35BD7400E190C8 /* ChatViewController.m */; };
+		85304DD11B3E6853000405A8 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85304DD01B3E6853000405A8 /* Firebase.framework */; };
 		85963F7B1B34C8F7006E2868 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 85963F7A1B34C8F7006E2868 /* main.m */; };
 		85963F7E1B34C8F7006E2868 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 85963F7D1B34C8F7006E2868 /* AppDelegate.m */; };
 		85963F811B34C8F7006E2868 /* yesand.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 85963F7F1B34C8F7006E2868 /* yesand.xcdatamodeld */; };
@@ -24,7 +25,6 @@
 		85963F981B34C8F7006E2868 /* yesandTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 85963F971B34C8F7006E2868 /* yesandTests.m */; };
 		85963FA21B34D264006E2868 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85963FA11B34D264006E2868 /* MapKit.framework */; };
 		85963FA51B359D9C006E2868 /* AuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85963FA41B359D9C006E2868 /* AuthViewController.m */; };
-		AB489B11564C56828C4160D5 /* Pods_yesandTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 768A60BFCBC5945ED10E215F /* Pods_yesandTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		BF372B461B3B1DEA00D7AE0C /* RateView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF372B451B3B1DEA00D7AE0C /* RateView.m */; };
 		BF372B811B3C3F5600D7AE0C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF372B801B3C3F5600D7AE0C /* CoreLocation.framework */; };
 		BF372B841B3C402500D7AE0C /* ClubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF372B831B3C402500D7AE0C /* ClubViewController.m */; };
@@ -36,7 +36,6 @@
 		BF4F90861B39E4EC00A93680 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF4F90851B39E4EC00A93680 /* EditProfileViewController.m */; };
 		BF4F90891B39F0D600A93680 /* AudienceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF4F90881B39F0D600A93680 /* AudienceViewController.m */; };
 		BF4F908C1B39FA7900A93680 /* RatingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF4F908B1B39FA7900A93680 /* RatingViewController.m */; };
-		DC7564BA9797941C8EBD4026 /* Pods_yesand.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5504428874710937E23AD880 /* Pods_yesand.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F99E11F11B3DACFD00A75738 /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F99E11F01B3DACFD00A75738 /* HomeTableViewCell.m */; };
 /* End PBXBuildFile section */
 
@@ -51,11 +50,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		174CA0AF3328B2CA967B07F4 /* Pods-yesandTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yesandTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-yesandTests/Pods-yesandTests.release.xcconfig"; sourceTree = "<group>"; };
-		41314330F8720162511DC46D /* Pods-yesand.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yesand.debug.xcconfig"; path = "Pods/Target Support Files/Pods-yesand/Pods-yesand.debug.xcconfig"; sourceTree = "<group>"; };
-		5504428874710937E23AD880 /* Pods_yesand.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_yesand.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5C7676ED28FF610905A6F984 /* Pods-yesand.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yesand.release.xcconfig"; path = "Pods/Target Support Files/Pods-yesand/Pods-yesand.release.xcconfig"; sourceTree = "<group>"; };
-		768A60BFCBC5945ED10E215F /* Pods_yesandTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_yesandTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		85014A9B1B359F7800E190C8 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		85014A9D1B359F8100E190C8 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		85014A9F1B359F8900E190C8 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -65,6 +59,7 @@
 		85014AA71B35AE8E00E190C8 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		85014AAA1B35BD7400E190C8 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
 		85014AAB1B35BD7400E190C8 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		85304DD01B3E6853000405A8 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		85963F751B34C8F7006E2868 /* yesand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yesand.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85963F791B34C8F7006E2868 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85963F7A1B34C8F7006E2868 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -82,7 +77,6 @@
 		85963FA11B34D264006E2868 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		85963FA31B359D9C006E2868 /* AuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthViewController.h; sourceTree = "<group>"; };
 		85963FA41B359D9C006E2868 /* AuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthViewController.m; sourceTree = "<group>"; };
-		9C0EFA0CC469F195C6151240 /* Pods-yesandTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yesandTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-yesandTests/Pods-yesandTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BF372B441B3B1DEA00D7AE0C /* RateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateView.h; sourceTree = "<group>"; };
 		BF372B451B3B1DEA00D7AE0C /* RateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateView.m; sourceTree = "<group>"; };
 		BF372B801B3C3F5600D7AE0C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -116,11 +110,11 @@
 				BF372B811B3C3F5600D7AE0C /* CoreLocation.framework in Frameworks */,
 				85014AA41B359F9700E190C8 /* SystemConfiguration.framework in Frameworks */,
 				85014AA21B359F9000E190C8 /* Security.framework in Frameworks */,
+				85304DD11B3E6853000405A8 /* Firebase.framework in Frameworks */,
 				85014AA01B359F8900E190C8 /* CFNetwork.framework in Frameworks */,
 				85014A9E1B359F8100E190C8 /* libc++.dylib in Frameworks */,
 				85014A9C1B359F7800E190C8 /* libicucore.dylib in Frameworks */,
 				85963FA21B34D264006E2868 /* MapKit.framework in Frameworks */,
-				DC7564BA9797941C8EBD4026 /* Pods_yesand.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,24 +122,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB489B11564C56828C4160D5 /* Pods_yesandTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		48275E75809004187D048B29 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				41314330F8720162511DC46D /* Pods-yesand.debug.xcconfig */,
-				5C7676ED28FF610905A6F984 /* Pods-yesand.release.xcconfig */,
-				9C0EFA0CC469F195C6151240 /* Pods-yesandTests.debug.xcconfig */,
-				174CA0AF3328B2CA967B07F4 /* Pods-yesandTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		85014AA51B35A07500E190C8 /* DangerZone!! */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,11 +164,9 @@
 		85963F6C1B34C8F7006E2868 = {
 			isa = PBXGroup;
 			children = (
-				85963FA11B34D264006E2868 /* MapKit.framework */,
 				85963F771B34C8F7006E2868 /* yesand */,
 				85963F941B34C8F7006E2868 /* yesandTests */,
 				85963F761B34C8F7006E2868 /* Products */,
-				48275E75809004187D048B29 /* Pods */,
 				E3A497684CF78C658459E9BB /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -245,6 +225,8 @@
 		E3A497684CF78C658459E9BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				85304DD01B3E6853000405A8 /* Firebase.framework */,
+				85963FA11B34D264006E2868 /* MapKit.framework */,
 				BF372B8A1B3C537200D7AE0C /* Accounts.framework */,
 				BF372B881B3C531A00D7AE0C /* Social.framework */,
 				BF372B801B3C3F5600D7AE0C /* CoreLocation.framework */,
@@ -253,8 +235,6 @@
 				85014A9F1B359F8900E190C8 /* CFNetwork.framework */,
 				85014A9D1B359F8100E190C8 /* libc++.dylib */,
 				85014A9B1B359F7800E190C8 /* libicucore.dylib */,
-				5504428874710937E23AD880 /* Pods_yesand.framework */,
-				768A60BFCBC5945ED10E215F /* Pods_yesandTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -281,12 +261,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 85963F9B1B34C8F7006E2868 /* Build configuration list for PBXNativeTarget "yesand" */;
 			buildPhases = (
-				5C6C8F21B6ECA20688C5EEDC /* Check Pods Manifest.lock */,
 				85963F711B34C8F7006E2868 /* Sources */,
 				85963F721B34C8F7006E2868 /* Frameworks */,
 				85963F731B34C8F7006E2868 /* Resources */,
-				FD0766EB7132AE06D8AB2BEF /* Embed Pods Frameworks */,
-				88E6D4F48D38AB5DC1088CF6 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -301,12 +278,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 85963F9E1B34C8F7006E2868 /* Build configuration list for PBXNativeTarget "yesandTests" */;
 			buildPhases = (
-				7BAADDC44F8740223B390644 /* Check Pods Manifest.lock */,
 				85963F8D1B34C8F7006E2868 /* Sources */,
 				85963F8E1B34C8F7006E2868 /* Frameworks */,
 				85963F8F1B34C8F7006E2868 /* Resources */,
-				6BA768F3808140E4D6F13AE8 /* Embed Pods Frameworks */,
-				202FA583B488D736A67B1098 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -374,99 +348,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		202FA583B488D736A67B1098 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-yesandTests/Pods-yesandTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5C6C8F21B6ECA20688C5EEDC /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		6BA768F3808140E4D6F13AE8 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-yesandTests/Pods-yesandTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7BAADDC44F8740223B390644 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		88E6D4F48D38AB5DC1088CF6 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-yesand/Pods-yesand-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FD0766EB7132AE06D8AB2BEF /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-yesand/Pods-yesand-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		85963F711B34C8F7006E2868 /* Sources */ = {
@@ -612,11 +493,15 @@
 		};
 		85963F9C1B34C8F7006E2868 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 41314330F8720162511DC46D /* Pods-yesand.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = yesand/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -624,11 +509,15 @@
 		};
 		85963F9D1B34C8F7006E2868 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5C7676ED28FF610905A6F984 /* Pods-yesand.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = yesand/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -636,7 +525,6 @@
 		};
 		85963F9F1B34C8F7006E2868 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9C0EFA0CC469F195C6151240 /* Pods-yesandTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -649,6 +537,12 @@
 				);
 				INFOPLIST_FILE = yesandTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/yesand.app/yesand";
 			};
@@ -656,7 +550,6 @@
 		};
 		85963FA01B34C8F7006E2868 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 174CA0AF3328B2CA967B07F4 /* Pods-yesandTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -665,6 +558,12 @@
 				);
 				INFOPLIST_FILE = yesandTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/yesand.app/yesand";
 			};
