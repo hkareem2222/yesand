@@ -414,8 +414,8 @@
                         <outlet property="returnToHomeButton" destination="ZhX-Uy-HX4" id="a4v-aP-g5o"/>
                         <outlet property="sceneNewButton" destination="myu-jI-DPt" id="orb-Df-wzP"/>
                         <outlet property="statusLabel" destination="f8f-wG-ymO" id="KYw-Y7-n4V"/>
-                        <segue destination="Oe5-1T-opU" kind="unwind" identifier="UnwindToHomeFromRating" unwindAction="unwindToHome:" id="dwF-3C-wzt"/>
                         <segue destination="Oe5-1T-opU" kind="unwind" identifier="UnwindToChatFromRating" unwindAction="unwindToChatFromRating:" id="oqC-1M-T94"/>
+                        <segue destination="UQ7-e7-iHq" kind="presentation" identifier="RatingToHome" modalPresentationStyle="currentContext" id="5tL-5e-YcU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zi7-Sr-LXk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1386,7 +1386,42 @@
                     <view key="view" contentMode="scaleToFill" id="ktf-AJ-S2b">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="1lt-qx-96L">
+                                <rect key="frame" x="0.0" y="64" width="600" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="Ll9-aV-mlv"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="cod-yr-ePE">
+                                <rect key="frame" x="0.0" y="109" width="600" height="442"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchID" id="5LY-N6-S5A">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5LY-N6-S5A" id="RQY-EW-L01">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="z1P-wz-fL8" id="neM-ac-Shp"/>
+                                    <outlet property="delegate" destination="z1P-wz-fL8" id="Ya0-Wf-gdX"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="cod-yr-ePE" firstAttribute="top" secondItem="1lt-qx-96L" secondAttribute="bottom" id="9Qw-ow-2xA"/>
+                            <constraint firstItem="1lt-qx-96L" firstAttribute="leading" secondItem="ktf-AJ-S2b" secondAttribute="leading" id="ERR-DR-OMO"/>
+                            <constraint firstItem="Kkb-cI-eOC" firstAttribute="top" secondItem="cod-yr-ePE" secondAttribute="bottom" id="ESQ-sS-8kT"/>
+                            <constraint firstItem="cod-yr-ePE" firstAttribute="leading" secondItem="ktf-AJ-S2b" secondAttribute="leading" id="JzS-lq-jvL"/>
+                            <constraint firstAttribute="trailing" secondItem="cod-yr-ePE" secondAttribute="trailing" id="mkU-ts-kbq"/>
+                            <constraint firstItem="1lt-qx-96L" firstAttribute="top" secondItem="FUE-GL-XLv" secondAttribute="bottom" id="r8g-As-nAn"/>
+                            <constraint firstAttribute="trailing" secondItem="1lt-qx-96L" secondAttribute="trailing" id="vCj-I5-j2N"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="F4f-J8-pCV"/>
                 </viewController>
@@ -1482,6 +1517,6 @@
         <image name="profilepic" width="359" height="360"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hkv-kI-r5j"/>
+        <segue reference="5tL-5e-YcU"/>
     </inferredMetricsTieBreakers>
 </document>

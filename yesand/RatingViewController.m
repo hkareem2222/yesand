@@ -102,13 +102,13 @@
 
 - (IBAction)onReturnToHomeTapped:(UIButton *)sender {
     [self storeRatingValueForOtherUser];
-    [self performSegueWithIdentifier:@"UnwindToHomeFromRating" sender:sender];
+    [self performSegueWithIdentifier:@"RatingToHome" sender:sender];
 }
 
 - (IBAction)onNewSceneTapped:(UIButton *)sender {
 //    Eventually we need to setup logic that makes the splash screen reappear and handle all the isAvailable logic
 //    [self storeRatingValueForOtherUser];
-//    [self performSegueWithIdentifier:@"UnwindToChatFromRating" sender:sender];
+    [self performSegueWithIdentifier:@"UnwindToChatFromRating" sender:sender];
 }
 
 
