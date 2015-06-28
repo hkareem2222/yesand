@@ -54,7 +54,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"LOAD");
-    [self retrieveNewTopic];
     self.isSplashHidden = NO;
     self.endSceneBarButton.enabled = NO;
     self.tabBarController.tabBar.hidden = YES;
@@ -64,10 +63,65 @@
     self.sceneButton.layer.cornerRadius = 5;
     self.topicLabel.layer.cornerRadius = 5;
     self.topicLabel.clipsToBounds = YES;
+
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
 
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
 
+    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
+
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
+
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
+
+    //--------------------------ends here
+
+    //--------------------------------chat view stuff
+
+    self.localMessages = [NSMutableArray new];
+    self.conversationsRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/conversations"];
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardWillShowNotification object:nil];
+    self.cloudMessages = [NSMutableArray new];
+
+    //---------------------------------endsHere
+}
+
+//----------------------------------------splashscreenstuff
+
+#pragma mark - TOPIC GENERATION
+-(void)viewDidAppear:(BOOL)animated {
+    [self retrieveNewTopic];
+}
+// Step 1
+-(void)retrieveNewTopic {
+    NSURL *url = [NSURL URLWithString:@"https://api.myjson.com/bins/1pt90"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+
+                               NSArray *topics = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError];
+                               self.topic = topics[arc4random_uniform((int)topics.count)];
+                               [self saveNewTopic];
+                           }];
+}
+// Step 2
+-(void)saveNewTopic {
+    Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
+    Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
+    NSDictionary *userDic = @{@"isAvailable": @1,
+                              @"character one": [self.topic objectForKey:@"character one"],
+                              @"character two": [self.topic objectForKey:@"character two"],
+                              @"topic name": [self.topic objectForKey:@"name"],
+                              @"updateAt": kFirebaseServerValueTimestamp
+                              };
+    [user updateChildValues:userDic];
+    [self findNewUsers];
+}
+// Step 3
+-(void)findNewUsers {
     //----------------------------------splashviewstuff
     self.ifCalled = NO;
     self.availableUsers = [NSMutableArray new];
@@ -99,74 +153,9 @@
         [self pairUsers];
         NSLog(@"------- AVAILABLE %@", self.availableUsers);
     }];
-
-
-    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
-
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
-
-    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
-
-    //--------------------------ends here
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //--------------------------------chat view stuff
-
-    self.localMessages = [NSMutableArray new];
-    self.conversationsRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/conversations"];
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardWillShowNotification object:nil];
-    self.cloudMessages = [NSMutableArray new];
-
-    //---------------------------------endsHere
 }
 
-//----------------------------------------splashscreenstuff
-
-#pragma mark - TOPIC GENERATION
-//-(void)viewDidAppear:(BOOL)animated {
-//    NSLog(@"APPEAR");
-//    [self retrieveNewTopic];
-//}
-
--(void)saveNewTopic {
-    Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
-    Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
-    NSDictionary *userDic = @{@"isAvailable": @1,
-                              @"character one": [self.topic objectForKey:@"character one"],
-                              @"character two": [self.topic objectForKey:@"character two"],
-                              @"topic name": [self.topic objectForKey:@"name"],
-                              @"updateAt": kFirebaseServerValueTimestamp
-                              };
-    [user updateChildValues:userDic];
-}
-
--(void)retrieveNewTopic {
-    NSURL *url = [NSURL URLWithString:@"https://api.myjson.com/bins/1pt90"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-
-                               NSArray *topics = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError];
-                               self.topic = topics[arc4random_uniform((int)topics.count)];
-                               [self saveNewTopic];
-                           }];
-}
-
+// Step 4
 #pragma mark - Pair Users
 -(void)pairUsers {
     NSLog(@"---- PAIR USERS");
