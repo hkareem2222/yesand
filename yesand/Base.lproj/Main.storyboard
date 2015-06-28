@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B6l-wa-hq4">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B6l-wa-hq4" userLabel="Text Field View">
                                 <rect key="frame" x="0.0" y="501" width="600" height="50"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q0g-z5-x7R">
@@ -31,7 +31,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nlt-AT-1kx">
                                         <rect key="frame" x="556" y="10" width="36" height="30"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="36" id="VFt-J4-V9h"/>
+                                            <constraint firstAttribute="width" constant="36" id="75k-rz-ziT"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal" title="Send">
@@ -44,14 +44,14 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="Q0g-z5-x7R" secondAttribute="bottom" constant="10" id="91e-ml-RFR"/>
-                                    <constraint firstItem="Q0g-z5-x7R" firstAttribute="top" secondItem="B6l-wa-hq4" secondAttribute="top" constant="10" id="G1g-lY-CUY"/>
-                                    <constraint firstItem="Q0g-z5-x7R" firstAttribute="leading" secondItem="B6l-wa-hq4" secondAttribute="leading" constant="8" id="KwK-1J-pbT"/>
-                                    <constraint firstAttribute="trailing" secondItem="Nlt-AT-1kx" secondAttribute="trailing" constant="8" id="a9i-YG-gYR"/>
-                                    <constraint firstItem="Nlt-AT-1kx" firstAttribute="top" secondItem="B6l-wa-hq4" secondAttribute="top" constant="10" id="dD2-3t-zd6"/>
-                                    <constraint firstItem="Nlt-AT-1kx" firstAttribute="leading" secondItem="Q0g-z5-x7R" secondAttribute="trailing" constant="8" id="fW4-Eh-7DK"/>
-                                    <constraint firstAttribute="bottom" secondItem="Nlt-AT-1kx" secondAttribute="bottom" constant="10" id="x7V-Xf-IWg"/>
-                                    <constraint firstAttribute="height" constant="50" id="xOw-RI-AzV"/>
+                                    <constraint firstItem="Nlt-AT-1kx" firstAttribute="leading" secondItem="Q0g-z5-x7R" secondAttribute="trailing" constant="8" id="Bn0-O5-Lq5"/>
+                                    <constraint firstAttribute="height" constant="50" id="DeC-bO-PhW"/>
+                                    <constraint firstItem="Q0g-z5-x7R" firstAttribute="top" secondItem="B6l-wa-hq4" secondAttribute="top" constant="10" id="KCk-Fw-xxI"/>
+                                    <constraint firstItem="Nlt-AT-1kx" firstAttribute="top" secondItem="B6l-wa-hq4" secondAttribute="top" constant="10" id="KmN-rW-yg2"/>
+                                    <constraint firstAttribute="bottom" secondItem="Nlt-AT-1kx" secondAttribute="bottom" constant="10" id="Svl-tV-kF4"/>
+                                    <constraint firstItem="Q0g-z5-x7R" firstAttribute="leading" secondItem="B6l-wa-hq4" secondAttribute="leading" constant="8" id="bAe-2o-4hV"/>
+                                    <constraint firstAttribute="trailing" secondItem="Nlt-AT-1kx" secondAttribute="trailing" constant="8" id="lfc-b7-vAn"/>
+                                    <constraint firstAttribute="bottom" secondItem="Q0g-z5-x7R" secondAttribute="bottom" constant="10" id="yKM-LG-1cR"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="56" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="3DB-k2-6om">
@@ -222,15 +222,15 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="vNX-0S-IY4" secondAttribute="trailing" id="1ao-d6-fbp"/>
                             <constraint firstItem="ard-wm-WB7" firstAttribute="top" secondItem="vNX-0S-IY4" secondAttribute="bottom" id="4hY-pd-dxA"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="B6l-wa-hq4" secondAttribute="trailing" constant="-16" id="B5W-Fg-mks"/>
+                            <constraint firstAttribute="trailing" secondItem="3DB-k2-6om" secondAttribute="trailing" id="7eh-QL-b7N"/>
                             <constraint firstItem="vNX-0S-IY4" firstAttribute="leading" secondItem="ZLU-gp-Nqo" secondAttribute="leading" id="D7F-vu-qpk"/>
-                            <constraint firstItem="B6l-wa-hq4" firstAttribute="leading" secondItem="ZLU-gp-Nqo" secondAttribute="leadingMargin" constant="-16" id="M4w-cR-phA"/>
+                            <constraint firstAttribute="trailing" secondItem="B6l-wa-hq4" secondAttribute="trailing" id="Gx0-my-8Tp"/>
+                            <constraint firstItem="ard-wm-WB7" firstAttribute="top" secondItem="B6l-wa-hq4" secondAttribute="bottom" id="N7G-4x-iQV"/>
                             <constraint firstItem="vNX-0S-IY4" firstAttribute="top" secondItem="cNR-rv-t7g" secondAttribute="bottom" id="Wd9-aP-04L"/>
-                            <constraint firstItem="3DB-k2-6om" firstAttribute="top" secondItem="cNR-rv-t7g" secondAttribute="bottom" id="afe-lN-dHI"/>
-                            <constraint firstItem="B6l-wa-hq4" firstAttribute="top" secondItem="3DB-k2-6om" secondAttribute="bottom" id="bM6-JJ-CwI"/>
-                            <constraint firstItem="3DB-k2-6om" firstAttribute="leading" secondItem="ZLU-gp-Nqo" secondAttribute="leadingMargin" constant="-16" id="gkM-UB-sXn"/>
-                            <constraint firstItem="ard-wm-WB7" firstAttribute="top" secondItem="B6l-wa-hq4" secondAttribute="bottom" id="oeX-BX-ycb"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="3DB-k2-6om" secondAttribute="trailing" constant="-16" id="ybC-Cg-sPe"/>
+                            <constraint firstItem="3DB-k2-6om" firstAttribute="leading" secondItem="ZLU-gp-Nqo" secondAttribute="leading" id="beZ-Ys-FFf"/>
+                            <constraint firstItem="B6l-wa-hq4" firstAttribute="top" secondItem="3DB-k2-6om" secondAttribute="bottom" id="dvL-dY-GuZ"/>
+                            <constraint firstItem="3DB-k2-6om" firstAttribute="top" secondItem="cNR-rv-t7g" secondAttribute="bottom" id="lh6-K5-eqb"/>
+                            <constraint firstItem="B6l-wa-hq4" firstAttribute="leading" secondItem="ZLU-gp-Nqo" secondAttribute="leading" id="rqH-J7-5vk"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="mTd-Ps-BvJ">
@@ -258,6 +258,7 @@
                         <outlet property="sceneButton" destination="Ybr-TG-qsx" id="cYV-xG-0zI"/>
                         <outlet property="splashView" destination="vNX-0S-IY4" id="LkS-aa-vIV"/>
                         <outlet property="tableView" destination="3DB-k2-6om" id="Tgp-UU-92M"/>
+                        <outlet property="textFieldBottomLayout" destination="N7G-4x-iQV" id="M5P-Uo-hNi"/>
                         <outlet property="topicLabel" destination="oF1-BE-4Le" id="3Sy-7N-TXN"/>
                         <outlet property="userSetupview" destination="JNd-Nl-Xwd" id="MHS-N7-0td"/>
                         <segue destination="KsM-7z-ZzQ" kind="unwind" identifier="UnwindToHome" unwindAction="unwindToHome:" id="e6w-2F-LsK"/>
