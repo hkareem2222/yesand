@@ -36,6 +36,7 @@
 		BF4F90861B39E4EC00A93680 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF4F90851B39E4EC00A93680 /* EditProfileViewController.m */; };
 		BF4F90891B39F0D600A93680 /* AudienceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF4F90881B39F0D600A93680 /* AudienceViewController.m */; };
 		BF4F908C1B39FA7900A93680 /* RatingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF4F908B1B39FA7900A93680 /* RatingViewController.m */; };
+		BFB429481B3F44CB00269212 /* NotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB429471B3F44CB00269212 /* NotificationsViewController.m */; };
 		F99E11F11B3DACFD00A75738 /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F99E11F01B3DACFD00A75738 /* HomeTableViewCell.m */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +97,8 @@
 		BF4F90881B39F0D600A93680 /* AudienceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudienceViewController.m; sourceTree = "<group>"; };
 		BF4F908A1B39FA7900A93680 /* RatingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatingViewController.h; sourceTree = "<group>"; };
 		BF4F908B1B39FA7900A93680 /* RatingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatingViewController.m; sourceTree = "<group>"; };
+		BFB429461B3F44CB00269212 /* NotificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationsViewController.h; sourceTree = "<group>"; };
+		BFB429471B3F44CB00269212 /* NotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationsViewController.m; sourceTree = "<group>"; };
 		F99E11EF1B3DACFD00A75738 /* HomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableViewCell.h; sourceTree = "<group>"; };
 		F99E11F01B3DACFD00A75738 /* HomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -155,6 +158,8 @@
 				BF4F90851B39E4EC00A93680 /* EditProfileViewController.m */,
 				85963F821B34C8F7006E2868 /* HomeViewController.h */,
 				85963F831B34C8F7006E2868 /* HomeViewController.m */,
+				BFB429461B3F44CB00269212 /* NotificationsViewController.h */,
+				BFB429471B3F44CB00269212 /* NotificationsViewController.m */,
 				85014AAA1B35BD7400E190C8 /* ChatViewController.h */,
 				85014AAB1B35BD7400E190C8 /* ChatViewController.m */,
 			);
@@ -367,6 +372,7 @@
 				F99E11F11B3DACFD00A75738 /* HomeTableViewCell.m in Sources */,
 				BF372B461B3B1DEA00D7AE0C /* RateView.m in Sources */,
 				BF4F90891B39F0D600A93680 /* AudienceViewController.m in Sources */,
+				BFB429481B3F44CB00269212 /* NotificationsViewController.m in Sources */,
 				BF372B911B3CD59F00D7AE0C /* TabBar.m in Sources */,
 				85014AAC1B35BD7400E190C8 /* ChatViewController.m in Sources */,
 				85963F7B1B34C8F7006E2868 /* main.m in Sources */,

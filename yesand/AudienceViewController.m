@@ -12,6 +12,9 @@
 @interface AudienceViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property NSArray *messages;
+@property (weak, nonatomic) IBOutlet UILabel *sceneTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *characterOneLabel;
+@property (weak, nonatomic) IBOutlet UILabel *characterTwoLabel;
 @end
 
 @implementation AudienceViewController
@@ -22,9 +25,15 @@
     NSLog(@"selected scene id %@", self.sceneID);
     NSString *sceneURL = [NSString stringWithFormat:@"https://yesand.firebaseio.com/scenes/%@", self.sceneID];
     Firebase *scenesConvo = [[Firebase alloc] initWithUrl:sceneURL];
+
+    [scenesConvo setValue:@0 forKey:@"isLive"];
     [scenesConvo observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         if (![snapshot.value[@"messages"] isEqual:[NSNull null]]) {
             self.messages = snapshot.value[@"messages"];
+            self.sceneTitleLabel.text = snapshot.value[@"titleName"];
+            self.characterOneLabel.text = snapshot.value[@"characterOne"];
+            NSLog(@"%@", snapshot.value);
+            self.characterTwoLabel.text = snapshot.value[@"characterTwo"];
             [self.tableView reloadData];
         }
     } withCancelBlock:^(NSError *error) {

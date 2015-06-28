@@ -20,7 +20,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *otherUserCharacter;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelBarButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *endSceneBarButton;
-@property (weak, nonatomic) IBOutlet UINavigationBar *sceneNavBar;
 @property (weak, nonatomic) IBOutlet UILabel *topicLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *currentUserImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *otherUserImageView;
@@ -44,6 +43,7 @@
 @property NSDictionary *otherUser;
 @property BOOL isSplashHidden;
 @property NSString *otherAuthuid;
+@property NSDictionary *topic;
 @end
 
 @implementation ChatViewController
@@ -52,12 +52,13 @@
     [super viewDidLoad];
     self.isSplashHidden = NO;
     self.endSceneBarButton.enabled = NO;
+    self.tabBarController.tabBar.hidden = YES;
     self.endSceneBarButton.title = @"";
-    self.sceneNavBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
+    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
 
-    self.sceneNavBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
 
-    self.sceneNavBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
 
     //----------------------------------splashviewstuff
     self.ifCalled = NO;
@@ -125,7 +126,39 @@
 }
 
 //----------------------------------------splashscreenstuff
-#pragma mark - Pair Users 
+
+#pragma mark - TOPIC GENERATION
+-(void)viewDidAppear:(BOOL)animated {
+    [self retrieveNewTopic];
+}
+
+-(void)saveNewTopic {
+    Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
+    Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
+    NSDictionary *userDic = @{@"isAvailable": @1,
+                              @"character one": [self.topic objectForKey:@"character one"],
+                              @"character two": [self.topic objectForKey:@"character two"],
+                              @"topic name": [self.topic objectForKey:@"name"],
+                              @"updateAt": kFirebaseServerValueTimestamp
+                              };
+    [user updateChildValues:userDic];
+}
+
+-(void)retrieveNewTopic {
+    NSURL *url = [NSURL URLWithString:@"https://api.myjson.com/bins/1pt90"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+
+                               NSArray *topics = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError];
+                               self.topic = topics[arc4random_uniform((int)topics.count)];
+                               [self saveNewTopic];
+                           }];
+}
+
+#pragma mark - Pair Users
 -(void)pairUsers {
     NSLog(@"---- PAIR USERS");
     for (NSDictionary *data in self.availableUsers) {
@@ -306,7 +339,8 @@
 #pragma mark - Segues
 
 - (IBAction)onCancelTapped:(UIBarButtonItem *)sender {
-    [self performSegueWithIdentifier:@"UnwindToHome" sender:sender];
+//    [self performSegueWithIdentifier:@"UnwindToHome" sender:sender];
+    [self performSegueWithIdentifier:@"ChatToHomeTest" sender:sender];
 }
 
 - (IBAction)onEndSceneTapped:(UIBarButtonItem *)sender {
