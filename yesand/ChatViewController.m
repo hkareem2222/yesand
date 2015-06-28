@@ -8,6 +8,8 @@
 
 #import "ChatViewController.h"
 #import "RatingViewController.h"
+#import "HomeViewController.h"
+
 @interface ChatViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIView *userSetupview;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -343,10 +345,9 @@
 #pragma mark - Segues
 
 - (IBAction)onCancelTapped:(UIBarButtonItem *)sender {
-//    [self performSegueWithIdentifier:@"UnwindToHome" sender:sender];
-    [self performSegueWithIdentifier:@"ChatToHomeTest" sender:sender];
+    NSLog(@"cancel");
+    [self performSegueWithIdentifier:@"ChatToHome" sender:sender];
 }
-
 - (IBAction)onEndSceneTapped:(UIBarButtonItem *)sender {
     [self performSegueWithIdentifier:@"SplashChatToRatings" sender:sender];
 }
