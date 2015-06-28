@@ -28,6 +28,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.chatLabel1.layer.cornerRadius = 5;
+    self.chatLabel2.layer.cornerRadius = 5;
+    self.chatLabel3.layer.cornerRadius = 5;
+    self.chatLabel4.layer.cornerRadius = 5;
+    self.chatLabel1.clipsToBounds = YES;
+    self.chatLabel2.clipsToBounds = YES;
+    self.chatLabel3.clipsToBounds = YES;
+    self.chatLabel4.clipsToBounds = YES;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     NSLog(@"selected scene id %@", self.sceneID);
     NSString *sceneURL = [NSString stringWithFormat:@"https://yesand.firebaseio.com/scenes/%@", self.sceneID];
