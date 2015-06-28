@@ -9,7 +9,7 @@
 #import "ChatViewController.h"
 #import "RatingViewController.h"
 @interface ChatViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
-
+@property (weak, nonatomic) IBOutlet UIView *userSetupview;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *messageTextField;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textFieldBottomLayout;
@@ -44,6 +44,7 @@
 @property BOOL isSplashHidden;
 @property NSString *otherAuthuid;
 @property NSDictionary *topic;
+@property (weak, nonatomic) IBOutlet UIButton *sceneButton;
 @end
 
 @implementation ChatViewController
@@ -55,7 +56,10 @@
     self.tabBarController.tabBar.hidden = YES;
     self.endSceneBarButton.title = @"";
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
-
+    self.userSetupview.layer.cornerRadius = 5;
+    self.sceneButton.layer.cornerRadius = 5;
+    self.topicLabel.layer.cornerRadius = 5;
+    self.topicLabel.clipsToBounds = YES;
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
 
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
