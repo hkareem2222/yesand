@@ -107,7 +107,7 @@
 
 - (IBAction)onNewSceneTapped:(UIButton *)sender {
 //    Eventually we need to setup logic that makes the splash screen reappear and handle all the isAvailable logic
-//    [self storeRatingValueForOtherUser];
+    [self storeRatingValueForOtherUser];
     [self performSegueWithIdentifier:@"UnwindToChatFromRating" sender:sender];
 }
 

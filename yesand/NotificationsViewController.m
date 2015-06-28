@@ -39,7 +39,7 @@
 
     cell.textLabel.text = [self.notifications objectAtIndex:indexPath.row];
     cell.imageView.image = [UIImage imageNamed:@"laughnotification"];
-    cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     cell.textLabel.numberOfLines = 0;
     cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:12.0];
     return cell;

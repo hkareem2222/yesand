@@ -352,6 +352,14 @@
 }
 
 -(IBAction)unwindToChatFromRating:(UIStoryboardSegue *)segue {
+    self.isSplashHidden = NO;
+    self.endSceneBarButton.enabled = NO;
+    self.tabBarController.tabBar.hidden = YES;
+    self.endSceneBarButton.title = @"";
+    self.localMessages = [NSMutableArray new];
+    self.conversationsRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/conversations"];
+    self.cloudMessages = [NSMutableArray new];
+
     NSLog(@"unwindToChat");
 }
 
