@@ -54,10 +54,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"LOAD");
-    self.isSplashHidden = NO;
-    self.endSceneBarButton.enabled = NO;
-    self.tabBarController.tabBar.hidden = YES;
-    self.endSceneBarButton.title = @"";
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
     self.userSetupview.layer.cornerRadius = 5;
     self.sceneButton.layer.cornerRadius = 5;
@@ -91,6 +87,13 @@
 
 #pragma mark - TOPIC GENERATION
 -(void)viewDidAppear:(BOOL)animated {
+    self.splashView.alpha = 1.0;
+    self.isSplashHidden = NO;
+    self.endSceneBarButton.enabled = NO;
+    self.tabBarController.tabBar.hidden = YES;
+    self.cancelBarButton.enabled = YES;
+    self.cancelBarButton.title = @"Cancel";
+    self.endSceneBarButton.title = @"";
     [self retrieveNewTopic];
 }
 // Step 1
@@ -352,13 +355,10 @@
 }
 
 -(IBAction)unwindToChatFromRating:(UIStoryboardSegue *)segue {
-    self.isSplashHidden = NO;
-    self.endSceneBarButton.enabled = NO;
-    self.tabBarController.tabBar.hidden = YES;
-    self.endSceneBarButton.title = @"";
     self.localMessages = [NSMutableArray new];
     self.conversationsRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/conversations"];
     self.cloudMessages = [NSMutableArray new];
+    [self.tableView reloadData];
 
     NSLog(@"unwindToChat");
 }
