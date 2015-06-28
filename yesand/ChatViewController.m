@@ -53,6 +53,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"LOAD");
+    [self retrieveNewTopic];
     self.isSplashHidden = NO;
     self.endSceneBarButton.enabled = NO;
     self.tabBarController.tabBar.hidden = YES;
@@ -134,9 +136,10 @@
 //----------------------------------------splashscreenstuff
 
 #pragma mark - TOPIC GENERATION
--(void)viewDidAppear:(BOOL)animated {
-    [self retrieveNewTopic];
-}
+//-(void)viewDidAppear:(BOOL)animated {
+//    NSLog(@"APPEAR");
+//    [self retrieveNewTopic];
+//}
 
 -(void)saveNewTopic {
     Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
