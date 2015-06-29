@@ -25,6 +25,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *messageField;
 @property (weak, nonatomic) IBOutlet UIView *audienceChatView;
 @property NSInteger labelCount;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textFieldBottomLayout;
+
 @end
 
 @implementation AudienceViewController
@@ -68,6 +70,24 @@
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(handleSingleTap:)];
     [self.audienceChatView addGestureRecognizer:singleFingerTap];
+
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardWillShowNotification object:nil];
+
+}
+
+#pragma mark - Keyboard Animation
+
+-(void)keyboardOnScreen:(NSNotification *)notification
+{
+    NSDictionary *info  = notification.userInfo;
+    NSValue      *value = info[UIKeyboardFrameEndUserInfoKey];
+
+    CGRect rawFrame      = [value CGRectValue];
+    CGRect keyboardFrame = [self.view convertRect:rawFrame fromView:nil];
+
+    //make sure to create the outlet for the textfieldbottomlayout//
+    self.textFieldBottomLayout.constant = keyboardFrame.size.height; //- 50;
 }
 
 //The event handling method

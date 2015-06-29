@@ -47,6 +47,7 @@
 @property NSString *otherAuthuid;
 @property NSDictionary *topic;
 @property (weak, nonatomic) IBOutlet UIButton *sceneButton;
+@property (weak, nonatomic) IBOutlet UIImageView *typingImageView;
 @end
 
 @implementation ChatViewController
@@ -59,6 +60,8 @@
     self.sceneButton.layer.cornerRadius = 5;
     self.topicLabel.layer.cornerRadius = 5;
     self.topicLabel.clipsToBounds = YES;
+    self.tabBarController.tabBar.hidden = YES;
+    self.typingImageView.hidden = YES;
 
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
 
@@ -246,6 +249,8 @@
                                    @"topicName": self.currentUserTopic,
                                    @"characterOne": self.currentUserCharacterOne,
                                    @"characterTwo": self.currentUserCharacterTwo,
+                                   self.currentUserCharacterOne: @0,
+                                   self.currentUserCharacterTwo: @0,
                                    @"isLive": @1,
                                    @"messages": @[@"test"]
                                    };
@@ -266,6 +271,11 @@
                                                     };
                     [self.sceneConvo updateChildValues:sceneMessages];
                     [self.tableView reloadData];
+                    if ([snapshot.value[self.otherUserCharacter.text] isEqualToNumber:@1]) {
+                        self.typingImageView.hidden = NO;
+                    } else {
+                        self.typingImageView.hidden = YES;
+                    }
                 }
             } withCancelBlock:^(NSError *error) {
             }];
@@ -282,6 +292,11 @@
                     self.cloudMessages = [NSMutableArray new];
                     [self.cloudMessages addObjectsFromArray:self.otherUserMessages];
                     [self.tableView reloadData];
+                    if ([snapshot.value[self.otherUserCharacter.text] isEqualToNumber:@1]) {
+                        self.typingImageView.hidden = NO;
+                    } else {
+                        self.typingImageView.hidden = YES;
+                    }
                 }
             } withCancelBlock:^(NSError *error) {
             }];
@@ -293,7 +308,7 @@
 
 #pragma mark - Sending Message
 - (IBAction)onSendButtonTapped:(id)sender {
-    [self.cloudMessages addObject:self.messageTextField.text];
+    [self.cloudMessages addObject:[NSString stringWithFormat:@"%@: %@", self.currentUserCharacter.text, self.messageTextField.text]];
     NSDictionary *conversation = @{
                                    @"messages": self.cloudMessages
                                    };
@@ -370,15 +385,19 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MessageID"];
-//    cell.textLabel.font = [UIFont systemFontOfSize:12];
-    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    cell.textLabel.numberOfLines = 0;
-    if (indexPath.row  % 2 == 0) {
-        cell.backgroundColor = [UIColor colorWithRed:255/255.0 green:215/255.0 blue:215/255.0 alpha:1.0];
+    if ([self.cloudMessages[indexPath.row] hasPrefix:[NSString stringWithFormat:@"%@", self.currentUserCharacter.text]]) {
+        SendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SendMessageID"];
+        [cell.sendMessageImageButton setTitle:self.cloudMessages[indexPath.row] forState:UIControlStateDisabled];
+        cell.sendMessageImageButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping | NSLineBreakByTruncatingTail;
+        cell.sendMessageImageButton.titleLabel.numberOfLines = 0;
+        return cell;
+    } else {
+        ReceiveTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ReceiveMessageID"];
+        [cell.receiveMessageImageButton setTitle:self.cloudMessages[indexPath.row] forState:UIControlStateDisabled];
+        cell.receiveMessageImageButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping | NSLineBreakByTruncatingTail;
+        cell.receiveMessageImageButton.titleLabel.numberOfLines = 0;
+        return cell;
     }
-    cell.textLabel.text = self.cloudMessages[indexPath.row];
-    return cell;
 }
 
 #pragma mark - Disappearing
@@ -412,6 +431,22 @@
     rotation.repeatCount = HUGE_VALF; // Repeat forever until remove animation
     [self.otherUserImageView.layer removeAllAnimations];
     [self.otherUserImageView.layer addAnimation:rotation forKey:@"Spin"];
+}
+
+#pragma mark - Typing indicator test
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField {
+    NSDictionary *conversation = @{
+                                   self.currentUserCharacter.text: @1
+                                   };
+    [self.convoRef updateChildValues:conversation];
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField {
+    NSDictionary *conversation = @{
+                                   self.currentUserCharacter.text: @0
+                                   };
+    [self.convoRef updateChildValues:conversation];
 }
 
 //  To remove animation

@@ -8,6 +8,9 @@
 
 #import "AuthViewController.h"
 #import "TwitterAuthHelper.h"
+#import <QuartzCore/QuartzCore.h>
+//#import <Fabric/Fabric.h>
+//#import <TwitterKit/TwitterKit.h>
 
 @interface AuthViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
@@ -16,7 +19,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *signUpButton;
 @property (weak, nonatomic) IBOutlet UIButton *logInButton;
 @property Firebase *myRootRef;
-@property (weak, nonatomic) IBOutlet UINavigationBar *loginBar;
 @property TwitterAuthHelper *twitterAuthHelper;
 @end
 
@@ -26,6 +28,13 @@
     [super viewDidLoad];
     self.myRootRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
     self.signUpButton.layer.cornerRadius = 10;
+    self.signUpButton.layer.borderWidth = 1.0f;
+    self.signUpButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.logInButton.layer.cornerRadius = 10;
+    self.logInButton.layer.borderWidth = 1.0f;
+    self.logInButton.layer.borderColor = [UIColor whiteColor].CGColor;
+
+    self.logInButton.layer.cornerRadius = 10;
     [self.myRootRef observeAuthEventWithBlock:^(FAuthData *authData) {
         if (authData) {
             [self performSegueWithIdentifier:@"AuthToHome" sender:self];
@@ -34,14 +43,14 @@
             NSLog(@"no user logged in");
         }
     }];
-    self.loginBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
+//    self.loginBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
 
 //    UIImage *image = [UIImage imageNamed:@"TestLogo.png"];
 //    self.navigationItem.titleView = [[UIImageView alloc]initWithImage:image];
-
-    self.loginBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
-
-    self.loginBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
+//
+//    self.loginBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
+//
+//    self.loginBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
 
 
     Firebase *ref = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
@@ -64,6 +73,16 @@
             }];
         }
     }];
+
+//    TWTRLogInButton *twitterButton = [TWTRLogInButton buttonWithLogInCompletion:^(TWTRSession* session, NSError* error) {
+//        if (session) {
+//            NSLog(@"signed in as %@", [session userName]);
+//        } else {
+//            NSLog(@"error: %@", [error localizedDescription]);
+//        }
+//    }];
+//    twiterButton.center = self.view.center;
+//    [self.view addSubview:twitterButton];
 
 }
 

@@ -36,6 +36,8 @@
 		BF4F90861B39E4EC00A93680 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF4F90851B39E4EC00A93680 /* EditProfileViewController.m */; };
 		BF4F90891B39F0D600A93680 /* AudienceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF4F90881B39F0D600A93680 /* AudienceViewController.m */; };
 		BF4F908C1B39FA7900A93680 /* RatingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF4F908B1B39FA7900A93680 /* RatingViewController.m */; };
+		F96300F71B41E3B3009F459B /* ReceiveTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F96300F61B41E3B3009F459B /* ReceiveTableViewCell.m */; };
+		F96300FA1B41E3C1009F459B /* SendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F96300F91B41E3C1009F459B /* SendTableViewCell.m */; };
 		F99E11F11B3DACFD00A75738 /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F99E11F01B3DACFD00A75738 /* HomeTableViewCell.m */; };
 /* End PBXBuildFile section */
 
@@ -94,6 +96,10 @@
 		BF4F90881B39F0D600A93680 /* AudienceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudienceViewController.m; sourceTree = "<group>"; };
 		BF4F908A1B39FA7900A93680 /* RatingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatingViewController.h; sourceTree = "<group>"; };
 		BF4F908B1B39FA7900A93680 /* RatingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatingViewController.m; sourceTree = "<group>"; };
+		F96300F51B41E3B3009F459B /* ReceiveTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReceiveTableViewCell.h; sourceTree = "<group>"; };
+		F96300F61B41E3B3009F459B /* ReceiveTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReceiveTableViewCell.m; sourceTree = "<group>"; };
+		F96300F81B41E3C1009F459B /* SendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendTableViewCell.h; sourceTree = "<group>"; };
+		F96300F91B41E3C1009F459B /* SendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendTableViewCell.m; sourceTree = "<group>"; };
 		F99E11EF1B3DACFD00A75738 /* HomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableViewCell.h; sourceTree = "<group>"; };
 		F99E11F01B3DACFD00A75738 /* HomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -240,6 +246,10 @@
 		F99E11F21B3DAD0900A75738 /* Custom Classes */ = {
 			isa = PBXGroup;
 			children = (
+				F96300F51B41E3B3009F459B /* ReceiveTableViewCell.h */,
+				F96300F61B41E3B3009F459B /* ReceiveTableViewCell.m */,
+				F96300F81B41E3C1009F459B /* SendTableViewCell.h */,
+				F96300F91B41E3C1009F459B /* SendTableViewCell.m */,
 				F99E11EF1B3DACFD00A75738 /* HomeTableViewCell.h */,
 				F99E11F01B3DACFD00A75738 /* HomeTableViewCell.m */,
 				BF372B8F1B3CD59F00D7AE0C /* TabBar.h */,
@@ -360,7 +370,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 750de74697568eb44d8f73e2011e553f48ba8373 8cb5c7b3c86a6c3b871a1c0b9e6802c61059531c8dd1d652d484a52557d35a82";
+			shellScript = "./Fabric.framework/run f365e72623950114378e6bef7103ffc9fac3da4e 7e6fd4af0f7444eacb02b183c55a9d69c6008269b37f9ea294ee79d48301b99c";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -376,9 +386,11 @@
 				85963F7E1B34C8F7006E2868 /* AppDelegate.m in Sources */,
 				85963F841B34C8F7006E2868 /* HomeViewController.m in Sources */,
 				85014AA81B35AE8E00E190C8 /* ProfileViewController.m in Sources */,
+				F96300F71B41E3B3009F459B /* ReceiveTableViewCell.m in Sources */,
 				BF4F908C1B39FA7900A93680 /* RatingViewController.m in Sources */,
 				F99E11F11B3DACFD00A75738 /* HomeTableViewCell.m in Sources */,
 				BF372B461B3B1DEA00D7AE0C /* RateView.m in Sources */,
+				F96300FA1B41E3C1009F459B /* SendTableViewCell.m in Sources */,
 				BF4F90891B39F0D600A93680 /* AudienceViewController.m in Sources */,
 				BF372B911B3CD59F00D7AE0C /* TabBar.m in Sources */,
 				85014AAC1B35BD7400E190C8 /* ChatViewController.m in Sources */,
