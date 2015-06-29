@@ -87,7 +87,7 @@
     CGRect keyboardFrame = [self.view convertRect:rawFrame fromView:nil];
 
     //make sure to create the outlet for the textfieldbottomlayout//
-    self.textFieldBottomLayout.constant = keyboardFrame.size.height; //- 50;
+    self.textFieldBottomLayout.constant = keyboardFrame.size.height - 50;
 }
 
 //The event handling method
