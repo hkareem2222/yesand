@@ -22,6 +22,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *chatLabel2;
 @property (weak, nonatomic) IBOutlet UILabel *chatLabel3;
 @property (weak, nonatomic) IBOutlet UILabel *chatLabel4;
+@property (weak, nonatomic) IBOutlet UITextField *messageField;
+@property (weak, nonatomic) IBOutlet UIView *audienceChatView;
+@property NSInteger labelCount;
 @end
 
 @implementation AudienceViewController
@@ -36,6 +39,7 @@
     self.chatLabel2.clipsToBounds = YES;
     self.chatLabel3.clipsToBounds = YES;
     self.chatLabel4.clipsToBounds = YES;
+    self.labelCount = 0;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     NSLog(@"selected scene id %@", self.sceneID);
     NSString *sceneURL = [NSString stringWithFormat:@"https://yesand.firebaseio.com/scenes/%@", self.sceneID];
@@ -59,7 +63,7 @@
     UITapGestureRecognizer *singleFingerTap =
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(handleSingleTap:)];
-    [self.tableView addGestureRecognizer:singleFingerTap];
+    [self.audienceChatView addGestureRecognizer:singleFingerTap];
 }
 
 //The event handling method
@@ -74,6 +78,25 @@
                                   };
     [self.scenesConvo updateChildValues:sceneLaughs];
     self.laughsLabel.text = self.laughs.stringValue;
+}
+- (IBAction)onSendButtonPressed:(id)sender {
+    NSArray *labels = @[self.chatLabel1, self.chatLabel2, self.chatLabel3, self.chatLabel4];
+    UILabel *label = labels[self.labelCount];
+    if (self.labelCount == 0) {
+        self.labelCount += 1;
+        NSLog(@"label count %li", self.labelCount);
+        label.text = self.messageField.text;
+    } else if (self.labelCount == 1) {
+        self.labelCount += 1;
+        NSLog(@"label count %li", self.labelCount);
+        label.text = self.messageField.text;
+    } else if (self.labelCount == 2) {
+        self.labelCount += 1;
+        label.text = self.messageField.text;
+    } else if (self.labelCount == 3) {
+        self.labelCount = 0;
+        label.text = self.messageField.text;
+    }
 }
 
 #pragma mark - TableView
