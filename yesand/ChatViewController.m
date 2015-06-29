@@ -47,7 +47,7 @@
 @property NSString *otherAuthuid;
 @property NSDictionary *topic;
 @property (weak, nonatomic) IBOutlet UIButton *sceneButton;
-@property UIImageView *typingImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *typingImageView;
 @end
 
 @implementation ChatViewController
@@ -61,6 +61,7 @@
     self.topicLabel.layer.cornerRadius = 5;
     self.topicLabel.clipsToBounds = YES;
     self.tabBarController.tabBar.hidden = YES;
+    self.typingImageView.hidden = YES;
 
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
 
@@ -270,6 +271,11 @@
                                                     };
                     [self.sceneConvo updateChildValues:sceneMessages];
                     [self.tableView reloadData];
+                    if ([snapshot.value[self.otherUserCharacter.text] isEqualToNumber:@1]) {
+                        self.typingImageView.hidden = NO;
+                    } else {
+                        self.typingImageView.hidden = YES;
+                    }
                 }
             } withCancelBlock:^(NSError *error) {
             }];
@@ -287,12 +293,9 @@
                     [self.cloudMessages addObjectsFromArray:self.otherUserMessages];
                     [self.tableView reloadData];
                     if ([snapshot.value[self.otherUserCharacter.text] isEqualToNumber:@1]) {
-                        [self addTypingIndicator];
-                        NSLog(@"___ ADD");
+                        self.typingImageView.hidden = NO;
                     } else {
-                        [self removeTypingIndicator];
-                        NSLog(@"--- OTHER %@", self.otherUserCharacter.text);
-                        NSLog(@"___ REMOVE");
+                        self.typingImageView.hidden = YES;
                     }
                 }
             } withCancelBlock:^(NSError *error) {
@@ -429,17 +432,6 @@
 }
 
 #pragma mark - Typing indicator test
-
--(void)addTypingIndicator {
-    CGRect frame = self.view.frame;
-    self.typingImageView = [[UIImageView alloc]initWithFrame:CGRectMake(20, frame.size.height - 95, 95, 40)];
-    self.typingImageView.image = [UIImage imageNamed:@"TypingIndicatorImage.png"];
-    [self.view addSubview:self.typingImageView];
-}
-
--(void)removeTypingIndicator {
-    [self.typingImageView removeFromSuperview];
-}
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField {
     NSDictionary *conversation = @{
