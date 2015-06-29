@@ -47,6 +47,7 @@
 @property NSString *otherAuthuid;
 @property NSDictionary *topic;
 @property (weak, nonatomic) IBOutlet UIButton *sceneButton;
+@property UIImageView *typingImageView;
 @end
 
 @implementation ChatViewController
@@ -247,6 +248,8 @@
                                    @"topicName": self.currentUserTopic,
                                    @"characterOne": self.currentUserCharacterOne,
                                    @"characterTwo": self.currentUserCharacterTwo,
+                                   self.currentUserCharacterOne: @0,
+                                   self.currentUserCharacterTwo: @0,
                                    @"isLive": @1,
                                    @"messages": @[@"test"]
                                    };
@@ -283,6 +286,14 @@
                     self.cloudMessages = [NSMutableArray new];
                     [self.cloudMessages addObjectsFromArray:self.otherUserMessages];
                     [self.tableView reloadData];
+                    if ([snapshot.value[self.otherUserCharacter.text] isEqualToNumber:@1]) {
+                        [self addTypingIndicator];
+                        NSLog(@"___ ADD");
+                    } else {
+                        [self removeTypingIndicator];
+                        NSLog(@"--- OTHER %@", self.otherUserCharacter.text);
+                        NSLog(@"___ REMOVE");
+                    }
                 }
             } withCancelBlock:^(NSError *error) {
             }];
@@ -415,6 +426,33 @@
     rotation.repeatCount = HUGE_VALF; // Repeat forever until remove animation
     [self.otherUserImageView.layer removeAllAnimations];
     [self.otherUserImageView.layer addAnimation:rotation forKey:@"Spin"];
+}
+
+#pragma mark - Typing indicator test
+
+-(void)addTypingIndicator {
+    CGRect frame = self.view.frame;
+    self.typingImageView = [[UIImageView alloc]initWithFrame:CGRectMake(20, frame.size.height - 95, 95, 40)];
+    self.typingImageView.image = [UIImage imageNamed:@"TypingIndicatorImage.png"];
+    [self.view addSubview:self.typingImageView];
+}
+
+-(void)removeTypingIndicator {
+    [self.typingImageView removeFromSuperview];
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField {
+    NSDictionary *conversation = @{
+                                   self.currentUserCharacter.text: @1
+                                   };
+    [self.convoRef updateChildValues:conversation];
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField {
+    NSDictionary *conversation = @{
+                                   self.currentUserCharacter.text: @0
+                                   };
+    [self.convoRef updateChildValues:conversation];
 }
 
 //  To remove animation
