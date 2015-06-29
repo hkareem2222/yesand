@@ -385,17 +385,19 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MessageID"];
-//    cell.textLabel.font = [UIFont systemFontOfSize:12];
-    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    cell.textLabel.numberOfLines = 0;
-    cell.textLabel.text = self.cloudMessages[indexPath.row];
-    if ([cell.textLabel.text hasPrefix:[NSString stringWithFormat:@"%@", self.currentUserCharacter.text]]) {
-        cell.backgroundColor = [UIColor colorWithRed:255/255.0 green:215/255.0 blue:215/255.0 alpha:1.0];
+    if ([self.cloudMessages[indexPath.row] hasPrefix:[NSString stringWithFormat:@"%@", self.currentUserCharacter.text]]) {
+        SendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SendMessageID"];
+        [cell.sendMessageImageButton setTitle:self.cloudMessages[indexPath.row] forState:UIControlStateDisabled];
+        cell.sendMessageImageButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping | NSLineBreakByTruncatingTail;
+        cell.sendMessageImageButton.titleLabel.numberOfLines = 0;
+        return cell;
     } else {
-        cell.backgroundColor = [UIColor whiteColor];
+        ReceiveTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ReceiveMessageID"];
+        [cell.receiveMessageImageButton setTitle:self.cloudMessages[indexPath.row] forState:UIControlStateDisabled];
+        cell.receiveMessageImageButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping | NSLineBreakByTruncatingTail;
+        cell.receiveMessageImageButton.titleLabel.numberOfLines = 0;
+        return cell;
     }
-    return cell;
 }
 
 #pragma mark - Disappearing

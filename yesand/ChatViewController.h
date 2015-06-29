@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <Firebase/Firebase.h>
+#import "ReceiveTableViewCell.h"
+#import "SendTableViewCell.h"
 
 @interface ChatViewController : UIViewController
 @property NSString *currentUsername;
