@@ -59,6 +59,7 @@
     self.sceneButton.layer.cornerRadius = 5;
     self.topicLabel.layer.cornerRadius = 5;
     self.topicLabel.clipsToBounds = YES;
+    self.tabBarController.tabBar.hidden = YES;
 
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
 
