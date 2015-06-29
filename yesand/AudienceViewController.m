@@ -40,6 +40,10 @@
     self.chatLabel3.clipsToBounds = YES;
     self.chatLabel4.clipsToBounds = YES;
     self.labelCount = 0;
+    self.chatLabel1.alpha = 0.0;
+    self.chatLabel2.alpha = 0.0;
+    self.chatLabel3.alpha = 0.0;
+    self.chatLabel4.alpha = 0.0;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     NSLog(@"selected scene id %@", self.sceneID);
     NSString *sceneURL = [NSString stringWithFormat:@"https://yesand.firebaseio.com/scenes/%@", self.sceneID];
@@ -81,24 +85,28 @@
 }
 - (IBAction)onSendButtonPressed:(id)sender {
     NSArray *labels = @[self.chatLabel1, self.chatLabel2, self.chatLabel3, self.chatLabel4];
-    UILabel *label = labels[self.labelCount];
+    UILabel *label;
+    if (self.labelCount < labels.count) {
+        label = labels[self.labelCount];
+    }
     if (self.labelCount == 0) {
         self.labelCount += 1;
-        NSLog(@"label count %li", self.labelCount);
         label.text = self.messageField.text;
+        label.alpha = 1.0;
     } else if (self.labelCount == 1) {
         self.labelCount += 1;
-        NSLog(@"label count %li", self.labelCount);
         label.text = self.messageField.text;
+        label.alpha = 1.0;
     } else if (self.labelCount == 2) {
         self.labelCount += 1;
         label.text = self.messageField.text;
+        label.alpha = 1.0;
     } else if (self.labelCount == 3) {
         self.labelCount = 0;
         label.text = self.messageField.text;
+        label.alpha = 1.0;
     }
 }
-
 #pragma mark - TableView
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
