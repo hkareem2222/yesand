@@ -7,6 +7,7 @@
 //
 
 #import "ProfileViewController.h"
+#import "ProfileTableViewCell.h"
 
 @interface ProfileViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *profileHeadingLabel;
@@ -17,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property NSMutableArray *scenes;
 @property Firebase *ref;
 @end
 
@@ -48,16 +50,40 @@
      self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
 
      self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
+
+    Firebase *scenesConvo = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/scenes"];
+    [scenesConvo observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        if (![snapshot.value isEqual:[NSNull null]]) {
+            self.scenes = [NSMutableArray new];;
+            for (FDataSnapshot *scene in snapshot.children) {
+                if ([scene.value[@"userOne"] isEqualToString:self.ref.authData.uid] || [scene.value[@"userTwo"] isEqualToString:self.ref.authData.uid]) {
+                    NSDictionary *sceneDic = @{
+                                               @"sceneID": scene.key,
+                                               @"topicName": scene.value[@"topicName"]
+                                               };
+                    [self.scenes addObject:sceneDic];
+                }
+            }
+            [self.tableView reloadData];
+        }
+    } withCancelBlock:^(NSError *error) {
+        NSLog(@"%@", error.description);
+    }];
 }
 
 #pragma mark - Table View
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return self.scenes.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
+    ProfileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
+    NSDictionary *sceneDic = self.scenes[indexPath.row];
+//    cell.sceneID = [sceneDic objectForKey:@"sceneID"];
+    cell.textLabel.text = [sceneDic objectForKey:@"topicName"];
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    cell.textLabel.numberOfLines = 0;
     return cell;
 }
 
