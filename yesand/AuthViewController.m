@@ -74,16 +74,6 @@
         }
     }];
 
-//    TWTRLogInButton *twitterButton = [TWTRLogInButton buttonWithLogInCompletion:^(TWTRSession* session, NSError* error) {
-//        if (session) {
-//            NSLog(@"signed in as %@", [session userName]);
-//        } else {
-//            NSLog(@"error: %@", [error localizedDescription]);
-//        }
-//    }];
-//    twiterButton.center = self.view.center;
-//    [self.view addSubview:twitterButton];
-
 }
 
 #pragma Twitter Authentication Methods
