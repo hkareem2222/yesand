@@ -7,6 +7,8 @@
 //
 
 #import "AudienceViewController.h"
+#import "AudienceReceiveTableViewCell.h"
+#import "AudienceSendTableViewCell.h"
 #import <Firebase/Firebase.h>
 
 @interface AudienceViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -74,6 +76,9 @@
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardWillShowNotification object:nil];
 
+    self.tableView.separatorColor = [UIColor clearColor];
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
 }
 
 #pragma mark - Keyboard Animation
@@ -134,14 +139,32 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MessageID"];
-//    cell.textLabel.font = [UIFont systemFontOfSize:12];
-    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    cell.textLabel.numberOfLines = 0;
-    if (indexPath.row  % 2 == 0) {
-        cell.backgroundColor = [UIColor colorWithRed:255/255.0 green:215/255.0 blue:215/255.0 alpha:1.0];
+    if ([self.messages[indexPath.row] hasPrefix:self.characterOneLabel.text]) {
+        AudienceReceiveTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ReceiveMessageID"];
+        cell.receiveMessageLabel.text = self.messages[indexPath.row];
+        return cell;
+    } else {
+        AudienceSendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SendMessageID"];
+        cell.sendMessageLabel.text = self.messages[indexPath.row];
+        return cell;
     }
-    cell.textLabel.text = self.messages[indexPath.row];
-    return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *msg = self.messages[indexPath.row];
+    CGSize sizeOfString = [self testSizeOfString:msg];
+    return sizeOfString.height + 20;
+}
+
+-(CGSize)testSizeOfString:(NSString *)labelText {
+    UILabel *gettingSizeLabel = [[UILabel alloc] init];
+    gettingSizeLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:14];
+    gettingSizeLabel.text = labelText;
+    gettingSizeLabel.numberOfLines = 0;
+    gettingSizeLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    CGSize maximumLabelSize = CGSizeMake(190, 9999);
+
+    CGSize expectSize = [gettingSizeLabel sizeThatFits:maximumLabelSize];
+    return expectSize;
 }
 @end
