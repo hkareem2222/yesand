@@ -9,8 +9,8 @@
 #import "AuthViewController.h"
 #import "TwitterAuthHelper.h"
 #import <QuartzCore/QuartzCore.h>
-//#import <Fabric/Fabric.h>
-//#import <TwitterKit/TwitterKit.h>
+#import <Accounts/Accounts.h>
+#import <Social/Social.h>
 
 @interface AuthViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
