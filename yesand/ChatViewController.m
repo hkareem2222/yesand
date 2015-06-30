@@ -252,8 +252,8 @@
                                    @"topicName": self.currentUserTopic,
                                    @"characterOne": self.currentUserCharacterOne,
                                    @"characterTwo": self.currentUserCharacterTwo,
-                                   self.currentUserCharacterOne: @0,
-                                   self.currentUserCharacterTwo: @0,
+                                   @"userOne": self.ref.authData.uid,
+                                   @"userTwo": self.otherAuthuid,
                                    @"isLive": @1,
                                    @"messages": @[@"test"]
                                    };
