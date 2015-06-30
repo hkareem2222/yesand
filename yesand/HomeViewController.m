@@ -121,6 +121,7 @@
 //         }];
 //}
 
+
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     // Remove seperator inset
     if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {

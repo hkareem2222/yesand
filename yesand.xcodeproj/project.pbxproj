@@ -41,6 +41,7 @@
 		F99E11F11B3DACFD00A75738 /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F99E11F01B3DACFD00A75738 /* HomeTableViewCell.m */; };
 		F9A55C5F1B42F3F500E47D1A /* AudienceReceiveTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A55C5E1B42F3F500E47D1A /* AudienceReceiveTableViewCell.m */; };
 		F9A55C621B42F40600E47D1A /* AudienceSendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A55C611B42F40600E47D1A /* AudienceSendTableViewCell.m */; };
+		F9A55C651B434D1700E47D1A /* ProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A55C641B434D1700E47D1A /* ProfileTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +109,8 @@
 		F9A55C5E1B42F3F500E47D1A /* AudienceReceiveTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudienceReceiveTableViewCell.m; sourceTree = "<group>"; };
 		F9A55C601B42F40600E47D1A /* AudienceSendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudienceSendTableViewCell.h; sourceTree = "<group>"; };
 		F9A55C611B42F40600E47D1A /* AudienceSendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudienceSendTableViewCell.m; sourceTree = "<group>"; };
+		F9A55C631B434D1700E47D1A /* ProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileTableViewCell.h; sourceTree = "<group>"; };
+		F9A55C641B434D1700E47D1A /* ProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -262,6 +265,8 @@
 				F9A55C611B42F40600E47D1A /* AudienceSendTableViewCell.m */,
 				F99E11EF1B3DACFD00A75738 /* HomeTableViewCell.h */,
 				F99E11F01B3DACFD00A75738 /* HomeTableViewCell.m */,
+				F9A55C631B434D1700E47D1A /* ProfileTableViewCell.h */,
+				F9A55C641B434D1700E47D1A /* ProfileTableViewCell.m */,
 				BF372B8F1B3CD59F00D7AE0C /* TabBar.h */,
 				BF372B901B3CD59F00D7AE0C /* TabBar.m */,
 				BF372B441B3B1DEA00D7AE0C /* RateView.h */,
@@ -399,6 +404,7 @@
 				F96300F71B41E3B3009F459B /* ReceiveTableViewCell.m in Sources */,
 				BF4F908C1B39FA7900A93680 /* RatingViewController.m in Sources */,
 				F99E11F11B3DACFD00A75738 /* HomeTableViewCell.m in Sources */,
+				F9A55C651B434D1700E47D1A /* ProfileTableViewCell.m in Sources */,
 				BF372B461B3B1DEA00D7AE0C /* RateView.m in Sources */,
 				F96300FA1B41E3C1009F459B /* SendTableViewCell.m in Sources */,
 				BF4F90891B39F0D600A93680 /* AudienceViewController.m in Sources */,
