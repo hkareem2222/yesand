@@ -8,16 +8,14 @@
 
 #import "ProfileViewController.h"
 
-@interface ProfileViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *starsCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *upVotesCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *followersCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *followingCountLabel;
+@interface ProfileViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *profileHeadingLabel;
 @property (weak, nonatomic) IBOutlet UILabel *profileSubheadingLabel;
 @property (weak, nonatomic) IBOutlet UILabel *profileLinkLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
 
 @implementation ProfileViewController
@@ -45,6 +43,19 @@
         self.locationLabel.text = snapshot.value[@"location"];
     }];
 }
+
+#pragma mark - Table View
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 0;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
+    return cell;
+}
+
+#pragma mark - Actions
 
 - (IBAction)onEditProfilePressed:(UIBarButtonItem *)sender {
     [self performSegueWithIdentifier:@"ProfileToEdit" sender:sender];
