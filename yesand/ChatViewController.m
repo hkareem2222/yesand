@@ -84,6 +84,9 @@
     self.cloudMessages = [NSMutableArray new];
 
     //---------------------------------endsHere
+
+    self.tableView.separatorColor = [UIColor clearColor];
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
 //----------------------------------------splashscreenstuff
@@ -387,17 +390,31 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.cloudMessages[indexPath.row] hasPrefix:[NSString stringWithFormat:@"%@", self.currentUserCharacter.text]]) {
         SendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SendMessageID"];
-        [cell.sendMessageImageButton setTitle:self.cloudMessages[indexPath.row] forState:UIControlStateDisabled];
-        cell.sendMessageImageButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping | NSLineBreakByTruncatingTail;
-        cell.sendMessageImageButton.titleLabel.numberOfLines = 0;
+        cell.sendMessageLabel.text = self.cloudMessages[indexPath.row];
         return cell;
     } else {
         ReceiveTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ReceiveMessageID"];
-        [cell.receiveMessageImageButton setTitle:self.cloudMessages[indexPath.row] forState:UIControlStateDisabled];
-        cell.receiveMessageImageButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping | NSLineBreakByTruncatingTail;
-        cell.receiveMessageImageButton.titleLabel.numberOfLines = 0;
+        cell.receiveMessageLabel.text = self.cloudMessages[indexPath.row];
         return cell;
     }
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *msg = self.cloudMessages[indexPath.row];
+    CGSize sizeOfString = [self testSizeOfString:msg];
+    return sizeOfString.height + 20;
+}
+
+-(CGSize)testSizeOfString:(NSString *)labelText {
+    UILabel *gettingSizeLabel = [[UILabel alloc] init];
+    gettingSizeLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:14];
+    gettingSizeLabel.text = labelText;
+    gettingSizeLabel.numberOfLines = 0;
+    gettingSizeLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    CGSize maximumLabelSize = CGSizeMake(190, 9999);
+
+    CGSize expectSize = [gettingSizeLabel sizeThatFits:maximumLabelSize];
+    return expectSize;
 }
 
 #pragma mark - Disappearing

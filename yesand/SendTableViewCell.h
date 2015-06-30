@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface SendTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIButton *sendMessageImageButton;
+@property (weak, nonatomic) IBOutlet UILabel *sendMessageLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *sendMessageImageView;
 
 @end
