@@ -10,4 +10,5 @@
 
 @interface HomeTableViewCell : UITableViewCell
 @property NSString *sceneID;
+@property (weak, nonatomic) IBOutlet UILabel *laughLabel;
 @end

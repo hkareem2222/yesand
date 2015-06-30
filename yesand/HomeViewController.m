@@ -64,11 +64,18 @@
     [scenesConvo observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         if (![snapshot.value isEqual:[NSNull null]]) {
             self.scenes = [NSMutableArray new];;
+            NSMutableArray *laughCount = [NSMutableArray new];
             for (FDataSnapshot *scene in snapshot.children) {
+                if (scene.value[@"laughs"] == nil) {
+                    [laughCount addObject:@0];
+                } else {
+                    [laughCount addObject:scene.value[@"laughs"]];
+                }
                 if ([scene.value[@"isLive"] isEqualToNumber:@1]) {
                     NSDictionary *sceneDic = @{
                                                @"sceneID": scene.key,
-                                               @"topicName": scene.value[@"topicName"]
+                                               @"topicName": scene.value[@"topicName"],
+//                                               @"laughs":
                                                };
                     [self.scenes addObject:sceneDic];
                 }
@@ -150,9 +157,10 @@
         cell.sceneID = [sceneDic objectForKey:@"sceneID"];
         cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
         cell.textLabel.numberOfLines = 0;
-        UILabel *topicLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 13.0, 220.0, 20.0)];
-        [cell.contentView addSubview:topicLabel];
-         topicLabel.text = [sceneDic objectForKey:@"topicName"];
+        cell.textLabel.text = [sceneDic objectForKey:@"topicName"];
+        NSNumber *laughNumber = [sceneDic objectForKey:@"laughs"];
+        NSLog(@"%@", laughNumber);
+        cell.laughLabel.text =  [laughNumber stringValue];
         cell.backgroundColor = [UIColor colorWithRed:236/255.0 green:240/255.0 blue:241/255.0 alpha:1.0];
         tableView.separatorColor = [UIColor colorWithRed:52/255.0 green:73/255.0 blue:94/255.0 alpha:1.0];
         UILabel *colorLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 5.0, 44.0)];
