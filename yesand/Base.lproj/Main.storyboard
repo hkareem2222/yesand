@@ -739,35 +739,7 @@
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vlM-zG-c07" id="wKg-oL-ROT">
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JJo-nc-ICg">
-                                                    <rect key="frame" x="517" y="13" width="75" height="17.5"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="75" id="cgk-zO-hd9"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Smile-512" translatesAutoresizingMaskIntoConstraints="NO" id="xL5-jm-seH">
-                                                    <rect key="frame" x="469" y="8" width="40" height="27.5"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="40" id="1xv-oc-IYj"/>
-                                                    </constraints>
-                                                </imageView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="xL5-jm-seH" firstAttribute="top" secondItem="wKg-oL-ROT" secondAttribute="topMargin" id="0So-cn-1Ap"/>
-                                                <constraint firstItem="JJo-nc-ICg" firstAttribute="leading" secondItem="xL5-jm-seH" secondAttribute="trailing" constant="8" id="6KK-ME-HyM"/>
-                                                <constraint firstItem="JJo-nc-ICg" firstAttribute="top" secondItem="wKg-oL-ROT" secondAttribute="topMargin" constant="5" id="FPR-d9-COv"/>
-                                                <constraint firstItem="JJo-nc-ICg" firstAttribute="trailing" secondItem="wKg-oL-ROT" secondAttribute="trailingMargin" id="K3f-2M-sg8"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="JJo-nc-ICg" secondAttribute="bottom" constant="5" id="XbW-BA-8O0"/>
-                                                <constraint firstItem="xL5-jm-seH" firstAttribute="bottom" secondItem="wKg-oL-ROT" secondAttribute="bottomMargin" id="qYV-j9-aJV"/>
-                                            </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="laughLabel" destination="JJo-nc-ICg" id="WjY-bB-4m7"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
