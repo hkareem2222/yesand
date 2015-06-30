@@ -9,8 +9,8 @@
 #import "AuthViewController.h"
 #import "TwitterAuthHelper.h"
 #import <QuartzCore/QuartzCore.h>
-//#import <Fabric/Fabric.h>
-//#import <TwitterKit/TwitterKit.h>
+#import <Accounts/Accounts.h>
+#import <Social/Social.h>
 
 @interface AuthViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
@@ -76,16 +76,6 @@
             }];
         }
     }];
-
-//    TWTRLogInButton *twitterButton = [TWTRLogInButton buttonWithLogInCompletion:^(TWTRSession* session, NSError* error) {
-//        if (session) {
-//            NSLog(@"signed in as %@", [session userName]);
-//        } else {
-//            NSLog(@"error: %@", [error localizedDescription]);
-//        }
-//    }];
-//    twiterButton.center = self.view.center;
-//    [self.view addSubview:twitterButton];
 
 }
 
