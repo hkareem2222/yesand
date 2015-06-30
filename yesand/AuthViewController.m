@@ -36,10 +36,13 @@
 
     self.logInButton.layer.cornerRadius = 10;
     [self.myRootRef observeAuthEventWithBlock:^(FAuthData *authData) {
-        if (authData) {
+        if ([authData.provider isEqualToString:@"anonymous"]) {
+            NSLog(@"anonymous user");
+        } else if (authData) {
             [self performSegueWithIdentifier:@"AuthToHome" sender:self];
             NSLog(@"%@", authData);
-        } else {
+        }
+        else {
             NSLog(@"no user logged in");
         }
     }];
@@ -86,6 +89,42 @@
 
 }
 
+- (IBAction)onGuestButtonPressed:(id)sender {
+    [self.myRootRef observeAuthEventWithBlock:^(FAuthData *authData) {
+        if (authData) {
+            NSLog(@"%@", authData);
+            [self performSegueWithIdentifier:@"AuthToHome" sender:sender];
+        } else {
+            NSLog(@"no user logged in (logging in anonymously");
+            [self.myRootRef authAnonymouslyWithCompletionBlock:^(NSError *error, FAuthData *authData) {
+                if (error) {
+                    NSLog(@"error logging in anonymously: %@", [error localizedDescription]);
+                } else {
+                    NSLog(@"anonymous login successful authData: %@", authData);
+                    NSDictionary *newUser = @{
+                                              @"provider": authData.provider,
+                                              @"isAvailable": @0,
+                                              @"updateAt": kFirebaseServerValueTimestamp,
+                                              @"character one": @"test",
+                                              @"character two": @"test",
+                                              @"topic name": @"test",
+                                              @"authuid": authData.uid,
+                                              @"username": authData.uid,
+                                              @"name": @" ",
+                                              @"tagline": @" ",
+                                              @"location": @" ",
+                                              @"website": @" ",
+                                              @"rating": @[@3,@3],
+                                              @"rating avg": @"3"
+                                              };
+                    [[[self.myRootRef childByAppendingPath:@"users"]
+                      childByAppendingPath:authData.uid] setValue:newUser];
+                    [self performSegueWithIdentifier:@"AuthToHome" sender:sender];
+                }
+            }];
+        }
+    }];
+}
 #pragma Twitter Authentication Methods
 
 - (void) authenticateWithTwitter {
@@ -229,7 +268,6 @@ withCompletionBlock:^(NSError *error, FAuthData *authData) {
                                   @"rating": @[@3,@3],
                                   @"rating avg": @"3"
                                   };
-
         [[[self.myRootRef childByAppendingPath:@"users"]
           childByAppendingPath:authData.uid] setValue:newUser];
     }
@@ -237,5 +275,9 @@ withCompletionBlock:^(NSError *error, FAuthData *authData) {
 }
 
 -(IBAction)unwindToAuth:(UIStoryboardSegue *)segue {
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+
 }
 @end

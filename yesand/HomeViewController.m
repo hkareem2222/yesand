@@ -29,6 +29,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.ref = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
+    
     //-------map stuff
     NSLog(@"---- VIEW DID LOAD");
     self.locationManager = [[CLLocationManager alloc] init];
@@ -88,6 +90,36 @@
         NSLog(@"%@", error.description);
     }];
 }
+
+//-(void)savingUserData {
+//    [self.ref authUser:self.ref.authData.uid password:@"password"
+//         withCompletionBlock:^(NSError *error, FAuthData *authData) {
+//             if (error) {
+//                 NSLog(@"error saving: %@", [error localizedDescription]);
+//             } else {
+//                 NSLog(@"%@", authData.uid);
+//                 NSDictionary *newUser = @{
+//                                           @"provider": authData.provider,
+//                                           @"isAvailable": @0,
+//                                           @"updateAt": kFirebaseServerValueTimestamp,
+//                                           @"character one": @"test",
+//                                           @"character two": @"test",
+//                                           @"topic name": @"test",
+//                                           @"authuid": authData.uid,
+//                                           @"username": authData.uid,
+//                                           @"name": @" ",
+//                                           @"tagline": @" ",
+//                                           @"location": @" ",
+//                                           @"website": @" ",
+//                                           @"rating": @[@3,@3],
+//                                           @"rating avg": @"3"
+//                                           };
+//                 
+//                 [[[self.ref childByAppendingPath:@"users"]
+//                   childByAppendingPath:authData.uid] setValue:newUser];
+//             }
+//         }];
+//}
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     // Remove seperator inset
@@ -191,5 +223,9 @@
         AudienceViewController *audienceVC = segue.destinationViewController;
         audienceVC.sceneID = self.selectedScene;
     }
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [self.ref removeAllObservers];
 }
 @end
