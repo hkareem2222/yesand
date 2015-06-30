@@ -132,6 +132,7 @@
         label.alpha = 1.0;
     }
 }
+
 #pragma mark - TableView
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
