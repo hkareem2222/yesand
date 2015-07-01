@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *returnToHomeButton;
 @property (weak, nonatomic) IBOutlet UIButton *sceneNewButton;
 @property (weak, nonatomic) IBOutlet UILabel *feedbackLabel;
+@property (weak, nonatomic) IBOutlet UILabel *rateOtherUserLabel;
 @property NSArray *ratings;
 @property NSMutableArray *otherUserRatings;
 @end
@@ -29,6 +30,7 @@
     self.returnToHomeButton.enabled = NO;
     self.feedbackLabel.hidden = YES;
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
+    [self.rateOtherUserLabel setFont:[UIFont fontWithName: @"AppleGothic" size: 30.0]];
 
     self.returnToHomeButton.layer.cornerRadius = 5;
     self.sceneNewButton.layer.cornerRadius = 5;

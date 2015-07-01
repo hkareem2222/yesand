@@ -10,7 +10,7 @@
 #import "RatingViewController.h"
 #import "HomeViewController.h"
 
-@interface ChatViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
+@interface ChatViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *userSetupview;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *messageTextField;
@@ -46,6 +46,8 @@
 @property BOOL isSplashHidden;
 @property NSString *otherAuthuid;
 @property NSDictionary *topic;
+@property NSTimer *timer;
+@property int countdown;
 @property (weak, nonatomic) IBOutlet UIImageView *typingImageView;
 @property (weak, nonatomic) IBOutlet UILabel *countdownLabel;
 @end
@@ -54,25 +56,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"LOAD");
-    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
     self.userSetupview.layer.cornerRadius = 5;
+    self.countdownLabel.layer.cornerRadius = 5;
     self.topicLabel.layer.cornerRadius = 5;
     self.topicLabel.clipsToBounds = YES;
+    self.countdownLabel.clipsToBounds = YES;
     self.tabBarController.tabBar.hidden = YES;
     self.typingImageView.hidden = YES;
 
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
-
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
-
-    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
-
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
-
-    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
-
-    //--------------------------ends here
+    NSDictionary *attrDict = @{
+                               NSFontAttributeName : [UIFont fontWithName:@"AppleGothic" size:21.0],
+                               NSForegroundColorAttributeName : [UIColor whiteColor]
+                               };
+    self.navigationController.navigationBar.titleTextAttributes = attrDict;
 
     //--------------------------------chat view stuff
 
@@ -99,6 +97,7 @@
     self.cancelBarButton.enabled = YES;
     self.cancelBarButton.title = @"Cancel";
     self.endSceneBarButton.title = @"";
+    self.countdown = 10;
     [self retrieveNewTopic];
 }
 // Step 1
@@ -187,17 +186,25 @@
             self.otherUserImageView.image = [UIImage imageNamed:@"profilepic2.png"];
             if (!self.ifCalled) {
                 [self performSelector:@selector(splashViewDisappear) withObject:nil afterDelay:10.0];
+                self.timer = [NSTimer scheduledTimerWithTimeInterval:1
+                                                         target:self
+                                                       selector:@selector(countDown)
+                                                       userInfo:nil
+                                                        repeats:YES];
                 self.ifCalled = YES;
             }
         } else {
             self.otherUserLabel.text = @"Finding";
             self.currentUserCharacter.text = @"Character";
             self.otherUserCharacter.text = @"Character";
-            self.topicLabel.text = @"Topic:";
+            self.topicLabel.text = @"Prompt will show when next performer arrives...";
             self.ifCalled = NO;
             self.otherUserImageView.image = [UIImage imageNamed:@"MaskIndicator.png"];
             [self rotateSecondImageView];
             [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(splashViewDisappear) object:nil];
+            [self.timer invalidate];
+            self.countdownLabel.text = @"Your scene will start shortly...";
+            self.countdown = 10;
         }
     } else {
         self.otherUser = self.availableUsers[self.indexOfCurrentUser - 1];
@@ -210,11 +217,24 @@
         self.isEven = NO;
         if (!self.ifCalled) {
             [self performSelector:@selector(splashViewDisappear) withObject:nil afterDelay:10.0];
+            self.timer = [NSTimer scheduledTimerWithTimeInterval:1
+                                                          target:self
+                                                        selector:@selector(countDown)
+                                                        userInfo:nil
+                                                         repeats:YES];
             self.ifCalled = YES;
         }
         [self.otherUserImageView.layer removeAllAnimations];
         self.otherUserImageView.image = [UIImage imageNamed:@"profilepic2.png"];
     }
+}
+
+-(void)countDown {
+    if (self.countdown == 0) {
+        [self.timer invalidate];
+    }
+    self.countdown--;
+    self.countdownLabel.text = [NSString stringWithFormat:@"Scene starts in %i", self.countdown];
 }
 
 -(void)splashViewDisappear {
@@ -273,6 +293,10 @@
                                                     };
                     [self.sceneConvo updateChildValues:sceneMessages];
                     [self.tableView reloadData];
+                    if (self.cloudMessages.count > 5) {
+                        NSIndexPath* ipath = [NSIndexPath indexPathForRow: self.cloudMessages.count-1 inSection: 0];
+                        [self.tableView scrollToRowAtIndexPath: ipath atScrollPosition: UITableViewScrollPositionBottom animated: YES];
+                    }
                     if ([snapshot.value[self.otherUserCharacter.text] isEqualToNumber:@1]) {
                         self.typingImageView.hidden = NO;
                     } else {
@@ -294,6 +318,10 @@
                     self.cloudMessages = [NSMutableArray new];
                     [self.cloudMessages addObjectsFromArray:self.otherUserMessages];
                     [self.tableView reloadData];
+                    if (self.cloudMessages.count > 5) {
+                        NSIndexPath* ipath = [NSIndexPath indexPathForRow: self.cloudMessages.count-1 inSection: 0];
+                        [self.tableView scrollToRowAtIndexPath: ipath atScrollPosition: UITableViewScrollPositionBottom animated: YES];
+                    }
                     if ([snapshot.value[self.otherUserCharacter.text] isEqualToNumber:@1]) {
                         self.typingImageView.hidden = NO;
                     } else {
@@ -341,7 +369,7 @@
 
 }
 
-#pragma mark - Scroll View Animation
+#pragma mark - Keyboard Animation
 
 -(void)keyboardOnScreen:(NSNotification *)notification
 {
@@ -352,6 +380,13 @@
     CGRect keyboardFrame = [self.view convertRect:rawFrame fromView:nil];
 
     self.textFieldBottomLayout.constant = keyboardFrame.size.height; //- 50;
+}
+
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self.messageTextField resignFirstResponder];
+    self.textFieldBottomLayout.constant = 0;
 }
 
 #pragma mark - Segues
@@ -449,7 +484,7 @@
     [self.otherUserImageView.layer addAnimation:rotation forKey:@"Spin"];
 }
 
-#pragma mark - Typing indicator test
+#pragma mark - Typing indicator
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField {
     NSDictionary *conversation = @{

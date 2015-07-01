@@ -17,7 +17,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *profileLinkLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property NSMutableArray *scenes;
 @property Firebase *ref;
@@ -28,11 +27,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    //----Set nav bar title text attributes
+    NSDictionary *attrDict = @{
+                               NSFontAttributeName : [UIFont fontWithName:@"AppleGothic" size:21.0],
+                               NSForegroundColorAttributeName : [UIColor whiteColor]
+                               };
+    self.navigationController.navigationBar.titleTextAttributes = attrDict;
+
     self.ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com"];
     if ([self.ref.authData.provider isEqualToString:@"anonymous"]) {
         self.editProfileBarButton.title = @"Sign up!";
     } else {
-        self.editProfileBarButton.title = @"Edit Profile";
+        self.editProfileBarButton.title = @"Settings";
     }
     NSString *currentUserString = [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@", self.ref.authData.uid];
     Firebase *currentUserRef = [[Firebase alloc] initWithUrl:currentUserString];
@@ -47,8 +54,6 @@
             self.locationLabel.text = snapshot.value[@"location"];
         }
     }];
-    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
-
      self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
 
      self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
@@ -94,8 +99,17 @@
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     cell.textLabel.numberOfLines = 0;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",[sceneDic objectForKey:@"laughs"]];
-    UIFont *myFont = [ UIFont fontWithName: @"AppleGothic" size: 17.0 ];
+    UIFont *myFont = [UIFont fontWithName:@"AppleGothic" size:15.0];
     cell.textLabel.font  = myFont;
+
+    UIImage     * thumbs;
+    UIImageView * thumbsView;
+    CGFloat       width;
+    thumbs = [UIImage imageNamed:@"laughsicon"];
+    thumbsView = [[UIImageView alloc] initWithImage:thumbs];
+    width = (cell.frame.size.height * thumbs.size.width) / thumbs.size.height;
+    thumbsView.frame   = CGRectMake(0, 0, width - 25, cell.frame.size.height - 25);
+    cell.accessoryView = thumbsView;
     return cell;
 }
 
@@ -118,15 +132,10 @@
 
 #pragma mark - Actions
 
-- (IBAction)onEditProfilePressed:(UIBarButtonItem *)sender {
-    if ([sender.title isEqualToString:@"Edit Profile"]) {
+- (IBAction)onSettingsPressed:(UIBarButtonItem *)sender {
+    if ([sender.title isEqualToString:@"Settings"]) {
         [self performSegueWithIdentifier:@"ProfileToEdit" sender:sender];
     }
-}
-
-- (IBAction)onLogoutButtonPressed:(UIBarButtonItem *)sender {
-    [self.ref unauth];
-    [self performSegueWithIdentifier:@"UnwindToAuth" sender:sender];
 }
 
 -(IBAction)unwindToProfile:(UIStoryboardSegue *)segue {

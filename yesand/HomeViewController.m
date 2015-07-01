@@ -9,6 +9,7 @@
 #import "HomeViewController.h"
 #import "AudienceViewController.h"
 #import "HomeTableViewCell.h"
+#import "SavedSceneViewController.h"
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 
@@ -32,16 +33,17 @@
     [super viewDidLoad];
 
     //---setting fonts for labels throughout app, as well as other items on home
-    UIFont *newFont = [UIFont fontWithName:@"AppleGothic" size:14];
-    [[UILabel appearance] setFont:newFont];
-    UIFont *segmentedFont = [ UIFont fontWithName: @"AppleGothic" size: 12.0 ];
+//    UIFont *newFont = [UIFont fontWithName:@"AppleGothic" size:14];
+//    [[UILabel appearance] setFont:newFont];
+
+    UIFont *segmentedFont = [UIFont fontWithName: @"AppleGothic" size: 12.0];
     NSDictionary *attributes = [NSDictionary dictionaryWithObject:segmentedFont
                                                            forKey:NSFontAttributeName];
     [self.segmentedControl setTitleTextAttributes:attributes
                                     forState:UIControlStateNormal];
 
     self.ref = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
-    self.title = @"Yes And";
+    self.navigationItem.title = @"Yes, And";
     //-------map stuff
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
@@ -74,10 +76,24 @@
     self.tabBarController.tabBar.tintColor = [UIColor whiteColor];
 
     //-----Navbar title attributes
-    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
-    
-    UIFont *titleFont = [UIFont fontWithName: @"AppleGothic" size: 21.0 ];
-    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:titleFont forKey:NSFontAttributeName];
+//    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
+//    
+//    UIFont *titleFont = [UIFont fontWithName: @"AppleGothic" size: 21.0 ];
+//    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:titleFont forKey:NSFontAttributeName];
+//
+//    NSDictionary *textAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+//                                    [UIColor whiteColor],NSForegroundColorAttributeName,
+//                                    [UIColor whiteColor],NSBackgroundColorAttributeName,nil];
+//    self.navigationController.navigationBar.titleTextAttributes = textAttributes;
+
+    NSDictionary *attrDict = @{
+                               NSFontAttributeName : [UIFont fontWithName:@"AppleGothic" size:21.0],
+                               NSForegroundColorAttributeName : [UIColor whiteColor]
+                               };
+    self.navigationController.navigationBar.titleTextAttributes = attrDict;
+
+//    UIImage *image = [UIImage imageNamed:@"logo-transparent.png"];
+//    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:image];
 
     //listening for Scenes
     Firebase *scenesConvo = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/scenes"];
@@ -195,6 +211,12 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    UIFont *myFont = [UIFont fontWithName: @"AppleGothic" size: 15.0];
+    UIImage     * thumbs;
+    UIImageView * thumbsView;
+    CGFloat       width;
+    thumbs = [UIImage imageNamed:@"laughsicon"];
+    thumbsView = [[UIImageView alloc] initWithImage:thumbs];
     if (self.segmentedControl.selectedSegmentIndex == 0) {
         HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
         NSDictionary *sceneDic = self.liveScenes[indexPath.row];
@@ -203,8 +225,11 @@
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.text = [sceneDic objectForKey:@"topicName"];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",[sceneDic objectForKey:@"laughs"]];
-        UIFont *myFont = [ UIFont fontWithName: @"AppleGothic" size: 17.0 ];
-        cell.textLabel.font  = myFont;
+        cell.textLabel.font = myFont;
+
+        width = (cell.frame.size.height * thumbs.size.width) / thumbs.size.height;
+        thumbsView.frame   = CGRectMake(0, 0, width - 25, cell.frame.size.height - 25);
+        cell.accessoryView = thumbsView;
         return cell;
     } else {
         HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
@@ -214,8 +239,11 @@
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.text = [sceneDic objectForKey:@"topicName"];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",[sceneDic objectForKey:@"laughs"]];
-        UIFont *myFont = [ UIFont fontWithName: @"AppleGothic" size: 17.0 ];
-        cell.textLabel.font  = myFont;
+        cell.textLabel.font = myFont;
+
+        width = (cell.frame.size.height * thumbs.size.width) / thumbs.size.height;
+        thumbsView.frame   = CGRectMake(0, 0, width - 25, cell.frame.size.height - 25);
+        cell.accessoryView = thumbsView;
         return cell;
     }
 }
@@ -223,7 +251,11 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     HomeTableViewCell *cell = (HomeTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     self.selectedScene = cell.sceneID;
-    [self performSegueWithIdentifier:@"HomeToAudience" sender:cell];
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
+        [self performSegueWithIdentifier:@"HomeToAudience" sender:cell];
+    } else {
+        [self performSegueWithIdentifier:@"HomeToSavedScene" sender:cell];
+    }
 }
 
 #pragma mark - Segue
@@ -235,7 +267,11 @@
     if ([segue.identifier isEqualToString:@"HomeToAudience"]) {
         AudienceViewController *audienceVC = segue.destinationViewController;
         audienceVC.sceneID = self.selectedScene;
+    } else if ([segue.identifier isEqualToString:@"HomeToSavedScene"]) {
+        SavedSceneViewController *sceneVC = segue.destinationViewController;
+        sceneVC.sceneID = self.selectedScene;
     }
+
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
