@@ -43,7 +43,7 @@
                                     forState:UIControlStateNormal];
 
     self.ref = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
-    self.navigationItem.title = @"Yes And";
+    self.navigationItem.title = @"Yes, And";
     //-------map stuff
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
