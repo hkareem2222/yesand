@@ -39,13 +39,7 @@
 
     self.editNavBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
 }
-- (IBAction)onChangeButtonPressed:(id)sender {
-}
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 - (IBAction)onSaveButtonPressed:(UIBarButtonItem *)sender {
     Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
     Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
@@ -64,5 +58,10 @@
     [self performSegueWithIdentifier:@"UnwindToProfile" sender:sender];
 }
 
+- (IBAction)onLogoutButtonPressed:(UIButton *)sender {
+    Firebase *ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com"];
+    [ref unauth];
+    [self performSegueWithIdentifier:@"UnwindToAuthFromEdit" sender:sender];
+}
 
 @end

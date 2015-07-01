@@ -821,7 +821,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -832,7 +831,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T4w-qQ-IcL">
                                 <rect key="frame" x="0.0" y="214" width="600" height="50"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="laughnotification" translatesAutoresizingMaskIntoConstraints="NO" id="ftm-Kk-FCU">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="laughsicon" translatesAutoresizingMaskIntoConstraints="NO" id="ftm-Kk-FCU">
                                         <rect key="frame" x="560" y="10" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="CW1-Wn-RoP"/>
@@ -1004,14 +1003,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="K0h-w6-sAo">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="jjO-Ch-RxZ">
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="6k4-B0-AX7">
                             <connections>
-                                <action selector="onLogoutButtonPressed:" destination="DSd-uC-qSp" id="LOo-aH-Umd"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Edit Profile" id="6k4-B0-AX7">
-                            <connections>
-                                <action selector="onEditProfilePressed:" destination="DSd-uC-qSp" id="sg2-ku-126"/>
+                                <action selector="onSettingsPressed:" destination="DSd-uC-qSp" id="msM-pW-7P4"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1026,12 +1020,10 @@
                         <outlet property="profileSubheadingLabel" destination="tlD-WR-8d0" id="TPg-GN-M8h"/>
                         <outlet property="tableView" destination="aMQ-tW-yfL" id="bqQ-RC-1Kn"/>
                         <segue destination="148-S7-Huy" kind="presentation" identifier="ProfileToEdit" id="OrS-Ky-3T9"/>
-                        <segue destination="o1v-yz-VNm" kind="unwind" identifier="UnwindToAuth" unwindAction="unwindToAuth:" id="kPR-X1-BNS"/>
                         <segue destination="769-2g-XYm" kind="show" identifier="ProfileToSavedScene" id="MjL-Mh-mnN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mpt-su-ezl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="o1v-yz-VNm" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3294" y="52"/>
         </scene>
@@ -1221,18 +1213,18 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mZo-KR-C6r">
-                                <rect key="frame" x="42" y="445" width="93" height="30"/>
+                                <rect key="frame" x="40" y="530" width="150" height="30"/>
                                 <color key="backgroundColor" red="0.98431372549019602" green="0.16078431372549018" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="93" id="juX-W4-XFu"/>
-                                    <constraint firstAttribute="height" constant="30" id="nSU-0r-3ea"/>
+                                    <constraint firstAttribute="height" constant="30" id="XYL-LD-dmx"/>
+                                    <constraint firstAttribute="width" constant="150" id="bat-zX-bpl"/>
                                 </constraints>
-                                <state key="normal" title="Change">
+                                <state key="normal" title="Logout">
                                     <color key="titleColor" red="0.96969696969999997" green="0.96969696969999997" blue="0.96969696969999997" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="onChangeButtonPressed:" destination="148-S7-Huy" eventType="touchUpInside" id="sFy-cX-2hP"/>
+                                    <action selector="onLogoutButtonPressed:" destination="148-S7-Huy" eventType="touchUpInside" id="h3J-Sl-4IR"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yey-Cp-6Su">
@@ -1327,30 +1319,20 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile Pic" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OCf-fl-cAI">
-                                <rect key="frame" x="42" y="424" width="68.5" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="68.5" id="YVz-ob-Dvr"/>
-                                    <constraint firstAttribute="height" constant="21" id="aKD-4P-vuD"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="mZo-KR-C6r" firstAttribute="leading" secondItem="BAM-pK-XwY" secondAttribute="leading" constant="40" id="5cx-ZI-wyD"/>
                             <constraint firstItem="Uea-oU-hXZ" firstAttribute="top" secondItem="N01-La-bZq" secondAttribute="bottom" constant="17" id="6Of-PH-TiB"/>
                             <constraint firstAttribute="trailingMargin" secondItem="J82-Wc-kLi" secondAttribute="trailing" constant="26" id="6j3-1z-y0j"/>
                             <constraint firstAttribute="trailingMargin" secondItem="atL-WX-1tC" secondAttribute="trailing" constant="26" id="76I-VY-utG"/>
                             <constraint firstItem="eFn-eD-dIT" firstAttribute="top" secondItem="3fS-H6-eN2" secondAttribute="bottom" id="9Y9-ss-O5G"/>
                             <constraint firstAttribute="trailingMargin" secondItem="N01-La-bZq" secondAttribute="trailing" constant="26" id="CL2-Cm-9BJ"/>
                             <constraint firstItem="oVm-Na-bBq" firstAttribute="top" secondItem="Uea-oU-hXZ" secondAttribute="bottom" id="CQa-ad-Oeu"/>
-                            <constraint firstItem="OCf-fl-cAI" firstAttribute="top" secondItem="atL-WX-1tC" secondAttribute="bottom" constant="17" id="CVJ-vP-z6y"/>
                             <constraint firstItem="atL-WX-1tC" firstAttribute="top" secondItem="D7L-RK-9HE" secondAttribute="bottom" id="Coo-vx-pfb"/>
                             <constraint firstItem="D7L-RK-9HE" firstAttribute="leading" secondItem="BAM-pK-XwY" secondAttribute="leadingMargin" constant="26" id="Cp5-R9-XeE"/>
                             <constraint firstItem="yey-Cp-6Su" firstAttribute="leading" secondItem="BAM-pK-XwY" secondAttribute="leadingMargin" constant="26" id="Dlq-9R-5LK"/>
-                            <constraint firstItem="mZo-KR-C6r" firstAttribute="top" secondItem="OCf-fl-cAI" secondAttribute="bottom" id="HYk-Rf-ATQ"/>
+                            <constraint firstItem="uQ3-iZ-oUX" firstAttribute="top" secondItem="mZo-KR-C6r" secondAttribute="bottom" constant="40" id="Hox-Bd-bVC"/>
                             <constraint firstItem="iUO-Pt-NG9" firstAttribute="leading" secondItem="BAM-pK-XwY" secondAttribute="leadingMargin" constant="26" id="M4R-UC-8qn"/>
                             <constraint firstItem="dwW-xd-OWw" firstAttribute="leading" secondItem="BAM-pK-XwY" secondAttribute="leading" id="OXw-oe-Egb"/>
                             <constraint firstItem="N01-La-bZq" firstAttribute="top" secondItem="iUO-Pt-NG9" secondAttribute="bottom" id="POP-69-KOq"/>
@@ -1364,11 +1346,9 @@
                             <constraint firstItem="oVm-Na-bBq" firstAttribute="leading" secondItem="BAM-pK-XwY" secondAttribute="leadingMargin" constant="26" id="hwT-2w-jlS"/>
                             <constraint firstItem="dwW-xd-OWw" firstAttribute="top" secondItem="BAM-pK-XwY" secondAttribute="top" id="mBy-XX-mWL"/>
                             <constraint firstAttribute="trailingMargin" secondItem="eFn-eD-dIT" secondAttribute="trailing" constant="26" id="ngJ-Yt-aHH"/>
-                            <constraint firstItem="mZo-KR-C6r" firstAttribute="leading" secondItem="BAM-pK-XwY" secondAttribute="leadingMargin" constant="26" id="oHw-bJ-8NE"/>
                             <constraint firstItem="J82-Wc-kLi" firstAttribute="top" secondItem="yey-Cp-6Su" secondAttribute="bottom" id="pWx-YI-6ut"/>
                             <constraint firstItem="Uea-oU-hXZ" firstAttribute="leading" secondItem="BAM-pK-XwY" secondAttribute="leadingMargin" constant="26" id="rPh-Ox-deT"/>
                             <constraint firstItem="3fS-H6-eN2" firstAttribute="top" secondItem="oVm-Na-bBq" secondAttribute="bottom" constant="17" id="riE-Ou-JIp"/>
-                            <constraint firstItem="OCf-fl-cAI" firstAttribute="leading" secondItem="BAM-pK-XwY" secondAttribute="leadingMargin" constant="26" id="t04-5D-amA"/>
                             <constraint firstItem="3fS-H6-eN2" firstAttribute="leading" secondItem="BAM-pK-XwY" secondAttribute="leadingMargin" constant="26" id="x9Y-ao-u2R"/>
                             <constraint firstItem="atL-WX-1tC" firstAttribute="leading" secondItem="BAM-pK-XwY" secondAttribute="leadingMargin" constant="26" id="yXE-Mh-iyd"/>
                             <constraint firstItem="iUO-Pt-NG9" firstAttribute="top" secondItem="J82-Wc-kLi" secondAttribute="bottom" constant="17" id="zua-iZ-YN5"/>
@@ -1382,7 +1362,8 @@
                         <outlet property="taglineField" destination="oVm-Na-bBq" id="CKe-4y-VQR"/>
                         <outlet property="usernameField" destination="J82-Wc-kLi" id="BMj-YL-z1B"/>
                         <outlet property="websiteField" destination="atL-WX-1tC" id="ftI-cq-mXs"/>
-                        <segue destination="cDJ-ET-62b" kind="unwind" identifier="UnwindToProfile" unwindAction="unwindToProfile:" id="Tpb-c1-pe2"/>
+                        <segue destination="cDJ-ET-62b" kind="unwind" identifier="UnwindToAuthFromEdit" unwindAction="unwindToAuth:" id="VYf-xS-4hY"/>
+                        <segue destination="cDJ-ET-62b" kind="unwind" identifier="UnwindToProfile" unwindAction="unwindToProfile:" id="Yu7-QB-8qo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tPw-GD-pB7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1645,13 +1626,13 @@
         <image name="Smile-512" width="512" height="512"/>
         <image name="TypingIndicatorImage" width="120" height="51"/>
         <image name="comedybackground" width="1098" height="1539"/>
-        <image name="laughnotification" width="30" height="31"/>
+        <image name="laughsicon" width="1200" height="1200"/>
         <image name="logo-transparent" width="169" height="163"/>
         <image name="profilepic" width="359" height="360"/>
         <image name="twitterlogincustom" width="912" height="159"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ZYi-VD-sef"/>
         <segue reference="yb9-Qh-uOw"/>
+        <segue reference="ZYi-VD-sef"/>
     </inferredMetricsTieBreakers>
 </document>

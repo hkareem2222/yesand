@@ -17,7 +17,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *profileLinkLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property NSMutableArray *scenes;
 @property Firebase *ref;
@@ -40,7 +39,7 @@
     if ([self.ref.authData.provider isEqualToString:@"anonymous"]) {
         self.editProfileBarButton.title = @"Sign up!";
     } else {
-        self.editProfileBarButton.title = @"Edit Profile";
+        self.editProfileBarButton.title = @"Settings";
     }
     NSString *currentUserString = [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@", self.ref.authData.uid];
     Firebase *currentUserRef = [[Firebase alloc] initWithUrl:currentUserString];
@@ -124,15 +123,10 @@
 
 #pragma mark - Actions
 
-- (IBAction)onEditProfilePressed:(UIBarButtonItem *)sender {
-    if ([sender.title isEqualToString:@"Edit Profile"]) {
+- (IBAction)onSettingsPressed:(UIBarButtonItem *)sender {
+    if ([sender.title isEqualToString:@"Settings"]) {
         [self performSegueWithIdentifier:@"ProfileToEdit" sender:sender];
     }
-}
-
-- (IBAction)onLogoutButtonPressed:(UIBarButtonItem *)sender {
-    [self.ref unauth];
-    [self performSegueWithIdentifier:@"UnwindToAuth" sender:sender];
 }
 
 -(IBAction)unwindToProfile:(UIStoryboardSegue *)segue {
