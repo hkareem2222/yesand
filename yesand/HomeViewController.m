@@ -34,8 +34,6 @@
     //---setting fonts for labels throughout app, as well as other items on home
     UIFont *newFont = [UIFont fontWithName:@"AppleGothic" size:14];
     [[UILabel appearance] setFont:newFont];
-
-
     UIFont *segmentedFont = [ UIFont fontWithName: @"AppleGothic" size: 12.0 ];
     NSDictionary *attributes = [NSDictionary dictionaryWithObject:segmentedFont
                                                            forKey:NSFontAttributeName];
