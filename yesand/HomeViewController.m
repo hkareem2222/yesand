@@ -30,6 +30,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    //---setting fonts for labels throughout app, as well as other items on home
+    UIFont *newFont = [UIFont fontWithName:@"AppleGothic" size:14];
+    [[UILabel appearance] setFont:newFont];
+
+
+    UIFont *segmentedFont = [ UIFont fontWithName: @"AppleGothic" size: 12.0 ];
+    NSDictionary *attributes = [NSDictionary dictionaryWithObject:segmentedFont
+                                                           forKey:NSFontAttributeName];
+    [self.segmentedControl setTitleTextAttributes:attributes
+                                    forState:UIControlStateNormal];
+
     self.ref = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
     self.title = @"Yes And";
     //-------map stuff
@@ -62,7 +74,12 @@
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
     self.tabBarController.tabBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
     self.tabBarController.tabBar.tintColor = [UIColor whiteColor];
+
+    //-----Navbar title attributes
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
+    
+    UIFont *titleFont = [UIFont fontWithName: @"AppleGothic" size: 21.0 ];
+    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:titleFont forKey:NSFontAttributeName];
 
     //listening for Scenes
     Firebase *scenesConvo = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/scenes"];
@@ -184,6 +201,8 @@
         cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.text = [sceneDic objectForKey:@"topicName"];
+        UIFont *myFont = [ UIFont fontWithName: @"AppleGothic" size: 17.0 ];
+        cell.textLabel.font  = myFont;
 //        NSNumber *laughNumber = [sceneDic objectForKey:@"laughs"];
 //        NSLog(@"%@", laughNumber);
 //        cell.laughLabel.text =  [laughNumber stringValue];
