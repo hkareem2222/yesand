@@ -48,6 +48,8 @@
 @property NSDictionary *topic;
 @property (weak, nonatomic) IBOutlet UIButton *sceneButton;
 @property (weak, nonatomic) IBOutlet UIImageView *typingImageView;
+@property (weak, nonatomic) IBOutlet UILabel *countdownLabel;
+
 @end
 
 @implementation ChatViewController

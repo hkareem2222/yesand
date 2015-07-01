@@ -102,6 +102,7 @@
 		BF4F90881B39F0D600A93680 /* AudienceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudienceViewController.m; sourceTree = "<group>"; };
 		BF4F908A1B39FA7900A93680 /* RatingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatingViewController.h; sourceTree = "<group>"; };
 		BF4F908B1B39FA7900A93680 /* RatingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatingViewController.m; sourceTree = "<group>"; };
+		BF9885291B442FC400C1037F /* AppleGothic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppleGothic.ttf; sourceTree = "<group>"; };
 		F94125631B4373D4006DC249 /* SavedSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedSceneViewController.h; sourceTree = "<group>"; };
 		F94125641B4373D4006DC249 /* SavedSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavedSceneViewController.m; sourceTree = "<group>"; };
 		F94125661B4378C7006DC249 /* SavedReceiveTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedReceiveTableViewCell.h; sourceTree = "<group>"; };
@@ -223,6 +224,7 @@
 			children = (
 				85963F791B34C8F7006E2868 /* Info.plist */,
 				85963F7A1B34C8F7006E2868 /* main.m */,
+				BF9885291B442FC400C1037F /* AppleGothic.ttf */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";

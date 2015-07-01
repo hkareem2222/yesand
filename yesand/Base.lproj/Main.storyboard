@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="V5t-P2-765">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C2507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="V5t-P2-765">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -169,24 +169,22 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t7A-xG-Yfx">
                                         <rect key="frame" x="0.0" y="387" width="600" height="100"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ybr-TG-qsx">
-                                                <rect key="frame" x="162" y="35" width="275" height="30"/>
-                                                <color key="backgroundColor" red="0.94509803921568625" green="0.25490196078431371" blue="0.29019607843137257" alpha="1" colorSpace="calibratedRGB"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your scene will start shortly..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V7T-9B-Jgy">
+                                                <rect key="frame" x="156" y="39" width="289" height="21"/>
+                                                <color key="backgroundColor" red="0.94509803921568625" green="0.25490196078431371" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="275" id="BVd-jT-yee"/>
-                                                    <constraint firstAttribute="height" constant="30" id="zLb-y2-ZWF"/>
+                                                    <constraint firstAttribute="width" constant="289" id="Pgn-63-Xd8"/>
+                                                    <constraint firstAttribute="height" constant="21" id="Weo-nC-gr4"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <state key="normal" title="Your scene will start shortly...">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                            </button>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.96969696969999997" green="0.96969696969999997" blue="0.96969696969999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="centerX" secondItem="Ybr-TG-qsx" secondAttribute="centerX" id="9bT-YW-zU8"/>
-                                            <constraint firstAttribute="centerY" secondItem="Ybr-TG-qsx" secondAttribute="centerY" id="JDa-2U-HbZ"/>
                                             <constraint firstAttribute="height" constant="100" id="XRU-ER-ybd"/>
+                                            <constraint firstAttribute="bottom" secondItem="V7T-9B-Jgy" secondAttribute="bottom" constant="40" id="qag-To-aby"/>
+                                            <constraint firstAttribute="centerX" secondItem="V7T-9B-Jgy" secondAttribute="centerX" id="wJy-Gc-UfY"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JNd-Nl-Xwd" userLabel="User Setup View">
@@ -324,6 +322,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="cancelBarButton" destination="SBI-Mh-GuT" id="Hfr-pc-7KX"/>
+                        <outlet property="countdownLabel" destination="V7T-9B-Jgy" id="D7I-2z-JNg"/>
                         <outlet property="currentUserCharacter" destination="ab1-Jx-q2U" id="T3g-nH-ZgN"/>
                         <outlet property="currentUserImageView" destination="ZBZ-6g-nad" id="3SC-if-hXw"/>
                         <outlet property="currentUserLabel" destination="aVr-Kk-xFh" id="Vnd-v2-Lzc"/>
@@ -332,7 +331,6 @@
                         <outlet property="otherUserCharacter" destination="QYb-8U-wbN" id="W66-qd-caz"/>
                         <outlet property="otherUserImageView" destination="MkJ-pM-DXU" id="lQl-Hj-GqI"/>
                         <outlet property="otherUserLabel" destination="dKD-ei-26W" id="JoS-VD-Zne"/>
-                        <outlet property="sceneButton" destination="Ybr-TG-qsx" id="cYV-xG-0zI"/>
                         <outlet property="splashView" destination="vNX-0S-IY4" id="LkS-aa-vIV"/>
                         <outlet property="tableView" destination="3DB-k2-6om" id="Tgp-UU-92M"/>
                         <outlet property="textFieldBottomLayout" destination="q5r-sx-Kmb" id="ngI-6t-HqB"/>
@@ -832,11 +830,25 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SceneID" id="vlM-zG-c07" customClass="HomeTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SceneID" textLabel="qSU-FJ-oUR" detailTextLabel="NBL-hi-Ckp" style="IBUITableViewCellStyleValue1" id="vlM-zG-c07" customClass="HomeTableViewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vlM-zG-c07" id="wKg-oL-ROT">
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qSU-FJ-oUR">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NBL-hi-Ckp">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -1435,7 +1447,7 @@
                                             <constraint firstAttribute="height" constant="30" id="qwE-1m-zFr"/>
                                         </constraints>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RVm-fn-Zhc">
@@ -1498,7 +1510,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dXY-Tz-ACB">
-                                        <rect key="frame" x="177.5" y="173" width="245" height="40"/>
+                                        <rect key="frame" x="177" y="173" width="245" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="PLs-Xk-5nt"/>
                                             <constraint firstAttribute="width" constant="245" id="swS-is-xgx"/>
@@ -1648,6 +1660,6 @@
         <image name="twitterlogin" width="240" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yb9-Qh-uOw"/>
+        <segue reference="hkv-kI-r5j"/>
     </inferredMetricsTieBreakers>
 </document>
