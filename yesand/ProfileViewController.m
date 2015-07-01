@@ -36,7 +36,7 @@
     }
     NSString *currentUserString = [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@", self.ref.authData.uid];
     Firebase *currentUserRef = [[Firebase alloc] initWithUrl:currentUserString];
-    [currentUserRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+    [currentUserRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         if ([self.ref.authData.provider isEqualToString:@"anonymous"]) {
             self.navigationItem.title = @"anonymous";
         } else {
