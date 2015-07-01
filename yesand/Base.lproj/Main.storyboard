@@ -681,7 +681,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v9d-G0-EgD">
                                 <rect key="frame" x="0.0" y="501" width="600" height="50"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Smile-512" translatesAutoresizingMaskIntoConstraints="NO" id="ZmF-1i-sFx">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="laughsicon" translatesAutoresizingMaskIntoConstraints="NO" id="ZmF-1i-sFx">
                                         <rect key="frame" x="514" y="8" width="35" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="35" id="27a-Pe-mfm"/>
@@ -1623,7 +1623,6 @@
         <image name="NewIcon" width="30" height="32"/>
         <image name="ReceiveMessageImage" width="230" height="51"/>
         <image name="SendImage" width="230" height="51"/>
-        <image name="Smile-512" width="512" height="512"/>
         <image name="TypingIndicatorImage" width="120" height="51"/>
         <image name="comedybackground" width="1098" height="1539"/>
         <image name="laughsicon" width="1200" height="1200"/>
