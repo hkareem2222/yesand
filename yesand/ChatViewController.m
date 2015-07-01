@@ -56,26 +56,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"LOAD");
-    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
     self.userSetupview.layer.cornerRadius = 5;
     self.countdownLabel.layer.cornerRadius = 5;
     self.topicLabel.layer.cornerRadius = 5;
     self.topicLabel.clipsToBounds = YES;
+    self.countdownLabel.clipsToBounds = YES;
     self.tabBarController.tabBar.hidden = YES;
     self.typingImageView.hidden = YES;
 
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
-
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
-
-    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
-
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
-
-    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
-
-    //--------------------------ends here
+    NSDictionary *attrDict = @{
+                               NSFontAttributeName : [UIFont fontWithName:@"AppleGothic" size:21.0],
+                               NSForegroundColorAttributeName : [UIColor whiteColor]
+                               };
+    self.navigationController.navigationBar.titleTextAttributes = attrDict;
 
     //--------------------------------chat view stuff
 

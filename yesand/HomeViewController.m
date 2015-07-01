@@ -9,6 +9,7 @@
 #import "HomeViewController.h"
 #import "AudienceViewController.h"
 #import "HomeTableViewCell.h"
+#import "SavedSceneViewController.h"
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 
@@ -32,8 +33,8 @@
     [super viewDidLoad];
 
     //---setting fonts for labels throughout app, as well as other items on home
-    UIFont *newFont = [UIFont fontWithName:@"AppleGothic" size:14];
-    [[UILabel appearance] setFont:newFont];
+//    UIFont *newFont = [UIFont fontWithName:@"AppleGothic" size:14];
+//    [[UILabel appearance] setFont:newFont];
 
     UIFont *segmentedFont = [UIFont fontWithName: @"AppleGothic" size: 12.0];
     NSDictionary *attributes = [NSDictionary dictionaryWithObject:segmentedFont
@@ -218,8 +219,8 @@
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.text = [sceneDic objectForKey:@"topicName"];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",[sceneDic objectForKey:@"laughs"]];
-        UIFont *myFont = [ UIFont fontWithName: @"AppleGothic" size: 17.0 ];
-        cell.textLabel.font  = myFont;
+        UIFont *myFont = [UIFont fontWithName: @"AppleGothic" size: 17.0];
+        cell.textLabel.font = myFont;
         return cell;
     } else {
         HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
@@ -229,8 +230,8 @@
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.text = [sceneDic objectForKey:@"topicName"];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",[sceneDic objectForKey:@"laughs"]];
-        UIFont *myFont = [ UIFont fontWithName: @"AppleGothic" size: 17.0 ];
-        cell.textLabel.font  = myFont;
+        UIFont *myFont = [UIFont fontWithName: @"AppleGothic" size: 17.0];
+        cell.textLabel.font = myFont;
         return cell;
     }
 }
@@ -238,7 +239,11 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     HomeTableViewCell *cell = (HomeTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     self.selectedScene = cell.sceneID;
-    [self performSegueWithIdentifier:@"HomeToAudience" sender:cell];
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
+        [self performSegueWithIdentifier:@"HomeToAudience" sender:cell];
+    } else {
+        [self performSegueWithIdentifier:@"HomeToSavedScene" sender:cell];
+    }
 }
 
 #pragma mark - Segue
@@ -250,7 +255,11 @@
     if ([segue.identifier isEqualToString:@"HomeToAudience"]) {
         AudienceViewController *audienceVC = segue.destinationViewController;
         audienceVC.sceneID = self.selectedScene;
+    } else if ([segue.identifier isEqualToString:@"HomeToSavedScene"]) {
+        SavedSceneViewController *sceneVC = segue.destinationViewController;
+        sceneVC.sceneID = self.selectedScene;
     }
+
 }
 
 -(void)viewWillDisappear:(BOOL)animated {

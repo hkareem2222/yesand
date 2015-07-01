@@ -47,7 +47,13 @@
     self.chatLabel2.alpha = 0.0;
     self.chatLabel3.alpha = 0.0;
     self.chatLabel4.alpha = 0.0;
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
+    NSDictionary *attrDict = @{
+                               NSFontAttributeName : [UIFont fontWithName:@"AppleGothic" size:21.0],
+                               NSForegroundColorAttributeName : [UIColor whiteColor]
+                               };
+    self.navigationController.navigationBar.titleTextAttributes = attrDict;
+
     NSLog(@"selected scene id %@", self.sceneID);
     NSString *sceneURL = [NSString stringWithFormat:@"https://yesand.firebaseio.com/scenes/%@", self.sceneID];
     self.scenesConvo = [[Firebase alloc] initWithUrl:sceneURL];
@@ -83,7 +89,6 @@
 
     self.tableView.separatorColor = [UIColor clearColor];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
 }
 
 #pragma mark - Keyboard Animation
