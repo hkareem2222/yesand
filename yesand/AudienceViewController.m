@@ -28,7 +28,6 @@
 @property (weak, nonatomic) IBOutlet UIView *audienceChatView;
 @property NSInteger labelCount;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textFieldBottomLayout;
-
 @end
 
 @implementation AudienceViewController
