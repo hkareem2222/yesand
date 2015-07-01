@@ -8,6 +8,7 @@
 
 #import "ProfileViewController.h"
 #import "ProfileTableViewCell.h"
+#import "SavedSceneViewController.h"
 
 @interface ProfileViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *profileHeadingLabel;
@@ -20,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property NSMutableArray *scenes;
 @property Firebase *ref;
+@property NSString *selectedScene;
 @end
 
 @implementation ProfileViewController
@@ -80,11 +82,28 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ProfileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
     NSDictionary *sceneDic = self.scenes[indexPath.row];
-//    cell.sceneID = [sceneDic objectForKey:@"sceneID"];
+    cell.sceneID = [sceneDic objectForKey:@"sceneID"];
     cell.textLabel.text = [sceneDic objectForKey:@"topicName"];
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     cell.textLabel.numberOfLines = 0;
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    ProfileTableViewCell *cell = (ProfileTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    self.selectedScene = cell.sceneID;
+    [self performSegueWithIdentifier:@"ProfileToSavedScene" sender:self];
+    NSLog(@"-----SCENE INSIDE DID SELECT %@", self.selectedScene);
+}
+
+#pragma mark - Segue
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"ProfileToSavedScene"]) {
+        SavedSceneViewController *savedVC = segue.destinationViewController;
+        savedVC.sceneID = self.selectedScene;
+        NSLog(@"-----SCENE INSIDE PREPARE %@", self.selectedScene);
+    }
 }
 
 #pragma mark - Actions
