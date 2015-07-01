@@ -16,23 +16,23 @@
 @property CLLocationManager *locationManager;
 @property Firebase *ref;
 @property NSString *timeStamp;
-@property NSMutableArray *scenes;
+@property NSMutableArray *liveScenes;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property NSString *selectedScene;
 @property BOOL isUserLocated;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic) NSArray *colors;
+@property NSMutableArray *topScenes;
 @end
 
 @implementation HomeViewController
 
-- (void)viewDidLoad {
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidLoad];
     self.ref = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
-    
+    self.title = @"Yes And";
     //-------map stuff
-    NSLog(@"---- VIEW DID LOAD");
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     [self.locationManager requestWhenInUseAuthorization];
@@ -67,23 +67,36 @@
     Firebase *scenesConvo = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/scenes"];
     [scenesConvo observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         if (![snapshot.value isEqual:[NSNull null]]) {
-            self.scenes = [NSMutableArray new];;
-            NSMutableArray *laughCount = [NSMutableArray new];
+            self.liveScenes = [NSMutableArray new];
+            self.topScenes = [NSMutableArray new];
+//            NSMutableArray *laughCount = [NSMutableArray new];
             for (FDataSnapshot *scene in snapshot.children) {
-                if (scene.value[@"laughs"] == nil) {
-                    [laughCount addObject:@0];
-                } else {
-                    [laughCount addObject:scene.value[@"laughs"]];
-                }
+//                if (scene.value[@"laughs"] == nil) {
+//                    [laughCount addObject:@0];
+//                } else {
+//                    [laughCount addObject:scene.value[@"laughs"]];
+//                }
                 if ([scene.value[@"isLive"] isEqualToNumber:@1]) {
-                    NSDictionary *sceneDic = @{
-                                               @"sceneID": scene.key,
-                                               @"topicName": scene.value[@"topicName"],
-//                                               @"laughs":
-                                               };
-                    [self.scenes addObject:sceneDic];
+                    if (scene.key != nil && scene.value[@"topicName"] != nil) {
+                        NSDictionary *sceneDic = @{
+                                                   @"sceneID": scene.key,
+                                                   @"topicName": scene.value[@"topicName"]
+                                                   };
+                        [self.liveScenes addObject:sceneDic];
+                    }
+                } else {
+                    if (scene.key != nil && scene.value[@"topicName"] != nil) {
+                        NSDictionary *sceneDic = @{
+                                                   @"sceneID": scene.key,
+                                                   @"topicName": scene.value[@"topicName"]
+                                                   };
+                        [self.topScenes addObject:sceneDic];
+
+                    }
                 }
             }
+//            [self sortByLaughs:self.topScenes];
+//            [self sortByLaughs:self.liveScenes];
             [self.tableView reloadData];
         }
     } withCancelBlock:^(NSError *error) {
@@ -91,36 +104,13 @@
     }];
 }
 
-//-(void)savingUserData {
-//    [self.ref authUser:self.ref.authData.uid password:@"password"
-//         withCompletionBlock:^(NSError *error, FAuthData *authData) {
-//             if (error) {
-//                 NSLog(@"error saving: %@", [error localizedDescription]);
-//             } else {
-//                 NSLog(@"%@", authData.uid);
-//                 NSDictionary *newUser = @{
-//                                           @"provider": authData.provider,
-//                                           @"isAvailable": @0,
-//                                           @"updateAt": kFirebaseServerValueTimestamp,
-//                                           @"character one": @"test",
-//                                           @"character two": @"test",
-//                                           @"topic name": @"test",
-//                                           @"authuid": authData.uid,
-//                                           @"username": authData.uid,
-//                                           @"name": @" ",
-//                                           @"tagline": @" ",
-//                                           @"location": @" ",
-//                                           @"website": @" ",
-//                                           @"rating": @[@3,@3],
-//                                           @"rating avg": @"3"
-//                                           };
-//                 
-//                 [[[self.ref childByAppendingPath:@"users"]
-//                   childByAppendingPath:authData.uid] setValue:newUser];
-//             }
-//         }];
+//-(void)sortByLaughs:(NSMutableArray *)myArray {
+//    NSSortDescriptor *laughDescriptor = [[NSSortDescriptor alloc] initWithKey:@"laughs" ascending:YES];
+//    NSArray *sortDescriptors = [NSArray arrayWithObject:laughDescriptor];
+//    [myArray sortUsingDescriptors:sortDescriptors];
+//    self.topScenes = myArray;
+//    [self.tableView reloadData];
 //}
-
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     // Remove seperator inset
@@ -178,9 +168,9 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.segmentedControl.selectedSegmentIndex == 0) {
-        return self.scenes.count;
+        return self.liveScenes.count;
     } else {
-        return 0;
+        return self.topScenes.count;
     }
 }
 
@@ -188,22 +178,32 @@
     tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     if (self.segmentedControl.selectedSegmentIndex == 0) {
         HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
-        NSDictionary *sceneDic = self.scenes[indexPath.row];
+        NSDictionary *sceneDic = self.liveScenes[indexPath.row];
         cell.sceneID = [sceneDic objectForKey:@"sceneID"];
         cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.text = [sceneDic objectForKey:@"topicName"];
-        NSNumber *laughNumber = [sceneDic objectForKey:@"laughs"];
-        NSLog(@"%@", laughNumber);
-        cell.laughLabel.text =  [laughNumber stringValue];
-        cell.backgroundColor = [UIColor colorWithRed:236/255.0 green:240/255.0 blue:241/255.0 alpha:1.0];
-        tableView.separatorColor = [UIColor colorWithRed:52/255.0 green:73/255.0 blue:94/255.0 alpha:1.0];
-        UILabel *colorLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 5.0, 44.0)];
-        [cell.contentView addSubview:colorLabel];
-        colorLabel.backgroundColor = [self.colors objectAtIndex:indexPath.row];
+//        NSNumber *laughNumber = [sceneDic objectForKey:@"laughs"];
+//        NSLog(@"%@", laughNumber);
+//        cell.laughLabel.text =  [laughNumber stringValue];
+//        cell.backgroundColor = [UIColor colorWithRed:236/255.0 green:240/255.0 blue:241/255.0 alpha:1.0];
+//        tableView.separatorColor = [UIColor colorWithRed:52/255.0 green:73/255.0 blue:94/255.0 alpha:1.0];
+//        UILabel *colorLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 5.0, 44.0)];
+//        [cell.contentView addSubview:colorLabel];
+//        colorLabel.backgroundColor = [self.colors objectAtIndex:indexPath.row];
         return cell;
     } else {
         HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
+        NSDictionary *sceneDic = self.topScenes[indexPath.row];
+        cell.sceneID = [sceneDic objectForKey:@"sceneID"];
+        cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        cell.textLabel.numberOfLines = 0;
+        cell.textLabel.text = [sceneDic objectForKey:@"topicName"];
+//        cell.backgroundColor = [UIColor colorWithRed:236/255.0 green:240/255.0 blue:241/255.0 alpha:1.0];
+//        tableView.separatorColor = [UIColor colorWithRed:52/255.0 green:73/255.0 blue:94/255.0 alpha:1.0];
+//        UILabel *colorLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 5.0, 44.0)];
+//        [cell.contentView addSubview:colorLabel];
+//        colorLabel.backgroundColor = [self.colors objectAtIndex:indexPath.row];
         return cell;
     }
 }

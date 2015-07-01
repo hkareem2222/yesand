@@ -11,7 +11,7 @@
 #import "SavedSendTableViewCell.h"
 #import <Firebase/Firebase.h>
 
-@interface SavedSceneViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface SavedSceneViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *sceneTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *characterLeftLabel;
 @property (weak, nonatomic) IBOutlet UILabel *characterRightLabel;
@@ -50,38 +50,38 @@
 
 #pragma mark - Table View
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.messages.count;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([self.messages[indexPath.row] hasPrefix:self.characterRightLabel.text]) {
-        SavedSendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SendMessageID"];
-        cell.sendMessageLabel.text = self.messages[indexPath.row];
-        return cell;
-    } else {
-        SavedReceiveTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ReceiveMessageID"];
-        cell.receiveMessageLabel.text = self.messages[indexPath.row];
-        return cell;
-    }
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *msg = self.messages[indexPath.row];
-    CGSize sizeOfString = [self testSizeOfString:msg];
-    return sizeOfString.height + 20;
-}
-
--(CGSize)testSizeOfString:(NSString *)labelText {
-    UILabel *gettingSizeLabel = [[UILabel alloc] init];
-    gettingSizeLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:14];
-    gettingSizeLabel.text = labelText;
-    gettingSizeLabel.numberOfLines = 0;
-    gettingSizeLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    CGSize maximumLabelSize = CGSizeMake(190, 9999);
-
-    CGSize expectSize = [gettingSizeLabel sizeThatFits:maximumLabelSize];
-    return expectSize;
-}
+//-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+//    return self.messages.count;
+//}
+//
+//-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if ([self.messages[indexPath.row] hasPrefix:self.characterRightLabel.text]) {
+//        SavedSendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SendMessageID"];
+//        cell.sendMessageLabel.text = self.messages[indexPath.row];
+//        return cell;
+//    } else {
+//        SavedReceiveTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ReceiveMessageID"];
+//        cell.receiveMessageLabel.text = self.messages[indexPath.row];
+//        return cell;
+//    }
+//}
+//
+//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    NSString *msg = self.messages[indexPath.row];
+//    CGSize sizeOfString = [self testSizeOfString:msg];
+//    return sizeOfString.height + 20;
+//}
+//
+//-(CGSize)testSizeOfString:(NSString *)labelText {
+//    UILabel *gettingSizeLabel = [[UILabel alloc] init];
+//    gettingSizeLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:14];
+//    gettingSizeLabel.text = labelText;
+//    gettingSizeLabel.numberOfLines = 0;
+//    gettingSizeLabel.lineBreakMode = NSLineBreakByWordWrapping;
+//    CGSize maximumLabelSize = CGSizeMake(190, 9999);
+//
+//    CGSize expectSize = [gettingSizeLabel sizeThatFits:maximumLabelSize];
+//    return expectSize;
+//}
 
 @end
