@@ -46,6 +46,8 @@
 @property BOOL isSplashHidden;
 @property NSString *otherAuthuid;
 @property NSDictionary *topic;
+@property NSTimer *timer;
+@property int countdown;
 @property (weak, nonatomic) IBOutlet UIImageView *typingImageView;
 @property (weak, nonatomic) IBOutlet UILabel *countdownLabel;
 @end
@@ -99,6 +101,7 @@
     self.cancelBarButton.enabled = YES;
     self.cancelBarButton.title = @"Cancel";
     self.endSceneBarButton.title = @"";
+    self.countdown = 10;
     [self retrieveNewTopic];
 }
 // Step 1
@@ -187,6 +190,11 @@
             self.otherUserImageView.image = [UIImage imageNamed:@"profilepic2.png"];
             if (!self.ifCalled) {
                 [self performSelector:@selector(splashViewDisappear) withObject:nil afterDelay:10.0];
+                self.timer = [NSTimer scheduledTimerWithTimeInterval:1
+                                                         target:self
+                                                       selector:@selector(countDown)
+                                                       userInfo:nil
+                                                        repeats:YES];
                 self.ifCalled = YES;
             }
         } else {
@@ -198,6 +206,9 @@
             self.otherUserImageView.image = [UIImage imageNamed:@"MaskIndicator.png"];
             [self rotateSecondImageView];
             [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(splashViewDisappear) object:nil];
+            [self.timer invalidate];
+            self.countdownLabel.text = @"Your scene will start shortly...";
+            self.countdown = 10;
         }
     } else {
         self.otherUser = self.availableUsers[self.indexOfCurrentUser - 1];
@@ -210,11 +221,24 @@
         self.isEven = NO;
         if (!self.ifCalled) {
             [self performSelector:@selector(splashViewDisappear) withObject:nil afterDelay:10.0];
+            self.timer = [NSTimer scheduledTimerWithTimeInterval:1
+                                                          target:self
+                                                        selector:@selector(countDown)
+                                                        userInfo:nil
+                                                         repeats:YES];
             self.ifCalled = YES;
         }
         [self.otherUserImageView.layer removeAllAnimations];
         self.otherUserImageView.image = [UIImage imageNamed:@"profilepic2.png"];
     }
+}
+
+-(void)countDown {
+    if (self.countdown == 0) {
+        [self.timer invalidate];
+    }
+    self.countdown--;
+    self.countdownLabel.text = [NSString stringWithFormat:@"Scene starts in %i", self.countdown];
 }
 
 -(void)splashViewDisappear {
