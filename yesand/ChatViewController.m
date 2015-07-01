@@ -7,55 +7,16 @@
 //
 
 #import "ChatViewController.h"
-#import "RatingViewController.h"
-#import "HomeViewController.h"
 
 @interface ChatViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIScrollViewDelegate>
-@property (weak, nonatomic) IBOutlet UIView *userSetupview;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UITextField *messageTextField;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textFieldBottomLayout;
-@property (weak, nonatomic) IBOutlet UILabel *currentUserLabel;
-@property (weak, nonatomic) IBOutlet UILabel *otherUserLabel;
-@property (weak, nonatomic) IBOutlet UILabel *currentUserCharacter;
-@property (weak, nonatomic) IBOutlet UIView *splashView;
-@property (weak, nonatomic) IBOutlet UILabel *otherUserCharacter;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelBarButton;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *endSceneBarButton;
-@property (weak, nonatomic) IBOutlet UILabel *topicLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *currentUserImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *otherUserImageView;
-@property double keyboardHeight;
-@property NSMutableArray *localMessages;
-@property NSMutableArray *cloudMessages;
-@property Firebase *conversationsRef;
-@property Firebase *convoRef;
-@property Firebase *rootRef;
-@property NSArray *currentUserMessages;
-@property NSArray *otherUserMessages;
-@property Firebase *sceneConvo;
-@property BOOL ifCalled;
-@property NSMutableArray *availableUsers;
-@property NSString *currentUserCharacterTwo;
-@property Firebase *ref;
-@property NSString *currentUserCharacterOne;
-@property Firebase *usersRef;
-@property NSString *currentUserTopic;
-@property NSInteger indexOfCurrentUser;
-@property NSDictionary *otherUser;
-@property BOOL isSplashHidden;
-@property NSString *otherAuthuid;
-@property NSDictionary *topic;
-@property NSTimer *timer;
-@property int countdown;
-@property (weak, nonatomic) IBOutlet UIImageView *typingImageView;
-@property (weak, nonatomic) IBOutlet UILabel *countdownLabel;
 @end
 
 @implementation ChatViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"view did load");
+    //views setup
     self.userSetupview.layer.cornerRadius = 5;
     self.countdownLabel.layer.cornerRadius = 5;
     self.topicLabel.layer.cornerRadius = 5;
@@ -72,24 +33,19 @@
                                };
     self.navigationController.navigationBar.titleTextAttributes = attrDict;
 
-    //--------------------------------chat view stuff
+    self.tableView.separatorColor = [UIColor clearColor];
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    //-----ends here
 
+    //--------------------------------chat view stuff
     self.localMessages = [NSMutableArray new];
     self.conversationsRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/conversations"];
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardWillShowNotification object:nil];
     self.cloudMessages = [NSMutableArray new];
-
     //---------------------------------endsHere
 
-    self.tableView.separatorColor = [UIColor clearColor];
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
-}
-
-//----------------------------------------splashscreenstuff
-
-#pragma mark - TOPIC GENERATION
--(void)viewDidAppear:(BOOL)animated {
+    //------------------------------splashscreenstuff
     self.splashView.alpha = 1.0;
     self.isSplashHidden = NO;
     self.endSceneBarButton.enabled = NO;
@@ -99,9 +55,26 @@
     self.endSceneBarButton.title = @"";
     self.countdown = 10;
     [self retrieveNewTopic];
+    //---------------------------------endsHere
 }
-// Step 1
+
+#pragma mark - Animation with image
+
+- (void)rotateSecondImageView {
+    CABasicAnimation *rotation;
+    rotation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+    rotation.fromValue = [NSNumber numberWithFloat:0];
+    rotation.toValue = [NSNumber numberWithFloat:(2 * M_PI)];
+    rotation.duration = 2.0f; // Speed
+    rotation.repeatCount = HUGE_VALF; // Repeat forever until remove animation
+    [self.otherUserImageView.layer removeAllAnimations];
+    [self.otherUserImageView.layer addAnimation:rotation forKey:@"Spin"];
+}
+
+#pragma mark - Topic Setup
+
 -(void)retrieveNewTopic {
+
     NSURL *url = [NSURL URLWithString:@"https://api.myjson.com/bins/1pt90"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
 
@@ -114,7 +87,7 @@
                                [self saveNewTopic];
                            }];
 }
-// Step 2
+
 -(void)saveNewTopic {
     Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
     Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
@@ -127,20 +100,23 @@
     [user updateChildValues:userDic];
     [self findNewUsers];
 }
-// Step 3
+
+#pragma mark - User Setup --- Transition To Chat
+
 -(void)findNewUsers {
-    //----------------------------------splashviewstuff
     self.ifCalled = NO;
     self.availableUsers = [NSMutableArray new];
     self.ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com"];
     NSString *currentUserString = [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@", self.ref.authData.uid];
     Firebase *currentUserRef = [[Firebase alloc] initWithUrl:currentUserString];
     [currentUserRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        self.currentUsername = snapshot.value[@"username"];
-        self.currentUserLabel.text = snapshot.value[@"username"];
-        self.currentUserTopic = snapshot.value[@"topic name"];
-        self.currentUserCharacterOne = snapshot.value[@"character one"];
-        self.currentUserCharacterTwo = snapshot.value[@"character two"];
+        if (snapshot.value[@"username"] != nil && snapshot.value[@"topic name"] != nil && snapshot.value[@"character one"] != nil && snapshot.value[@"character two"] != nil) {
+            self.currentUsername = snapshot.value[@"username"];
+            self.currentUserLabel.text = snapshot.value[@"username"];
+            self.currentUserTopic = snapshot.value[@"topic name"];
+            self.currentUserCharacterOne = snapshot.value[@"character one"];
+            self.currentUserCharacterTwo = snapshot.value[@"character two"];
+        }
     }];
     self.usersRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/users"];
 
@@ -162,8 +138,6 @@
     }];
 }
 
-// Step 4
-#pragma mark - Pair Users
 -(void)pairUsers {
     NSLog(@"---- PAIR USERS");
     for (NSDictionary *data in self.availableUsers) {
@@ -259,10 +233,29 @@
         }
     }];
 }
-//------------------------------------------ends here
 
-#pragma mark - Query Conversation
+-(void)makeNotAvailable {
+    Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
+    NSDictionary *userDic = @{@"isAvailable": @0
+                              };
+    if (usersRef.authData.uid != nil) {
+        NSLog(@"----------------%@", usersRef.authData.uid);
+        Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
+        [user updateChildValues: userDic];
+    }
 
+    if (self.isSplashHidden) {
+        if (self.otherAuthuid != nil) {
+            NSLog(@"----------------%@", self.otherAuthuid);
+            Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
+            Firebase *otherUser = [usersRef childByAppendingPath:self.otherAuthuid];
+            [otherUser updateChildValues:userDic];
+        }
+    }
+    
+}
+
+#pragma mark - Conversation Setup
 -(void)queryConversation {
     if (self.isEven) {
         //setting up scene model for even only
@@ -334,9 +327,6 @@
     }
 }
 
-
-
-#pragma mark - Sending Message
 - (IBAction)onSendButtonTapped:(id)sender {
     [self.cloudMessages addObject:[NSString stringWithFormat:@"%@: %@", self.currentUserCharacter.text, self.messageTextField.text]];
     NSDictionary *conversation = @{
@@ -346,27 +336,6 @@
     [self.messageTextField resignFirstResponder];
     self.textFieldBottomLayout.constant = 0;
     self.messageTextField.text = @"";
-}
-
--(void)makeNotAvailable {
-    Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
-    NSDictionary *userDic = @{@"isAvailable": @0
-                            };
-    if (usersRef.authData.uid != nil) {
-        NSLog(@"----------------%@", usersRef.authData.uid);
-        Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
-        [user updateChildValues: userDic];
-    }
-
-    if (self.isSplashHidden) {
-        if (self.otherAuthuid != nil) {
-            NSLog(@"----------------%@", self.otherAuthuid);
-            Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
-            Firebase *otherUser = [usersRef childByAppendingPath:self.otherAuthuid];
-            [otherUser updateChildValues:userDic];
-        }
-    }
-
 }
 
 #pragma mark - Keyboard Animation
@@ -451,6 +420,22 @@
     return expectSize;
 }
 
+#pragma mark - Typing indicator
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField {
+    NSDictionary *conversation = @{
+                                   self.currentUserCharacter.text: @1
+                                   };
+    [self.convoRef updateChildValues:conversation];
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField {
+    NSDictionary *conversation = @{
+                                   self.currentUserCharacter.text: @0
+                                   };
+    [self.convoRef updateChildValues:conversation];
+}
+
 #pragma mark - Disappearing
 
 -(void)viewWillDisappear:(BOOL)animated {
@@ -470,37 +455,5 @@
         [self.convoRef removeAllObservers];
     }
 }
-
-#pragma mark - Animation with image
-
-- (void)rotateSecondImageView {
-    CABasicAnimation *rotation;
-    rotation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
-    rotation.fromValue = [NSNumber numberWithFloat:0];
-    rotation.toValue = [NSNumber numberWithFloat:(2 * M_PI)];
-    rotation.duration = 2.0f; // Speed
-    rotation.repeatCount = HUGE_VALF; // Repeat forever until remove animation
-    [self.otherUserImageView.layer removeAllAnimations];
-    [self.otherUserImageView.layer addAnimation:rotation forKey:@"Spin"];
-}
-
-#pragma mark - Typing indicator
-
--(void)textFieldDidBeginEditing:(UITextField *)textField {
-    NSDictionary *conversation = @{
-                                   self.currentUserCharacter.text: @1
-                                   };
-    [self.convoRef updateChildValues:conversation];
-}
-
--(void)textFieldDidEndEditing:(UITextField *)textField {
-    NSDictionary *conversation = @{
-                                   self.currentUserCharacter.text: @0
-                                   };
-    [self.convoRef updateChildValues:conversation];
-}
-
-//  To remove animation
-// [self.imageview.layer removeAllAnimations]
 
 @end
