@@ -43,7 +43,7 @@
                                     forState:UIControlStateNormal];
 
     self.ref = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
-    self.title = @"Yes And";
+    self.title = @"Yes, And";
     //-------map stuff
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
@@ -76,10 +76,24 @@
     self.tabBarController.tabBar.tintColor = [UIColor whiteColor];
 
     //-----Navbar title attributes
-    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
-    
-    UIFont *titleFont = [UIFont fontWithName: @"AppleGothic" size: 21.0 ];
-    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:titleFont forKey:NSFontAttributeName];
+//    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
+//    
+//    UIFont *titleFont = [UIFont fontWithName: @"AppleGothic" size: 21.0 ];
+//    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:titleFont forKey:NSFontAttributeName];
+//
+//    NSDictionary *textAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+//                                    [UIColor whiteColor],NSForegroundColorAttributeName,
+//                                    [UIColor whiteColor],NSBackgroundColorAttributeName,nil];
+//    self.navigationController.navigationBar.titleTextAttributes = textAttributes;
+
+    NSDictionary *attrDict = @{
+                               NSFontAttributeName : [UIFont fontWithName:@"AppleGothic" size:21.0],
+                               NSForegroundColorAttributeName : [UIColor whiteColor]
+                               };
+    self.navigationController.navigationBar.titleTextAttributes = attrDict;
+
+//    UIImage *image = [UIImage imageNamed:@"logo-transparent.png"];
+//    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:image];
 
     //listening for Scenes
     Firebase *scenesConvo = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/scenes"];

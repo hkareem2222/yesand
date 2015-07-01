@@ -28,6 +28,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    //----Set nav bar title text attributes
+    NSDictionary *attrDict = @{
+                               NSFontAttributeName : [UIFont fontWithName:@"AppleGothic" size:21.0],
+                               NSForegroundColorAttributeName : [UIColor whiteColor]
+                               };
+    self.navigationController.navigationBar.titleTextAttributes = attrDict;
+
     self.ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com"];
     if ([self.ref.authData.provider isEqualToString:@"anonymous"]) {
         self.editProfileBarButton.title = @"Sign up!";

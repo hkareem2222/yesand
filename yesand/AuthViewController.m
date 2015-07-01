@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *signUpButton;
 @property (weak, nonatomic) IBOutlet UIButton *logInButton;
 @property Firebase *myRootRef;
+@property (weak, nonatomic) IBOutlet UIButton *guestButton;
 @property TwitterAuthHelper *twitterAuthHelper;
 @end
 
@@ -33,6 +34,8 @@
     self.logInButton.layer.cornerRadius = 10;
     self.logInButton.layer.borderWidth = 1.0f;
     self.logInButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.guestButton.layer.cornerRadius = 10;
+
 
     self.logInButton.layer.cornerRadius = 10;
     [self.myRootRef observeAuthEventWithBlock:^(FAuthData *authData) {
