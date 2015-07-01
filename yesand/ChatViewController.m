@@ -343,8 +343,6 @@
                                    @"messages": self.cloudMessages
                                    };
     [self.convoRef updateChildValues:conversation];
-    [self.messageTextField resignFirstResponder];
-    self.textFieldBottomLayout.constant = 0;
     self.messageTextField.text = @"";
 }
 
@@ -499,6 +497,8 @@
                                    };
     [self.convoRef updateChildValues:conversation];
 }
+
+
 
 //  To remove animation
 // [self.imageview.layer removeAllAnimations]
