@@ -1520,7 +1520,7 @@
                                     <constraint firstAttribute="width" constant="240" id="ExO-iJ-iFI"/>
                                     <constraint firstAttribute="height" constant="40" id="sbT-w6-3DQ"/>
                                 </constraints>
-                                <state key="normal" image="twitterloginother">
+                                <state key="normal" image="twitterlogincustom">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -1648,7 +1648,7 @@
         <image name="laughnotification" width="30" height="31"/>
         <image name="logo-transparent" width="169" height="163"/>
         <image name="profilepic" width="359" height="360"/>
-        <image name="twitterloginother" width="912" height="159"/>
+        <image name="twitterlogincustom" width="912" height="159"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ZYi-VD-sef"/>
