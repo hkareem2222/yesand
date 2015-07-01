@@ -99,7 +99,7 @@
                     laughCount = scene.value[@"laughs"];
                 }
                 if ([scene.value[@"isLive"] isEqualToNumber:@1]) {
-                    if (scene.key != nil && scene.value[@"topicName"] != nil && scene.value[@"laughs"] != nil) {
+                    if (scene.key != nil && scene.value[@"topicName"] != nil) {
                         NSDictionary *sceneDic = @{
                                                    @"sceneID": scene.key,
                                                    @"topicName": scene.value[@"topicName"],
@@ -115,12 +115,10 @@
                                                    @"laughs": laughCount
                                                    };
                         [self.topScenes addObject:sceneDic];
-
                     }
                 }
             }
             [self sortByLaughs:self.topScenes andWith:self.liveScenes];
-            [self.tableView reloadData];
         }
     } withCancelBlock:^(NSError *error) {
         NSLog(@"%@", error.description);
@@ -187,9 +185,9 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     UIFont *myFont = [UIFont fontWithName: @"AppleGothic" size: 15.0];
-    UIImage     * thumbs;
-    UIImageView * thumbsView;
-    CGFloat       width;
+    UIImage *thumbs;
+    UIImageView *thumbsView;
+    CGFloat width;
     thumbs = [UIImage imageNamed:@"laughsicon"];
     thumbsView = [[UIImageView alloc] initWithImage:thumbs];
     if (self.segmentedControl.selectedSegmentIndex == 0) {
@@ -232,6 +230,18 @@
         [self performSegueWithIdentifier:@"HomeToSavedScene" sender:cell];
     }
 }
+
+#pragma mark - Alerts for Errors
+
+-(void)showAlert:(NSError *)error {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Error" message:[error localizedDescription]
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    }];
+    [alert addAction:dismissAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 
 #pragma mark - Segue
 
