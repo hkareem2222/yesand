@@ -59,9 +59,16 @@
             self.scenes = [NSMutableArray new];;
             for (FDataSnapshot *scene in snapshot.children) {
                 if ([scene.value[@"userOne"] isEqualToString:self.ref.authData.uid] || [scene.value[@"userTwo"] isEqualToString:self.ref.authData.uid]) {
+                    NSNumber *laughCount;
+                    if (scene.value[@"laughs"] == nil) {
+                        laughCount = @0;
+                    } else {
+                        laughCount = scene.value[@"laughs"];
+                    }
                     NSDictionary *sceneDic = @{
                                                @"sceneID": scene.key,
-                                               @"topicName": scene.value[@"topicName"]
+                                               @"topicName": scene.value[@"topicName"],
+                                               @"laughs": laughCount
                                                };
                     [self.scenes addObject:sceneDic];
                 }
@@ -86,6 +93,9 @@
     cell.textLabel.text = [sceneDic objectForKey:@"topicName"];
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     cell.textLabel.numberOfLines = 0;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",[sceneDic objectForKey:@"laughs"]];
+    UIFont *myFont = [ UIFont fontWithName: @"AppleGothic" size: 17.0 ];
+    cell.textLabel.font  = myFont;
     return cell;
 }
 
