@@ -85,18 +85,19 @@
         if (![snapshot.value isEqual:[NSNull null]]) {
             self.liveScenes = [NSMutableArray new];
             self.topScenes = [NSMutableArray new];
-//            NSMutableArray *laughCount = [NSMutableArray new];
             for (FDataSnapshot *scene in snapshot.children) {
-//                if (scene.value[@"laughs"] == nil) {
-//                    [laughCount addObject:@0];
-//                } else {
-//                    [laughCount addObject:scene.value[@"laughs"]];
-//                }
+                NSNumber *laughCount;
+                if (scene.value[@"laughs"] == nil) {
+                    laughCount = @0;
+                } else {
+                   laughCount = scene.value[@"laughs"];
+                }
                 if ([scene.value[@"isLive"] isEqualToNumber:@1]) {
-                    if (scene.key != nil && scene.value[@"topicName"] != nil) {
+                    if (scene.key != nil && scene.value[@"topicName"] != nil && scene.value[@"laughs"] != nil) {
                         NSDictionary *sceneDic = @{
                                                    @"sceneID": scene.key,
-                                                   @"topicName": scene.value[@"topicName"]
+                                                   @"topicName": scene.value[@"topicName"],
+                                                   @"laughs": laughCount
                                                    };
                         [self.liveScenes addObject:sceneDic];
                     }
@@ -104,15 +105,15 @@
                     if (scene.key != nil && scene.value[@"topicName"] != nil) {
                         NSDictionary *sceneDic = @{
                                                    @"sceneID": scene.key,
-                                                   @"topicName": scene.value[@"topicName"]
+                                                   @"topicName": scene.value[@"topicName"],
+                                                   @"laughs": laughCount
                                                    };
                         [self.topScenes addObject:sceneDic];
 
                     }
                 }
             }
-//            [self sortByLaughs:self.topScenes];
-//            [self sortByLaughs:self.liveScenes];
+            [self sortByLaughs:self.topScenes andWith:self.liveScenes];
             [self.tableView reloadData];
         }
     } withCancelBlock:^(NSError *error) {
@@ -120,30 +121,32 @@
     }];
 }
 
-//-(void)sortByLaughs:(NSMutableArray *)myArray {
-//    NSSortDescriptor *laughDescriptor = [[NSSortDescriptor alloc] initWithKey:@"laughs" ascending:YES];
-//    NSArray *sortDescriptors = [NSArray arrayWithObject:laughDescriptor];
-//    [myArray sortUsingDescriptors:sortDescriptors];
-//    self.topScenes = myArray;
-//    [self.tableView reloadData];
-//}
-
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Remove seperator inset
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-        [cell setSeparatorInset:UIEdgeInsetsZero];
-    }
-
-    // Prevent the cell from inheriting the Table View's margin settings
-    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
-        [cell setPreservesSuperviewLayoutMargins:NO];
-    }
-
-    // Explictly set your cell's layout margins
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-        [cell setLayoutMargins:UIEdgeInsetsZero];
-    }
+-(void)sortByLaughs:(NSMutableArray *)topScenes andWith:(NSMutableArray *)liveScenes {
+    NSSortDescriptor *laughDescriptor = [[NSSortDescriptor alloc] initWithKey:@"laughs" ascending:NO];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:laughDescriptor];
+    [topScenes sortUsingDescriptors:sortDescriptors];
+    [liveScenes sortUsingDescriptors:sortDescriptors];
+    self.topScenes = topScenes;
+    self.liveScenes = liveScenes;
+    [self.tableView reloadData];
 }
+
+//-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+//    // Remove seperator inset
+//    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+//        [cell setSeparatorInset:UIEdgeInsetsZero];
+//    }
+//
+//    // Prevent the cell from inheriting the Table View's margin settings
+//    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+//        [cell setPreservesSuperviewLayoutMargins:NO];
+//    }
+//
+//    // Explictly set your cell's layout margins
+//    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+//        [cell setLayoutMargins:UIEdgeInsetsZero];
+//    }
+//}
 
 - (IBAction)onSegmentedIndexTapped:(UISegmentedControl *)sender {
     [self.tableView reloadData];
@@ -199,16 +202,9 @@
         cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.text = [sceneDic objectForKey:@"topicName"];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",[sceneDic objectForKey:@"laughs"]];
         UIFont *myFont = [ UIFont fontWithName: @"AppleGothic" size: 17.0 ];
         cell.textLabel.font  = myFont;
-//        NSNumber *laughNumber = [sceneDic objectForKey:@"laughs"];
-//        NSLog(@"%@", laughNumber);
-//        cell.laughLabel.text =  [laughNumber stringValue];
-//        cell.backgroundColor = [UIColor colorWithRed:236/255.0 green:240/255.0 blue:241/255.0 alpha:1.0];
-//        tableView.separatorColor = [UIColor colorWithRed:52/255.0 green:73/255.0 blue:94/255.0 alpha:1.0];
-//        UILabel *colorLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 5.0, 44.0)];
-//        [cell.contentView addSubview:colorLabel];
-//        colorLabel.backgroundColor = [self.colors objectAtIndex:indexPath.row];
         return cell;
     } else {
         HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
@@ -217,11 +213,9 @@
         cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.text = [sceneDic objectForKey:@"topicName"];
-//        cell.backgroundColor = [UIColor colorWithRed:236/255.0 green:240/255.0 blue:241/255.0 alpha:1.0];
-//        tableView.separatorColor = [UIColor colorWithRed:52/255.0 green:73/255.0 blue:94/255.0 alpha:1.0];
-//        UILabel *colorLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 5.0, 44.0)];
-//        [cell.contentView addSubview:colorLabel];
-//        colorLabel.backgroundColor = [self.colors objectAtIndex:indexPath.row];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",[sceneDic objectForKey:@"laughs"]];
+        UIFont *myFont = [ UIFont fontWithName: @"AppleGothic" size: 17.0 ];
+        cell.textLabel.font  = myFont;
         return cell;
     }
 }

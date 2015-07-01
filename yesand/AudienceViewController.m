@@ -57,11 +57,17 @@
             self.messages = snapshot.value[@"messages"];
             self.sceneTitleLabel.text = snapshot.value[@"topicName"];
             self.characterOneLabel.text = snapshot.value[@"characterOne"];
-            NSLog(@"%@", snapshot.value);
             self.characterTwoLabel.text = snapshot.value[@"characterTwo"];
             self.laughs = snapshot.value[@"laughs"];
             self.laughsLabel.text = self.laughs.stringValue;
             [self.tableView reloadData];
+            if ([snapshot.value[@"isLive"] isEqualToNumber:@0]) {
+                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Users have left the scene" message:nil preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+                }];
+                [alert addAction:dismissAction];
+                [self presentViewController:alert animated:YES completion:nil];
+            }
         }
     } withCancelBlock:^(NSError *error) {
         NSLog(@"%@", error.description);

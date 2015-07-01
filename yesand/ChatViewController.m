@@ -46,10 +46,8 @@
 @property BOOL isSplashHidden;
 @property NSString *otherAuthuid;
 @property NSDictionary *topic;
-@property (weak, nonatomic) IBOutlet UIButton *sceneButton;
 @property (weak, nonatomic) IBOutlet UIImageView *typingImageView;
 @property (weak, nonatomic) IBOutlet UILabel *countdownLabel;
-
 @end
 
 @implementation ChatViewController
@@ -59,7 +57,6 @@
     NSLog(@"LOAD");
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
     self.userSetupview.layer.cornerRadius = 5;
-    self.sceneButton.layer.cornerRadius = 5;
     self.topicLabel.layer.cornerRadius = 5;
     self.topicLabel.clipsToBounds = YES;
     self.tabBarController.tabBar.hidden = YES;
