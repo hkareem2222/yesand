@@ -27,6 +27,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    UIFont *newFont = [UIFont fontWithName:@"AppleGothic" size:14];
+    [[UILabel appearance] setFont:newFont];
+
     self.myRootRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
     self.signUpButton.layer.cornerRadius = 10;
     self.signUpButton.layer.borderWidth = 1.0f;
@@ -35,6 +39,9 @@
     self.logInButton.layer.borderWidth = 1.0f;
     self.logInButton.layer.borderColor = [UIColor whiteColor].CGColor;
     self.guestButton.layer.cornerRadius = 10;
+    self.guestButton.layer.borderWidth = 1.0f;
+    self.guestButton.layer.borderColor = [UIColor whiteColor].CGColor;
+
 
 
     self.logInButton.layer.cornerRadius = 10;
