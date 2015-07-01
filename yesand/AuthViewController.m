@@ -28,10 +28,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.myRootRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
+
+    //views setup
     UIFont *newFont = [UIFont fontWithName:@"AppleGothic" size:14];
     [[UILabel appearance] setFont:newFont];
 
-    self.myRootRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
     self.signUpButton.layer.cornerRadius = 10;
     self.signUpButton.layer.borderWidth = 1.0f;
     self.signUpButton.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -43,7 +45,7 @@
     self.guestButton.layer.borderColor = [UIColor whiteColor].CGColor;
 
 
-
+    //auth check on load
     self.logInButton.layer.cornerRadius = 10;
     [self.myRootRef observeAuthEventWithBlock:^(FAuthData *authData) {
         if ([authData.provider isEqualToString:@"anonymous"]) {
@@ -56,14 +58,6 @@
             NSLog(@"no user logged in");
         }
     }];
-//    self.loginBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
-
-//    UIImage *image = [UIImage imageNamed:@"TestLogo.png"];
-//    self.navigationItem.titleView = [[UIImageView alloc]initWithImage:image];
-//
-//    self.loginBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
-//
-//    self.loginBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
 }
 
 #pragma mark - Twitter Authentication
@@ -78,8 +72,7 @@
                                                                      apiKey:@"yk5py8Xq5qmtloMvAK3sRgvwA"];
     [self.twitterAuthHelper selectTwitterAccountWithCallback:^(NSError *error, NSArray *accounts) {
         if (error) {
-            NSString *message = [NSString stringWithFormat:@"There was an error logging into Twitter: %@", [error localizedDescription]];
-            NSLog(@"%@", message);
+            [self showAlert:error];
         } else {
             [self handleMultipleTwitterAccounts:accounts];
         }
@@ -104,7 +97,7 @@
     [self.twitterAuthHelper authenticateAccount:account
                                    withCallback:^(NSError *error, FAuthData *authData) {
                                        if (error) {
-                                           // Error authenticating account with Firebase
+                                           [self showAlert:error];
                                        } else {
                                            // User successfully logged in
                                            NSLog(@"Logged in! %@", authData);
@@ -163,7 +156,7 @@
             NSLog(@"no user logged in (logging in anonymously");
             [self.myRootRef authAnonymouslyWithCompletionBlock:^(NSError *error, FAuthData *authData) {
                 if (error) {
-                    NSLog(@"error logging in anonymously: %@", [error localizedDescription]);
+                    [self showAlert:error];
                 } else {
                     NSLog(@"anonymous login successful authData: %@", authData);
                     NSDictionary *newUser = @{
@@ -191,20 +184,14 @@
     }];
 }
 
-#pragma mark - Button Actions 
+#pragma mark - Email & Password Login
 
 - (IBAction)onSignUpButtonPressed:(UIButton *)button {
     if ([button.titleLabel.text isEqualToString:@"Sign up"]) {
         [self.myRootRef createUser:self.emailField.text password:self.passwordField.text
           withValueCompletionBlock:^(NSError *error, NSDictionary *result) {
               if (error) {
-                  UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Signup" message:[NSString stringWithFormat:@"Signup Error: %@", [error localizedDescription]]
-                    preferredStyle:UIAlertControllerStyleAlert];
-                  UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-                  }];
-                  [alert addAction:dismissAction];
-                  [self presentViewController:alert animated:YES completion:nil];
-
+                  [self showAlert:error];
               } else {
                   NSString *uid = [result objectForKey:@"uid"];
                   [self savingUserData];
@@ -216,13 +203,7 @@
         [self.myRootRef authUser:self.emailField.text password:self.passwordField.text
             withCompletionBlock:^(NSError *error, FAuthData *authData) {
       if (error) {
-          UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Login" message:[NSString stringWithFormat:@"Login Error: %@", [error localizedDescription]]
-                                                                  preferredStyle:UIAlertControllerStyleAlert];
-          UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-          }];
-          [alert addAction:dismissAction];
-          [self presentViewController:alert animated:YES completion:nil];
-
+          [self showAlert:error];
       } else {
           NSLog(@"logged in");
           [self performSegueWithIdentifier:@"AuthToHome" sender:self];
@@ -244,7 +225,7 @@
     [self.myRootRef authUser:self.emailField.text password:self.passwordField.text
 withCompletionBlock:^(NSError *error, FAuthData *authData) {
     if (error) {
-        NSLog(@"error saving: %@", [error localizedDescription]);
+        [self showAlert:error];
     } else {
         NSLog(@"%@", authData.uid);
         NSDictionary *newUser = @{
@@ -269,6 +250,19 @@ withCompletionBlock:^(NSError *error, FAuthData *authData) {
     }
 }];
 }
+
+#pragma mark - Alerts for Errors
+
+-(void)showAlert:(NSError *)error {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Error" message:[error localizedDescription]
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    }];
+    [alert addAction:dismissAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark - Segue
 
 -(IBAction)unwindToAuth:(UIStoryboardSegue *)segue {
 }
