@@ -36,14 +36,14 @@
     [[UILabel appearance] setFont:newFont];
 
 
-    UIFont *segmentedFont = [ UIFont fontWithName: @"AppleGothic" size: 12.0 ];
+    UIFont *segmentedFont = [UIFont fontWithName: @"AppleGothic" size: 12.0];
     NSDictionary *attributes = [NSDictionary dictionaryWithObject:segmentedFont
                                                            forKey:NSFontAttributeName];
     [self.segmentedControl setTitleTextAttributes:attributes
                                     forState:UIControlStateNormal];
 
     self.ref = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
-    self.title = @"Yes And";
+    self.navigationItem.title = @"Yes And";
     //-------map stuff
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;

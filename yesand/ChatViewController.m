@@ -10,7 +10,7 @@
 #import "RatingViewController.h"
 #import "HomeViewController.h"
 
-@interface ChatViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
+@interface ChatViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *userSetupview;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *messageTextField;
@@ -297,6 +297,10 @@
                                                     };
                     [self.sceneConvo updateChildValues:sceneMessages];
                     [self.tableView reloadData];
+                    if (self.cloudMessages.count > 5) {
+                        NSIndexPath* ipath = [NSIndexPath indexPathForRow: self.cloudMessages.count-1 inSection: 0];
+                        [self.tableView scrollToRowAtIndexPath: ipath atScrollPosition: UITableViewScrollPositionTop animated: YES];
+                    }
                     if ([snapshot.value[self.otherUserCharacter.text] isEqualToNumber:@1]) {
                         self.typingImageView.hidden = NO;
                     } else {
@@ -318,6 +322,10 @@
                     self.cloudMessages = [NSMutableArray new];
                     [self.cloudMessages addObjectsFromArray:self.otherUserMessages];
                     [self.tableView reloadData];
+                    if (self.cloudMessages.count > 5) {
+                        NSIndexPath* ipath = [NSIndexPath indexPathForRow: self.cloudMessages.count-1 inSection: 0];
+                        [self.tableView scrollToRowAtIndexPath: ipath atScrollPosition: UITableViewScrollPositionBottom animated: YES];
+                    }
                     if ([snapshot.value[self.otherUserCharacter.text] isEqualToNumber:@1]) {
                         self.typingImageView.hidden = NO;
                     } else {
@@ -365,7 +373,7 @@
 
 }
 
-#pragma mark - Scroll View Animation
+#pragma mark - Keyboard Animation
 
 -(void)keyboardOnScreen:(NSNotification *)notification
 {
@@ -376,6 +384,13 @@
     CGRect keyboardFrame = [self.view convertRect:rawFrame fromView:nil];
 
     self.textFieldBottomLayout.constant = keyboardFrame.size.height; //- 50;
+}
+
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self.messageTextField resignFirstResponder];
+    self.textFieldBottomLayout.constant = 0;
 }
 
 #pragma mark - Segues
@@ -473,7 +488,7 @@
     [self.otherUserImageView.layer addAnimation:rotation forKey:@"Spin"];
 }
 
-#pragma mark - Typing indicator test
+#pragma mark - Typing indicator
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField {
     NSDictionary *conversation = @{
