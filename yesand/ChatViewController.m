@@ -59,6 +59,7 @@
     NSLog(@"LOAD");
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
     self.userSetupview.layer.cornerRadius = 5;
+    self.countdownLabel.layer.cornerRadius = 5;
     self.topicLabel.layer.cornerRadius = 5;
     self.topicLabel.clipsToBounds = YES;
     self.tabBarController.tabBar.hidden = YES;
@@ -201,7 +202,7 @@
             self.otherUserLabel.text = @"Finding";
             self.currentUserCharacter.text = @"Character";
             self.otherUserCharacter.text = @"Character";
-            self.topicLabel.text = @"Topic:";
+            self.topicLabel.text = @"Prompt will show when next performer arrives...";
             self.ifCalled = NO;
             self.otherUserImageView.image = [UIImage imageNamed:@"MaskIndicator.png"];
             [self rotateSecondImageView];
