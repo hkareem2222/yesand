@@ -295,7 +295,7 @@
                     [self.tableView reloadData];
                     if (self.cloudMessages.count > 5) {
                         NSIndexPath* ipath = [NSIndexPath indexPathForRow: self.cloudMessages.count-1 inSection: 0];
-                        [self.tableView scrollToRowAtIndexPath: ipath atScrollPosition: UITableViewScrollPositionTop animated: YES];
+                        [self.tableView scrollToRowAtIndexPath: ipath atScrollPosition: UITableViewScrollPositionBottom animated: YES];
                     }
                     if ([snapshot.value[self.otherUserCharacter.text] isEqualToNumber:@1]) {
                         self.typingImageView.hidden = NO;

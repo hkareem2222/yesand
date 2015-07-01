@@ -99,8 +99,17 @@
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     cell.textLabel.numberOfLines = 0;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",[sceneDic objectForKey:@"laughs"]];
-    UIFont *myFont = [ UIFont fontWithName: @"AppleGothic" size: 17.0 ];
+    UIFont *myFont = [UIFont fontWithName:@"AppleGothic" size:15.0];
     cell.textLabel.font  = myFont;
+
+    UIImage     * thumbs;
+    UIImageView * thumbsView;
+    CGFloat       width;
+    thumbs = [UIImage imageNamed:@"laughsicon"];
+    thumbsView = [[UIImageView alloc] initWithImage:thumbs];
+    width = (cell.frame.size.height * thumbs.size.width) / thumbs.size.height;
+    thumbsView.frame   = CGRectMake(0, 0, width - 25, cell.frame.size.height - 25);
+    cell.accessoryView = thumbsView;
     return cell;
 }
 

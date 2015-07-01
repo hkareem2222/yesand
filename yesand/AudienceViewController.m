@@ -67,6 +67,10 @@
             self.laughs = snapshot.value[@"laughs"];
             self.laughsLabel.text = self.laughs.stringValue;
             [self.tableView reloadData];
+            if (self.messages.count > 5) {
+                NSIndexPath* ipath = [NSIndexPath indexPathForRow: self.messages.count-1 inSection: 0];
+                [self.tableView scrollToRowAtIndexPath:ipath atScrollPosition: UITableViewScrollPositionBottom animated: YES];
+            }
             if ([snapshot.value[@"isLive"] isEqualToNumber:@0]) {
                 UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Users have left the scene" message:nil preferredStyle:UIAlertControllerStyleAlert];
                 UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
