@@ -1348,14 +1348,7 @@
                                             <action selector="onSignUpButtonPressed:" destination="V5t-P2-765" eventType="touchUpInside" id="wgT-Ny-H2z"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="twitterlogin" translatesAutoresizingMaskIntoConstraints="NO" id="Fmg-Sv-pPw">
-                                        <rect key="frame" x="180" y="173" width="240" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="DDY-pX-HIW"/>
-                                            <constraint firstAttribute="width" constant="240" id="bUH-39-gYL"/>
-                                        </constraints>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UZU-2V-XWb">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UZU-2V-XWb">
                                         <rect key="frame" x="236" y="221" width="128" height="30"/>
                                         <color key="backgroundColor" red="0.80000001192092896" green="0.80000001192092896" blue="0.80000001192092896" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -1369,6 +1362,19 @@
                                             <action selector="onGuestButtonPressed:" destination="V5t-P2-765" eventType="touchUpInside" id="vPC-IX-322"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dXY-Tz-ACB">
+                                        <rect key="frame" x="177.5" y="173" width="245" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="PLs-Xk-5nt"/>
+                                            <constraint firstAttribute="width" constant="245" id="swS-is-xgx"/>
+                                        </constraints>
+                                        <state key="normal" image="twitterlogin">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onTwitterButtonPressed:" destination="V5t-P2-765" eventType="touchUpInside" id="gDO-Zl-L2m"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1380,19 +1386,18 @@
                                     <constraint firstItem="JID-EC-H4A" firstAttribute="leading" secondItem="6nw-rj-zXe" secondAttribute="leading" constant="30" id="Irf-Z8-1ZV"/>
                                     <constraint firstItem="GRd-sb-Ukc" firstAttribute="top" secondItem="DJK-6E-Pne" secondAttribute="bottom" constant="8" id="NZV-Su-OO3"/>
                                     <constraint firstItem="DJK-6E-Pne" firstAttribute="top" secondItem="RVm-fn-Zhc" secondAttribute="bottom" constant="8" id="QJp-2p-ZjQ"/>
-                                    <constraint firstAttribute="centerX" secondItem="Fmg-Sv-pPw" secondAttribute="centerX" id="TKO-jH-SIx"/>
                                     <constraint firstAttribute="trailing" secondItem="oYm-9n-wZn" secondAttribute="trailing" constant="30" id="UYR-q6-ebh"/>
                                     <constraint firstAttribute="trailing" secondItem="RVm-fn-Zhc" secondAttribute="trailing" constant="30" id="Upc-bh-jez"/>
                                     <constraint firstItem="RVm-fn-Zhc" firstAttribute="top" secondItem="JID-EC-H4A" secondAttribute="bottom" constant="8" id="Veg-LE-TYV"/>
                                     <constraint firstItem="oYm-9n-wZn" firstAttribute="width" secondItem="GRd-sb-Ukc" secondAttribute="width" id="Vsw-QS-YzR"/>
                                     <constraint firstAttribute="trailing" secondItem="DJK-6E-Pne" secondAttribute="trailing" constant="30" id="X2F-h0-g7K"/>
                                     <constraint firstAttribute="centerX" secondItem="UZU-2V-XWb" secondAttribute="centerX" id="XXn-Pd-q5X"/>
-                                    <constraint firstItem="UZU-2V-XWb" firstAttribute="top" secondItem="Fmg-Sv-pPw" secondAttribute="bottom" constant="8" id="bqu-w7-MrU"/>
                                     <constraint firstItem="GRd-sb-Ukc" firstAttribute="leading" secondItem="6nw-rj-zXe" secondAttribute="leading" constant="30" id="eyA-BM-MIk"/>
                                     <constraint firstItem="DJK-6E-Pne" firstAttribute="leading" secondItem="6nw-rj-zXe" secondAttribute="leading" constant="30" id="glH-Nf-813"/>
                                     <constraint firstItem="oYm-9n-wZn" firstAttribute="leading" secondItem="GRd-sb-Ukc" secondAttribute="trailing" constant="12" id="kQs-hX-Cbn"/>
                                     <constraint firstItem="RVm-fn-Zhc" firstAttribute="leading" secondItem="6nw-rj-zXe" secondAttribute="leading" constant="30" id="pGN-OD-8pK"/>
-                                    <constraint firstItem="Fmg-Sv-pPw" firstAttribute="top" secondItem="oYm-9n-wZn" secondAttribute="bottom" constant="8" id="q5V-nW-t7g"/>
+                                    <constraint firstItem="dXY-Tz-ACB" firstAttribute="top" secondItem="oYm-9n-wZn" secondAttribute="bottom" constant="8" id="pKF-4X-eHK"/>
+                                    <constraint firstAttribute="centerX" secondItem="dXY-Tz-ACB" secondAttribute="centerX" id="psr-H0-Ush"/>
                                     <constraint firstAttribute="bottom" secondItem="fNr-Q9-Hku" secondAttribute="bottom" id="qgx-Zl-n9a"/>
                                     <constraint firstAttribute="trailing" secondItem="fNr-Q9-Hku" secondAttribute="trailing" id="yP9-nA-atO"/>
                                     <constraint firstItem="JID-EC-H4A" firstAttribute="top" secondItem="6nw-rj-zXe" secondAttribute="top" constant="21" id="zYI-uS-7Zy"/>

@@ -27,11 +27,11 @@
 		85963F981B34C8F7006E2868 /* yesandTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 85963F971B34C8F7006E2868 /* yesandTests.m */; };
 		85963FA21B34D264006E2868 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85963FA11B34D264006E2868 /* MapKit.framework */; };
 		85963FA51B359D9C006E2868 /* AuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85963FA41B359D9C006E2868 /* AuthViewController.m */; };
+		85CFE43C1B4350B9002A52A1 /* TwitterAuthHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 85CFE43B1B4350B9002A52A1 /* TwitterAuthHelper.m */; };
 		BF372B461B3B1DEA00D7AE0C /* RateView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF372B451B3B1DEA00D7AE0C /* RateView.m */; };
 		BF372B811B3C3F5600D7AE0C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF372B801B3C3F5600D7AE0C /* CoreLocation.framework */; };
 		BF372B891B3C531A00D7AE0C /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF372B881B3C531A00D7AE0C /* Social.framework */; };
 		BF372B8B1B3C537200D7AE0C /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF372B8A1B3C537200D7AE0C /* Accounts.framework */; };
-		BF372B8E1B3C545300D7AE0C /* TwitterAuthHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BF372B8D1B3C545300D7AE0C /* TwitterAuthHelper.m */; };
 		BF372B911B3CD59F00D7AE0C /* TabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BF372B901B3CD59F00D7AE0C /* TabBar.m */; };
 		BF4F90861B39E4EC00A93680 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF4F90851B39E4EC00A93680 /* EditProfileViewController.m */; };
 		BF4F90891B39F0D600A93680 /* AudienceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF4F90881B39F0D600A93680 /* AudienceViewController.m */; };
@@ -84,13 +84,13 @@
 		85963FA11B34D264006E2868 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		85963FA31B359D9C006E2868 /* AuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthViewController.h; sourceTree = "<group>"; };
 		85963FA41B359D9C006E2868 /* AuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthViewController.m; sourceTree = "<group>"; };
+		85CFE43A1B4350B9002A52A1 /* TwitterAuthHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterAuthHelper.h; sourceTree = "<group>"; };
+		85CFE43B1B4350B9002A52A1 /* TwitterAuthHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterAuthHelper.m; sourceTree = "<group>"; };
 		BF372B441B3B1DEA00D7AE0C /* RateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateView.h; sourceTree = "<group>"; };
 		BF372B451B3B1DEA00D7AE0C /* RateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateView.m; sourceTree = "<group>"; };
 		BF372B801B3C3F5600D7AE0C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		BF372B881B3C531A00D7AE0C /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		BF372B8A1B3C537200D7AE0C /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
-		BF372B8C1B3C545300D7AE0C /* TwitterAuthHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterAuthHelper.h; sourceTree = "<group>"; };
-		BF372B8D1B3C545300D7AE0C /* TwitterAuthHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterAuthHelper.m; sourceTree = "<group>"; };
 		BF372B8F1B3CD59F00D7AE0C /* TabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBar.h; sourceTree = "<group>"; };
 		BF372B901B3CD59F00D7AE0C /* TabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBar.m; sourceTree = "<group>"; };
 		BF4F90841B39E4EC00A93680 /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
@@ -255,6 +255,8 @@
 		F99E11F21B3DAD0900A75738 /* Custom Classes */ = {
 			isa = PBXGroup;
 			children = (
+				85CFE43A1B4350B9002A52A1 /* TwitterAuthHelper.h */,
+				85CFE43B1B4350B9002A52A1 /* TwitterAuthHelper.m */,
 				F96300F51B41E3B3009F459B /* ReceiveTableViewCell.h */,
 				F96300F61B41E3B3009F459B /* ReceiveTableViewCell.m */,
 				F96300F81B41E3C1009F459B /* SendTableViewCell.h */,
@@ -271,8 +273,6 @@
 				BF372B901B3CD59F00D7AE0C /* TabBar.m */,
 				BF372B441B3B1DEA00D7AE0C /* RateView.h */,
 				BF372B451B3B1DEA00D7AE0C /* RateView.m */,
-				BF372B8C1B3C545300D7AE0C /* TwitterAuthHelper.h */,
-				BF372B8D1B3C545300D7AE0C /* TwitterAuthHelper.m */,
 			);
 			name = "Custom Classes";
 			sourceTree = "<group>";
@@ -396,7 +396,6 @@
 			files = (
 				BF4F90861B39E4EC00A93680 /* EditProfileViewController.m in Sources */,
 				85963F811B34C8F7006E2868 /* yesand.xcdatamodeld in Sources */,
-				BF372B8E1B3C545300D7AE0C /* TwitterAuthHelper.m in Sources */,
 				85963FA51B359D9C006E2868 /* AuthViewController.m in Sources */,
 				85963F7E1B34C8F7006E2868 /* AppDelegate.m in Sources */,
 				85963F841B34C8F7006E2868 /* HomeViewController.m in Sources */,
@@ -409,6 +408,7 @@
 				F96300FA1B41E3C1009F459B /* SendTableViewCell.m in Sources */,
 				BF4F90891B39F0D600A93680 /* AudienceViewController.m in Sources */,
 				F9A55C621B42F40600E47D1A /* AudienceSendTableViewCell.m in Sources */,
+				85CFE43C1B4350B9002A52A1 /* TwitterAuthHelper.m in Sources */,
 				BF372B911B3CD59F00D7AE0C /* TabBar.m in Sources */,
 				85014AAC1B35BD7400E190C8 /* ChatViewController.m in Sources */,
 				F9A55C5F1B42F3F500E47D1A /* AudienceReceiveTableViewCell.m in Sources */,

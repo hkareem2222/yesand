@@ -7,10 +7,10 @@
 //
 
 #import "AuthViewController.h"
-#import "TwitterAuthHelper.h"
 #import <QuartzCore/QuartzCore.h>
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
+#import "TwitterAuthHelper.h"
 
 @interface AuthViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
@@ -54,30 +54,95 @@
 //    self.loginBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
 //
 //    self.loginBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
+}
 
+#pragma mark - Twitter Authentication
 
+- (IBAction)onTwitterButtonPressed:(id)sender {
+    [self authenticateWithTwitter];
+}
+
+- (void) authenticateWithTwitter {
     Firebase *ref = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
-    TwitterAuthHelper *twitterAuthHelper = [[TwitterAuthHelper alloc] initWithFirebaseRef:ref
-                                                                                   apiKey:@"Z8GrVACeWIebv2W0CkOP0kXaY"];
-        [twitterAuthHelper selectTwitterAccountWithCallback:^(NSError *error, NSArray *accounts) {
+    self.twitterAuthHelper = [[TwitterAuthHelper alloc] initWithFirebaseRef:ref
+                                                                     apiKey:@"yk5py8Xq5qmtloMvAK3sRgvwA"];
+    [self.twitterAuthHelper selectTwitterAccountWithCallback:^(NSError *error, NSArray *accounts) {
         if (error) {
-            // Error retrieving Twitter accounts
-        } else if ([accounts count] == 0) {
-            // No Twitter accounts found on device
+            NSString *message = [NSString stringWithFormat:@"There was an error logging into Twitter: %@", [error localizedDescription]];
+            NSLog(@"%@", message);
         } else {
-            // Select an account. Here we pick the first one for simplicity
-            ACAccount *account = [accounts firstObject];
-            [twitterAuthHelper authenticateAccount:account withCallback:^(NSError *error, FAuthData *authData) {
-                if (error) {
-                    // Error authenticating account
-                } else {
-                    // User logged in!
-                }
-            }];
+            [self handleMultipleTwitterAccounts:accounts];
         }
     }];
-
 }
+- (void)handleMultipleTwitterAccounts:(NSArray *)accounts {
+    switch ([accounts count]) {
+        case 0:
+            NSLog(@"no twitter accounts on device");
+            break;
+        case 1:
+            // Single user system, go straight to login
+            [self authenticateWithTwitterAccount:[accounts firstObject]];
+            break;
+        default:
+            // Handle multiple users
+            [self selectTwitterAccount:accounts];
+            break;
+    }
+}
+- (void)authenticateWithTwitterAccount:(ACAccount *)account {
+    [self.twitterAuthHelper authenticateAccount:account
+                                   withCallback:^(NSError *error, FAuthData *authData) {
+                                       if (error) {
+                                           // Error authenticating account with Firebase
+                                       } else {
+                                           // User successfully logged in
+                                           NSLog(@"Logged in! %@", authData);
+                                           [self saveTwitterUserData:authData];
+                                       }
+                                   }];
+}
+- (void)selectTwitterAccount:(NSArray *)accounts {
+    // Pop up action sheet which has different user accounts as options
+    UIActionSheet *selectUserActionSheet = [[UIActionSheet alloc] initWithTitle:@"Select Twitter Account" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
+    for (ACAccount *account in accounts) {
+        [selectUserActionSheet addButtonWithTitle:[account username]];
+    }
+    selectUserActionSheet.cancelButtonIndex = [selectUserActionSheet addButtonWithTitle:@"Cancel"];
+    [selectUserActionSheet showInView:self.view];
+}
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSString *currentTwitterHandle = [actionSheet buttonTitleAtIndex:buttonIndex];
+    for (ACAccount *account in self.twitterAuthHelper.accounts) {
+        if ([currentTwitterHandle isEqualToString:account.username]) {
+            [self authenticateWithTwitterAccount:account];
+            return;
+        }
+    }
+}
+
+-(void)saveTwitterUserData:(FAuthData *)authData {
+    NSDictionary *newUser = @{
+                              @"provider": authData.provider,
+                              @"isAvailable": @0,
+                              @"updateAt": kFirebaseServerValueTimestamp,
+                              @"character one": @"test",
+                              @"character two": @"test",
+                              @"topic name": @"test",
+                              @"authuid": authData.uid,
+                              @"username": authData.providerData[@"username"],
+                              @"name": @" ",
+                              @"tagline": @" ",
+                              @"location": @" ",
+                              @"website": @" ",
+                              @"rating": @[@3,@3],
+                              @"rating avg": @"3"
+                              };
+    [[[self.myRootRef childByAppendingPath:@"users"]
+      childByAppendingPath:authData.uid] setValue:newUser];
+}
+
+#pragma mark - Guest Login
 
 - (IBAction)onGuestButtonPressed:(id)sender {
     [self.myRootRef observeAuthEventWithBlock:^(FAuthData *authData) {
@@ -115,75 +180,6 @@
         }
     }];
 }
-#pragma Twitter Authentication Methods
-
-- (void) authenticateWithTwitter {
-    Firebase *ref = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
-    self.twitterAuthHelper = [[TwitterAuthHelper alloc] initWithFirebaseRef:ref
-                                                                     apiKey:@"Z8GrVACeWIebv2W0CkOP0kXaY"];
-    [self.twitterAuthHelper selectTwitterAccountWithCallback:^(NSError *error, NSArray *accounts) {
-        if (error) {
-//            NSString *message = [NSString stringWithFormat:@"There was an error logging into Twitter: %@", [error localizedDescription]];
-//            [self showErrorAlertWithMessage:message];
-
-            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Twitter Login Failure" message:[NSString stringWithFormat:@"%@", [error localizedDescription]]
-                                                                    preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-            }];
-            [alert addAction:dismissAction];
-            [self presentViewController:alert animated:YES completion:nil];
-
-        } else {
-            [self handleMultipleTwitterAccounts:accounts];
-        }
-    }];
-}
-
-- (void) handleMultipleTwitterAccounts:(NSArray *)accounts {
-    switch ([accounts count]) {
-        case 0:
-            // No account on device.
-            break;
-        case 1:
-            // Single user system, go straight to login
-            [self authenticateWithTwitterAccount:[accounts firstObject]];
-            break;
-        default:
-            // Handle multiple users
-            [self selectTwitterAccount:accounts];
-            break;
-    }
-}
-- (void) authenticateWithTwitterAccount:(ACAccount *)account {
-    [self.twitterAuthHelper authenticateAccount:account
-                                   withCallback:^(NSError *error, FAuthData *authData) {
-                                       if (error) {
-                                           // Error authenticating account with Firebase
-                                       } else {
-                                           // User successfully logged in
-                                           NSLog(@"Logged in! %@", authData);
-                                       }
-                                   }];
-}
-- (void) selectTwitterAccount:(NSArray *)accounts {
-    // Pop up action sheet which has different user accounts as options
-    UIActionSheet *selectUserActionSheet = [[UIActionSheet alloc] initWithTitle:@"Select Twitter Account" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
-    for (ACAccount *account in accounts) {
-        [selectUserActionSheet addButtonWithTitle:[account username]];
-    }
-    selectUserActionSheet.cancelButtonIndex = [selectUserActionSheet addButtonWithTitle:@"Cancel"];
-    [selectUserActionSheet showInView:self.view];
-}
-- (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSString *currentTwitterHandle = [actionSheet buttonTitleAtIndex:buttonIndex];
-    for (ACAccount *account in self.twitterAuthHelper.accounts) {
-        if ([currentTwitterHandle isEqualToString:account.username]) {
-            [self authenticateWithTwitterAccount:account];
-            return;
-        }
-    }
-}
-
 
 #pragma mark - Button Actions 
 

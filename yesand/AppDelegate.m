@@ -19,6 +19,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [Fabric with:@[CrashlyticsKit]];
+//        [self.window.rootViewController performSegueWithIdentifier:@"AuthToHome" sender:self];
     return YES;
 }
 
