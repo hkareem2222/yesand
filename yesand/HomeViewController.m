@@ -25,25 +25,33 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic) NSArray *colors;
 @property NSMutableArray *topScenes;
+@property Firebase *scenesConvo;
 @end
 
 @implementation HomeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.ref = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
 
     //---setting fonts for labels throughout app, as well as other items on home
-//    UIFont *newFont = [UIFont fontWithName:@"AppleGothic" size:14];
-//    [[UILabel appearance] setFont:newFont];
-
     UIFont *segmentedFont = [UIFont fontWithName: @"AppleGothic" size: 12.0];
     NSDictionary *attributes = [NSDictionary dictionaryWithObject:segmentedFont
                                                            forKey:NSFontAttributeName];
     [self.segmentedControl setTitleTextAttributes:attributes
                                     forState:UIControlStateNormal];
-
-    self.ref = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
     self.navigationItem.title = @"Yes, And";
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
+    self.tabBarController.tabBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
+    self.tabBarController.tabBar.tintColor = [UIColor whiteColor];
+
+    NSDictionary *attrDict = @{
+                               NSFontAttributeName : [UIFont fontWithName:@"AppleGothic" size:21.0],
+                               NSForegroundColorAttributeName : [UIColor whiteColor]
+                               };
+    self.navigationController.navigationBar.titleTextAttributes = attrDict;
+    //------ends here
+
     //-------map stuff
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
@@ -68,36 +76,18 @@
     MKCoordinateRegion region = MKCoordinateRegionMake(annotation.coordinate, MKCoordinateSpanMake(0.05, 0.05));
     [self.mapView setRegion:region];
     //------ends here
+}
 
-//    self.colors = [NSArray arrayWithObjects:[UIColor colorWithRed:3/255.0 green:201/255.0 blue:169/255.0 alpha:1.0], [UIColor colorWithRed:25/255.0 green:181/255.0 blue:254/255.0 alpha:1.0], [UIColor colorWithRed:242/255.0 green:120/255.0 blue:75/255.0 alpha:1.0], [UIColor colorWithRed:155/255.0 green:89/255.0 blue:182 /255.0 alpha:1.0], [UIColor colorWithRed:3/255.0 green:201/255.0 blue:169/255.0 alpha:1.0], [UIColor colorWithRed:25/255.0 green:181/255.0 blue:254/255.0 alpha:1.0], [UIColor colorWithRed:242/255.0 green:120/255.0 blue:75/255.0 alpha:1.0], [UIColor colorWithRed:155/255.0 green:89/255.0 blue:182 /255.0 alpha:1.0], [UIColor colorWithRed:3/255.0 green:201/255.0 blue:169/255.0 alpha:1.0], [UIColor colorWithRed:25/255.0 green:181/255.0 blue:254/255.0 alpha:1.0], [UIColor colorWithRed:242/255.0 green:120/255.0 blue:75/255.0 alpha:1.0], [UIColor colorWithRed:155/255.0 green:89/255.0 blue:182 /255.0 alpha:1.0], nil];
-
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
-    self.tabBarController.tabBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
-    self.tabBarController.tabBar.tintColor = [UIColor whiteColor];
-
-    //-----Navbar title attributes
-//    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
-//    
-//    UIFont *titleFont = [UIFont fontWithName: @"AppleGothic" size: 21.0 ];
-//    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:titleFont forKey:NSFontAttributeName];
-//
-//    NSDictionary *textAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
-//                                    [UIColor whiteColor],NSForegroundColorAttributeName,
-//                                    [UIColor whiteColor],NSBackgroundColorAttributeName,nil];
-//    self.navigationController.navigationBar.titleTextAttributes = textAttributes;
-
-    NSDictionary *attrDict = @{
-                               NSFontAttributeName : [UIFont fontWithName:@"AppleGothic" size:21.0],
-                               NSForegroundColorAttributeName : [UIColor whiteColor]
-                               };
-    self.navigationController.navigationBar.titleTextAttributes = attrDict;
-
-//    UIImage *image = [UIImage imageNamed:@"logo-transparent.png"];
-//    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:image];
-
+-(void)viewDidAppear:(BOOL)animated {
     //listening for Scenes
-    Firebase *scenesConvo = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/scenes"];
-    [scenesConvo observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+    [self sceneListener];
+}
+
+#pragma mark - Loading Scenes
+
+-(void)sceneListener {
+    self.scenesConvo = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/scenes"];
+    [self.scenesConvo observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         if (![snapshot.value isEqual:[NSNull null]]) {
             self.liveScenes = [NSMutableArray new];
             self.topScenes = [NSMutableArray new];
@@ -106,7 +96,7 @@
                 if (scene.value[@"laughs"] == nil) {
                     laughCount = @0;
                 } else {
-                   laughCount = scene.value[@"laughs"];
+                    laughCount = scene.value[@"laughs"];
                 }
                 if ([scene.value[@"isLive"] isEqualToNumber:@1]) {
                     if (scene.key != nil && scene.value[@"topicName"] != nil && scene.value[@"laughs"] != nil) {
@@ -147,22 +137,7 @@
     [self.tableView reloadData];
 }
 
-//-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    // Remove seperator inset
-//    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-//        [cell setSeparatorInset:UIEdgeInsetsZero];
-//    }
-//
-//    // Prevent the cell from inheriting the Table View's margin settings
-//    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
-//        [cell setPreservesSuperviewLayoutMargins:NO];
-//    }
-//
-//    // Explictly set your cell's layout margins
-//    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-//        [cell setLayoutMargins:UIEdgeInsetsZero];
-//    }
-//}
+#pragma mark - Segmented Control
 
 - (IBAction)onSegmentedIndexTapped:(UISegmentedControl *)sender {
     [self.tableView reloadData];
@@ -276,5 +251,6 @@
 
 -(void)viewWillDisappear:(BOOL)animated {
     [self.ref removeAllObservers];
+    [self.scenesConvo removeAllObservers];
 }
 @end

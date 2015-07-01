@@ -102,6 +102,7 @@
                                            // User successfully logged in
                                            NSLog(@"Logged in! %@", authData);
                                            [self saveTwitterUserData:authData];
+                                           [self performSegueWithIdentifier:@"AuthToHome" sender:self];
                                        }
                                    }];
 }
