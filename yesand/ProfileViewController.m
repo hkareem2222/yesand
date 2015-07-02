@@ -44,7 +44,7 @@
     if ([self.ref.authData.provider isEqualToString:@"anonymous"]) {
         self.editProfileBarButton.title = @"Sign up!";
     } else {
-        self.editProfileBarButton.title = @"Settings";
+        self.editProfileBarButton.image = [UIImage imageNamed:@"settingsicon.png"];
     }
 }
 
@@ -138,10 +138,10 @@
 }
 
 - (IBAction)onSettingsPressed:(UIBarButtonItem *)sender {
-    if ([sender.title isEqualToString:@"Settings"]) {
-        [self performSegueWithIdentifier:@"ProfileToEdit" sender:sender];
-    } else if ([sender.title isEqualToString:@"Sign up!"]) {
+    if ([sender.title isEqualToString:@"Sign up!"]) {
         [self performSegueWithIdentifier:@"UnwindToAuthFromProfile" sender:sender];
+    } else {
+        [self performSegueWithIdentifier:@"ProfileToEdit" sender:sender];
     }
 }
 

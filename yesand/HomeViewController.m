@@ -26,6 +26,7 @@
 @property (nonatomic) NSArray *colors;
 @property NSMutableArray *topScenes;
 @property Firebase *scenesConvo;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *helpBarButton;
 @end
 
 @implementation HomeViewController
@@ -43,6 +44,7 @@
                                     forState:UIControlStateNormal];
     self.navigationItem.title = @"Yes, And";
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
+    self.helpBarButton.tintColor = [UIColor whiteColor];
     self.tabBarController.tabBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
     self.tabBarController.tabBar.tintColor = [UIColor whiteColor];
 

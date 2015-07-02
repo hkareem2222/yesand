@@ -729,11 +729,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="r2y-wN-Tbp">
-                        <barButtonItem key="rightBarButtonItem" title="Item" style="plain" id="73s-aP-kaj"/>
+                        <barButtonItem key="rightBarButtonItem" image="helpicon" id="epH-eu-1rn"/>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="helpBarButton" destination="epH-eu-1rn" id="LXb-he-Qd5"/>
                         <outlet property="mapView" destination="max-fw-xhT" id="3mO-l0-wU4"/>
                         <outlet property="segmentedControl" destination="QTZ-cM-tnE" id="gNz-JZ-XrK"/>
                         <outlet property="tableView" destination="IQr-Iz-FX1" id="ykq-ta-i9A"/>
@@ -851,7 +852,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="K0h-w6-sAo">
-                        <barButtonItem key="rightBarButtonItem" title="Settings" id="6k4-B0-AX7">
+                        <barButtonItem key="rightBarButtonItem" image="settingsicon" id="6k4-B0-AX7">
                             <connections>
                                 <action selector="onSettingsPressed:" destination="DSd-uC-qSp" id="msM-pW-7P4"/>
                             </connections>
@@ -1454,13 +1455,15 @@
         <image name="SendImage" width="230" height="51"/>
         <image name="TypingIndicatorImage" width="60" height="25"/>
         <image name="comedybackground" width="1098" height="1539"/>
+        <image name="helpicon" width="29" height="29"/>
         <image name="laughsicon" width="20" height="20"/>
         <image name="logo-transparent" width="169" height="163"/>
         <image name="profilepic" width="359" height="360"/>
+        <image name="settingsicon" width="23" height="23"/>
         <image name="twitterlogincustom" width="912" height="159"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="hkv-kI-r5j"/>
-        <segue reference="ZYi-VD-sef"/>
+        <segue reference="MjL-Mh-mnN"/>
     </inferredMetricsTieBreakers>
 </document>
