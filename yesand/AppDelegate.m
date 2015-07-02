@@ -20,7 +20,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [Fabric with:@[CrashlyticsKit]];
 //        [self.window.rootViewController performSegueWithIdentifier:@"AuthToHome" sender:self];
-    return YES;
+    UIImage *tabItem = [UIImage imageNamed:@"tabItem"];
+    [[UITabBar appearance] setSelectionIndicatorImage:tabItem];
+        return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
