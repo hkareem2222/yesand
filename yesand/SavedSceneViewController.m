@@ -34,6 +34,8 @@
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
 
     self.tableView.separatorColor = [UIColor clearColor];
+    self.sceneTitleLabel.font = [UIFont fontWithName: @"AppleGothic" size: 15.0];
+
     
     //scene setup
     Firebase *ref = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];

@@ -15,8 +15,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property NSArray *messages;
 @property (weak, nonatomic) IBOutlet UILabel *sceneTitleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *characterOneLabel;
-@property (weak, nonatomic) IBOutlet UILabel *characterTwoLabel;
+@property NSString *leftCharacter;
+@property NSString *rightCharacter;
 @property NSNumber *laughs;
 @property Firebase *scenesConvo;
 @property (weak, nonatomic) IBOutlet UILabel *laughsLabel;
@@ -64,8 +64,8 @@
         if (![snapshot.value[@"messages"] isEqual:[NSNull null]]) {
             self.messages = snapshot.value[@"messages"];
             self.sceneTitleLabel.text = snapshot.value[@"topicName"];
-            self.characterOneLabel.text = snapshot.value[@"characterOne"];
-            self.characterTwoLabel.text = snapshot.value[@"characterTwo"];
+            self.leftCharacter = snapshot.value[@"characterOne"];
+            self.rightCharacter = snapshot.value[@"characterTwo"];
             self.laughs = snapshot.value[@"laughs"];
             self.laughsLabel.text = self.laughs.stringValue;
             [self.tableView reloadData];
@@ -160,7 +160,7 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([self.messages[indexPath.row] hasPrefix:self.characterOneLabel.text]) {
+    if ([self.messages[indexPath.row] hasPrefix:self.leftCharacter]) {
         AudienceReceiveTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ReceiveMessageID"];
         cell.receiveMessageLabel.text = self.messages[indexPath.row];
         return cell;
