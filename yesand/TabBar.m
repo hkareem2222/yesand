@@ -19,6 +19,13 @@
     [self.viewControllers enumerateObjectsUsingBlock:^(UIViewController *vc, NSUInteger idx, BOOL *stop) {
         vc.title = nil;
         vc.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
+
+        UITabBarItem *item = [self.tabBar.items objectAtIndex:0];
+        item.image = [[UIImage imageNamed:@"HomeIconWhite.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        UITabBarItem *item2 = [self.tabBar.items objectAtIndex:1];
+        item2.image = [[UIImage imageNamed:@"NewSceneIconWhite.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        UITabBarItem *item3 = [self.tabBar.items objectAtIndex:2];
+        item3.image = [[UIImage imageNamed:@"MaskIconWhite.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     }];
 }
 
