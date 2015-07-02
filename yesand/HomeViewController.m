@@ -64,21 +64,48 @@
     self.mapView.showsUserLocation = YES;
     self.mapView.mapType = MKMapTypeStandard;
     self.mapView.delegate = self;
-    NSDictionary *comedyLocationsDic = @{
+
+    //remove this after launch
+    NSDictionary *comedyLocationDicOne = @{
                                          @"latitude": @41.912375,
                                          @"longitude": @-87.634002
                                          };
-    NSArray *comedyLocations = @[comedyLocationsDic];
-    NSNumber *latitude = comedyLocations.firstObject[@"latitude"];
-    NSNumber *longitude = comedyLocations.firstObject[@"longitude"];
+    NSDictionary *comedyLocationDicTwo = @{
+                                           @"latitude": @41.913375,
+                                           @"longitude": @-87.634002
+                                           };
+    NSDictionary *comedyLocationDicThree = @{
+                                           @"latitude": @41.912175,
+                                           @"longitude": @-87.630002
+                                           };
+    NSDictionary *comedyLocationDicFour = @{
+                                           @"latitude": @41.912112,
+                                           @"longitude": @-87.634000
+                                           };
+    NSDictionary *comedyLocationDicFive = @{
+                                            @"latitude": @41.912772,
+                                            @"longitude": @-87.640400
+                                            };
+    NSDictionary *comedyLocationDicSix = @{
+                                            @"latitude": @41.912672,
+                                            @"longitude": @-87.610400
+                                            };
+    NSDictionary *comedyLocationDicSeven = @{
+                                            @"latitude": @41.912152,
+                                            @"longitude": @-87.620700
+                                            };
+    NSArray *comedyLocations = @[comedyLocationDicOne, comedyLocationDicTwo, comedyLocationDicThree, comedyLocationDicFour, comedyLocationDicFive, comedyLocationDicSix, comedyLocationDicSeven];
+    for (NSDictionary *dictionary in comedyLocations) {
+        NSNumber *latitude = dictionary[@"latitude"];
+        NSNumber *longitude = dictionary[@"longitude"];
 
-    MKPointAnnotation *annotation = [MKPointAnnotation new];
-    annotation.coordinate = CLLocationCoordinate2DMake(latitude.doubleValue, longitude.doubleValue);
-    annotation.title = @"Second City Theater";
-    [self.mapView addAnnotation:annotation];
-
-    MKCoordinateRegion region = MKCoordinateRegionMake(annotation.coordinate, MKCoordinateSpanMake(0.05, 0.05));
-    [self.mapView setRegion:region];
+        MKPointAnnotation *annotation = [MKPointAnnotation new];
+        annotation.coordinate = CLLocationCoordinate2DMake(latitude.doubleValue, longitude.doubleValue);
+//        annotation.title = @"Second City Theater";
+        [self.mapView addAnnotation:annotation];
+        MKCoordinateRegion region = MKCoordinateRegionMake(annotation.coordinate, MKCoordinateSpanMake(0.05, 0.05));
+        [self.mapView setRegion:region];
+    }
     //------ends here
 }
 

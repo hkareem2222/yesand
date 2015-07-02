@@ -63,6 +63,9 @@
 #pragma mark - Share
 
 - (IBAction)onShareButtonPressed:(UIBarButtonItem *)sender {
+//    NSLog(@"share");
+//    UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[@"Download Yes, And and participate in funny improvs"] applicationActivities:nil];
+//    [self presentViewController:controller animated:YES completion:nil];
 }
 
 #pragma mark - Table View

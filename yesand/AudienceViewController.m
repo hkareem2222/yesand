@@ -97,7 +97,7 @@
                                   };
     [self.scenesConvo updateChildValues:sceneLaughs];
     self.laughsLabel.text = self.laughs.stringValue;
-}
+} 
 
 //#pragma mark - Keyboard Animation
 //
