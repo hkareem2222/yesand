@@ -32,6 +32,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     self.ref = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
 
     //---setting fonts for labels throughout app, as well as other items on home

@@ -22,7 +22,7 @@
 //        [self.window.rootViewController performSegueWithIdentifier:@"AuthToHome" sender:self];
     UIImage *tabItem = [UIImage imageNamed:@"tabItem"];
     [[UITabBar appearance] setSelectionIndicatorImage:tabItem];
-        return YES;
+    return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
