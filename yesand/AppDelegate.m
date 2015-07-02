@@ -19,6 +19,18 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [Fabric with:@[CrashlyticsKit]];
+    NSShadow *shadow = [[NSShadow alloc] init];
+//    shadow.shadowOffset = CGSizeMake(0.0, 0.0);
+//    shadow.shadowColor = [UIColor lightGrayColor];
+    UIFont *newFont = [UIFont fontWithName:@"AppleGothic" size:12];
+
+    [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil]
+     setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:[UIColor whiteColor],
+       NSShadowAttributeName:shadow,
+       NSFontAttributeName:newFont
+       }
+     forState:UIControlStateNormal];
 //        [self.window.rootViewController performSegueWithIdentifier:@"AuthToHome" sender:self];
     return YES;
 }

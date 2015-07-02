@@ -1006,9 +1006,11 @@
                         <outlet property="tableView" destination="aMQ-tW-yfL" id="bqQ-RC-1Kn"/>
                         <segue destination="148-S7-Huy" kind="presentation" identifier="ProfileToEdit" id="OrS-Ky-3T9"/>
                         <segue destination="769-2g-XYm" kind="show" identifier="ProfileToSavedScene" id="MjL-Mh-mnN"/>
+                        <segue destination="tkB-tk-6iZ" kind="unwind" identifier="UnwindToAuthFromProfile" unwindAction="unwindToAuth:" id="vnQ-5L-u50"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mpt-su-ezl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="tkB-tk-6iZ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3294" y="52"/>
         </scene>
@@ -1616,7 +1618,7 @@
         <image name="twitterlogincustom" width="912" height="159"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ZYi-VD-sef"/>
+        <segue reference="MjL-Mh-mnN"/>
         <segue reference="hkv-kI-r5j"/>
     </inferredMetricsTieBreakers>
 </document>

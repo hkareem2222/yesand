@@ -21,6 +21,7 @@
 @property NSMutableArray *scenes;
 @property Firebase *ref;
 @property NSString *selectedScene;
+@property Firebase *currentUserRef;
 @end
 
 @implementation ProfileViewController
@@ -49,8 +50,8 @@
 
 -(void)viewDidAppear:(BOOL)animated {
     NSString *currentUserString = [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@", self.ref.authData.uid];
-    Firebase *currentUserRef = [[Firebase alloc] initWithUrl:currentUserString];
-    [currentUserRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+    self.currentUserRef = [[Firebase alloc] initWithUrl:currentUserString];
+    [self.currentUserRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         if ([self.ref.authData.provider isEqualToString:@"anonymous"]) {
             self.navigationItem.title = @"anonymous";
         } else {
@@ -89,6 +90,10 @@
     }];
 }
 
+-(void)viewWillDisappear:(BOOL)animated {
+    [self.currentUserRef removeAllObservers];
+}
+
 #pragma mark - Table View
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -121,7 +126,6 @@
     ProfileTableViewCell *cell = (ProfileTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     self.selectedScene = cell.sceneID;
     [self performSegueWithIdentifier:@"ProfileToSavedScene" sender:self];
-    NSLog(@"-----SCENE INSIDE DID SELECT %@", self.selectedScene);
 }
 
 #pragma mark - Segue
@@ -130,13 +134,14 @@
     if ([segue.identifier isEqualToString:@"ProfileToSavedScene"]) {
         SavedSceneViewController *savedVC = segue.destinationViewController;
         savedVC.sceneID = self.selectedScene;
-        NSLog(@"-----SCENE INSIDE PREPARE %@", self.selectedScene);
     }
 }
 
 - (IBAction)onSettingsPressed:(UIBarButtonItem *)sender {
     if ([sender.title isEqualToString:@"Settings"]) {
         [self performSegueWithIdentifier:@"ProfileToEdit" sender:sender];
+    } else if ([sender.title isEqualToString:@"Sign up!"]) {
+        [self performSegueWithIdentifier:@"UnwindToAuthFromProfile" sender:sender];
     }
 }
 
