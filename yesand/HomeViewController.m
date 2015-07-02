@@ -267,4 +267,9 @@
     [self.ref removeAllObservers];
     [self.scenesConvo removeAllObservers];
 }
+
+- (IBAction)onInfoButtonPressed:(UIBarButtonItem *)sender {
+    [self performSegueWithIdentifier:@"HomeToInfo" sender:self];
+}
+
 @end
