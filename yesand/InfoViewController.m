@@ -19,6 +19,8 @@
     [super viewDidLoad];
     [self automaticallyAdjustsScrollViewInsets];
     [self.textView scrollRangeToVisible:NSMakeRange(0, 1)];
+    self.textView.layer.cornerRadius = 5;
+    self.textView.layer.masksToBounds = YES;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     NSDictionary *attrDict = @{
                                NSFontAttributeName : [UIFont fontWithName:@"AppleGothic" size:21.0],
