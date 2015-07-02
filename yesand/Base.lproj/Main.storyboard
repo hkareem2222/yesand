@@ -969,7 +969,7 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MaskIndicator" translatesAutoresizingMaskIntoConstraints="NO" id="eHi-d4-Xll">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pawfessor" translatesAutoresizingMaskIntoConstraints="NO" id="eHi-d4-Xll">
                                 <rect key="frame" x="25" y="97" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="Jaa-Ri-dLV"/>
@@ -1673,6 +1673,7 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
         <image name="helpicon" width="29" height="29"/>
         <image name="laughsicon" width="20" height="20"/>
         <image name="logo-transparent" width="169" height="163"/>
+        <image name="pawfessor" width="360" height="360"/>
         <image name="settingsicon" width="23" height="23"/>
         <image name="twitterlogincustom" width="912" height="159"/>
     </resources>
