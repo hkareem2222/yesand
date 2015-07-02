@@ -30,6 +30,8 @@
     self.usernameField.delegate = self;
     self.emailField.delegate = self;
     self.passwordField.delegate = self;
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     self.myRootRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
 
     //views setup
