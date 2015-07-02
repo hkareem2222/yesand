@@ -20,8 +20,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [Fabric with:@[CrashlyticsKit]];
 //        [self.window.rootViewController performSegueWithIdentifier:@"AuthToHome" sender:self];
-    UIImage *tabItem = [UIImage imageNamed:@"tabItem"];
-    [[UITabBar appearance] setSelectionIndicatorImage:tabItem];
+    UIImage *whiteUnderline = [UIImage imageNamed:@"whiteUnderline"];
+    [[UITabBar appearance] setSelectionIndicatorImage:whiteUnderline];
     return YES;
 }
 
