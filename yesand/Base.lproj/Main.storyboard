@@ -659,8 +659,16 @@
                                         <rect key="frame" x="25" y="40" width="550" height="407"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <attributedString key="attributedText">
+                                            <fragment content="How to “Yes, And”">
+                                                <attributes>
+                                                    <font key="NSFont" size="20" name="HelveticaNeue-Bold"/>
+                                                    <font key="NSOriginalFont" size="20" name="HelveticaNeue-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
                                             <fragment>
-                                                <string key="content">How to “Yes, And”
+                                                <string key="content" base64-UTF8="YES">
+Cg
 </string>
                                                 <attributes>
                                                     <font key="NSFont" size="20" name="HelveticaNeue"/>
@@ -668,17 +676,116 @@
                                                 </attributes>
                                             </fragment>
                                             <fragment>
+                                                <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content">For Performers:
+</string>
+                                                <attributes>
+                                                    <font key="NSFont" size="16" name="HelveticaNeue-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
                                                 <string key="content">
-For Performers:
+- </string>
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="Say YES, AND">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content">. In other words, accept what your fellow performer says and add to it. This is not a rap battle, so you’re working with—and not against—your partner. Saying “yes, and” is not a must, but please don’t deny; you’ll stop the scene dead in its tracks.
+ 
+- </string>
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="Be funny, but don’t force it">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content">. Most people are funniest when they’re not trying too hard. Relax, let the words come to you, and realize that not everything you say will be a rip-roaring punch line. 
 
-Say YES, AND. In other words, accept what your fellow performer says and add to it. This is not a rap battle, so you’re working with—and not against—your partner. Saying “yes, and” is not a must, but please don’t deny; you’ll stop the scene dead in its tracks. 
-Be funny, but don’t force it. Most people are funniest when they’re not trying too hard. Relax, let the words come to you, and realize that not everything you say will be a rip-roaring punch line. 
-Be a good partner. Sometimes making yourself look good means letting your fellow performer look good. Also, keep the open-ended questions to a minimum, because this will interrupt your partner’s flow and put them in the hot seat. 
-Feel free to make it your own. We give you an improv prompt and characters, but we fully expect the stories to take several turns before the end of the scene. 
-End the scene when you feel the scene has ended. Either of the two performers can stop the scene at any time. Keep in mind that you rate one another once the scene is done, so don’t bail on the scene at an inopportune time. 
+- </string>
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="Be a good partner">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content">. Sometimes making yourself look good means letting your fellow performer look good. Also, keep the open-ended questions to a minimum, because this will interrupt your partner’s flow and put them in the hot seat. 
 
-For the Audience: 
+- </string>
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="Feel free to make it your own">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content">. We give you an improv prompt and characters, but we fully expect the stories to take several turns before the end of the scene. 
 
+- </string>
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="End the scene when you feel the scene has ended">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content">. Either of the two performers can stop the scene at any time. Keep in mind that you rate one another once the scene is done, so don’t bail on the scene at an inopportune time. 
+
+</string>
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content">For the Audience: 
+</string>
+                                                <attributes>
+                                                    <font key="NSFont" size="16" name="HelveticaNeue-Bold"/>
+                                                    <font key="NSOriginalFont" size="16" name="HelveticaNeue-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content">
 Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh” at good lines in real time by tapping the chat screen as many times as appropriate. (More laughing = more laughs = more taps.) Basically, kick back and enjoy the real-time hijinks.
 
 </string>

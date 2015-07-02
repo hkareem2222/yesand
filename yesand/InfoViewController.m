@@ -17,6 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self automaticallyAdjustsScrollViewInsets];
     [self.textView scrollRangeToVisible:NSMakeRange(0, 1)];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     NSDictionary *attrDict = @{
