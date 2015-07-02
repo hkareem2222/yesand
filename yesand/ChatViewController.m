@@ -75,7 +75,7 @@
 
 -(void)retrieveNewTopic {
 
-    NSURL *url = [NSURL URLWithString:@"https://api.myjson.com/bins/1pt90"];
+    NSURL *url = [NSURL URLWithString:@"http://yesand.io/topics.json"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
 
     [NSURLConnection sendAsynchronousRequest:request
