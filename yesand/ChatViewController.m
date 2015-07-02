@@ -44,7 +44,9 @@
     [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardWillShowNotification object:nil];
     self.cloudMessages = [NSMutableArray new];
     //---------------------------------endsHere
+}
 
+-(void)viewDidAppear:(BOOL)animated {
     //------------------------------splashscreenstuff
     self.splashView.alpha = 1.0;
     self.isSplashHidden = NO;
@@ -75,7 +77,7 @@
 
 -(void)retrieveNewTopic {
 
-    NSURL *url = [NSURL URLWithString:@"https://api.myjson.com/bins/1pt90"];
+    NSURL *url = [NSURL URLWithString:@"http://yesand.io/topics.json"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
 
     [NSURLConnection sendAsynchronousRequest:request
