@@ -24,6 +24,8 @@
     self.countdownLabel.clipsToBounds = YES;
     self.tabBarController.tabBar.hidden = YES;
     self.typingImageView.hidden = YES;
+    self.currentUserCharacter.lineBreakMode = NSLineBreakByWordWrapping;
+    self.otherUserCharacter.lineBreakMode = NSLineBreakByWordWrapping;
 
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
@@ -158,6 +160,7 @@
             self.currentUserCharacter.text = self.currentUserCharacterOne;
             self.otherUserCharacter.text = self.currentUserCharacterTwo;
             self.topicLabel.text = [NSString stringWithFormat:@"Topic: %@", self.currentUserTopic];
+            self.topicLabelForChat.text = self.currentUserTopic;
             self.isEven = YES;
             [self.otherUserImageView.layer removeAllAnimations];
             self.otherUserImageView.image = [UIImage imageNamed:@"profilepic2.png"];
@@ -191,6 +194,7 @@
         self.currentUserCharacter.text = [self.otherUser objectForKey:@"character two"];
         self.otherUserCharacter.text = [self.otherUser objectForKey:@"character one"];
         self.topicLabel.text = [NSString stringWithFormat:@"Topic: %@", [self.otherUser objectForKey:@"topic name"]];
+        self.topicLabelForChat.text = [self.otherUser objectForKey:@"topic name"];
         self.isEven = NO;
         if (!self.ifCalled) {
             [self performSelector:@selector(splashViewDisappear) withObject:nil afterDelay:10.0];

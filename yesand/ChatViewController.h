@@ -31,6 +31,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *topicLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *currentUserImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *otherUserImageView;
+@property (weak, nonatomic) IBOutlet UILabel *topicLabelForChat;
 @property double keyboardHeight;
 @property NSMutableArray *localMessages;
 @property NSMutableArray *cloudMessages;
