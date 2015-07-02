@@ -81,6 +81,11 @@
     self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
+#pragma mark - Share
+
+- (IBAction)onShareButtonPressed:(UIBarButtonItem *)sender {
+}
+
 #pragma mark - Laughs
 
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
