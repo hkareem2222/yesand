@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="V5t-P2-765">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C2507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="V5t-P2-765">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -1026,7 +1026,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wsU-QV-3Hq">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wsU-QV-3Hq">
                                 <rect key="frame" x="0.0" y="64" width="600" height="35"/>
                                 <color key="backgroundColor" red="0.96470588235294119" green="0.25490196078431371" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -1037,7 +1037,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOK-Lf-6Q3">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOK-Lf-6Q3">
                                 <rect key="frame" x="0.0" y="99" width="300" height="28"/>
                                 <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1047,7 +1047,7 @@
                                 <color key="textColor" red="0.098039217293262482" green="0.098039217293262482" blue="0.098039217293262482" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f6b-UE-oeS">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f6b-UE-oeS">
                                 <rect key="frame" x="300" y="99" width="300" height="28"/>
                                 <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1057,7 +1057,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="cjH-uf-XBu">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="cjH-uf-XBu">
                                 <rect key="frame" x="0.0" y="127" width="600" height="424"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ReceiveMessageID" rowHeight="60" id="OgX-vD-oMu" customClass="SavedReceiveTableViewCell">
@@ -1362,7 +1362,7 @@
         <scene sceneID="PRt-ad-y5z">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dIj-3I-ipL" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" image="HomeIcon" id="Psa-cM-ijR"/>
+                    <tabBarItem key="tabBarItem" image="HomeIconWhite" id="Psa-cM-ijR"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="STF-Mm-ud1">
@@ -1566,7 +1566,7 @@
         <scene sceneID="Cmh-hy-gNo">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="q5z-f3-ka2" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" image="MaskIcon" id="crQ-yS-lv5"/>
+                    <tabBarItem key="tabBarItem" image="MaskIconWhite" id="crQ-yS-lv5"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="y8m-e5-BwK">
@@ -1586,7 +1586,7 @@
         <scene sceneID="1D4-wp-9I5">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4TZ-hi-J5F" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="100" title="" image="NewIcon" id="3hS-xN-MNC"/>
+                    <tabBarItem key="tabBarItem" tag="100" title="" image="NewSceneIconWhite" id="3hS-xN-MNC"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="avH-ia-rxB">
@@ -1604,10 +1604,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="HomeIcon" width="35" height="35"/>
-        <image name="MaskIcon" width="28" height="35"/>
+        <image name="HomeIconWhite" width="27" height="26"/>
+        <image name="MaskIconWhite" width="221" height="225"/>
         <image name="MaskIndicator" width="399" height="498"/>
-        <image name="NewIcon" width="30" height="32"/>
+        <image name="NewSceneIconWhite" width="30" height="32"/>
         <image name="ReceiveMessageImage" width="230" height="51"/>
         <image name="SendImage" width="230" height="51"/>
         <image name="TypingIndicatorImage" width="60" height="25"/>
