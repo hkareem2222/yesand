@@ -225,6 +225,7 @@
     self.endSceneBarButton.enabled = YES;
     self.cancelBarButton.title = @"";
     self.cancelBarButton.enabled = NO;
+    self.messageTextField.placeholder = self.currentUserCharacter.text;
     [self.usersRef removeAllObservers];
     [self queryConversation];
     Firebase *otherUserRef = [[Firebase alloc] initWithUrl: [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@",self.otherAuthuid]];
