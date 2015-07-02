@@ -206,7 +206,7 @@
             self.ifCalled = YES;
         }
         [self.otherUserImageView.layer removeAllAnimations];
-        self.otherUserImageView.image = [UIImage imageNamed:@"profilepic2.png"];
+        self.otherUserImageView.image = [UIImage imageNamed:@"MaskIndicator.png"];
     }
 }
 
