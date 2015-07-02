@@ -44,7 +44,9 @@
     [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardWillShowNotification object:nil];
     self.cloudMessages = [NSMutableArray new];
     //---------------------------------endsHere
+}
 
+-(void)viewDidAppear:(BOOL)animated {
     //------------------------------splashscreenstuff
     self.splashView.alpha = 1.0;
     self.isSplashHidden = NO;
