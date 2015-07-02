@@ -163,7 +163,7 @@
             self.topicLabelForChat.text = self.currentUserTopic;
             self.isEven = YES;
             [self.otherUserImageView.layer removeAllAnimations];
-            self.otherUserImageView.image = [UIImage imageNamed:@"profilepic2.png"];
+            self.otherUserImageView.image = [UIImage imageNamed:@"MaskIndicator.png"];
             if (!self.ifCalled) {
                 [self performSelector:@selector(splashViewDisappear) withObject:nil afterDelay:10.0];
                 self.timer = [NSTimer scheduledTimerWithTimeInterval:1

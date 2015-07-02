@@ -20,20 +20,18 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yesandlogo" translatesAutoresizingMaskIntoConstraints="NO" id="8cV-77-tEi">
-                    <rect key="frame" x="121" y="120" width="239" height="239"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="239" id="MYV-aj-pFK"/>
-                        <constraint firstAttribute="height" constant="239" id="USS-Sx-tCb"/>
-                    </constraints>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="comedybackground" translatesAutoresizingMaskIntoConstraints="NO" id="WWz-2p-H2S">
+                    <rect key="frame" x="0.0" y="136" width="480" height="344"/>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" red="1" green="0.1396418868" blue="0.1534002314" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.94901960784313721" green="0.25490196078431371" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="centerY" secondItem="8cV-77-tEi" secondAttribute="centerY" id="HE2-9W-7dI"/>
+                <constraint firstAttribute="trailing" secondItem="WWz-2p-H2S" secondAttribute="trailing" id="8sw-df-SUj"/>
                 <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="V8f-Bh-FcX"/>
-                <constraint firstAttribute="centerX" secondItem="8cV-77-tEi" secondAttribute="centerX" id="XZD-eP-8s9"/>
+                <constraint firstItem="WWz-2p-H2S" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="VFG-4t-jgs"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" id="g4M-9w-sGW"/>
+                <constraint firstAttribute="bottom" secondItem="WWz-2p-H2S" secondAttribute="bottom" id="jfR-mY-Aac"/>
+                <constraint firstItem="WWz-2p-H2S" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="136" id="kXd-Cs-FAi"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -41,6 +39,6 @@
         </view>
     </objects>
     <resources>
-        <image name="yesandlogo" width="444" height="442"/>
+        <image name="comedybackground" width="1098" height="1539"/>
     </resources>
 </document>
