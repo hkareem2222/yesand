@@ -23,6 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    //edit user info
     self.editNavBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
 
     self.editNavBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
@@ -43,9 +44,7 @@
     }];
 }
 
--(void)viewWillDisappear:(BOOL)animated {
-    [self.currentUserRef removeAllObservers];
-}
+#pragma mark - Button Actions
 
 - (IBAction)onSaveButtonPressed:(UIBarButtonItem *)sender {
     Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
@@ -57,7 +56,6 @@
                               @"website": self.websiteField.text
                               };
     [user updateChildValues:userDic];
-    NSLog(@"tapped");
     [self performSegueWithIdentifier:@"UnwindToProfile" sender:sender];
 }
 
@@ -71,4 +69,9 @@
     [self performSegueWithIdentifier:@"UnwindToAuthFromEdit" sender:sender];
 }
 
+
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [self.currentUserRef removeAllObservers];
+}
 @end
