@@ -439,7 +439,7 @@
 
 -(CGSize)testSizeOfString:(NSString *)labelText {
     UILabel *gettingSizeLabel = [[UILabel alloc] init];
-    gettingSizeLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:14];
+    gettingSizeLabel.font = [UIFont fontWithName:@"AppleGothic" size:14];
     gettingSizeLabel.text = labelText;
     gettingSizeLabel.numberOfLines = 0;
     gettingSizeLabel.lineBreakMode = NSLineBreakByWordWrapping;
@@ -498,6 +498,17 @@
     [self.convoRef updateChildValues:conversation];
 }
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self.cloudMessages addObject:[NSString stringWithFormat:@"%@: %@", self.currentUserCharacter.text, self.messageTextField.text]];
+    NSDictionary *conversation = @{
+                                   @"messages": self.cloudMessages
+                                   };
+    [self.convoRef updateChildValues:conversation];
+    self.messageTextField.text = @"";
+    [self.messageTextField resignFirstResponder];
+    self.textFieldBottomLayout.constant = 0;
+    return YES;
+}
 
 
 //  To remove animation
