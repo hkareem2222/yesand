@@ -13,12 +13,11 @@
 
 @interface SavedSceneViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *sceneTitleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *characterLeftLabel;
-@property (weak, nonatomic) IBOutlet UILabel *characterRightLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property NSString *leftCharacter;
+@property NSString *rightCharacter;
 @property NSArray *messages;
 @property Firebase *scenesConvo;
-
 @end
 
 @implementation SavedSceneViewController
@@ -46,11 +45,11 @@
             self.messages = snapshot.value[@"messages"];
             self.sceneTitleLabel.text = snapshot.value[@"topicName"];
             if ([snapshot.value[@"userOne"] isEqualToString:ref.authData.uid]) {
-                self.characterLeftLabel.text = snapshot.value[@"characterTwo"];
-                self.characterRightLabel.text = snapshot.value[@"characterOne"];
+                self.leftCharacter = snapshot.value[@"characterTwo"];
+                self.rightCharacter = snapshot.value[@"characterOne"];
             } else {
-                self.characterLeftLabel.text = snapshot.value[@"characterOne"];
-                self.characterRightLabel.text = snapshot.value[@"characterTwo"];
+                self.leftCharacter = snapshot.value[@"characterOne"];
+                self.rightCharacter = snapshot.value[@"characterTwo"];
             }
             [self.tableView reloadData];
         }
@@ -66,7 +65,7 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([self.messages[indexPath.row] hasPrefix:self.characterRightLabel.text]) {
+    if ([self.messages[indexPath.row] hasPrefix:self.rightCharacter]) {
         SavedSendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SendMessageID"];
         cell.sendMessageLabel.text = self.messages[indexPath.row];
         return cell;
