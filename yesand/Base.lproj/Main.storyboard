@@ -969,7 +969,7 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pawfessor" translatesAutoresizingMaskIntoConstraints="NO" id="eHi-d4-Xll">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MaskIndicator" translatesAutoresizingMaskIntoConstraints="NO" id="eHi-d4-Xll">
                                 <rect key="frame" x="25" y="97" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="Jaa-Ri-dLV"/>
@@ -977,7 +977,7 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
                                 </constraints>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="aMQ-tW-yfL">
-                                <rect key="frame" x="0.0" y="210" width="600" height="341"/>
+                                <rect key="frame" x="0.0" y="220" width="600" height="331"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SceneID" textLabel="dTN-tm-n52" detailTextLabel="Ra7-IY-v00" style="IBUITableViewCellStyleValue1" id="LHx-7N-ARW" customClass="ProfileTableViewCell">
@@ -1053,7 +1053,7 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
                             <constraint firstAttribute="trailing" secondItem="aMQ-tW-yfL" secondAttribute="trailing" id="NH3-S2-UhE"/>
                             <constraint firstItem="kGD-uh-Z3K" firstAttribute="leading" secondItem="eHi-d4-Xll" secondAttribute="trailing" constant="15" id="SP3-df-EwV"/>
                             <constraint firstItem="roW-jg-Mfv" firstAttribute="top" secondItem="XX8-Az-woW" secondAttribute="bottom" constant="25" id="VEJ-68-jUe"/>
-                            <constraint firstItem="aMQ-tW-yfL" firstAttribute="top" secondItem="P7v-le-Emz" secondAttribute="bottom" constant="8" id="VgL-ri-wuN"/>
+                            <constraint firstItem="aMQ-tW-yfL" firstAttribute="top" secondItem="P7v-le-Emz" secondAttribute="bottom" constant="18" id="VgL-ri-wuN"/>
                             <constraint firstItem="eHi-d4-Xll" firstAttribute="top" secondItem="XX8-Az-woW" secondAttribute="bottom" constant="33" id="XdF-Mh-4QQ"/>
                             <constraint firstItem="P7v-le-Emz" firstAttribute="leading" secondItem="eHi-d4-Xll" secondAttribute="trailing" constant="15" id="XnG-sd-mZe"/>
                             <constraint firstItem="tlD-WR-8d0" firstAttribute="leading" secondItem="eHi-d4-Xll" secondAttribute="trailing" constant="15" id="e5A-ug-vYQ"/>
@@ -1673,7 +1673,6 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
         <image name="helpicon" width="29" height="29"/>
         <image name="laughsicon" width="20" height="20"/>
         <image name="logo-transparent" width="169" height="163"/>
-        <image name="pawfessor" width="360" height="360"/>
         <image name="settingsicon" width="23" height="23"/>
         <image name="twitterlogincustom" width="912" height="159"/>
     </resources>
