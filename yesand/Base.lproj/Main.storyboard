@@ -728,7 +728,9 @@
                             <constraint firstItem="max-fw-xhT" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="yLh-Dt-TPx"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="r2y-wN-Tbp"/>
+                    <navigationItem key="navigationItem" id="r2y-wN-Tbp">
+                        <barButtonItem key="rightBarButtonItem" title="Item" style="plain" id="73s-aP-kaj"/>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -1458,7 +1460,7 @@
         <image name="twitterlogincustom" width="912" height="159"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="MjL-Mh-mnN"/>
         <segue reference="hkv-kI-r5j"/>
+        <segue reference="ZYi-VD-sef"/>
     </inferredMetricsTieBreakers>
 </document>
