@@ -174,7 +174,7 @@
             self.otherUserLabel.text = @"Finding";
             self.currentUserCharacter.text = @"Character";
             self.otherUserCharacter.text = @"Character";
-            self.topicLabel.text = @"Prompt will show when next performer arrives...";
+            self.topicLabel.text = @"Awaiting your fellow performer...";
             self.ifCalled = NO;
             self.otherUserImageView.image = [UIImage imageNamed:@"MaskIndicator.png"];
             [self rotateSecondImageView];
