@@ -26,6 +26,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    //views setup
     self.sceneNewButton.enabled = NO;
     self.returnToHomeButton.enabled = NO;
     self.feedbackLabel.hidden = YES;
@@ -45,9 +47,12 @@
     self.rateView.maxRating = 5;
     self.rateView.delegate = self;
 
+    //rating views setup
     [self rateView];
     [self pullOtherUserRating];
 }
+
+#pragma mark - Rate View
 
 - (void)rateView:(RateView *)rateView ratingDidChange:(float)rating {
 
@@ -81,11 +86,9 @@
             self.ratings = snapshot.value[@"rating"];
             self.otherUserRatings = [NSMutableArray new];
             [self.otherUserRatings addObjectsFromArray:self.ratings];
-    //        [self storeRatingValueForOtherUser];
         }];
 }
 
-// On save rating button tapped call this method below
 -(void)storeRatingValueForOtherUser {
     Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
     Firebase *otherUser = [usersRef childByAppendingPath:self.otherAuthuid];
@@ -103,13 +106,14 @@
     [otherUser updateChildValues:ratingUpdate];
 }
 
+#pragma mark - Segue
+
 - (IBAction)onReturnToHomeTapped:(UIButton *)sender {
     [self storeRatingValueForOtherUser];
     [self performSegueWithIdentifier:@"RatingToHome" sender:sender];
 }
 
 - (IBAction)onNewSceneTapped:(UIButton *)sender {
-//    Eventually we need to setup logic that makes the splash screen reappear and handle all the isAvailable logic
     [self storeRatingValueForOtherUser];
     [self performSegueWithIdentifier:@"UnwindToChatFromRating" sender:sender];
 }

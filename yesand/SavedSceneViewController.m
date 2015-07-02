@@ -25,6 +25,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    //views setup
+    NSDictionary *attrDict = @{
+                               NSFontAttributeName : [UIFont fontWithName:@"AppleGothic" size:21.0],
+                               NSForegroundColorAttributeName : [UIColor whiteColor]
+                               };
+    self.navigationController.navigationBar.titleTextAttributes = attrDict;
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
+
+    self.tableView.separatorColor = [UIColor clearColor];
+    
+    //scene setup
     Firebase *ref = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
     NSString *sceneURL = [NSString stringWithFormat:@"https://yesand.firebaseio.com/scenes/%@", self.sceneID];
     NSLog(@"------ SCENE ID %@", self.sceneID);
@@ -45,14 +57,6 @@
     } withCancelBlock:^(NSError *error) {
         NSLog(@"%@", error.description);
     }];
-    NSDictionary *attrDict = @{
-                               NSFontAttributeName : [UIFont fontWithName:@"AppleGothic" size:21.0],
-                               NSForegroundColorAttributeName : [UIColor whiteColor]
-                               };
-    self.navigationController.navigationBar.titleTextAttributes = attrDict;
-    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
-
-    self.tableView.separatorColor = [UIColor clearColor];
 }
 
 #pragma mark - Table View

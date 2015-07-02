@@ -34,6 +34,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    //views setup
     self.chatLabel1.layer.cornerRadius = 5;
     self.chatLabel2.layer.cornerRadius = 5;
     self.chatLabel3.layer.cornerRadius = 5;
@@ -54,7 +56,7 @@
                                };
     self.navigationController.navigationBar.titleTextAttributes = attrDict;
 
-    NSLog(@"selected scene id %@", self.sceneID);
+    //Scene Setup
     NSString *sceneURL = [NSString stringWithFormat:@"https://yesand.firebaseio.com/scenes/%@", self.sceneID];
     self.scenesConvo = [[Firebase alloc] initWithUrl:sceneURL];
 
@@ -83,6 +85,8 @@
         NSLog(@"%@", error.description);
     }];
 
+
+    //laughs count
     UITapGestureRecognizer *singleFingerTap =
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(handleSingleTap:)];
@@ -93,6 +97,19 @@
 
     self.tableView.separatorColor = [UIColor clearColor];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+}
+
+#pragma mark - Laughs
+
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
+    NSInteger laughsInt = self.laughs.integerValue;
+    laughsInt += 1;
+    self.laughs = [NSNumber numberWithInteger:laughsInt];
+    NSDictionary *sceneLaughs = @{
+                                  @"laughs": self.laughs
+                                  };
+    [self.scenesConvo updateChildValues:sceneLaughs];
+    self.laughsLabel.text = self.laughs.stringValue;
 }
 
 #pragma mark - Keyboard Animation
@@ -109,19 +126,8 @@
     self.textFieldBottomLayout.constant = keyboardFrame.size.height - 50;
 }
 
-//The event handling method
-- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
-    NSLog(@"tapped");
-//    CGPoint location = [recognizer locationInView:[recognizer.view superview]];
-    NSInteger laughsInt = self.laughs.integerValue;
-    laughsInt += 1;
-    self.laughs = [NSNumber numberWithInteger:laughsInt];
-    NSDictionary *sceneLaughs = @{
-                                  @"laughs": self.laughs
-                                  };
-    [self.scenesConvo updateChildValues:sceneLaughs];
-    self.laughsLabel.text = self.laughs.stringValue;
-}
+# pragma mark - Send Button
+
 - (IBAction)onSendButtonPressed:(id)sender {
     NSArray *labels = @[self.chatLabel1, self.chatLabel2, self.chatLabel3, self.chatLabel4];
     UILabel *label;

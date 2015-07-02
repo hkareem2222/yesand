@@ -22,6 +22,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    //edit user info
     Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
     Firebase *currentUserRef = [usersRef childByAppendingPath:usersRef.authData.uid];
     [currentUserRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
@@ -33,6 +35,7 @@
         self.websiteField.text = snapshot.value[@"website"];
     }];
 
+    //views setup
     self.editNavBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
 
     self.editNavBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
@@ -50,7 +53,6 @@
                               @"website": self.websiteField.text
                               };
     [user updateChildValues:userDic];
-    NSLog(@"tapped");
     [self performSegueWithIdentifier:@"UnwindToProfile" sender:sender];
 }
 

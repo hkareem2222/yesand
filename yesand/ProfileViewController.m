@@ -28,12 +28,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    //----Set nav bar title text attributes
+    //----view setup
     NSDictionary *attrDict = @{
                                NSFontAttributeName : [UIFont fontWithName:@"AppleGothic" size:21.0],
                                NSForegroundColorAttributeName : [UIColor whiteColor]
                                };
     self.navigationController.navigationBar.titleTextAttributes = attrDict;
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
+
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
+    //------ends here
 
     self.ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com"];
     if ([self.ref.authData.provider isEqualToString:@"anonymous"]) {
@@ -41,6 +45,9 @@
     } else {
         self.editProfileBarButton.title = @"Settings";
     }
+}
+
+-(void)viewDidAppear:(BOOL)animated {
     NSString *currentUserString = [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@", self.ref.authData.uid];
     Firebase *currentUserRef = [[Firebase alloc] initWithUrl:currentUserString];
     [currentUserRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
@@ -54,9 +61,6 @@
             self.locationLabel.text = snapshot.value[@"location"];
         }
     }];
-     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
-
-     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
 
     Firebase *scenesConvo = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/scenes"];
     [scenesConvo observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
@@ -130,8 +134,6 @@
     }
 }
 
-#pragma mark - Actions
-
 - (IBAction)onSettingsPressed:(UIBarButtonItem *)sender {
     if ([sender.title isEqualToString:@"Settings"]) {
         [self performSegueWithIdentifier:@"ProfileToEdit" sender:sender];
@@ -141,7 +143,5 @@
 -(IBAction)unwindToProfile:(UIStoryboardSegue *)segue {
     
 }
-
-
 
 @end
