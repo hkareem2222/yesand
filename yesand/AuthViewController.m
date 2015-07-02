@@ -12,7 +12,7 @@
 #import <Social/Social.h>
 #import "TwitterAuthHelper.h"
 
-@interface AuthViewController ()
+@interface AuthViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
@@ -27,7 +27,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.usernameField.delegate = self;
+    self.emailField.delegate = self;
+    self.passwordField.delegate = self;
     self.myRootRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
 
     //views setup
@@ -250,6 +252,19 @@ withCompletionBlock:^(NSError *error, FAuthData *authData) {
           childByAppendingPath:authData.uid] setValue:newUser];
     }
 }];
+}
+
+#pragma mark - Text Field
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    NSInteger nextTag = textField.tag + 1;
+    UIResponder* nextResponder = [textField.superview viewWithTag:nextTag];
+    if (nextResponder) {
+        [nextResponder becomeFirstResponder];
+    } else {
+        [textField resignFirstResponder];
+    }
+    return NO;
 }
 
 #pragma mark - Alerts for Errors

@@ -85,7 +85,7 @@
 
 -(CGSize)testSizeOfString:(NSString *)labelText {
     UILabel *gettingSizeLabel = [[UILabel alloc] init];
-    gettingSizeLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:14];
+    gettingSizeLabel.font = [UIFont fontWithName:@"AppleGothic" size:14];
     gettingSizeLabel.text = labelText;
     gettingSizeLabel.numberOfLines = 0;
     gettingSizeLabel.lineBreakMode = NSLineBreakByWordWrapping;
