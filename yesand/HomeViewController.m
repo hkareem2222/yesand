@@ -43,6 +43,7 @@
     [self.segmentedControl setTitleTextAttributes:attributes
                                     forState:UIControlStateNormal];
     self.navigationItem.title = @"Yes, And";
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
     self.helpBarButton.tintColor = [UIColor whiteColor];
     self.tabBarController.tabBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];

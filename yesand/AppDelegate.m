@@ -19,6 +19,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [Fabric with:@[CrashlyticsKit]];
+    [application setStatusBarStyle:UIStatusBarStyleLightContent];
     NSShadow *shadow = [[NSShadow alloc] init];
 //    shadow.shadowOffset = CGSizeMake(0.0, 0.0);
 //    shadow.shadowColor = [UIColor lightGrayColor];
