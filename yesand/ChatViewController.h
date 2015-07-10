@@ -32,6 +32,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *currentUserImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *otherUserImageView;
 @property (weak, nonatomic) IBOutlet UILabel *topicLabelForChat;
+@property (weak, nonatomic) IBOutlet UIImageView *typingImageView;
+@property (weak, nonatomic) IBOutlet UILabel *countdownLabel;
 @property double keyboardHeight;
 @property NSMutableArray *localMessages;
 @property NSMutableArray *cloudMessages;
@@ -55,6 +57,4 @@
 @property NSDictionary *topic;
 @property NSTimer *timer;
 @property int countdown;
-@property (weak, nonatomic) IBOutlet UIImageView *typingImageView;
-@property (weak, nonatomic) IBOutlet UILabel *countdownLabel;
 @end

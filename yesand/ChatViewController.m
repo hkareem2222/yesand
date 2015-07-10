@@ -458,6 +458,9 @@
 
 -(void)viewWillDisappear:(BOOL)animated {
     [self makeNotAvailable];
+    [self.usersRef removeAllObservers];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(splashViewDisappear) object:nil];
+    NSLog(@"---- removing");
     if (self.isSplashHidden) {
         if (self.isEven) {
             NSDictionary *sceneMessages = @{
@@ -469,7 +472,6 @@
         Firebase *otherConvo = [self.conversationsRef childByAppendingPath: self.otherUsername];
         [currentConvo removeValue];
         [otherConvo removeValue];
-        [self.usersRef removeAllObservers];
         [self.convoRef removeAllObservers];
     }
 }
