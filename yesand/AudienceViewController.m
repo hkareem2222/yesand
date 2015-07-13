@@ -84,7 +84,46 @@
 #pragma mark - Share
 
 - (IBAction)onShareButtonPressed:(UIBarButtonItem *)sender {
+    [self takeScreenshotAndLoadActivityView];
 }
+
+-(void)takeScreenshotAndLoadActivityView {
+    CALayer *layer = [[UIApplication sharedApplication] keyWindow].layer;
+    CGFloat scale = [UIScreen mainScreen].scale;
+    UIGraphicsBeginImageContextWithOptions(layer.frame.size, NO, scale);
+
+    [layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *screenshot = UIGraphicsGetImageFromCurrentImageContext();
+    NSArray *objectsToShare = @[screenshot];
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
+    NSArray *excludeActivities = @[UIActivityTypeAirDrop,
+                                   UIActivityTypePrint,
+                                   UIActivityTypeMail,
+                                   UIActivityTypeCopyToPasteboard,
+                                   UIActivityTypeAssignToContact,
+                                   //                                       UIActivityTypeSaveToCameraRoll,
+                                   UIActivityTypeAddToReadingList,
+                                   UIActivityTypePostToFlickr,
+                                   UIActivityTypePostToVimeo];
+    activityVC.excludedActivityTypes = excludeActivities;
+
+    [self presentViewController:activityVC animated:YES completion:nil];
+
+    // // This is just a reminder to add code to save image to camera roll
+    //      CFDictionaryRef attachments = CMCopyDictionaryOfAttachments(kCFAllocatorDefault,
+    //                                                                  imageDataSampleBuffer,
+    //                                                                  kCMAttachmentMode_ShouldPropagate);
+    //      ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    //      [library writeImageDataToSavedPhotosAlbum:jpegData metadata:(__bridge id)attachments completionBlock:^(NSURL *assetURL, NSError *error) {
+    //          if (error) {
+    //              [self displayErrorOnMainQueue:error withMessage:@"Save to camera roll failed"];
+    //          }
+    //
+    //      }];
+    
+    
+}
+
 
 #pragma mark - Laughs
 
