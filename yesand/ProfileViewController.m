@@ -56,7 +56,6 @@
         if ([self.ref.authData.provider isEqualToString:@"anonymous"]) {
             self.navigationItem.title = @"anonymous";
         } else {
-            self.navigationItem.title = snapshot.value[@"username"];
             self.profileHeadingLabel.text = snapshot.value[@"name"];
             self.profileSubheadingLabel.text = snapshot.value[@"tagline"];
             self.profileLinkLabel.text = snapshot.value[@"website"];

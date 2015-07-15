@@ -48,8 +48,9 @@
     self.rateView.delegate = self;
 
     //rating views setup
-    [self rateView];
+    NSLog(@"view loaded -------- ");
     [self pullOtherUserRating];
+    [self rateView];
 }
 
 #pragma mark - Rate View
@@ -80,12 +81,14 @@
 }
 
 -(void)pullOtherUserRating {
+    NSLog(@"inside -------- ");
     Firebase *ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
     Firebase *otherUser = [ref childByAppendingPath:self.otherAuthuid];
     [otherUser observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
             self.ratings = snapshot.value[@"rating"];
             self.otherUserRatings = [NSMutableArray new];
             [self.otherUserRatings addObjectsFromArray:self.ratings];
+        NSLog(@"objects added -------- ");
         }];
 }
 
