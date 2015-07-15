@@ -80,7 +80,7 @@
 
 -(void)retrieveNewTopic {
 
-    NSURL *url = [NSURL URLWithString:@"http://yesand.io/topics.json"];
+    NSURL *url = [NSURL URLWithString:@"http://shaind.com/topics.json"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
 
     [NSURLConnection sendAsynchronousRequest:request
