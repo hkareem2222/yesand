@@ -639,6 +639,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="laughsImageView" destination="ZmF-1i-sFx" id="yls-Gw-wcg"/>
                         <outlet property="laughsLabel" destination="Rz4-R6-EJg" id="OiY-LA-7zw"/>
                         <outlet property="sceneTitleLabel" destination="VNj-Ga-Qiz" id="4vU-rK-ejR"/>
                         <outlet property="tableView" destination="W5K-zs-1nX" id="bVw-Go-vH8"/>

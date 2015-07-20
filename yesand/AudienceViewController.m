@@ -20,6 +20,7 @@
 @property NSNumber *laughs;
 @property Firebase *scenesConvo;
 @property (weak, nonatomic) IBOutlet UILabel *laughsLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *laughsImageView;
 @property NSInteger labelCount;
 @end
 
@@ -30,15 +31,16 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    // Laughs Key Value Observing
+    [self.laughsLabel addObserver:self
+                       forKeyPath:@"text"
+                          options:NSKeyValueObservingOptionNew
+     | NSKeyValueObservingOptionOld
+                          context:nil];
+
     //views setup
     self.labelCount = 0;
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
-//    NSDictionary *attrDict = @{
-//                               NSFontAttributeName : [UIFont fontWithName:@"AppleGothic" size:21.0],
-//                               NSForegroundColorAttributeName : [UIColor whiteColor]
-//                               };
-//    self.navigationController.navigationBar.titleTextAttributes = attrDict;
-//    self.sceneTitleLabel.font = [UIFont fontWithName: @"AppleGothic" size: 15.0];
 
     //Scene Setup
     NSString *sceneURL = [NSString stringWithFormat:@"https://yesand.firebaseio.com/scenes/%@", self.sceneID];
@@ -51,7 +53,7 @@
             self.leftCharacter = snapshot.value[@"characterOne"];
             self.rightCharacter = snapshot.value[@"characterTwo"];
             self.laughs = snapshot.value[@"laughs"];
-            self.laughsLabel.text = self.laughs.stringValue;
+            [self.laughsLabel setValue:self.laughs.stringValue forKey:@"text"];
             [self.tableView reloadData];
             if (self.messages.count > 5) {
                 NSIndexPath* ipath = [NSIndexPath indexPathForRow: self.messages.count-1 inSection: 0];
@@ -68,7 +70,6 @@
     } withCancelBlock:^(NSError *error) {
         NSLog(@"%@", error.description);
     }];
-
 
     //laughs count
     UITapGestureRecognizer *singleFingerTap =
@@ -137,8 +138,23 @@
                                   @"laughs": self.laughs
                                   };
     [self.scenesConvo updateChildValues:sceneLaughs];
-    self.laughsLabel.text = self.laughs.stringValue;
-} 
+    [self.laughsLabel setValue:self.laughs.stringValue forKey:@"text"];
+}
+
+// Animates the laughs image every time the text value changes of the label
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"text"]) {
+        CABasicAnimation *theAnimation;
+        theAnimation=[CABasicAnimation animationWithKeyPath:@"opacity"];
+        theAnimation.duration=0.4;
+        theAnimation.repeatCount=1;
+        theAnimation.autoreverses=YES;
+        theAnimation.fromValue=[NSNumber numberWithFloat:1.0];
+        theAnimation.toValue=[NSNumber numberWithFloat:0.2];
+        [self.laughsImageView.layer addAnimation:theAnimation forKey:@"animateOpacity"];
+    }
+}
 
 //#pragma mark - Keyboard Animation
 //
