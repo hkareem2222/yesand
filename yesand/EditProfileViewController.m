@@ -43,10 +43,11 @@
     self.logoutButton.layer.cornerRadius = 5;
 
     for (UITextField *textField in self.textFields) {
-        CALayer *border = [CALayer layer];
-        border.frame = CGRectMake(0.0f, textField.frame.size.height - 30, textField.frame.size.width, 1.0f);
-        border.backgroundColor = [UIColor colorWithRed:193/255.0 green:193/255.0 blue:193/255.0 alpha:0.9].CGColor;
-        [textField.layer addSublayer:border];
+        textField.layer.cornerRadius = 2;
+//        CALayer *border = [CALayer layer];
+//        border.frame = CGRectMake(0.0f, textField.frame.size.height - 30, textField.frame.size.width, 1.0f);
+//        border.backgroundColor = [UIColor colorWithRed:193/255.0 green:193/255.0 blue:193/255.0 alpha:0.9].CGColor;
+//        [textField.layer addSublayer:border];
     }
 }
 
