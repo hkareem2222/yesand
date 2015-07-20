@@ -8,7 +8,7 @@
 
 #import "EditProfileViewController.h"
 
-@interface EditProfileViewController ()
+@interface EditProfileViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *taglineField;
@@ -24,7 +24,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.usernameField.delegate = self;
+    self.nameField.delegate = self;
+    self.taglineField.delegate = self;
+    self.locationField.delegate = self;
+    self.websiteField.delegate = self;
+
     self.editNavBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
 
     self.editNavBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
@@ -78,6 +83,7 @@
 }
 
 - (IBAction)onCancelPressed:(UIBarButtonItem *)sender {
+    [self resignFirstResponder];
     [self performSegueWithIdentifier:@"UnwindToProfile" sender:sender];
 }
 
@@ -87,9 +93,20 @@
     [self performSegueWithIdentifier:@"UnwindToAuthFromEdit" sender:sender];
 }
 
-
-
 -(void)viewWillDisappear:(BOOL)animated {
     [self.currentUserRef removeAllObservers];
+}
+
+#pragma mark - Text Field
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    NSInteger nextTag = textField.tag + 1;
+    UIResponder* nextResponder = [textField.superview viewWithTag:nextTag];
+    if (nextResponder) {
+        [nextResponder becomeFirstResponder];
+    } else {
+        [textField resignFirstResponder];
+    }
+    return NO;
 }
 @end
