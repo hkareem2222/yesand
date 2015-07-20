@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *locationField;
 @property (weak, nonatomic) IBOutlet UITextField *websiteField;
 @property (weak, nonatomic) IBOutlet UINavigationBar *editNavBar;
+@property (weak, nonatomic) IBOutlet UIButton *logoutButton;
+@property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *textFields;
 @property Firebase *currentUserRef;
 @end
 
@@ -22,7 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     self.editNavBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
 
     self.editNavBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
@@ -33,6 +35,18 @@
                                };
     self.editNavBar.titleTextAttributes = attrDict;
 
+    self.logoutButton.layer.cornerRadius = 5;
+
+    for (UITextField *textField in self.textFields) {
+        CALayer *border = [CALayer layer];
+        border.frame = CGRectMake(0.0f, textField.frame.size.height - 30, textField.frame.size.width, 1.0f);
+        border.backgroundColor = [UIColor colorWithRed:193/255.0 green:193/255.0 blue:193/255.0 alpha:0.9].CGColor;
+        [textField.layer addSublayer:border];
+    }
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 -(void)viewDidAppear:(BOOL)animated {
