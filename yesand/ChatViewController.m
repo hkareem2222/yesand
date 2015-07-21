@@ -41,11 +41,11 @@
     //-----ends here
 
     //--------------------------------chat view stuff
-    self.localMessages = [NSMutableArray new];
-    self.conversationsRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/conversations"];
+    self.cloudMessages = [NSMutableArray new];
+    self.scenesRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/scenes"];
+
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardWillShowNotification object:nil];
-    self.cloudMessages = [NSMutableArray new];
     //---------------------------------endsHere
 }
 
@@ -111,9 +111,8 @@
 -(void)findNewUsers {
     self.ifCalled = NO;
     self.availableUsers = [NSMutableArray new];
-    self.ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com"];
-    NSString *currentUserString = [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@", self.ref.authData.uid];
-    Firebase *currentUserRef = [[Firebase alloc] initWithUrl:currentUserString];
+    self.ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
+    Firebase *currentUserRef = [self.ref childByAppendingPath:self.ref.authData.uid];
     [currentUserRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         if (snapshot.value[@"username"] != nil && snapshot.value[@"topic name"] != nil && snapshot.value[@"character one"] != nil && snapshot.value[@"character two"] != nil) {
             self.currentUsername = snapshot.value[@"username"];
@@ -125,7 +124,7 @@
     }];
     self.usersRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/users"];
 
-    // Retrieve new posts as they are added to firebase
+    // Retrieve new users as they are added to firebase
     [self.usersRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         NSMutableArray *usersArray = [NSMutableArray new];
         for (FDataSnapshot *user in snapshot.children) {
@@ -260,7 +259,6 @@
             [otherUser updateChildValues:userDic];
         }
     }
-    
 }
 
 #pragma mark - Conversation Setup
@@ -274,64 +272,77 @@
                                    @"characterTwo": self.currentUserCharacterTwo,
                                    @"userOne": self.ref.authData.uid,
                                    @"userTwo": self.otherAuthuid,
-                                   @"isLive": @1,
-                                   @"messages": @[@"test"]
+                                   @"isLive": @1
                                    };
+
         self.sceneConvo = [scenesConvo childByAutoId];
+    
         [self.sceneConvo setValue:sceneDic];
-        //setting up conversation model and query
-        if (self.currentUsername != nil) {
-            NSLog(@"----------------%@", self.currentUsername);
-            self.convoRef = [self.conversationsRef childByAppendingPath: self.currentUsername];
-
-            [self.convoRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-                if (![snapshot.value isEqual:[NSNull null]]) {
-                    self.currentUserMessages = snapshot.value[@"messages"];
-                    self.cloudMessages = [NSMutableArray new];
-                    [self.cloudMessages addObjectsFromArray:self.currentUserMessages];
-                    NSDictionary *sceneMessages = @{
-                                                    @"messages": self.cloudMessages
-                                                    };
-                    [self.sceneConvo updateChildValues:sceneMessages];
-                    [self.tableView reloadData];
-                    if (self.cloudMessages.count > 5) {
-                        NSIndexPath* ipath = [NSIndexPath indexPathForRow: self.cloudMessages.count-1 inSection: 0];
-                        [self.tableView scrollToRowAtIndexPath: ipath atScrollPosition: UITableViewScrollPositionBottom animated: YES];
+        // Update the key for both users and set scene ID Reference
+        Firebase *otherUserRef = [[Firebase alloc] initWithUrl: [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@",self.otherAuthuid]];
+        self.currentUserRef = [[Firebase alloc]initWithUrl:[NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@",self.ref.authData.uid]];
+        NSDictionary *sceneID = @{
+                                       @"sceneID": self.sceneConvo.key
+                                       };
+        [self.currentUserRef updateChildValues:sceneID];
+        [otherUserRef updateChildValues:sceneID];
+        [self.currentUserRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+            if (snapshot.value[@"sceneID"] != nil) {
+                NSString *sceneID = snapshot.value[@"sceneID"];
+                self.sceneIDRef = [[Firebase alloc]initWithUrl:[NSString stringWithFormat:@"https://yesand.firebaseio.com/scenes/%@", sceneID]];
+                //setting up conversation model and query
+                [self.sceneIDRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+                    if (![snapshot.value isEqual:[NSNull null]]) {
+                        if (snapshot.value[@"messages"] != nil) {
+                            self.currentUserMessages = snapshot.value[@"messages"];
+                            self.cloudMessages = [NSMutableArray new];
+                            [self.cloudMessages addObjectsFromArray:self.currentUserMessages];
+                            [self.tableView reloadData];
+                            if (self.cloudMessages.count > 5) {
+                                NSIndexPath* ipath = [NSIndexPath indexPathForRow: self.cloudMessages.count-1 inSection: 0];
+                                [self.tableView scrollToRowAtIndexPath: ipath atScrollPosition: UITableViewScrollPositionBottom animated: YES];
+                            }
+                            if ([snapshot.value[self.otherUserCharacter.text] isEqualToNumber:@1]) {
+                                self.typingImageView.hidden = NO;
+                            } else {
+                                self.typingImageView.hidden = YES;
+                            }
+                        }
                     }
-                    if ([snapshot.value[self.otherUserCharacter.text] isEqualToNumber:@1]) {
-                        self.typingImageView.hidden = NO;
-                    } else {
-                        self.typingImageView.hidden = YES;
-                    }
-                }
-            } withCancelBlock:^(NSError *error) {
-            }];
-        }
+                } withCancelBlock:^(NSError *error) {
+                }];
+            }
+        }];
     } else {
-        //setting up conversation model and query
-        if (self.otherUsername != nil) {
-            NSLog(@"----------------%@", self.otherUsername);
-            self.convoRef = [self.conversationsRef childByAppendingPath: self.otherUsername];
-
-            [self.convoRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-                if (![snapshot.value isEqual:[NSNull null]]) {
-                    self.otherUserMessages = snapshot.value[@"messages"];
-                    self.cloudMessages = [NSMutableArray new];
-                    [self.cloudMessages addObjectsFromArray:self.otherUserMessages];
-                    [self.tableView reloadData];
-                    if (self.cloudMessages.count > 5) {
-                        NSIndexPath* ipath = [NSIndexPath indexPathForRow: self.cloudMessages.count-1 inSection: 0];
-                        [self.tableView scrollToRowAtIndexPath: ipath atScrollPosition: UITableViewScrollPositionBottom animated: YES];
+        // Get the scene ID reference that was just created by other user
+        self.currentUserRef = [self.ref childByAppendingPath:self.ref.authData.uid];
+        [self.currentUserRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+            if (snapshot.value[@"sceneID"] != nil) {
+                NSString *sceneID = snapshot.value[@"sceneID"];
+                self.sceneIDRef = [[Firebase alloc]initWithUrl:[NSString stringWithFormat:@"https://yesand.firebaseio.com/scenes/%@", sceneID]];
+                //setting up conversation model and query
+                [self.sceneIDRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+                    if (![snapshot.value isEqual:[NSNull null]]) {
+                        if (snapshot.value[@"messages"] != nil) {
+                            self.otherUserMessages = snapshot.value[@"messages"];
+                            self.cloudMessages = [NSMutableArray new];
+                            [self.cloudMessages addObjectsFromArray:self.otherUserMessages];
+                            [self.tableView reloadData];
+                            if (self.cloudMessages.count > 5) {
+                                NSIndexPath* ipath = [NSIndexPath indexPathForRow: self.cloudMessages.count-1 inSection: 0];
+                                [self.tableView scrollToRowAtIndexPath: ipath atScrollPosition: UITableViewScrollPositionBottom animated: YES];
+                            }
+                            if ([snapshot.value[self.otherUserCharacter.text] isEqualToNumber:@1]) {
+                                self.typingImageView.hidden = NO;
+                            } else {
+                                self.typingImageView.hidden = YES;
+                            }
+                        }
                     }
-                    if ([snapshot.value[self.otherUserCharacter.text] isEqualToNumber:@1]) {
-                        self.typingImageView.hidden = NO;
-                    } else {
-                        self.typingImageView.hidden = YES;
-                    }
-                }
-            } withCancelBlock:^(NSError *error) {
-            }];
-        }
+                } withCancelBlock:^(NSError *error) {
+                }];
+            }
+        }];
     }
 }
 
@@ -340,7 +351,7 @@
     NSDictionary *conversation = @{
                                    @"messages": self.cloudMessages
                                    };
-    [self.convoRef updateChildValues:conversation];
+    [self.sceneIDRef updateChildValues:conversation];
     self.messageTextField.text = @"";
 }
 
@@ -367,7 +378,6 @@
 #pragma mark - Segues
 
 - (IBAction)onCancelTapped:(UIBarButtonItem *)sender {
-    NSLog(@"cancel");
     [self performSegueWithIdentifier:@"ChatToHome" sender:sender];
 }
 - (IBAction)onEndSceneTapped:(UIBarButtonItem *)sender {
@@ -382,11 +392,9 @@
 }
 
 -(IBAction)unwindToChatFromRating:(UIStoryboardSegue *)segue {
-    self.localMessages = [NSMutableArray new];
-    self.conversationsRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/conversations"];
+    self.scenesRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/scenes"];
     self.cloudMessages = [NSMutableArray new];
     [self.tableView reloadData];
-
     NSLog(@"unwindToChat");
 }
 
@@ -432,14 +440,14 @@
     NSDictionary *conversation = @{
                                    self.currentUserCharacter.text: @1
                                    };
-    [self.convoRef updateChildValues:conversation];
+    [self.sceneIDRef updateChildValues:conversation];
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField {
     NSDictionary *conversation = @{
                                    self.currentUserCharacter.text: @0
                                    };
-    [self.convoRef updateChildValues:conversation];
+    [self.sceneIDRef updateChildValues:conversation];
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -447,7 +455,7 @@
     NSDictionary *conversation = @{
                                    @"messages": self.cloudMessages
                                    };
-    [self.convoRef updateChildValues:conversation];
+    [self.sceneIDRef updateChildValues:conversation];
     self.messageTextField.text = @"";
     [self.messageTextField resignFirstResponder];
     self.textFieldBottomLayout.constant = 0;
@@ -459,20 +467,17 @@
 -(void)viewWillDisappear:(BOOL)animated {
     [self makeNotAvailable];
     [self.usersRef removeAllObservers];
+    [self.currentUserRef removeAllObservers];
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(splashViewDisappear) object:nil];
     NSLog(@"---- removing");
     if (self.isSplashHidden) {
         if (self.isEven) {
-            NSDictionary *sceneMessages = @{
-                                            @"isLive": @0
-                                            };
-            [self.sceneConvo updateChildValues:sceneMessages];
+            NSDictionary *isLive = @{
+                                     @"isLive": @0
+                                     };
+            [self.sceneConvo updateChildValues:isLive];
         }
-        Firebase *currentConvo = [self.conversationsRef childByAppendingPath: self.currentUsername];
-        Firebase *otherConvo = [self.conversationsRef childByAppendingPath: self.otherUsername];
-        [currentConvo removeValue];
-        [otherConvo removeValue];
-        [self.convoRef removeAllObservers];
+        [self.sceneIDRef removeAllObservers];
     }
 }
 

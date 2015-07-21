@@ -35,11 +35,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *typingImageView;
 @property (weak, nonatomic) IBOutlet UILabel *countdownLabel;
 @property double keyboardHeight;
-@property NSMutableArray *localMessages;
 @property NSMutableArray *cloudMessages;
-@property Firebase *conversationsRef;
-@property Firebase *convoRef;
-@property Firebase *rootRef;
 @property NSArray *currentUserMessages;
 @property NSArray *otherUserMessages;
 @property Firebase *sceneConvo;
@@ -57,4 +53,7 @@
 @property NSDictionary *topic;
 @property NSTimer *timer;
 @property int countdown;
+@property Firebase *scenesRef;
+@property Firebase *sceneIDRef;
+@property Firebase *currentUserRef;
 @end
