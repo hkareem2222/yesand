@@ -22,10 +22,14 @@
 
         UITabBarItem *item = [self.tabBar.items objectAtIndex:0];
         item.image = [[UIImage imageNamed:@"HomeIconWhite.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        UITabBarItem *item2 = [self.tabBar.items objectAtIndex:1];
+        UITabBarItem *item1 = [self.tabBar.items objectAtIndex:1];
+        item1.image = [[UIImage imageNamed:@"SearchIconWhite.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        UITabBarItem *item2 = [self.tabBar.items objectAtIndex:2];
         item2.image = [[UIImage imageNamed:@"NewSceneIconWhite.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        UITabBarItem *item3 = [self.tabBar.items objectAtIndex:2];
-        item3.image = [[UIImage imageNamed:@"MaskIconWhite.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        UITabBarItem *item3 = [self.tabBar.items objectAtIndex:3];
+        item3.image = [[UIImage imageNamed:@"EventsIconWhite.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        UITabBarItem *item4 = [self.tabBar.items objectAtIndex:4];
+        item4.image = [[UIImage imageNamed:@"MaskIconWhite.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     }];
 }
 

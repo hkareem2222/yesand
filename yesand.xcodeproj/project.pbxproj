@@ -41,6 +41,8 @@
 		F941256B1B4378D2006DC249 /* SavedSendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F941256A1B4378D2006DC249 /* SavedSendTableViewCell.m */; };
 		F96300F71B41E3B3009F459B /* ReceiveTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F96300F61B41E3B3009F459B /* ReceiveTableViewCell.m */; };
 		F96300FA1B41E3C1009F459B /* SendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F96300F91B41E3C1009F459B /* SendTableViewCell.m */; };
+		F965C4A21B6030320065F6F9 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F965C4A11B6030320065F6F9 /* SearchViewController.m */; };
+		F965C4A51B60393B0065F6F9 /* MeetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F965C4A41B60393B0065F6F9 /* MeetupViewController.m */; };
 		F99E11F11B3DACFD00A75738 /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F99E11F01B3DACFD00A75738 /* HomeTableViewCell.m */; };
 		F9A55C5F1B42F3F500E47D1A /* AudienceReceiveTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A55C5E1B42F3F500E47D1A /* AudienceReceiveTableViewCell.m */; };
 		F9A55C621B42F40600E47D1A /* AudienceSendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A55C611B42F40600E47D1A /* AudienceSendTableViewCell.m */; };
@@ -114,6 +116,10 @@
 		F96300F61B41E3B3009F459B /* ReceiveTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReceiveTableViewCell.m; sourceTree = "<group>"; };
 		F96300F81B41E3C1009F459B /* SendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendTableViewCell.h; sourceTree = "<group>"; };
 		F96300F91B41E3C1009F459B /* SendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendTableViewCell.m; sourceTree = "<group>"; };
+		F965C4A01B6030320065F6F9 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		F965C4A11B6030320065F6F9 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		F965C4A31B60393B0065F6F9 /* MeetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetupViewController.h; sourceTree = "<group>"; };
+		F965C4A41B60393B0065F6F9 /* MeetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetupViewController.m; sourceTree = "<group>"; };
 		F99E11EF1B3DACFD00A75738 /* HomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableViewCell.h; sourceTree = "<group>"; };
 		F99E11F01B3DACFD00A75738 /* HomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewCell.m; sourceTree = "<group>"; };
 		F9A55C5D1B42F3F500E47D1A /* AudienceReceiveTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudienceReceiveTableViewCell.h; sourceTree = "<group>"; };
@@ -167,6 +173,10 @@
 		85014AA91B35AEAB00E190C8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F965C4A31B60393B0065F6F9 /* MeetupViewController.h */,
+				F965C4A41B60393B0065F6F9 /* MeetupViewController.m */,
+				F965C4A01B6030320065F6F9 /* SearchViewController.h */,
+				F965C4A11B6030320065F6F9 /* SearchViewController.m */,
 				F9A9677B1B44FDFF00F74893 /* InfoViewController.h */,
 				F9A9677C1B44FDFF00F74893 /* InfoViewController.m */,
 				F94125631B4373D4006DC249 /* SavedSceneViewController.h */,
@@ -436,8 +446,10 @@
 				F9A55C621B42F40600E47D1A /* AudienceSendTableViewCell.m in Sources */,
 				85CFE43C1B4350B9002A52A1 /* TwitterAuthHelper.m in Sources */,
 				BF372B911B3CD59F00D7AE0C /* TabBar.m in Sources */,
+				F965C4A51B60393B0065F6F9 /* MeetupViewController.m in Sources */,
 				85014AAC1B35BD7400E190C8 /* ChatViewController.m in Sources */,
 				F9A55C5F1B42F3F500E47D1A /* AudienceReceiveTableViewCell.m in Sources */,
+				F965C4A21B6030320065F6F9 /* SearchViewController.m in Sources */,
 				85963F7B1B34C8F7006E2868 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
