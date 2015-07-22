@@ -34,6 +34,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *topicLabelForChat;
 @property (weak, nonatomic) IBOutlet UIImageView *typingImageView;
 @property (weak, nonatomic) IBOutlet UILabel *countdownLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *laughImageView;
+@property (weak, nonatomic) IBOutlet UILabel *laughsLabel;
 @property double keyboardHeight;
 @property NSMutableArray *cloudMessages;
 @property NSArray *currentUserMessages;
@@ -56,4 +58,5 @@
 @property Firebase *scenesRef;
 @property Firebase *sceneIDRef;
 @property Firebase *currentUserRef;
+@property NSNumber *laughs;
 @end

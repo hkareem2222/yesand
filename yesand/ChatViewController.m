@@ -61,6 +61,12 @@
     self.countdown = 10;
     [self retrieveNewTopic];
     //---------------------------------endsHere
+    // Laughs Key Value Observing
+    [self.laughsLabel addObserver:self
+                       forKeyPath:@"text"
+                          options:NSKeyValueObservingOptionNew
+     | NSKeyValueObservingOptionOld
+                          context:nil];
 }
 
 #pragma mark - Animation with image
@@ -272,7 +278,8 @@
                                    @"characterTwo": self.currentUserCharacterTwo,
                                    @"userOne": self.ref.authData.uid,
                                    @"userTwo": self.otherAuthuid,
-                                   @"isLive": @1
+                                   @"isLive": @1,
+                                   @"laughs": @0
                                    };
 
         self.sceneConvo = [scenesConvo childByAutoId];
@@ -308,6 +315,10 @@
                                 self.typingImageView.hidden = YES;
                             }
                         }
+                        self.laughs = snapshot.value[@"laughs"];
+                        if (![self.laughsLabel.text isEqualToString:self.laughs.stringValue]) {
+                            [self.laughsLabel setValue:self.laughs.stringValue forKey:@"text"];
+                        }
                     }
                 } withCancelBlock:^(NSError *error) {
                 }];
@@ -338,6 +349,10 @@
                                 self.typingImageView.hidden = YES;
                             }
                         }
+                        self.laughs = snapshot.value[@"laughs"];
+                        if (![self.laughsLabel.text isEqualToString:self.laughs.stringValue]) {
+                            [self.laughsLabel setValue:self.laughs.stringValue forKey:@"text"];
+                        }
                     }
                 } withCancelBlock:^(NSError *error) {
                 }];
@@ -354,6 +369,23 @@
     [self.sceneIDRef updateChildValues:conversation];
     self.messageTextField.text = @"";
 }
+
+#pragma mark - Laughs Animation
+// Animates the laughs image every time the text value changes of the label
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"text"]) {
+        CABasicAnimation *theAnimation;
+        theAnimation=[CABasicAnimation animationWithKeyPath:@"opacity"];
+        theAnimation.duration=0.4;
+        theAnimation.repeatCount=1;
+        theAnimation.autoreverses=YES;
+        theAnimation.fromValue=[NSNumber numberWithFloat:1.0];
+        theAnimation.toValue=[NSNumber numberWithFloat:0.2];
+        [self.laughImageView.layer addAnimation:theAnimation forKey:@"animateOpacity"];
+    }
+}
+
 
 #pragma mark - Keyboard Animation
 
