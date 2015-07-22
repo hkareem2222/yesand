@@ -144,7 +144,6 @@
         [usersArray sortUsingDescriptors: arrayOfDescriptors];
         self.availableUsers = usersArray;
         [self pairUsers];
-        NSLog(@"------- AVAILABLE %@", self.availableUsers);
     }];
 }
 
@@ -236,7 +235,6 @@
     Firebase *otherUserRef = [[Firebase alloc] initWithUrl: [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@",self.otherAuthuid]];
     [otherUserRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         if ([snapshot.value[@"isAvailable"] isEqualToNumber:@0]) {
-            NSLog(@" CALLING FROM ALERT");
             [self.messageTextField resignFirstResponder];
             UIAlertController* alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ left the scene", self.otherUsername] message:nil preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *continueAction = [UIAlertAction actionWithTitle:@"Continue" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
@@ -355,7 +353,6 @@
     }
 }
 
-
 #pragma mark - Keyboard Animation
 
 -(void)keyboardOnScreen:(NSNotification *)notification
@@ -368,7 +365,6 @@
 
     self.textFieldBottomLayout.constant = keyboardFrame.size.height; //- 50;
 }
-
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
@@ -488,10 +484,6 @@
                                      };
             [self.sceneConvo updateChildValues:isLive];
         }
-    }
-    if (self.cloudMessages.count < 5) {
-        NSLog(@"---- removing scene");
-        [self.sceneConvo removeValue];
     }
 }
 
