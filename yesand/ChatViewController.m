@@ -236,6 +236,8 @@
     Firebase *otherUserRef = [[Firebase alloc] initWithUrl: [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@",self.otherAuthuid]];
     [otherUserRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         if ([snapshot.value[@"isAvailable"] isEqualToNumber:@0]) {
+            NSLog(@" CALLING FROM ALERT");
+            [self.messageTextField resignFirstResponder];
             UIAlertController* alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ left the scene", self.otherUsername] message:nil preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *continueAction = [UIAlertAction actionWithTitle:@"Continue" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
                 [self performSegueWithIdentifier:@"SplashChatToRatings" sender:self];
@@ -337,15 +339,6 @@
     }];
 }
 
-- (IBAction)onSendButtonTapped:(id)sender {
-    [self.cloudMessages addObject:[NSString stringWithFormat:@"%@: %@", self.currentUserCharacter.text, self.messageTextField.text]];
-    NSDictionary *conversation = @{
-                                   @"messages": self.cloudMessages
-                                   };
-    [self.sceneIDRef updateChildValues:conversation];
-    self.messageTextField.text = @"";
-}
-
 #pragma mark - Laughs Animation
 // Animates the laughs image every time the text value changes of the label
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -426,18 +419,17 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *msg = self.cloudMessages[indexPath.row];
-    CGSize sizeOfString = [self testSizeOfString:msg];
+    CGSize sizeOfString = [self getSizeOfString:msg];
     return sizeOfString.height + 20;
 }
 
--(CGSize)testSizeOfString:(NSString *)labelText {
+-(CGSize)getSizeOfString:(NSString *)labelText {
     UILabel *gettingSizeLabel = [[UILabel alloc] init];
     gettingSizeLabel.font = [UIFont fontWithName:@"AppleGothic" size:14];
     gettingSizeLabel.text = labelText;
     gettingSizeLabel.numberOfLines = 0;
     gettingSizeLabel.lineBreakMode = NSLineBreakByWordWrapping;
     CGSize maximumLabelSize = CGSizeMake(190, 9999);
-
     CGSize expectSize = [gettingSizeLabel sizeThatFits:maximumLabelSize];
     return expectSize;
 }
@@ -455,16 +447,27 @@
     NSDictionary *conversation = @{
                                    self.currentUserCharacter.text: @0
                                    };
+    NSLog(@" CALLING FROM DID END EDITING");
     [self.sceneIDRef updateChildValues:conversation];
 }
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField {
+#pragma mark - Send Message
+
+-(void)sendMessage {
     [self.cloudMessages addObject:[NSString stringWithFormat:@"%@: %@", self.currentUserCharacter.text, self.messageTextField.text]];
     NSDictionary *conversation = @{
                                    @"messages": self.cloudMessages
                                    };
     [self.sceneIDRef updateChildValues:conversation];
     self.messageTextField.text = @"";
+}
+
+- (IBAction)onSendButtonTapped:(id)sender {
+    [self sendMessage];
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self sendMessage];
     [self.messageTextField resignFirstResponder];
     self.textFieldBottomLayout.constant = 0;
     return YES;
@@ -478,7 +481,6 @@
     [self.currentUserRef removeAllObservers];
     [self.sceneIDRef removeAllObservers];
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(splashViewDisappear) object:nil];
-    NSLog(@"---- removing");
     if (self.isSplashHidden) {
         if (self.isEven) {
             NSDictionary *isLive = @{
@@ -486,6 +488,10 @@
                                      };
             [self.sceneConvo updateChildValues:isLive];
         }
+    }
+    if (self.cloudMessages.count < 5) {
+        NSLog(@"---- removing scene");
+        [self.sceneConvo removeValue];
     }
 }
 
