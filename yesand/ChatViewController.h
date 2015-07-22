@@ -38,8 +38,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *laughsLabel;
 @property double keyboardHeight;
 @property NSMutableArray *cloudMessages;
-@property NSArray *currentUserMessages;
-@property NSArray *otherUserMessages;
+@property NSArray *currentMessages;
 @property Firebase *sceneConvo;
 @property BOOL ifCalled;
 @property NSMutableArray *availableUsers;
