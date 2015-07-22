@@ -1506,11 +1506,11 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
             </objects>
             <point key="canvasLocation" x="3294" y="780"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Home-->
         <scene sceneID="PRt-ad-y5z">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dIj-3I-ipL" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" image="HomeIconWhite" id="Psa-cM-ijR"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="HomeIconWhite" id="Psa-cM-ijR"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="STF-Mm-ud1">
@@ -1710,11 +1710,11 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
             </objects>
             <point key="canvasLocation" x="1448" y="-722"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Profile-->
         <scene sceneID="Cmh-hy-gNo">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="q5z-f3-ka2" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" image="MaskIconWhite" id="crQ-yS-lv5"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="MaskIconWhite" id="crQ-yS-lv5"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="y8m-e5-BwK">
@@ -1730,11 +1730,11 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
             </objects>
             <point key="canvasLocation" x="2630" y="52"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--New Scene-->
         <scene sceneID="1D4-wp-9I5">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4TZ-hi-J5F" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="100" title="" image="NewSceneIconWhite" id="3hS-xN-MNC"/>
+                    <tabBarItem key="tabBarItem" tag="100" title="New Scene" image="NewSceneIconWhite" id="3hS-xN-MNC"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="avH-ia-rxB">

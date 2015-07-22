@@ -28,6 +28,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.laughsImageView.layer.cornerRadius = self.laughsImageView.frame.size.width / 2;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -147,11 +148,11 @@
     if ([keyPath isEqualToString:@"text"]) {
         CABasicAnimation *theAnimation;
         theAnimation=[CABasicAnimation animationWithKeyPath:@"opacity"];
-        theAnimation.duration=0.4;
+        theAnimation.duration=0.5;
         theAnimation.repeatCount=1;
         theAnimation.autoreverses=YES;
         theAnimation.fromValue=[NSNumber numberWithFloat:1.0];
-        theAnimation.toValue=[NSNumber numberWithFloat:0.2];
+        theAnimation.toValue=[NSNumber numberWithFloat:0.0];
         [self.laughsImageView.layer addAnimation:theAnimation forKey:@"animateOpacity"];
     }
 }

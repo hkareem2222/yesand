@@ -33,8 +33,10 @@
        }
      forState:UIControlStateNormal];
 //        [self.window.rootViewController performSegueWithIdentifier:@"AuthToHome" sender:self];
-    UIImage *whiteUnderline = [UIImage imageNamed:@"whiteUnderline"];
+    UIImage *whiteUnderline = [UIImage imageNamed:@"WhiteLine"];
     [[UITabBar appearance] setSelectionIndicatorImage:whiteUnderline];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor] }
+                                             forState:UIControlStateNormal];
     return YES;
 }
 

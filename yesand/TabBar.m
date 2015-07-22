@@ -18,7 +18,7 @@
     [super viewDidLoad];
     [self.viewControllers enumerateObjectsUsingBlock:^(UIViewController *vc, NSUInteger idx, BOOL *stop) {
         vc.title = nil;
-        vc.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
+//        vc.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
 
         UITabBarItem *item = [self.tabBar.items objectAtIndex:0];
         item.image = [[UIImage imageNamed:@"HomeIconWhite.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
