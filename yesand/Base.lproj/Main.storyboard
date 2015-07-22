@@ -1506,11 +1506,11 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
             </objects>
             <point key="canvasLocation" x="3294" y="780"/>
         </scene>
-        <!--Home-->
+        <!--Navigation Controller-->
         <scene sceneID="PRt-ad-y5z">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dIj-3I-ipL" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" image="HomeIconWhite" id="Psa-cM-ijR"/>
+                    <tabBarItem key="tabBarItem" title="" image="HomeIconWhite" id="Psa-cM-ijR"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="STF-Mm-ud1">
@@ -1712,11 +1712,11 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
             </objects>
             <point key="canvasLocation" x="1448" y="-722"/>
         </scene>
-        <!--Profile-->
+        <!--Navigation Controller-->
         <scene sceneID="Cmh-hy-gNo">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="q5z-f3-ka2" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" image="MaskIconWhite" id="crQ-yS-lv5"/>
+                    <tabBarItem key="tabBarItem" title="" image="MaskIconWhite" id="crQ-yS-lv5"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="y8m-e5-BwK">
@@ -1747,27 +1747,27 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="RBN-pT-rbJ">
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="yUy-oG-kM5"/>
+                                    <constraint firstAttribute="height" constant="44" id="TOC-G8-bPn"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="rrh-U4-KgE">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Ivn-8R-bwe">
                                 <rect key="frame" x="0.0" y="108" width="600" height="492"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SceneID" textLabel="Km2-XS-3Wi" detailTextLabel="NsQ-1W-Krr" style="IBUITableViewCellStyleValue1" id="hYq-oD-RAC">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SceneID" textLabel="woN-sD-8nA" detailTextLabel="Eoy-rk-ilB" style="IBUITableViewCellStyleValue1" id="31b-lE-85N" customClass="SearchTableViewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hYq-oD-RAC" id="aaM-oN-PCl">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="31b-lE-85N" id="BEW-4E-gkF">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Km2-XS-3Wi">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="woN-sD-8nA">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NsQ-1W-Krr">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Eoy-rk-ilB">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
@@ -1778,24 +1778,28 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="NcO-U4-jTY" id="Wbq-Ht-iwu"/>
-                                    <outlet property="delegate" destination="NcO-U4-jTY" id="PAE-pZ-dFd"/>
+                                    <outlet property="dataSource" destination="NcO-U4-jTY" id="UGu-xR-pCf"/>
+                                    <outlet property="delegate" destination="NcO-U4-jTY" id="xUy-8t-ApU"/>
                                 </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="rrh-U4-KgE" firstAttribute="leading" secondItem="YVq-Rm-TDY" secondAttribute="leading" id="Bvk-FM-JD6"/>
-                            <constraint firstItem="RBN-pT-rbJ" firstAttribute="top" secondItem="Vsb-3G-tjf" secondAttribute="bottom" id="FvR-va-RLm"/>
-                            <constraint firstAttribute="trailing" secondItem="rrh-U4-KgE" secondAttribute="trailing" id="JgP-sN-IVC"/>
-                            <constraint firstItem="rrh-U4-KgE" firstAttribute="top" secondItem="RBN-pT-rbJ" secondAttribute="bottom" id="Tvo-oF-mJu"/>
-                            <constraint firstAttribute="trailing" secondItem="RBN-pT-rbJ" secondAttribute="trailing" id="db5-M9-5EK"/>
-                            <constraint firstItem="xpV-C8-qXE" firstAttribute="top" secondItem="rrh-U4-KgE" secondAttribute="bottom" id="nSX-wY-QaG"/>
-                            <constraint firstItem="RBN-pT-rbJ" firstAttribute="leading" secondItem="YVq-Rm-TDY" secondAttribute="leading" id="p0B-yd-5OV"/>
+                            <constraint firstItem="Ivn-8R-bwe" firstAttribute="top" secondItem="RBN-pT-rbJ" secondAttribute="bottom" id="3NT-A8-KDh"/>
+                            <constraint firstItem="xpV-C8-qXE" firstAttribute="top" secondItem="Ivn-8R-bwe" secondAttribute="bottom" id="IXX-VI-hKY"/>
+                            <constraint firstItem="Ivn-8R-bwe" firstAttribute="leading" secondItem="YVq-Rm-TDY" secondAttribute="leading" id="gKk-Ai-cV2"/>
+                            <constraint firstAttribute="trailing" secondItem="Ivn-8R-bwe" secondAttribute="trailing" id="lCx-XY-0ih"/>
+                            <constraint firstItem="RBN-pT-rbJ" firstAttribute="top" secondItem="Vsb-3G-tjf" secondAttribute="bottom" id="qsc-6m-os9"/>
+                            <constraint firstAttribute="trailing" secondItem="RBN-pT-rbJ" secondAttribute="trailing" id="u1X-7h-qpf"/>
+                            <constraint firstItem="RBN-pT-rbJ" firstAttribute="leading" secondItem="YVq-Rm-TDY" secondAttribute="leading" id="ub0-NH-Nbs"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="yz0-qi-HSW"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="searchBar" destination="RBN-pT-rbJ" id="PTs-Hp-pJC"/>
+                        <outlet property="tableView" destination="Ivn-8R-bwe" id="fHz-nW-26G"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wdb-Dw-bkF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1820,11 +1824,11 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
             </objects>
             <point key="canvasLocation" x="3314" y="-2130"/>
         </scene>
-        <!--New Scene-->
+        <!--Navigation Controller-->
         <scene sceneID="1D4-wp-9I5">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4TZ-hi-J5F" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="100" title="New Scene" image="NewSceneIconWhite" id="3hS-xN-MNC"/>
+                    <tabBarItem key="tabBarItem" tag="100" title="" image="NewSceneIconWhite" id="3hS-xN-MNC"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="avH-ia-rxB">
@@ -1840,11 +1844,11 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
             </objects>
             <point key="canvasLocation" x="2630" y="-1418"/>
         </scene>
-        <!--Search-->
+        <!--Navigation Controller-->
         <scene sceneID="jow-ZL-Hz1">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5IH-IO-GG5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Search" image="SearchIconWhite" id="x6d-9X-cLK"/>
+                    <tabBarItem key="tabBarItem" title="" image="SearchIconWhite" id="x6d-9X-cLK"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="PGd-ES-PeH">
@@ -1860,11 +1864,11 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
             </objects>
             <point key="canvasLocation" x="2630" y="1444"/>
         </scene>
-        <!--Events-->
+        <!--Navigation Controller-->
         <scene sceneID="khi-aW-k07">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Q1R-Jp-7cC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Events" image="EventsIconWhite" id="c7S-xD-Jw8"/>
+                    <tabBarItem key="tabBarItem" title="" image="EventsIconWhite" id="c7S-xD-Jw8"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7GV-N5-gui">

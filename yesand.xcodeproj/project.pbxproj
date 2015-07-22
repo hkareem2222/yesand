@@ -43,6 +43,7 @@
 		F96300FA1B41E3C1009F459B /* SendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F96300F91B41E3C1009F459B /* SendTableViewCell.m */; };
 		F965C4A21B6030320065F6F9 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F965C4A11B6030320065F6F9 /* SearchViewController.m */; };
 		F965C4A51B60393B0065F6F9 /* MeetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F965C4A41B60393B0065F6F9 /* MeetupViewController.m */; };
+		F965C4A81B604AE60065F6F9 /* SearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F965C4A71B604AE60065F6F9 /* SearchTableViewCell.m */; };
 		F99E11F11B3DACFD00A75738 /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F99E11F01B3DACFD00A75738 /* HomeTableViewCell.m */; };
 		F9A55C5F1B42F3F500E47D1A /* AudienceReceiveTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A55C5E1B42F3F500E47D1A /* AudienceReceiveTableViewCell.m */; };
 		F9A55C621B42F40600E47D1A /* AudienceSendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A55C611B42F40600E47D1A /* AudienceSendTableViewCell.m */; };
@@ -120,6 +121,8 @@
 		F965C4A11B6030320065F6F9 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		F965C4A31B60393B0065F6F9 /* MeetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetupViewController.h; sourceTree = "<group>"; };
 		F965C4A41B60393B0065F6F9 /* MeetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetupViewController.m; sourceTree = "<group>"; };
+		F965C4A61B604AE60065F6F9 /* SearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTableViewCell.h; sourceTree = "<group>"; };
+		F965C4A71B604AE60065F6F9 /* SearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTableViewCell.m; sourceTree = "<group>"; };
 		F99E11EF1B3DACFD00A75738 /* HomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableViewCell.h; sourceTree = "<group>"; };
 		F99E11F01B3DACFD00A75738 /* HomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewCell.m; sourceTree = "<group>"; };
 		F9A55C5D1B42F3F500E47D1A /* AudienceReceiveTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudienceReceiveTableViewCell.h; sourceTree = "<group>"; };
@@ -297,6 +300,8 @@
 				F9A55C5E1B42F3F500E47D1A /* AudienceReceiveTableViewCell.m */,
 				F9A55C601B42F40600E47D1A /* AudienceSendTableViewCell.h */,
 				F9A55C611B42F40600E47D1A /* AudienceSendTableViewCell.m */,
+				F965C4A61B604AE60065F6F9 /* SearchTableViewCell.h */,
+				F965C4A71B604AE60065F6F9 /* SearchTableViewCell.m */,
 				F99E11EF1B3DACFD00A75738 /* HomeTableViewCell.h */,
 				F99E11F01B3DACFD00A75738 /* HomeTableViewCell.m */,
 				F9A55C631B434D1700E47D1A /* ProfileTableViewCell.h */,
@@ -437,6 +442,7 @@
 				F96300F71B41E3B3009F459B /* ReceiveTableViewCell.m in Sources */,
 				BF4F908C1B39FA7900A93680 /* RatingViewController.m in Sources */,
 				F99E11F11B3DACFD00A75738 /* HomeTableViewCell.m in Sources */,
+				F965C4A81B604AE60065F6F9 /* SearchTableViewCell.m in Sources */,
 				F9A55C651B434D1700E47D1A /* ProfileTableViewCell.m in Sources */,
 				F9A9677D1B44FDFF00F74893 /* InfoViewController.m in Sources */,
 				BF372B461B3B1DEA00D7AE0C /* RateView.m in Sources */,

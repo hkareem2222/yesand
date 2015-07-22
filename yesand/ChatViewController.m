@@ -480,11 +480,15 @@
     if (self.isSplashHidden) {
         if (self.isEven) {
             NSDictionary *isLive = @{
-                                     @"isLive": @0
+                                     @"isLive": @0,
                                      };
             [self.sceneConvo updateChildValues:isLive];
         }
     }
+    NSDictionary *sceneUpdate = @{
+                             @"sceneID": @""
+                             };
+    [self.currentUserRef updateChildValues:sceneUpdate];
 }
 
 @end
