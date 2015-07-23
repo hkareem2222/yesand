@@ -8,14 +8,22 @@
 
 #import "SearchViewController.h"
 #import "SearchTableViewCell.h"
+#import "SavedSceneViewController.h"
 #import <Firebase/Firebase.h>
 
-@interface SearchViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface SearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property NSMutableArray *loadedScenes;
+@property NSMutableArray *searchedScenes;
+@property NSMutableArray *scenes;
 @property NSArray *sortedScenes;
 @property Firebase *scenesConvo;
+@property NSIndexPath *indexPath;
+@property NSDictionary *sceneDic;
+@property NSString *selectedScene;
+@property BOOL searched;
+
 @end
 
 @implementation SearchViewController
@@ -30,6 +38,8 @@
                                NSForegroundColorAttributeName : [UIColor whiteColor]
                                };
     self.navigationController.navigationBar.titleTextAttributes = attrDict;
+    self.searchBar.delegate = self;
+    self.searched = NO;
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -60,6 +70,7 @@
                 }
             }
             self.sortedScenes = [[self.loadedScenes reverseObjectEnumerator] allObjects];
+//            self.scenes = [NSMutableArray arrayWithArray:self.sortedScenes];
             [self.tableView reloadData];
         }
     } withCancelBlock:^(NSError *error) {
@@ -70,10 +81,17 @@
 #pragma mark - Table View
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.sortedScenes.count > 10) {
-        return 10;
+    if (self.searched == NO) {
+        if (self.sortedScenes.count > 10) {
+            return 10;
+        }
+        return self.sortedScenes.count;
+    } else {
+        if (self.searchedScenes.count > 10) {
+            return 10;
+        }
+        return self.searchedScenes.count;
     }
-    return self.sortedScenes.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -85,20 +103,87 @@
     CGFloat width;
     thumbs = [UIImage imageNamed:@"laughsicon"];
     thumbsView = [[UIImageView alloc] initWithImage:thumbs];
-    // Cell setup
+
+    // Cell scene setup
     SearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
-    NSDictionary *sceneDic = self.sortedScenes[indexPath.row];
-    cell.sceneID = [sceneDic objectForKey:@"sceneID"];
+    if (self.searched == NO) {
+        self.sceneDic = self.sortedScenes[indexPath.row];
+    } else if (self.searched) {
+        self.sceneDic = self.searchedScenes[indexPath.row];
+    }
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     cell.textLabel.numberOfLines = 0;
-    cell.textLabel.text = [sceneDic objectForKey:@"topicName"];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",[sceneDic objectForKey:@"laughs"]];
     cell.textLabel.font = myFont;
-
+    cell.sceneID = [self.sceneDic objectForKey:@"sceneID"];
+    cell.textLabel.text = [self.sceneDic objectForKey:@"topicName"];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",[self.sceneDic objectForKey:@"laughs"]];
     width = (cell.frame.size.height * thumbs.size.width) / thumbs.size.height;
     thumbsView.frame   = CGRectMake(0, 0, width - 25, cell.frame.size.height - 25);
     cell.accessoryView = thumbsView;
     return cell;
+}
+
+-(NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    self.indexPath = indexPath;
+    return indexPath;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    SearchTableViewCell *cell = (SearchTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    self.selectedScene = cell.sceneID;
+    [self performSegueWithIdentifier:@"SearchToSavedScene" sender:cell];
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self.searchBar resignFirstResponder];
+}
+
+#pragma mark - Search Bar
+
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    self.searchBar.showsCancelButton = YES;
+    if ([searchText isEqualToString:@""]) {
+        self.searched = NO;
+    } else {
+        self.searchedScenes = [NSMutableArray new];
+        int x = 0;
+        for (NSDictionary *sceneInfo in self.loadedScenes) {
+            NSRange rangeTwo = [[sceneInfo objectForKey:@"topicName"] rangeOfString:self.searchBar.text options: NSCaseInsensitiveSearch];
+            if (rangeTwo.location != NSNotFound) {
+                [self.searchedScenes addObject:sceneInfo];
+            }
+            x++;
+        }
+        self.searched = YES;
+    }
+    [self.tableView reloadData];
+}
+
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    self.searched = YES;
+    self.searchBar.showsCancelButton = NO;
+    [self.tableView reloadData];
+    [searchBar resignFirstResponder];
+}
+
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    self.searchBar.text = @"";
+    self.searched = NO;
+    self.searchBar.showsCancelButton = NO;
+    [self.tableView reloadData];
+    [searchBar resignFirstResponder];
+}
+
+-(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = YES;
+    return YES;
+}
+
+#pragma mark - Segue
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    SavedSceneViewController *savedSceneVC = segue.destinationViewController;
+    savedSceneVC.sceneID = self.selectedScene;
 }
 
 

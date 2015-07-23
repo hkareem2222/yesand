@@ -58,4 +58,5 @@
 @property Firebase *sceneIDRef;
 @property Firebase *currentUserRef;
 @property NSNumber *laughs;
+@property BOOL alertPresented;
 @end

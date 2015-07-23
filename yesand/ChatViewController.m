@@ -59,6 +59,13 @@
     self.cancelBarButton.title = @"Cancel";
     self.endSceneBarButton.title = @"";
     self.countdown = 10;
+    self.topicLabel.text = @"Awaiting your fellow performer...";
+    self.otherUserLabel.text = @"Finding";
+    self.otherUserCharacter.text = @"Character";
+    self.currentUserCharacter.text = @"Character";
+    self.countdownLabel.text = @"Your scene will start shortly...";
+    self.textFieldBottomLayout.constant = 0;
+    self.alertPresented = NO;
     [self retrieveNewTopic];
     //---------------------------------endsHere
     // Laughs Key Value Observing
@@ -94,6 +101,7 @@
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
 
                                NSArray *topics = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError];
+                               self.topic = [NSDictionary new];
                                self.topic = topics[arc4random_uniform((int)topics.count)];
                                [self saveNewTopic];
                            }];
@@ -236,6 +244,7 @@
     [otherUserRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         if ([snapshot.value[@"isAvailable"] isEqualToNumber:@0]) {
             [self.messageTextField resignFirstResponder];
+            self.alertPresented = YES;
             UIAlertController* alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@ left the scene", self.otherUsername] message:nil preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *continueAction = [UIAlertAction actionWithTitle:@"Continue" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
                 [self performSegueWithIdentifier:@"SplashChatToRatings" sender:self];
@@ -245,26 +254,6 @@
             [otherUserRef removeAllObservers];
         }
     }];
-}
-
--(void)makeNotAvailable {
-    Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
-    NSDictionary *userDic = @{@"isAvailable": @0
-                              };
-    if (usersRef.authData.uid != nil) {
-        NSLog(@"----------------%@", usersRef.authData.uid);
-        Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
-        [user updateChildValues: userDic];
-    }
-
-    if (self.isSplashHidden) {
-        if (self.otherAuthuid != nil) {
-            NSLog(@"----------------%@", self.otherAuthuid);
-            Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
-            Firebase *otherUser = [usersRef childByAppendingPath:self.otherAuthuid];
-            [otherUser updateChildValues:userDic];
-        }
-    }
 }
 
 #pragma mark - Conversation Setup
@@ -293,7 +282,7 @@
         [otherUserRef updateChildValues:sceneID];
         [self.currentUserRef updateChildValues:sceneID];
         [self.currentUserRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-            if (snapshot.value[@"sceneID"] != nil) {
+            if (snapshot.value[@"sceneID"] != nil && ![snapshot.value[@"sceneID"] isEqual:[NSNull null]] && ![snapshot.value[@"sceneID"] isEqualToString:@""]) {
                 self.sceneIDRef = [self.scenesRef childByAppendingPath:snapshot.value[@"sceneID"]];
                 NSLog(@"---- SCENE ID EVEN %@", self.sceneIDRef);
                 [self observeSceneConversation];
@@ -303,7 +292,8 @@
         // Get the scene ID reference that was just created by other user
         self.currentUserRef = [self.ref childByAppendingPath:self.ref.authData.uid];
         [self.currentUserRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-            if (snapshot.value[@"sceneID"] != nil) {
+            NSLog(@"SNAPSHOTT -- %@", snapshot.value[@"sceneID"]);
+            if (snapshot.value[@"sceneID"] != nil && ![snapshot.value[@"sceneID"] isEqual:[NSNull null]] && ![snapshot.value[@"sceneID"] isEqualToString:@""]) {
                 self.sceneIDRef = [self.scenesRef childByAppendingPath:snapshot.value[@"sceneID"]];
                 NSLog(@"---- SCENE ID ODD %@", self.sceneIDRef);
                 [self observeSceneConversation];
@@ -389,8 +379,10 @@
 }
 
 -(IBAction)unwindToChatFromRating:(UIStoryboardSegue *)segue {
-    self.scenesRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/scenes"];
+//    self.scenesRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/scenes"];
+    NSLog(@" START %@", self.cloudMessages);
     self.cloudMessages = [NSMutableArray new];
+    NSLog(@" END %@", self.cloudMessages);
     [self.tableView reloadData];
     NSLog(@"unwindToChat");
 }
@@ -443,7 +435,6 @@
     NSDictionary *conversation = @{
                                    self.currentUserCharacter.text: @0
                                    };
-    NSLog(@" CALLING FROM DID END EDITING");
     [self.sceneIDRef updateChildValues:conversation];
 }
 
@@ -470,6 +461,27 @@
 }
 
 #pragma mark - Disappearing
+
+-(void)makeNotAvailable {
+    Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
+    NSDictionary *userDic = @{@"isAvailable": @0
+                              };
+    if (usersRef.authData.uid != nil) {
+        NSLog(@"----------------%@", usersRef.authData.uid);
+        Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
+        [user updateChildValues:userDic];
+    }
+
+    if (self.isSplashHidden) {
+        if (!self.alertPresented) {
+            if (self.otherAuthuid != nil) {
+                NSLog(@"----------------%@", self.otherAuthuid);
+                Firebase *otherUser = [usersRef childByAppendingPath:self.otherAuthuid];
+                [otherUser updateChildValues:userDic];
+            }
+        }
+    }
+}
 
 -(void)viewWillDisappear:(BOOL)animated {
     [self makeNotAvailable];

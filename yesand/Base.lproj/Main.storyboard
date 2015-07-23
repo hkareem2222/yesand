@@ -1744,7 +1744,7 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="RBN-pT-rbJ">
+                            <searchBar contentMode="redraw" placeholder="Search Topics" translatesAutoresizingMaskIntoConstraints="NO" id="RBN-pT-rbJ">
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="TOC-G8-bPn"/>
@@ -1799,6 +1799,7 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
                     <connections>
                         <outlet property="searchBar" destination="RBN-pT-rbJ" id="PTs-Hp-pJC"/>
                         <outlet property="tableView" destination="Ivn-8R-bwe" id="fHz-nW-26G"/>
+                        <segue destination="769-2g-XYm" kind="show" identifier="SearchToSavedScene" id="vpc-Ch-njs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wdb-Dw-bkF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1904,6 +1905,6 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="hkv-kI-r5j"/>
-        <segue reference="MjL-Mh-mnN"/>
+        <segue reference="vpc-Ch-njs"/>
     </inferredMetricsTieBreakers>
 </document>

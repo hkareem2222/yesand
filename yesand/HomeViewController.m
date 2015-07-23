@@ -27,6 +27,7 @@
 @property NSMutableArray *topScenes;
 @property Firebase *scenesConvo;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *helpBarButton;
+@property NSDictionary *sceneDic;
 @end
 
 @implementation HomeViewController
@@ -221,35 +222,23 @@
     CGFloat width;
     thumbs = [UIImage imageNamed:@"laughsicon"];
     thumbsView = [[UIImageView alloc] initWithImage:thumbs];
+    // Cell
+    HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    cell.textLabel.numberOfLines = 0;
+    cell.textLabel.font = myFont;
+    width = (cell.frame.size.height * thumbs.size.width) / thumbs.size.height;
+    thumbsView.frame   = CGRectMake(0, 0, width - 25, cell.frame.size.height - 25);
+    cell.accessoryView = thumbsView;
     if (self.segmentedControl.selectedSegmentIndex == 0) {
-        HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
-        NSDictionary *sceneDic = self.liveScenes[indexPath.row];
-        cell.sceneID = [sceneDic objectForKey:@"sceneID"];
-        cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        cell.textLabel.numberOfLines = 0;
-        cell.textLabel.text = [sceneDic objectForKey:@"topicName"];
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",[sceneDic objectForKey:@"laughs"]];
-        cell.textLabel.font = myFont;
-
-        width = (cell.frame.size.height * thumbs.size.width) / thumbs.size.height;
-        thumbsView.frame   = CGRectMake(0, 0, width - 25, cell.frame.size.height - 25);
-        cell.accessoryView = thumbsView;
-        return cell;
+        self.sceneDic = self.liveScenes[indexPath.row];
     } else {
-        HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
-        NSDictionary *sceneDic = self.topScenes[indexPath.row];
-        cell.sceneID = [sceneDic objectForKey:@"sceneID"];
-        cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        cell.textLabel.numberOfLines = 0;
-        cell.textLabel.text = [sceneDic objectForKey:@"topicName"];
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",[sceneDic objectForKey:@"laughs"]];
-        cell.textLabel.font = myFont;
-
-        width = (cell.frame.size.height * thumbs.size.width) / thumbs.size.height;
-        thumbsView.frame   = CGRectMake(0, 0, width - 25, cell.frame.size.height - 25);
-        cell.accessoryView = thumbsView;
-        return cell;
+        self.sceneDic = self.topScenes[indexPath.row];
     }
+    cell.sceneID = [self.sceneDic objectForKey:@"sceneID"];
+    cell.textLabel.text = [self.sceneDic objectForKey:@"topicName"];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",[self.sceneDic objectForKey:@"laughs"]];
+    return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -261,18 +250,6 @@
         [self performSegueWithIdentifier:@"HomeToSavedScene" sender:cell];
     }
 }
-
-#pragma mark - Alerts for Errors
-
--(void)showAlert:(NSError *)error {
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Error" message:[error localizedDescription]
-                                                            preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-    }];
-    [alert addAction:dismissAction];
-    [self presentViewController:alert animated:YES completion:nil];
-}
-
 
 #pragma mark - Segue
 
