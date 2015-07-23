@@ -101,7 +101,6 @@
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
 
                                NSArray *topics = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError];
-                               self.topic = [NSDictionary new];
                                self.topic = topics[arc4random_uniform((int)topics.count)];
                                [self saveNewTopic];
                            }];
@@ -284,7 +283,6 @@
         [self.currentUserRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
             if (snapshot.value[@"sceneID"] != nil && ![snapshot.value[@"sceneID"] isEqual:[NSNull null]] && ![snapshot.value[@"sceneID"] isEqualToString:@""]) {
                 self.sceneIDRef = [self.scenesRef childByAppendingPath:snapshot.value[@"sceneID"]];
-                NSLog(@"---- SCENE ID EVEN %@", self.sceneIDRef);
                 [self observeSceneConversation];
             }
         }];
@@ -292,10 +290,8 @@
         // Get the scene ID reference that was just created by other user
         self.currentUserRef = [self.ref childByAppendingPath:self.ref.authData.uid];
         [self.currentUserRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-            NSLog(@"SNAPSHOTT -- %@", snapshot.value[@"sceneID"]);
             if (snapshot.value[@"sceneID"] != nil && ![snapshot.value[@"sceneID"] isEqual:[NSNull null]] && ![snapshot.value[@"sceneID"] isEqualToString:@""]) {
                 self.sceneIDRef = [self.scenesRef childByAppendingPath:snapshot.value[@"sceneID"]];
-                NSLog(@"---- SCENE ID ODD %@", self.sceneIDRef);
                 [self observeSceneConversation];
             }
         }];
@@ -349,7 +345,6 @@
 {
     NSDictionary *info  = notification.userInfo;
     NSValue      *value = info[UIKeyboardFrameEndUserInfoKey];
-
     CGRect rawFrame      = [value CGRectValue];
     CGRect keyboardFrame = [self.view convertRect:rawFrame fromView:nil];
 
@@ -379,10 +374,7 @@
 }
 
 -(IBAction)unwindToChatFromRating:(UIStoryboardSegue *)segue {
-//    self.scenesRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/scenes"];
-    NSLog(@" START %@", self.cloudMessages);
     self.cloudMessages = [NSMutableArray new];
-    NSLog(@" END %@", self.cloudMessages);
     [self.tableView reloadData];
     NSLog(@"unwindToChat");
 }
@@ -467,7 +459,6 @@
     NSDictionary *userDic = @{@"isAvailable": @0
                               };
     if (usersRef.authData.uid != nil) {
-        NSLog(@"----------------%@", usersRef.authData.uid);
         Firebase *user = [usersRef childByAppendingPath:usersRef.authData.uid];
         [user updateChildValues:userDic];
     }
@@ -475,7 +466,6 @@
     if (self.isSplashHidden) {
         if (!self.alertPresented) {
             if (self.otherAuthuid != nil) {
-                NSLog(@"----------------%@", self.otherAuthuid);
                 Firebase *otherUser = [usersRef childByAppendingPath:self.otherAuthuid];
                 [otherUser updateChildValues:userDic];
             }
