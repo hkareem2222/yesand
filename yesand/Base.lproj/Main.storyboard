@@ -78,7 +78,7 @@
                                                     <rect key="frame" x="5" y="2" width="230" height="52"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dbI-1O-uDN">
-                                                    <rect key="frame" x="40" y="6" width="34.5" height="16.5"/>
+                                                    <rect key="frame" x="40" y="6" width="35" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="190" id="tFb-ef-bni"/>
                                                     </constraints>
@@ -116,7 +116,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oIP-BP-oft">
-                                                    <rect key="frame" x="376" y="6" width="34.5" height="16.5"/>
+                                                    <rect key="frame" x="376" y="6" width="35" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="190" id="jaU-Xt-cBU"/>
                                                     </constraints>
@@ -503,6 +503,7 @@
                         <outlet property="feedbackLabel" destination="6cO-FT-US7" id="vKA-na-chl"/>
                         <outlet property="rateOtherUserLabel" destination="hph-6D-xsz" id="kvQ-5a-MsL"/>
                         <outlet property="rateView" destination="0kM-lP-Ath" id="xim-50-LLG"/>
+                        <outlet property="reportButton" destination="BZj-gB-jVp" id="ERS-ZK-J8O"/>
                         <outlet property="returnToHomeButton" destination="ZhX-Uy-HX4" id="a4v-aP-g5o"/>
                         <outlet property="sceneNewButton" destination="myu-jI-DPt" id="orb-Df-wzP"/>
                         <outlet property="statusLabel" destination="f8f-wG-ymO" id="KYw-Y7-n4V"/>

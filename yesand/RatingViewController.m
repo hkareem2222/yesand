@@ -18,9 +18,13 @@
 @property (weak, nonatomic) IBOutlet UIButton *sceneNewButton;
 @property (weak, nonatomic) IBOutlet UILabel *feedbackLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rateOtherUserLabel;
+@property (weak, nonatomic) IBOutlet UIButton *reportButton;
 @property NSArray *ratings;
 @property NSMutableArray *otherUserRatings;
 @property Firebase *ref;
+@property Firebase *otherUserRef;
+@property NSArray *reports;
+@property NSMutableArray *otherUserReports;
 @end
 
 @implementation RatingViewController
@@ -47,10 +51,10 @@
     self.rateView.editable = YES;
     self.rateView.maxRating = 5;
     self.rateView.delegate = self;
+    self.otherUserReports = [NSMutableArray new];
 
     //rating views setup
-    NSLog(@"view loaded -------- ");
-    [self pullOtherUserRating];
+    [self pullOtherUserRatingAndReports];
     [self rateView];
 }
 
@@ -81,15 +85,18 @@
     }
 }
 
--(void)pullOtherUserRating {
-    NSLog(@"inside -------- ");
-    Firebase *ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
-    Firebase *otherUser = [ref childByAppendingPath:self.otherAuthuid];
-    [otherUser observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-            self.ratings = snapshot.value[@"rating"];
-            self.otherUserRatings = [NSMutableArray new];
-            [self.otherUserRatings addObjectsFromArray:self.ratings];
-        NSLog(@"objects added -------- ");
+-(void)pullOtherUserRatingAndReports {
+    self.ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
+    self.otherUserRef = [self.ref childByAppendingPath:self.otherAuthuid];
+    [self.otherUserRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        self.ratings = snapshot.value[@"rating"];
+        self.otherUserRatings = [NSMutableArray new];
+        [self.otherUserRatings addObjectsFromArray:self.ratings];
+        if (![snapshot.value[@"reports"] isEqual:[NSNull null]] && snapshot.value[@"reports"] != nil) {
+            self.reports = snapshot.value[@"reports"];
+            [self.otherUserReports addObjectsFromArray:self.reports];
+        }
+        NSLog(@"rating objects added -------- ");
         }];
 }
 
@@ -126,13 +133,18 @@
 - (IBAction)onReportUserTapped:(UIButton *)sender {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Are you sure you want to report the other user?" message:nil preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        // Setup the report that emails and updates in firebase
-        // Add text fields for reasons? Probably not
-        // Scene to report     -- self.sceneID
-        // User to report      -- self.otherAuthuid
-        // User sending report -- self.ref.authData.uid
+        NSDictionary *report = @{
+                                 @"sceneID": self.sceneID,
+                                 @"reportedBy": self.ref.authData.uid,
+                                 };
+        [self.otherUserReports addObject:report];
+        NSDictionary *reportUpdate = @{
+                                       @"reports": self.otherUserReports,
+                                       };
+        [self.otherUserRef updateChildValues:reportUpdate];
         self.sceneNewButton.enabled = YES;
         self.returnToHomeButton.enabled = YES;
+        self.reportButton.enabled = NO;
     }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
     }];
