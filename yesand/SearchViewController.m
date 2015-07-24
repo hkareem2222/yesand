@@ -140,9 +140,10 @@
 
 #pragma mark - Search Bar
 
--(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    self.searchBar.showsCancelButton = YES;
-    if ([searchText isEqualToString:@""]) {
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    self.searched = YES;
+    self.searchBar.showsCancelButton = NO;
+    if ([self.searchBar.text isEqualToString:@""]) {
         self.searched = NO;
     } else {
         self.searchedScenes = [NSMutableArray new];
@@ -156,12 +157,6 @@
         }
         self.searched = YES;
     }
-    [self.tableView reloadData];
-}
-
--(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    self.searched = YES;
-    self.searchBar.showsCancelButton = NO;
     [self.tableView reloadData];
     [searchBar resignFirstResponder];
 }
