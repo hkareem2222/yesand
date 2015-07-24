@@ -1128,22 +1128,45 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wsU-QV-3Hq">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ms1-eX-fgV">
                                 <rect key="frame" x="0.0" y="64" width="600" height="35"/>
-                                <color key="backgroundColor" red="0.70196080207824707" green="0.70196080207824707" blue="0.70196080207824707" alpha="1" colorSpace="calibratedRGB"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wsU-QV-3Hq">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="35"/>
+                                        <color key="backgroundColor" red="0.70196080207824707" green="0.70196080207824707" blue="0.70196080207824707" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="127" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rNM-wg-0QP">
+                                        <rect key="frame" x="563" y="0.0" width="29" height="35"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="laughsicon" translatesAutoresizingMaskIntoConstraints="NO" id="voD-30-1QR">
+                                        <rect key="frame" x="530" y="5" width="25" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="25" id="t0K-w2-uI2"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="BPj-ch-Zax"/>
-                                    <constraint firstAttribute="height" constant="35" id="iL4-mK-vdN"/>
+                                    <constraint firstItem="voD-30-1QR" firstAttribute="top" secondItem="ms1-eX-fgV" secondAttribute="top" constant="5" id="1lH-6z-v6N"/>
+                                    <constraint firstAttribute="trailing" secondItem="rNM-wg-0QP" secondAttribute="trailing" constant="8" id="3LX-vv-84p"/>
+                                    <constraint firstItem="wsU-QV-3Hq" firstAttribute="top" secondItem="ms1-eX-fgV" secondAttribute="top" id="8Dy-Nd-24n"/>
+                                    <constraint firstAttribute="height" constant="35" id="8SZ-nM-xCH"/>
+                                    <constraint firstAttribute="bottom" secondItem="wsU-QV-3Hq" secondAttribute="bottom" id="E5c-OC-9YM"/>
+                                    <constraint firstItem="wsU-QV-3Hq" firstAttribute="leading" secondItem="ms1-eX-fgV" secondAttribute="leading" id="Fsy-yG-dnj"/>
+                                    <constraint firstAttribute="trailing" secondItem="wsU-QV-3Hq" secondAttribute="trailing" id="LVh-i5-mMy"/>
+                                    <constraint firstItem="rNM-wg-0QP" firstAttribute="leading" secondItem="voD-30-1QR" secondAttribute="trailing" constant="8" id="Qkt-VM-wvD"/>
+                                    <constraint firstAttribute="bottom" secondItem="rNM-wg-0QP" secondAttribute="bottom" id="Xan-dO-XJF"/>
+                                    <constraint firstItem="rNM-wg-0QP" firstAttribute="top" secondItem="ms1-eX-fgV" secondAttribute="top" id="aOn-Ah-sZX"/>
+                                    <constraint firstItem="rNM-wg-0QP" firstAttribute="leading" secondItem="voD-30-1QR" secondAttribute="trailing" constant="8" id="oR9-UV-UZ9"/>
+                                    <constraint firstAttribute="bottom" secondItem="voD-30-1QR" secondAttribute="bottom" constant="5" id="vvn-Aw-pyH"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="BPj-ch-Zax"/>
-                                    </mask>
-                                </variation>
-                            </label>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="cjH-uf-XBu">
                                 <rect key="frame" x="0.0" y="99" width="600" height="452"/>
                                 <prototypes>
@@ -1227,13 +1250,13 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="wsU-QV-3Hq" secondAttribute="trailing" id="GTH-IZ-hR3"/>
-                            <constraint firstAttribute="trailing" secondItem="cjH-uf-XBu" secondAttribute="trailing" id="L02-Dx-ULW"/>
-                            <constraint firstItem="wsU-QV-3Hq" firstAttribute="leading" secondItem="gCa-dy-Xrg" secondAttribute="leading" id="Rur-vV-Fpw"/>
-                            <constraint firstItem="cjH-uf-XBu" firstAttribute="top" secondItem="wsU-QV-3Hq" secondAttribute="bottom" id="hnn-UM-Hfm"/>
-                            <constraint firstItem="wAI-CJ-8NY" firstAttribute="top" secondItem="cjH-uf-XBu" secondAttribute="bottom" id="o9M-ji-vD7"/>
-                            <constraint firstItem="wsU-QV-3Hq" firstAttribute="top" secondItem="ZRV-5M-9Qt" secondAttribute="bottom" id="per-Tc-9XW"/>
-                            <constraint firstItem="cjH-uf-XBu" firstAttribute="leading" secondItem="gCa-dy-Xrg" secondAttribute="leading" id="vFa-tR-4kP"/>
+                            <constraint firstItem="ms1-eX-fgV" firstAttribute="top" secondItem="ZRV-5M-9Qt" secondAttribute="bottom" id="39v-rY-DhJ"/>
+                            <constraint firstItem="wAI-CJ-8NY" firstAttribute="top" secondItem="cjH-uf-XBu" secondAttribute="bottom" id="3La-ee-R1c"/>
+                            <constraint firstItem="cjH-uf-XBu" firstAttribute="leading" secondItem="gCa-dy-Xrg" secondAttribute="leading" id="6W2-Xi-QpV"/>
+                            <constraint firstItem="cjH-uf-XBu" firstAttribute="top" secondItem="ms1-eX-fgV" secondAttribute="bottom" id="K95-Tq-TVg"/>
+                            <constraint firstAttribute="trailing" secondItem="cjH-uf-XBu" secondAttribute="trailing" id="a0q-IG-pRU"/>
+                            <constraint firstItem="ms1-eX-fgV" firstAttribute="leading" secondItem="gCa-dy-Xrg" secondAttribute="leading" id="f4G-If-Vsy"/>
+                            <constraint firstAttribute="trailing" secondItem="ms1-eX-fgV" secondAttribute="trailing" id="hv6-lh-tPw"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Yes And Scene" id="hML-iF-WzP">
@@ -1246,6 +1269,7 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="laughsLabel" destination="rNM-wg-0QP" id="lHX-ED-02w"/>
                         <outlet property="sceneTitleLabel" destination="wsU-QV-3Hq" id="bHd-Ro-58K"/>
                         <outlet property="tableView" destination="cjH-uf-XBu" id="7g6-fp-3WB"/>
                     </connections>

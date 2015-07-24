@@ -102,27 +102,12 @@
                                    UIActivityTypeMail,
                                    UIActivityTypeCopyToPasteboard,
                                    UIActivityTypeAssignToContact,
-                                   //                                       UIActivityTypeSaveToCameraRoll,
                                    UIActivityTypeAddToReadingList,
                                    UIActivityTypePostToFlickr,
                                    UIActivityTypePostToVimeo];
     activityVC.excludedActivityTypes = excludeActivities;
 
     [self presentViewController:activityVC animated:YES completion:nil];
-
-    // // This is just a reminder to add code to save image to camera roll
-    //      CFDictionaryRef attachments = CMCopyDictionaryOfAttachments(kCFAllocatorDefault,
-    //                                                                  imageDataSampleBuffer,
-    //                                                                  kCMAttachmentMode_ShouldPropagate);
-    //      ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-    //      [library writeImageDataToSavedPhotosAlbum:jpegData metadata:(__bridge id)attachments completionBlock:^(NSURL *assetURL, NSError *error) {
-    //          if (error) {
-    //              [self displayErrorOnMainQueue:error withMessage:@"Save to camera roll failed"];
-    //          }
-    //
-    //      }];
-    
-    
 }
 
 

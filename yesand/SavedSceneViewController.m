@@ -14,6 +14,7 @@
 @interface SavedSceneViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *sceneTitleLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UILabel *laughsLabel;
 @property NSString *leftCharacter;
 @property NSString *rightCharacter;
 @property NSArray *messages;
@@ -35,7 +36,6 @@
 
     self.tableView.separatorColor = [UIColor clearColor];
     self.sceneTitleLabel.font = [UIFont fontWithName: @"AppleGothic" size: 15.0];
-
     
     //scene setup
     Firebase *ref = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
@@ -44,6 +44,12 @@
     self.scenesConvo = [[Firebase alloc] initWithUrl:sceneURL];
     [self.scenesConvo observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         if (![snapshot.value[@"messages"] isEqual:[NSNull null]]) {
+            NSNumber *laughs = snapshot.value[@"laughs"];
+            if (snapshot.value[@"laughs"] == nil) {
+                self.laughsLabel.text = @"0";
+            } else {
+                self.laughsLabel.text = laughs.stringValue;
+            }
             self.messages = snapshot.value[@"messages"];
             self.sceneTitleLabel.text = snapshot.value[@"topicName"];
             if ([snapshot.value[@"userOne"] isEqualToString:ref.authData.uid]) {
@@ -80,27 +86,12 @@
                                    UIActivityTypeMail,
                                    UIActivityTypeCopyToPasteboard,
                                    UIActivityTypeAssignToContact,
-                                   //                                       UIActivityTypeSaveToCameraRoll,
                                    UIActivityTypeAddToReadingList,
                                    UIActivityTypePostToFlickr,
                                    UIActivityTypePostToVimeo];
     activityVC.excludedActivityTypes = excludeActivities;
 
     [self presentViewController:activityVC animated:YES completion:nil];
-
-    // // This is just a reminder to add code to save image to camera roll
-    //      CFDictionaryRef attachments = CMCopyDictionaryOfAttachments(kCFAllocatorDefault,
-    //                                                                  imageDataSampleBuffer,
-    //                                                                  kCMAttachmentMode_ShouldPropagate);
-    //      ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-    //      [library writeImageDataToSavedPhotosAlbum:jpegData metadata:(__bridge id)attachments completionBlock:^(NSURL *assetURL, NSError *error) {
-    //          if (error) {
-    //              [self displayErrorOnMainQueue:error withMessage:@"Save to camera roll failed"];
-    //          }
-    //
-    //      }];
-
-
 }
 
 #pragma mark - Table View
