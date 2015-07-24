@@ -81,17 +81,21 @@
                               };
     [user updateChildValues:userDic];
     [self performSegueWithIdentifier:@"UnwindToProfile" sender:sender];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)onCancelPressed:(UIBarButtonItem *)sender {
     [self resignFirstResponder];
     [self performSegueWithIdentifier:@"UnwindToProfile" sender:sender];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)onLogoutButtonPressed:(UIButton *)sender {
     Firebase *ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com"];
     [ref unauth];
+    [self dismissViewControllerAnimated:YES completion:nil];
     [self performSegueWithIdentifier:@"UnwindToAuthFromEdit" sender:sender];
+    NSLog(@"called");
 }
 
 -(void)viewWillDisappear:(BOOL)animated {

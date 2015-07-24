@@ -285,6 +285,9 @@ withCompletionBlock:^(NSError *error, FAuthData *authData) {
 -(IBAction)unwindToAuth:(UIStoryboardSegue *)segue {
 }
 
+-(IBAction)unwindToAuthFromEdit:(UIStoryboardSegue *)segue {
+}
+
 -(void)viewWillDisappear:(BOOL)animated {
 
 }

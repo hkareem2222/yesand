@@ -42,50 +42,54 @@
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 
     self.ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com"];
-    if ([self.ref.authData.provider isEqualToString:@"anonymous"]) {
-        self.editProfileBarButton.title = @"Sign up!";
-    } else {
-        self.editProfileBarButton.image = [UIImage imageNamed:@"settingsicon.png"];
-    }
-
-    NSString *currentUserString = [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@", self.ref.authData.uid];
-    self.currentUserRef = [[Firebase alloc] initWithUrl:currentUserString];
-    [self.currentUserRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+    if (self.ref.authData) {
         if ([self.ref.authData.provider isEqualToString:@"anonymous"]) {
-            self.navigationItem.title = @"anonymous";
+            self.editProfileBarButton.title = @"Sign up!";
         } else {
-            self.profileHeadingLabel.text = snapshot.value[@"name"];
-            self.profileSubheadingLabel.text = snapshot.value[@"tagline"];
-            self.profileLinkLabel.text = snapshot.value[@"website"];
-            self.locationLabel.text = snapshot.value[@"location"];
+            self.editProfileBarButton.image = [UIImage imageNamed:@"settingsicon.png"];
         }
-    }];
 
-    Firebase *scenesConvo = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/scenes"];
-    [scenesConvo observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        if (![snapshot.value isEqual:[NSNull null]]) {
-            self.scenes = [NSMutableArray new];;
-            for (FDataSnapshot *scene in snapshot.children) {
-                if ([scene.value[@"userOne"] isEqualToString:self.ref.authData.uid] || [scene.value[@"userTwo"] isEqualToString:self.ref.authData.uid]) {
-                    NSNumber *laughCount;
-                    if (scene.value[@"laughs"] == nil) {
-                        laughCount = @0;
-                    } else {
-                        laughCount = scene.value[@"laughs"];
-                    }
-                    NSDictionary *sceneDic = @{
-                                               @"sceneID": scene.key,
-                                               @"topicName": scene.value[@"topicName"],
-                                               @"laughs": laughCount
-                                               };
-                    [self.scenes addObject:sceneDic];
+        NSString *currentUserString = [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@", self.ref.authData.uid];
+        self.currentUserRef = [[Firebase alloc] initWithUrl:currentUserString];
+        [self.currentUserRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+            if (![snapshot.value isEqual:[NSNull null]] && snapshot.value != nil) {
+                if ([self.ref.authData.provider isEqualToString:@"anonymous"]) {
+                    self.navigationItem.title = @"anonymous";
+                } else {
+                    self.profileHeadingLabel.text = snapshot.value[@"name"];
+                    self.profileSubheadingLabel.text = snapshot.value[@"tagline"];
+                    self.profileLinkLabel.text = snapshot.value[@"website"];
+                    self.locationLabel.text = snapshot.value[@"location"];
                 }
             }
-            [self.tableView reloadData];
-        }
-    } withCancelBlock:^(NSError *error) {
-        NSLog(@"%@", error.description);
-    }];
+        }];
+
+        Firebase *scenesConvo = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/scenes"];
+        [scenesConvo observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+            if (![snapshot.value isEqual:[NSNull null]] && snapshot.value != nil) {
+                self.scenes = [NSMutableArray new];;
+                for (FDataSnapshot *scene in snapshot.children) {
+                    if ([scene.value[@"userOne"] isEqualToString:self.ref.authData.uid] || [scene.value[@"userTwo"] isEqualToString:self.ref.authData.uid]) {
+                        NSNumber *laughCount;
+                        if (scene.value[@"laughs"] == nil) {
+                            laughCount = @0;
+                        } else {
+                            laughCount = scene.value[@"laughs"];
+                        }
+                        NSDictionary *sceneDic = @{
+                                                   @"sceneID": scene.key,
+                                                   @"topicName": scene.value[@"topicName"],
+                                                   @"laughs": laughCount
+                                                   };
+                        [self.scenes addObject:sceneDic];
+                    }
+                }
+                [self.tableView reloadData];
+            }
+        } withCancelBlock:^(NSError *error) {
+            NSLog(@"%@", error.description);
+        }];
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated {

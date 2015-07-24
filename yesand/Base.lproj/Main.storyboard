@@ -1497,8 +1497,9 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
                         <outletCollection property="textFields" destination="oVm-Na-bBq" id="z4r-Wi-5qD"/>
                         <outletCollection property="textFields" destination="eFn-eD-dIT" id="9n7-2H-twt"/>
                         <outletCollection property="textFields" destination="atL-WX-1tC" id="vBV-Xv-7Qe"/>
-                        <segue destination="cDJ-ET-62b" kind="unwind" identifier="UnwindToAuthFromEdit" unwindAction="unwindToAuth:" id="VYf-xS-4hY"/>
                         <segue destination="cDJ-ET-62b" kind="unwind" identifier="UnwindToProfile" unwindAction="unwindToProfile:" id="Yu7-QB-8qo"/>
+                        <segue destination="cDJ-ET-62b" kind="unwind" identifier="UnwindToAuthFromEdit" unwindAction="unwindToAuthFromEdit:" id="5DX-hH-ZRn"/>
+                        <segue destination="V5t-P2-765" kind="presentation" identifier="ModalToAuth" id="uc5-VB-H1r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tPw-GD-pB7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1905,6 +1906,6 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="hkv-kI-r5j"/>
-        <segue reference="vpc-Ch-njs"/>
+        <segue reference="MjL-Mh-mnN"/>
     </inferredMetricsTieBreakers>
 </document>
