@@ -7,6 +7,7 @@
 //
 
 #import "ChatViewController.h"
+#import "HomeViewController.h"
 
 @interface ChatViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIScrollViewDelegate>
 @end
@@ -16,6 +17,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"view did load");
+
+    //Getting Scene Location
+    UINavigationController *navController = (UINavigationController *)[self.tabBarController.viewControllers objectAtIndex:0];
+    HomeViewController *homeVC = (HomeViewController *)navController.viewControllers.firstObject;
+    self.latitude = homeVC.userLatitide;
+    self.longitude = homeVC.userLongitude;
+
     //views setup
     self.userSetupview.layer.cornerRadius = 5;
     self.countdownLabel.layer.cornerRadius = 5;
@@ -267,7 +275,9 @@
                                    @"userOne": self.ref.authData.uid,
                                    @"userTwo": self.otherAuthuid,
                                    @"isLive": @1,
-                                   @"laughs": @0
+                                   @"laughs": @0,
+                                   @"latitude": [[NSNumber alloc] initWithDouble:self.latitude],
+                                   @"longitude": [[NSNumber alloc] initWithDouble:self.longitude]
                                    };
 
         self.sceneConvo = [scenesConvo childByAutoId];
