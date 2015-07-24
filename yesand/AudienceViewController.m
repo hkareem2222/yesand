@@ -22,7 +22,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *laughsLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *laughsImageView;
 @property NSInteger labelCount;
-@property UIDynamicAnimator *dynamicAnimator;
 @end
 
 @implementation AudienceViewController
@@ -30,7 +29,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.laughsImageView.layer.cornerRadius = self.laughsImageView.frame.size.width / 2;
-    self.dynamicAnimator = [[UIDynamicAnimator alloc]initWithReferenceView:self.view];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
