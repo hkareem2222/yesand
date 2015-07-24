@@ -78,7 +78,7 @@
                                                     <rect key="frame" x="5" y="2" width="230" height="52"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dbI-1O-uDN">
-                                                    <rect key="frame" x="40" y="6" width="35" height="17"/>
+                                                    <rect key="frame" x="40" y="6" width="34.5" height="16.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="190" id="tFb-ef-bni"/>
                                                     </constraints>
@@ -116,7 +116,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oIP-BP-oft">
-                                                    <rect key="frame" x="376" y="6" width="35" height="17"/>
+                                                    <rect key="frame" x="376" y="6" width="34.5" height="16.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="190" id="jaU-Xt-cBU"/>
                                                     </constraints>
@@ -1498,7 +1498,7 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
                         <outletCollection property="textFields" destination="eFn-eD-dIT" id="9n7-2H-twt"/>
                         <outletCollection property="textFields" destination="atL-WX-1tC" id="vBV-Xv-7Qe"/>
                         <segue destination="cDJ-ET-62b" kind="unwind" identifier="UnwindToProfile" unwindAction="unwindToProfile:" id="Yu7-QB-8qo"/>
-                        <segue destination="cDJ-ET-62b" kind="unwind" identifier="UnwindToAuthFromEdit" unwindAction="unwindToAuthFromEdit:" id="5DX-hH-ZRn"/>
+                        <segue destination="V5t-P2-765" kind="showDetail" identifier="EditToAuth" id="jPd-zO-bd8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tPw-GD-pB7" userLabel="First Responder" sceneMemberID="firstResponder"/>

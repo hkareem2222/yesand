@@ -91,11 +91,14 @@
 }
 
 - (IBAction)onLogoutButtonPressed:(UIButton *)sender {
-    Firebase *ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com"];
-    [ref unauth];
-    [self dismissViewControllerAnimated:YES completion:nil];
-    [self performSegueWithIdentifier:@"UnwindToAuthFromEdit" sender:sender];
-    NSLog(@"called");
+    [self performSegueWithIdentifier:@"EditToAuth" sender:sender];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"EditToAuth"]) {
+        Firebase *ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com"];
+        [ref unauth];
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
