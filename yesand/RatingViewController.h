@@ -10,4 +10,5 @@
 
 @interface RatingViewController : UIViewController
 @property NSString *otherAuthuid;
+@property NSString *sceneID;
 @end

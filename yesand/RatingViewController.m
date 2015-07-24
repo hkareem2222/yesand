@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *rateOtherUserLabel;
 @property NSArray *ratings;
 @property NSMutableArray *otherUserRatings;
+@property Firebase *ref;
 @end
 
 @implementation RatingViewController
@@ -123,7 +124,19 @@
 
 
 - (IBAction)onReportUserTapped:(UIButton *)sender {
-    // Set up logic for alert view saying are you sure you want to report user
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Are you sure you want to report the user?" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        // Setup the report that emails and updates in firebase
+        // Add text fields for reasons? Probably not
+        // Scene to report     -- self.sceneID
+        // User to report      -- self.otherAuthuid
+        // User sending report -- self.ref.authData.uid
+    }];
+    UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    }];
+    [alert addAction:yesAction];
+    [alert addAction:noAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end

@@ -370,6 +370,7 @@
     if ([segue.identifier isEqualToString:@"SplashChatToRatings"]) {
         RatingViewController *ratingVC = segue.destinationViewController;
         ratingVC.otherAuthuid = self.otherAuthuid;
+        ratingVC.sceneID = self.sceneIDRef.key;
     }
 }
 

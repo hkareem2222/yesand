@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *laughsLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *laughsImageView;
 @property NSInteger labelCount;
+@property UIDynamicAnimator *dynamicAnimator;
 @end
 
 @implementation AudienceViewController
@@ -29,6 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.laughsImageView.layer.cornerRadius = self.laughsImageView.frame.size.width / 2;
+    self.dynamicAnimator = [[UIDynamicAnimator alloc]initWithReferenceView:self.view];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -77,9 +79,6 @@
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(handleSingleTap:)];
     [self.tableView addGestureRecognizer:singleFingerTap];
-
-    //    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    //    [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardWillShowNotification object:nil];
 
     self.tableView.separatorColor = [UIColor clearColor];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -157,45 +156,22 @@
     }
 }
 
-//#pragma mark - Keyboard Animation
+// Don't delete for now
+//-(void)animateTest {
+//    CGPoint startPoint = (CGPoint){100.f, 100.f};
+//    CGPoint middlePoint = (CGPoint){400.f, 400.f};
+//    CGPoint endPoint = (CGPoint){600.f, 100.f};
 //
-//-(void)keyboardOnScreen:(NSNotification *)notification
-//{
-//    NSDictionary *info  = notification.userInfo;
-//    NSValue      *value = info[UIKeyboardFrameEndUserInfoKey];
+//    CGMutablePathRef thePath = CGPathCreateMutable();
+//    CGPathMoveToPoint(thePath, NULL, startPoint.x, startPoint.y);
+//    CGPathAddLineToPoint(thePath, NULL, middlePoint.x, middlePoint.y);
+//    CGPathAddLineToPoint(thePath, NULL, endPoint.x, endPoint.y);
 //
-//    CGRect rawFrame      = [value CGRectValue];
-//    CGRect keyboardFrame = [self.view convertRect:rawFrame fromView:nil];
-//
-//    //make sure to create the outlet for the textfieldbottomlayout//
-//    self.textFieldBottomLayout.constant = keyboardFrame.size.height - 50;
-//}
-
-//# pragma mark - Send Button
-//
-//- (IBAction)onSendButtonPressed:(id)sender {
-//    NSArray *labels = @[self.chatLabel1, self.chatLabel2, self.chatLabel3, self.chatLabel4];
-//    UILabel *label;
-//    if (self.labelCount < labels.count) {
-//        label = labels[self.labelCount];
-//    }
-//    if (self.labelCount == 0) {
-//        self.labelCount += 1;
-//        label.text = self.messageField.text;
-//        label.alpha = 1.0;
-//    } else if (self.labelCount == 1) {
-//        self.labelCount += 1;
-//        label.text = self.messageField.text;
-//        label.alpha = 1.0;
-//    } else if (self.labelCount == 2) {
-//        self.labelCount += 1;
-//        label.text = self.messageField.text;
-//        label.alpha = 1.0;
-//    } else if (self.labelCount == 3) {
-//        self.labelCount = 0;
-//        label.text = self.messageField.text;
-//        label.alpha = 1.0;
-//    }
+//    CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+//    animation.duration = 3.f;
+//    animation.path = thePath;
+//    [self.laughsImageView.layer addAnimation:animation forKey:@"position"];
+//    self.laughsImageView.layer.position = endPoint;
 //}
 
 #pragma mark - TableView
