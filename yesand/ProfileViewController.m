@@ -50,7 +50,7 @@
 
     NSString *currentUserString = [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@", self.ref.authData.uid];
     self.currentUserRef = [[Firebase alloc] initWithUrl:currentUserString];
-    [self.currentUserRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+    [self.currentUserRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         if ([self.ref.authData.provider isEqualToString:@"anonymous"]) {
             self.navigationItem.title = @"anonymous";
         } else {
@@ -62,7 +62,7 @@
     }];
 
     Firebase *scenesConvo = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com/scenes"];
-    [scenesConvo observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+    [scenesConvo observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         if (![snapshot.value isEqual:[NSNull null]]) {
             self.scenes = [NSMutableArray new];;
             for (FDataSnapshot *scene in snapshot.children) {
@@ -144,7 +144,6 @@
 }
 
 -(IBAction)unwindToProfile:(UIStoryboardSegue *)segue {
-    
 }
 
 @end

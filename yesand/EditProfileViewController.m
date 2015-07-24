@@ -58,7 +58,7 @@
 -(void)viewDidAppear:(BOOL)animated {
     Firebase *usersRef = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com/users"];
     self.currentUserRef = [usersRef childByAppendingPath:usersRef.authData.uid];
-    [self.currentUserRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+    [self.currentUserRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         self.navigationItem.title = snapshot.value[@"username"];
         self.usernameField.text = snapshot.value[@"username"];
         self.nameField.text = snapshot.value[@"name"];

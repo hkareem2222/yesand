@@ -103,7 +103,7 @@
     CGFloat width;
     thumbs = [UIImage imageNamed:@"laughsicon"];
     thumbsView = [[UIImageView alloc] initWithImage:thumbs];
-
+    
     // Cell scene setup
     SearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SceneID"];
     if (self.searched == NO) {
