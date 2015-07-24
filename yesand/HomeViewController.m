@@ -28,6 +28,7 @@
 @property Firebase *scenesConvo;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *helpBarButton;
 @property NSDictionary *sceneDic;
+@property NSMutableArray *sceneLocations;
 @end
 
 @implementation HomeViewController
@@ -65,49 +66,6 @@
     self.mapView.showsUserLocation = YES;
     self.mapView.mapType = MKMapTypeStandard;
     self.mapView.delegate = self;
-
-    //remove this after launch
-    NSDictionary *comedyLocationDicOne = @{
-                                         @"latitude": @41.912375,
-                                         @"longitude": @-87.634002
-                                         };
-    NSDictionary *comedyLocationDicTwo = @{
-                                           @"latitude": @41.913375,
-                                           @"longitude": @-87.634002
-                                           };
-    NSDictionary *comedyLocationDicThree = @{
-                                           @"latitude": @41.912175,
-                                           @"longitude": @-87.630002
-                                           };
-    NSDictionary *comedyLocationDicFour = @{
-                                           @"latitude": @41.912112,
-                                           @"longitude": @-87.634000
-                                           };
-    NSDictionary *comedyLocationDicFive = @{
-                                            @"latitude": @41.912772,
-                                            @"longitude": @-87.640400
-                                            };
-    NSDictionary *comedyLocationDicSix = @{
-                                            @"latitude": @41.912672,
-                                            @"longitude": @-87.610400
-                                            };
-    NSDictionary *comedyLocationDicSeven = @{
-                                            @"latitude": @41.912152,
-                                            @"longitude": @-87.620700
-                                            };
-    NSArray *comedyLocations = @[comedyLocationDicOne, comedyLocationDicTwo, comedyLocationDicThree, comedyLocationDicFour, comedyLocationDicFive, comedyLocationDicSix, comedyLocationDicSeven];
-    for (NSDictionary *dictionary in comedyLocations) {
-        NSNumber *latitude = dictionary[@"latitude"];
-        NSNumber *longitude = dictionary[@"longitude"];
-
-        MKPointAnnotation *annotation = [MKPointAnnotation new];
-        annotation.coordinate = CLLocationCoordinate2DMake(latitude.doubleValue, longitude.doubleValue);
-//        annotation.title = @"Second City Theater";
-        [self.mapView addAnnotation:annotation];
-        MKCoordinateRegion region = MKCoordinateRegionMake(annotation.coordinate, MKCoordinateSpanMake(0.05, 0.05));
-        [self.mapView setRegion:region];
-    }
-    //------ends here
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -123,12 +81,20 @@
         if (![snapshot.value isEqual:[NSNull null]]) {
             self.liveScenes = [NSMutableArray new];
             self.topScenes = [NSMutableArray new];
+            self.sceneLocations = [NSMutableArray new];
             for (FDataSnapshot *scene in snapshot.children) {
                 NSNumber *laughCount;
                 if (scene.value[@"laughs"] == nil) {
                     laughCount = @0;
                 } else {
                     laughCount = scene.value[@"laughs"];
+                }
+                if (scene.value[@"latitude"] != nil && scene.value[@"longitude"] != nil) {
+                    NSDictionary *sceneLocationDictionary = @{
+                                                              @"latitude": scene.value[@"latitude"],
+                                                              @"longitude": scene.value[@"longitude"]
+                                                              };
+                    [self.sceneLocations addObject:sceneLocationDictionary];
                 }
                 if ([scene.value[@"isLive"] isEqualToNumber:@1]) {
                     if (scene.key != nil && scene.value[@"topicName"] != nil) {
@@ -150,6 +116,7 @@
                     }
                 }
             }
+            [self addMapAnnotations];
             [self sortByLaughs:self.topScenes andWith:self.liveScenes];
         }
     } withCancelBlock:^(NSError *error) {
@@ -184,6 +151,9 @@
         for (CLLocation *location in locations) {
             if (location.verticalAccuracy < 1000 && location.horizontalAccuracy < 1000) {
                 NSLog(@"user located");
+                self.userLatitide = location.coordinate.latitude;
+                NSLog(@"userLat %f", self.userLatitide);
+                self.userLongitude = location.coordinate.longitude;
 //                [self reverseGeoCode:location];
                 [self.locationManager stopUpdatingLocation];
             }
@@ -202,6 +172,19 @@
 
     }
     return nil;
+}
+
+-(void)addMapAnnotations {
+    for (NSDictionary *dictionary in self.sceneLocations) {
+        NSNumber *latitude = dictionary[@"latitude"];
+        NSNumber *longitude = dictionary[@"longitude"];
+        MKPointAnnotation *annotation = [MKPointAnnotation new];
+        annotation.coordinate = CLLocationCoordinate2DMake(latitude.doubleValue, longitude.doubleValue);
+        //        annotation.title = @"Second City Theater";
+        [self.mapView addAnnotation:annotation];
+        MKCoordinateRegion region = MKCoordinateRegionMake(annotation.coordinate, MKCoordinateSpanMake(0.05, 0.05));
+        [self.mapView setRegion:region];
+    }
 }
 
 #pragma mark - Table View

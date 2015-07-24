@@ -11,7 +11,7 @@
 #import <MapKit/MapKit.h>
 
 @interface HomeViewController : UIViewController
-
-
+@property CLLocationDegrees userLatitide;
+@property CLLocationDegrees userLongitude;
 @end
 

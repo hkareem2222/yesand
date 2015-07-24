@@ -7,9 +7,12 @@
 //
 
 #import "MeetupViewController.h"
+#import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface MeetupViewController ()
-
+@interface MeetupViewController () <UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate, CLLocationManagerDelegate>
+@property NSArray *meetups;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
 
 @implementation MeetupViewController
@@ -26,19 +29,41 @@
     self.navigationController.navigationBar.titleTextAttributes = attrDict;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)viewDidAppear:(BOOL)animated {
+        [self retrieveJSONInfo];
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - Meetup API
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)retrieveJSONInfo {
+    //API KEY 30552f7c5317733067253f2732c63
+    NSURL *url = [NSURL URLWithString:@"https://api.meetup.com/2/open_events?&sign=true&photo-host=public&zip=60601&topic=improv,%20comedy&radius=25.0&page=2&key=30552f7c5317733067253f2732c63"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                               if (!connectionError) {
+                                   NSDictionary *meetupsDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError];
+                                   self.meetups = [meetupsDictionary objectForKey:@"results"];
+                                   [self.tableView reloadData];
+                               } else {
+                                   NSLog(@"%@", [connectionError localizedDescription]);
+                               }
+                           }];
 }
-*/
+
+#pragma mark - Table View
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MeetupID"];
+    NSDictionary *meetup = self.meetups[indexPath.row];
+    cell.textLabel.text = [meetup objectForKey:@"name"];
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.meetups.count;
+}
 
 @end

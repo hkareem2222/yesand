@@ -59,4 +59,6 @@
 @property Firebase *currentUserRef;
 @property NSNumber *laughs;
 @property BOOL alertPresented;
+@property CLLocationDegrees latitude;
+@property CLLocationDegrees longitude;
 @end
