@@ -124,18 +124,20 @@
 
 
 - (IBAction)onReportUserTapped:(UIButton *)sender {
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Are you sure you want to report the user?" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Are you sure you want to report the other user?" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         // Setup the report that emails and updates in firebase
         // Add text fields for reasons? Probably not
         // Scene to report     -- self.sceneID
         // User to report      -- self.otherAuthuid
         // User sending report -- self.ref.authData.uid
+        self.sceneNewButton.enabled = YES;
+        self.returnToHomeButton.enabled = YES;
     }];
-    UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
     }];
     [alert addAction:yesAction];
-    [alert addAction:noAction];
+    [alert addAction:cancelAction];
     [self presentViewController:alert animated:YES completion:nil];
 }
 

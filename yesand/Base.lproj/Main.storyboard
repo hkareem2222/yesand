@@ -459,10 +459,26 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BZj-gB-jVp">
+                                <rect key="frame" x="259" y="550" width="83" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="83" id="1qn-Jx-1Kt"/>
+                                    <constraint firstAttribute="height" constant="30" id="70k-XK-prb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <state key="normal" title="Report User">
+                                    <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onReportUserTapped:" destination="hKZ-s2-gAP" eventType="touchUpInside" id="MNx-U4-WJJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="myu-jI-DPt" secondAttribute="trailing" constant="15" id="088-hM-S6m"/>
+                            <constraint firstItem="7Rb-fm-FVs" firstAttribute="top" secondItem="BZj-gB-jVp" secondAttribute="bottom" constant="20" id="2Ci-CW-pkw"/>
                             <constraint firstAttribute="centerX" secondItem="6cO-FT-US7" secondAttribute="centerX" id="Ej2-eM-tgt"/>
                             <constraint firstItem="6cO-FT-US7" firstAttribute="top" secondItem="f8f-wG-ymO" secondAttribute="bottom" constant="25" id="GYU-0E-tt2"/>
                             <constraint firstItem="hph-6D-xsz" firstAttribute="leading" secondItem="uOn-FL-eSG" secondAttribute="leading" constant="15" id="Gph-GT-rLK"/>
@@ -470,6 +486,7 @@
                             <constraint firstItem="myu-jI-DPt" firstAttribute="leading" secondItem="ZhX-Uy-HX4" secondAttribute="trailing" constant="40" id="KTz-YE-NfR"/>
                             <constraint firstAttribute="trailing" secondItem="6HO-Ad-UW8" secondAttribute="trailing" constant="15" id="MsC-sp-NK9"/>
                             <constraint firstItem="7Rb-fm-FVs" firstAttribute="top" secondItem="ZhX-Uy-HX4" secondAttribute="bottom" constant="75" id="NMR-jy-qtq"/>
+                            <constraint firstAttribute="centerX" secondItem="BZj-gB-jVp" secondAttribute="centerX" id="NcN-er-5LG"/>
                             <constraint firstAttribute="centerX" secondItem="0kM-lP-Ath" secondAttribute="centerX" id="V0l-Wa-waa"/>
                             <constraint firstAttribute="trailing" secondItem="hph-6D-xsz" secondAttribute="trailing" constant="15" id="aLk-kT-KhK"/>
                             <constraint firstItem="7Rb-fm-FVs" firstAttribute="top" secondItem="myu-jI-DPt" secondAttribute="bottom" constant="75" id="b0p-sU-stR"/>
@@ -1744,7 +1761,7 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" placeholder="Search Topics" translatesAutoresizingMaskIntoConstraints="NO" id="RBN-pT-rbJ">
+                            <searchBar contentMode="redraw" placeholder="Search Recent Topics" translatesAutoresizingMaskIntoConstraints="NO" id="RBN-pT-rbJ">
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="TOC-G8-bPn"/>
@@ -1969,7 +1986,7 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
         <image name="twitterlogincustom" width="912" height="159"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hkv-kI-r5j"/>
-        <segue reference="MjL-Mh-mnN"/>
+        <segue reference="5tL-5e-YcU"/>
+        <segue reference="vpc-Ch-njs"/>
     </inferredMetricsTieBreakers>
 </document>

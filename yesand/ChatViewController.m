@@ -74,6 +74,7 @@
     self.countdownLabel.text = @"Your scene will start shortly...";
     self.textFieldBottomLayout.constant = 0;
     self.alertPresented = NO;
+    [self rotateSecondImageView];
     [self retrieveNewTopic];
     //---------------------------------endsHere
     // Laughs Key Value Observing
@@ -199,7 +200,6 @@
             self.topicLabel.text = @"Awaiting your fellow performer...";
             self.ifCalled = NO;
             self.otherUserImageView.image = [UIImage imageNamed:@"MaskIndicator.png"];
-            [self rotateSecondImageView];
             [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(splashViewDisappear) object:nil];
             [self.timer invalidate];
             self.countdownLabel.text = @"Your scene will start shortly...";
@@ -453,7 +453,9 @@
 }
 
 - (IBAction)onSendButtonTapped:(id)sender {
-    [self sendMessage];
+    if (![self.messageTextField.text isEqualToString:@""] && self.messageTextField.text != nil) {
+        [self sendMessage];
+    }
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
