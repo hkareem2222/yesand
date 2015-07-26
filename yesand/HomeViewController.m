@@ -175,6 +175,7 @@
 }
 
 -(void)addMapAnnotations {
+    NSMutableArray *annotations = [NSMutableArray new];
     for (NSDictionary *dictionary in self.sceneLocations) {
         NSNumber *latitude = dictionary[@"latitude"];
         NSNumber *longitude = dictionary[@"longitude"];
@@ -182,9 +183,9 @@
         annotation.coordinate = CLLocationCoordinate2DMake(latitude.doubleValue, longitude.doubleValue);
         //        annotation.title = @"Second City Theater";
         [self.mapView addAnnotation:annotation];
-        MKCoordinateRegion region = MKCoordinateRegionMake(annotation.coordinate, MKCoordinateSpanMake(0.05, 0.05));
-        [self.mapView setRegion:region];
+        [annotations addObject:annotation];
     }
+    [self.mapView showAnnotations:annotations animated:YES];
 }
 
 #pragma mark - Table View
