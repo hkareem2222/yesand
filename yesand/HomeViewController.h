@@ -13,5 +13,6 @@
 @interface HomeViewController : UIViewController
 @property CLLocationDegrees userLatitide;
 @property CLLocationDegrees userLongitude;
+@property NSString *userZip;
 @end
 
