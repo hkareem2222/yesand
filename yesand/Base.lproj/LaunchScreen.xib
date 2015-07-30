@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7706"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -10,35 +10,43 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2015 Yes, And App. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
-                    <rect key="frame" x="20" y="459" width="441" height="21"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Etk-9A-eQ7">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="65"/>
+                    <color key="backgroundColor" red="1" green="0.40000000596046448" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="441" id="2ls-kY-3zZ"/>
-                        <constraint firstAttribute="height" constant="21" id="VdG-uS-BsT"/>
+                        <constraint firstAttribute="height" constant="65" id="JGM-CM-CzC"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="comedybackground" translatesAutoresizingMaskIntoConstraints="NO" id="WWz-2p-H2S">
-                    <rect key="frame" x="0.0" y="136" width="480" height="344"/>
-                </imageView>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aFm-Re-4yf">
+                    <rect key="frame" x="0.0" y="430" width="480" height="50"/>
+                    <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="Hh0-a9-PNR"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wVt-Hh-wPc">
+                    <rect key="frame" x="0.0" y="215" width="480" height="50"/>
+                    <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="qLT-f9-5mQ"/>
+                    </constraints>
+                </view>
             </subviews>
-            <color key="backgroundColor" red="0.94901960784313721" green="0.25490196078431371" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="WWz-2p-H2S" secondAttribute="trailing" id="8sw-df-SUj"/>
-                <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="V8f-Bh-FcX"/>
-                <constraint firstItem="WWz-2p-H2S" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="VFG-4t-jgs"/>
-                <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" id="g4M-9w-sGW"/>
-                <constraint firstAttribute="bottom" secondItem="WWz-2p-H2S" secondAttribute="bottom" id="jfR-mY-Aac"/>
-                <constraint firstItem="WWz-2p-H2S" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="136" id="kXd-Cs-FAi"/>
+                <constraint firstAttribute="trailing" secondItem="wVt-Hh-wPc" secondAttribute="trailing" id="ATh-0W-Hem"/>
+                <constraint firstAttribute="trailing" secondItem="Etk-9A-eQ7" secondAttribute="trailing" id="MOu-e1-Hoy"/>
+                <constraint firstItem="aFm-Re-4yf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="YoK-D7-sct"/>
+                <constraint firstItem="wVt-Hh-wPc" firstAttribute="top" secondItem="Etk-9A-eQ7" secondAttribute="bottom" constant="150" id="ZSJ-Ov-9DQ"/>
+                <constraint firstItem="Etk-9A-eQ7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ZfL-FA-QP8"/>
+                <constraint firstAttribute="trailing" secondItem="aFm-Re-4yf" secondAttribute="trailing" id="b6p-Bh-dW6"/>
+                <constraint firstItem="wVt-Hh-wPc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dht-Tf-MfM"/>
+                <constraint firstItem="Etk-9A-eQ7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="dsU-7S-EkW"/>
+                <constraint firstAttribute="bottom" secondItem="aFm-Re-4yf" secondAttribute="bottom" id="rKT-GM-pFl"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="548" y="455"/>
         </view>
     </objects>
-    <resources>
-        <image name="comedybackground" width="1098" height="1539"/>
-    </resources>
 </document>
