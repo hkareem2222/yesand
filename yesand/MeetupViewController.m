@@ -38,6 +38,7 @@
     self.userZipCode = homeVC.userZip;
 
     //nav controller view
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     self.navigationItem.title = @"Events";
