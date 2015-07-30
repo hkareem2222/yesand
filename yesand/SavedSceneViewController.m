@@ -90,8 +90,14 @@
                                    UIActivityTypePostToFlickr,
                                    UIActivityTypePostToVimeo];
     activityVC.excludedActivityTypes = excludeActivities;
-
-    [self presentViewController:activityVC animated:YES completion:nil];
+    //activity vc is not the same for ipad
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [self presentViewController:activityVC animated:YES completion:nil];
+    }
+    else {
+        UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityVC];
+        [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width, 100, 0, 0)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
 }
 
 #pragma mark - Table View

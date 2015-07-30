@@ -139,15 +139,9 @@
                               @"topic name": @"test",
                               @"authuid": authData.uid,
                               @"username": authData.providerData[@"username"],
-                              @"name": @" ",
-                              @"tagline": @" ",
-                              @"location": @" ",
-                              @"website": @" ",
-                              @"rating": @[@3,@3],
-                              @"rating avg": @"3"
                               };
     [[[self.myRootRef childByAppendingPath:@"users"]
-      childByAppendingPath:authData.uid] setValue:newUser];
+      childByAppendingPath:authData.uid] updateChildValues:newUser];
 }
 
 #pragma mark - Guest Login
