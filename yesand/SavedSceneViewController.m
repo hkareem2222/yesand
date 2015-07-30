@@ -19,6 +19,8 @@
 @property NSString *rightCharacter;
 @property NSArray *messages;
 @property Firebase *scenesConvo;
+@property NSArray *reports;
+@property NSMutableArray *updatedReports;
 @end
 
 @implementation SavedSceneViewController
@@ -36,7 +38,8 @@
 
     self.tableView.separatorColor = [UIColor clearColor];
     self.sceneTitleLabel.font = [UIFont fontWithName: @"AppleGothic" size: 15.0];
-    
+    self.updatedReports = [NSMutableArray new];
+
     //scene setup
     Firebase *ref = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
     NSString *sceneURL = [NSString stringWithFormat:@"https://yesand.firebaseio.com/scenes/%@", self.sceneID];
@@ -59,11 +62,47 @@
                 self.leftCharacter = snapshot.value[@"characterOne"];
                 self.rightCharacter = snapshot.value[@"characterTwo"];
             }
+            if (![snapshot.value[@"reports"] isEqual:[NSNull null]] && snapshot.value[@"reports"] != nil) {
+                self.reports = snapshot.value[@"reports"];
+                [self.updatedReports addObjectsFromArray:self.reports];
+            }
             [self.tableView reloadData];
         }
     } withCancelBlock:^(NSError *error) {
         NSLog(@"%@", error.description);
     }];
+}
+
+#pragma mark - Report Scene
+
+-(void)reportScene {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Are you sure you want to report this scene?" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        // adds the report only if they have not reported the scene already
+        NSDictionary *report = @{
+                                 @"reportedBy": self.scenesConvo.authData.uid,
+                                 };
+        int currentUserReportCount = 0;
+        for (NSDictionary *dict in self.updatedReports) {
+            if ([[dict objectForKey:@"reportedBy"] isEqual:self.scenesConvo.authData.uid]) {
+                currentUserReportCount += 1;
+            }
+        }
+        if (currentUserReportCount == 0) {
+            [self.updatedReports addObject:report];
+        }
+        NSDictionary *reportUpdate = @{
+                                       @"reports": self.updatedReports,
+                                       };
+        [self.scenesConvo updateChildValues:reportUpdate];
+        // need to disable the report button that will be added
+//        self.reportButton.enabled = NO;
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    }];
+    [alert addAction:yesAction];
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - Share
