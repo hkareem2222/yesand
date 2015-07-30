@@ -27,6 +27,7 @@
 		85963F981B34C8F7006E2868 /* yesandTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 85963F971B34C8F7006E2868 /* yesandTests.m */; };
 		85963FA21B34D264006E2868 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85963FA11B34D264006E2868 /* MapKit.framework */; };
 		85963FA51B359D9C006E2868 /* AuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85963FA41B359D9C006E2868 /* AuthViewController.m */; };
+		85A0C5E81B6AA3CB009F3A94 /* DetailEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85A0C5E71B6AA3CB009F3A94 /* DetailEventViewController.m */; };
 		85CFE43C1B4350B9002A52A1 /* TwitterAuthHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 85CFE43B1B4350B9002A52A1 /* TwitterAuthHelper.m */; };
 		BF372B461B3B1DEA00D7AE0C /* RateView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF372B451B3B1DEA00D7AE0C /* RateView.m */; };
 		BF372B811B3C3F5600D7AE0C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF372B801B3C3F5600D7AE0C /* CoreLocation.framework */; };
@@ -91,6 +92,8 @@
 		85963FA11B34D264006E2868 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		85963FA31B359D9C006E2868 /* AuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthViewController.h; sourceTree = "<group>"; };
 		85963FA41B359D9C006E2868 /* AuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthViewController.m; sourceTree = "<group>"; };
+		85A0C5E61B6AA3CB009F3A94 /* DetailEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailEventViewController.h; sourceTree = "<group>"; };
+		85A0C5E71B6AA3CB009F3A94 /* DetailEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailEventViewController.m; sourceTree = "<group>"; };
 		85CFE43A1B4350B9002A52A1 /* TwitterAuthHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterAuthHelper.h; sourceTree = "<group>"; };
 		85CFE43B1B4350B9002A52A1 /* TwitterAuthHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterAuthHelper.m; sourceTree = "<group>"; };
 		BF372B441B3B1DEA00D7AE0C /* RateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateView.h; sourceTree = "<group>"; };
@@ -176,6 +179,8 @@
 		85014AA91B35AEAB00E190C8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				85A0C5E61B6AA3CB009F3A94 /* DetailEventViewController.h */,
+				85A0C5E71B6AA3CB009F3A94 /* DetailEventViewController.m */,
 				F965C4A31B60393B0065F6F9 /* MeetupViewController.h */,
 				F965C4A41B60393B0065F6F9 /* MeetupViewController.m */,
 				F965C4A01B6030320065F6F9 /* SearchViewController.h */,
@@ -457,6 +462,7 @@
 				F9A55C5F1B42F3F500E47D1A /* AudienceReceiveTableViewCell.m in Sources */,
 				F965C4A21B6030320065F6F9 /* SearchViewController.m in Sources */,
 				85963F7B1B34C8F7006E2868 /* main.m in Sources */,
+				85A0C5E81B6AA3CB009F3A94 /* DetailEventViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

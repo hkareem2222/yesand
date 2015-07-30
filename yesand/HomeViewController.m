@@ -152,14 +152,21 @@
             if (location.verticalAccuracy < 1000 && location.horizontalAccuracy < 1000) {
                 NSLog(@"user located");
                 self.userLatitide = location.coordinate.latitude;
-                NSLog(@"userLat %f", self.userLatitide);
                 self.userLongitude = location.coordinate.longitude;
-//                [self reverseGeoCode:location];
+                [self reverseGeoCode:location];
                 [self.locationManager stopUpdatingLocation];
             }
         }
         self.isUserLocated = !self.isUserLocated;
     }
+}
+
+-(void)reverseGeoCode:(CLLocation *)location {
+    CLGeocoder *geoCoder = [CLGeocoder new];
+    [geoCoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+        CLPlacemark *placemark = placemarks.firstObject;
+        self.userZip = placemark.postalCode;
+    }];
 }
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
