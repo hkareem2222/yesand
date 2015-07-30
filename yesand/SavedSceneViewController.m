@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *sceneTitleLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *laughsLabel;
+@property (weak, nonatomic) IBOutlet UIButton *reportButton;
 @property NSString *leftCharacter;
 @property NSString *rightCharacter;
 @property NSArray *messages;
@@ -74,6 +75,9 @@
 }
 
 #pragma mark - Report Scene
+- (IBAction)onReportTapped:(UIButton *)sender {
+    [self reportScene];
+}
 
 -(void)reportScene {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Are you sure you want to report this scene?" message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -95,8 +99,7 @@
                                        @"reports": self.updatedReports,
                                        };
         [self.scenesConvo updateChildValues:reportUpdate];
-        // need to disable the report button that will be added
-//        self.reportButton.enabled = NO;
+        self.reportButton.enabled = NO;
     }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
     }];

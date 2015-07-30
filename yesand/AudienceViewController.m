@@ -22,6 +22,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *laughsLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *laughsImageView;
 @property NSInteger labelCount;
+@property (weak, nonatomic) IBOutlet UIButton *reportButton;
+@property NSArray *reports;
+@property NSMutableArray *updatedReports;
+
 @end
 
 @implementation AudienceViewController
@@ -29,6 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.laughsImageView.layer.cornerRadius = self.laughsImageView.frame.size.width / 2;
+    self.updatedReports = [NSMutableArray new];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -67,6 +72,10 @@
                 [alert addAction:dismissAction];
                 [self presentViewController:alert animated:YES completion:nil];
             }
+            if (![snapshot.value[@"reports"] isEqual:[NSNull null]] && snapshot.value[@"reports"] != nil) {
+                self.reports = snapshot.value[@"reports"];
+                [self.updatedReports addObjectsFromArray:self.reports];
+            }
         }
     } withCancelBlock:^(NSError *error) {
         NSLog(@"%@", error.description);
@@ -80,6 +89,40 @@
 
     self.tableView.separatorColor = [UIColor clearColor];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+}
+
+#pragma mark - Report Scene
+- (IBAction)onReportTapped:(UIButton *)sender {
+    [self reportScene];
+}
+
+-(void)reportScene {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Are you sure you want to report this scene?" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        // adds the report only if they have not reported the scene already
+        NSDictionary *report = @{
+                                 @"reportedBy": self.scenesConvo.authData.uid,
+                                 };
+        int currentUserReportCount = 0;
+        for (NSDictionary *dict in self.updatedReports) {
+            if ([[dict objectForKey:@"reportedBy"] isEqual:self.scenesConvo.authData.uid]) {
+                currentUserReportCount += 1;
+            }
+        }
+        if (currentUserReportCount == 0) {
+            [self.updatedReports addObject:report];
+        }
+        NSDictionary *reportUpdate = @{
+                                       @"reports": self.updatedReports,
+                                       };
+        [self.scenesConvo updateChildValues:reportUpdate];
+        self.reportButton.enabled = NO;
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    }];
+    [alert addAction:yesAction];
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - Share
