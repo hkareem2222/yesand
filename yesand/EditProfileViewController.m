@@ -65,6 +65,13 @@
         self.taglineField.text = snapshot.value[@"tagline"];
         self.locationField.text = snapshot.value[@"location"];
         self.websiteField.text = snapshot.value[@"website"];
+        if ([self.currentUserRef.authData.provider isEqualToString:@"anonymous"]) {
+            self.usernameField.enabled = NO;
+            self.nameField.enabled = NO;
+            self.taglineField.enabled = NO;
+            self.locationField.enabled = NO;
+            self.websiteField.enabled = NO;
+        }
     }];
 }
 

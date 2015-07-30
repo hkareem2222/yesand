@@ -56,7 +56,6 @@
                                NSForegroundColorAttributeName : [UIColor whiteColor]
                                };
     self.navigationController.navigationBar.titleTextAttributes = attrDict;
-    //------ends here
 
     //-------map stuff
     self.locationManager = [[CLLocationManager alloc] init];
@@ -66,6 +65,41 @@
     self.mapView.showsUserLocation = YES;
     self.mapView.mapType = MKMapTypeStandard;
     self.mapView.delegate = self;
+    // Authentication
+    [self.ref observeAuthEventWithBlock:^(FAuthData *authData) {
+        if (authData) {
+            // Do nothing
+            // Going to need to hide the sign in button here
+            NSLog(@"auth data --- %@", authData.uid);
+        } else {
+            // Create an anonymous uer
+            [self.ref authAnonymouslyWithCompletionBlock:^(NSError *error, FAuthData *authData) {
+                if (error) {
+                    [self showAlert:error];
+                } else {
+                    NSLog(@"anonymous login successful authData: %@", authData);
+                    NSDictionary *newUser = @{
+                                              @"provider": authData.provider,
+                                              @"isAvailable": @0,
+                                              @"updateAt": kFirebaseServerValueTimestamp,
+                                              @"character one": @"test",
+                                              @"character two": @"test",
+                                              @"topic name": @"test",
+                                              @"authuid": authData.uid,
+                                              @"username": authData.uid,
+                                              @"name": @" ",
+                                              @"tagline": @" ",
+                                              @"location": @" ",
+                                              @"website": @" ",
+                                              @"rating": @[@3,@3],
+                                              @"rating avg": @"3"
+                                              };
+                    [[[self.ref childByAppendingPath:@"users"]
+                      childByAppendingPath:authData.uid] setValue:newUser];
+                }
+            }];
+        }
+    }];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -266,5 +300,17 @@
 - (IBAction)onInfoButtonPressed:(UIBarButtonItem *)sender {
     [self performSegueWithIdentifier:@"HomeToInfo" sender:self];
 }
+
+#pragma mark - Alerts for Errors
+
+-(void)showAlert:(NSError *)error {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Error" message:[error localizedDescription]
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    }];
+    [alert addAction:dismissAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 
 @end

@@ -43,11 +43,7 @@
 
     self.ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com"];
     if (self.ref.authData) {
-        if ([self.ref.authData.provider isEqualToString:@"anonymous"]) {
-            self.editProfileBarButton.title = @"Sign up!";
-        } else {
-            self.editProfileBarButton.image = [UIImage imageNamed:@"settingsicon.png"];
-        }
+        self.editProfileBarButton.image = [UIImage imageNamed:@"settingsicon.png"];
 
         NSString *currentUserString = [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@", self.ref.authData.uid];
         self.currentUserRef = [[Firebase alloc] initWithUrl:currentUserString];
