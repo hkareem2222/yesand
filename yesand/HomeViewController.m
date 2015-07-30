@@ -27,6 +27,7 @@
 @property NSMutableArray *topScenes;
 @property Firebase *scenesConvo;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *helpBarButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *signInBarButton;
 @property NSDictionary *sceneDic;
 @property NSMutableArray *sceneLocations;
 @end
@@ -72,6 +73,13 @@
         if (authData) {
             // Do nothing
             // Going to need to hide the sign in button here
+            if ([authData.provider isEqualToString:@"anonymous"]) {
+                self.signInBarButton.enabled = YES;
+                self.signInBarButton.title = @"Sign In";
+            } else {
+                self.signInBarButton.enabled = NO;
+                self.signInBarButton.title = @"";
+            }
             NSLog(@"auth data --- %@", authData.uid);
         } else {
             // Create an anonymous uer
@@ -303,6 +311,11 @@
     [self performSegueWithIdentifier:@"HomeToInfo" sender:self];
 }
 
+- (IBAction)onSignInButtonPressed:(UIBarButtonItem *)sender {
+    [self performSegueWithIdentifier:@"HomeToAuth" sender:sender];
+    Firebase *ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com"];
+    [ref unauth];
+}
 #pragma mark - Alerts for Errors
 
 -(void)showAlert:(NSError *)error {

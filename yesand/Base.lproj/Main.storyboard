@@ -990,6 +990,11 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="r2y-wN-Tbp">
+                        <barButtonItem key="leftBarButtonItem" id="Hct-Rg-gKn">
+                            <connections>
+                                <action selector="onSignInButtonPressed:" destination="vXZ-lx-hvc" id="GAe-8b-mZU"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="helpicon" id="epH-eu-1rn">
                             <connections>
                                 <action selector="onInfoButtonPressed:" destination="vXZ-lx-hvc" id="xlv-M0-tde"/>
@@ -1002,10 +1007,12 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
                         <outlet property="helpBarButton" destination="epH-eu-1rn" id="LXb-he-Qd5"/>
                         <outlet property="mapView" destination="max-fw-xhT" id="3mO-l0-wU4"/>
                         <outlet property="segmentedControl" destination="QTZ-cM-tnE" id="gNz-JZ-XrK"/>
+                        <outlet property="signInBarButton" destination="Hct-Rg-gKn" id="A5O-ab-hI5"/>
                         <outlet property="tableView" destination="IQr-Iz-FX1" id="ykq-ta-i9A"/>
                         <segue destination="WRj-b4-piV" kind="show" identifier="HomeToAudience" id="sbG-hL-R0G"/>
                         <segue destination="769-2g-XYm" kind="show" identifier="HomeToSavedScene" id="ZYi-VD-sef"/>
                         <segue destination="GnI-2v-Wxa" kind="show" identifier="HomeToInfo" id="Irj-5q-D2o"/>
+                        <segue destination="V5t-P2-765" kind="showDetail" identifier="HomeToAuth" id="gdE-58-5YL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -2240,7 +2247,8 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
         <image name="twitterlogincustom" width="912" height="159"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hkv-kI-r5j"/>
-        <segue reference="vpc-Ch-njs"/>
+        <segue reference="5tL-5e-YcU"/>
+        <segue reference="gdE-58-5YL"/>
+        <segue reference="ZYi-VD-sef"/>
     </inferredMetricsTieBreakers>
 </document>
