@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -12,36 +12,52 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Etk-9A-eQ7">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="65"/>
-                    <color key="backgroundColor" red="1" green="0.40000000596046448" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="1" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="65" id="JGM-CM-CzC"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aFm-Re-4yf">
                     <rect key="frame" x="0.0" y="430" width="480" height="50"/>
-                    <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="1" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="Hh0-a9-PNR"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wVt-Hh-wPc">
                     <rect key="frame" x="0.0" y="215" width="480" height="50"/>
-                    <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="1" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="qLT-f9-5mQ"/>
                     </constraints>
                 </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fKh-Lj-e2g">
+                    <rect key="frame" x="0.0" y="265" width="480" height="165"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tlE-Np-Guh">
+                    <rect key="frame" x="0.0" y="65" width="480" height="150"/>
+                    <color key="backgroundColor" red="0.97254901960784312" green="0.95294117647058818" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="tlE-Np-Guh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="6Tb-wM-WkP"/>
                 <constraint firstAttribute="trailing" secondItem="wVt-Hh-wPc" secondAttribute="trailing" id="ATh-0W-Hem"/>
+                <constraint firstItem="aFm-Re-4yf" firstAttribute="top" secondItem="fKh-Lj-e2g" secondAttribute="bottom" id="B8r-Rp-BiX"/>
+                <constraint firstItem="fKh-Lj-e2g" firstAttribute="top" secondItem="wVt-Hh-wPc" secondAttribute="bottom" id="DGj-GQ-95i"/>
+                <constraint firstItem="fKh-Lj-e2g" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="EXx-KY-KXL"/>
                 <constraint firstAttribute="trailing" secondItem="Etk-9A-eQ7" secondAttribute="trailing" id="MOu-e1-Hoy"/>
+                <constraint firstAttribute="trailing" secondItem="tlE-Np-Guh" secondAttribute="trailing" id="OO9-DK-GVe"/>
                 <constraint firstItem="aFm-Re-4yf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="YoK-D7-sct"/>
                 <constraint firstItem="wVt-Hh-wPc" firstAttribute="top" secondItem="Etk-9A-eQ7" secondAttribute="bottom" constant="150" id="ZSJ-Ov-9DQ"/>
                 <constraint firstItem="Etk-9A-eQ7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ZfL-FA-QP8"/>
+                <constraint firstItem="wVt-Hh-wPc" firstAttribute="top" secondItem="tlE-Np-Guh" secondAttribute="bottom" id="b3s-xj-bm6"/>
                 <constraint firstAttribute="trailing" secondItem="aFm-Re-4yf" secondAttribute="trailing" id="b6p-Bh-dW6"/>
+                <constraint firstAttribute="trailing" secondItem="fKh-Lj-e2g" secondAttribute="trailing" id="cNg-md-BIV"/>
                 <constraint firstItem="wVt-Hh-wPc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dht-Tf-MfM"/>
                 <constraint firstItem="Etk-9A-eQ7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="dsU-7S-EkW"/>
+                <constraint firstItem="tlE-Np-Guh" firstAttribute="top" secondItem="Etk-9A-eQ7" secondAttribute="bottom" id="mxw-VH-Pek"/>
                 <constraint firstAttribute="bottom" secondItem="aFm-Re-4yf" secondAttribute="bottom" id="rKT-GM-pFl"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
