@@ -11,6 +11,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "HomeViewController.h"
 #import "DetailEventViewController.h"
+#import <Firebase/Firebase.h>
 
 @interface MeetupViewController () <UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate, CLLocationManagerDelegate>
 @property NSArray *meetups;
@@ -19,9 +20,11 @@
 @property NSString *userZipCode;
 @property BOOL isUserLocated;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (weak, nonatomic) IBOutlet UIView *noMeetupView;
+@property (weak, nonatomic) IBOutlet UIView *overlayTableView;
 @property NSMutableArray *venueLocations;
 @property NSDictionary *detailEvent;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UILabel *overlayViewLabel;
 @end
 
 @implementation MeetupViewController
@@ -55,7 +58,8 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated {
-        [self retrieveJSONInfo];
+    [self.activityIndicator startAnimating];
+    [self retrieveJSONInfo];
 }
 
 #pragma mark - Meetup API
@@ -72,7 +76,6 @@
                                if (!connectionError) {
                                    NSDictionary *meetupsDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError];
                                    self.meetups = [meetupsDictionary objectForKey:@"results"];
-                                   NSLog(@"-----meetup count------%lu", self.meetups.count);
                                    if (self.meetups.count != 0) {
                                        self.venueLocations = [NSMutableArray new];
                                        for (NSDictionary *eventDic in self.meetups) {
@@ -86,12 +89,32 @@
                                        }
                                        [self addMapAnnotations];
                                        [self.tableView reloadData];
-                                       self.noMeetupView.alpha = 0.0;
+                                       [self.activityIndicator stopAnimating];
+                                       self.overlayTableView.alpha = 0.0;
+                                       self.overlayViewLabel.alpha = 0.0;
+                                       [self anonymousUserCheck];
+                                   } else {
+                                       [self.activityIndicator stopAnimating];
+                                       self.overlayViewLabel.alpha = 1.0;
+                                       self.overlayViewLabel.text = @"Sorry no Meetups are available in your area.";
+                                       [self anonymousUserCheck];
                                    }
                                } else {
                                    NSLog(@"%@", [connectionError localizedDescription]);
+                                   [self.activityIndicator stopAnimating];
+                                   [self anonymousUserCheck];
                                }
                            }];
+}
+
+-(void)anonymousUserCheck {
+    Firebase *ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com"];
+    if ([ref.authData.provider isEqualToString:@"anonymous"]) {
+        self.overlayTableView.alpha = 0.75;
+        self.overlayViewLabel.text = @"Please sign up to activate this feature.";
+        self.overlayViewLabel.alpha = 1.0;
+        //create button to Sign up that segues to AuthVC
+    }
 }
 
 #pragma mark - Table View
