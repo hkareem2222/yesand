@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *profileLinkLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet UIView *paywallView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property NSMutableArray *scenes;
 @property Firebase *ref;
@@ -51,11 +52,13 @@
             if (![snapshot.value isEqual:[NSNull null]] && snapshot.value != nil) {
                 if ([self.ref.authData.provider isEqualToString:@"anonymous"]) {
                     self.navigationItem.title = @"anonymous";
+                    self.paywallView.alpha = 0.75;
                 } else {
                     self.profileHeadingLabel.text = snapshot.value[@"name"];
                     self.profileSubheadingLabel.text = snapshot.value[@"tagline"];
                     self.profileLinkLabel.text = snapshot.value[@"website"];
                     self.locationLabel.text = snapshot.value[@"location"];
+                    self.paywallView.alpha = 0.0;
                 }
             }
         }];

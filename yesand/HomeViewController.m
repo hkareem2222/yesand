@@ -30,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *signInBarButton;
 @property NSDictionary *sceneDic;
 @property NSMutableArray *sceneLocations;
+@property (weak, nonatomic) IBOutlet UIButton *howItWorksButton;
 @end
 
 @implementation HomeViewController
@@ -59,6 +60,7 @@
                                NSForegroundColorAttributeName : [UIColor whiteColor]
                                };
     self.navigationController.navigationBar.titleTextAttributes = attrDict;
+    self.howItWorksButton.layer.cornerRadius = 5.0;
 
     //-------map stuff
     self.locationManager = [[CLLocationManager alloc] init];

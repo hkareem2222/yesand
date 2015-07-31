@@ -67,7 +67,7 @@
 
 -(void)retrieveJSONInfo {
     //API KEY 30552f7c5317733067253f2732c63
-    NSString *urlString = [NSString stringWithFormat:@"https://api.meetup.com/2/open_events?&sign=true&photo-host=public&zip=%@&topic=improv,%%20comedy&radius=25.0&page=5&key=30552f7c5317733067253f2732c63", @"60601"];
+    NSString *urlString = [NSString stringWithFormat:@"https://api.meetup.com/2/open_events?&sign=true&photo-host=public&zip=%@&topic=improv,%%20comedy&radius=25.0&page=5&key=30552f7c5317733067253f2732c63", self.userZipCode];
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
 
