@@ -50,6 +50,11 @@
 		F9A55C621B42F40600E47D1A /* AudienceSendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A55C611B42F40600E47D1A /* AudienceSendTableViewCell.m */; };
 		F9A55C651B434D1700E47D1A /* ProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A55C641B434D1700E47D1A /* ProfileTableViewCell.m */; };
 		F9A9677D1B44FDFF00F74893 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A9677C1B44FDFF00F74893 /* InfoViewController.m */; };
+		F9F8F1181B6B3E1300B14EC9 /* PageContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9F8F1171B6B3E1300B14EC9 /* PageContentViewController.m */; };
+		F9F8F11D1B6B421B00B14EC9 /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = F9F8F1191B6B421B00B14EC9 /* splash.png */; };
+		F9F8F11E1B6B421B00B14EC9 /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = F9F8F11A1B6B421B00B14EC9 /* login.png */; };
+		F9F8F11F1B6B421B00B14EC9 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = F9F8F11B1B6B421B00B14EC9 /* home.png */; };
+		F9F8F1201B6B421B00B14EC9 /* livescene.png in Resources */ = {isa = PBXBuildFile; fileRef = F9F8F11C1B6B421B00B14EC9 /* livescene.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +141,15 @@
 		F9A55C641B434D1700E47D1A /* ProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileTableViewCell.m; sourceTree = "<group>"; };
 		F9A9677B1B44FDFF00F74893 /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
 		F9A9677C1B44FDFF00F74893 /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
+		F9F8F1161B6B3E1300B14EC9 /* PageContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageContentViewController.h; sourceTree = "<group>"; };
+		F9F8F1171B6B3E1300B14EC9 /* PageContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageContentViewController.m; sourceTree = "<group>"; };
+		F9F8F1191B6B421B00B14EC9 /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
+		F9F8F11A1B6B421B00B14EC9 /* login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login.png; sourceTree = "<group>"; };
+		F9F8F11B1B6B421B00B14EC9 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
+		F9F8F11C1B6B421B00B14EC9 /* livescene.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = livescene.png; sourceTree = "<group>"; };
+		F9F8F1211B6B44A100B14EC9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		F9F8F1231B6B44B600B14EC9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F9F8F1251B6B44C000B14EC9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,14 +193,16 @@
 		85014AA91B35AEAB00E190C8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F9F8F1161B6B3E1300B14EC9 /* PageContentViewController.h */,
+				F9F8F1171B6B3E1300B14EC9 /* PageContentViewController.m */,
+				F9A9677B1B44FDFF00F74893 /* InfoViewController.h */,
+				F9A9677C1B44FDFF00F74893 /* InfoViewController.m */,
 				85A0C5E61B6AA3CB009F3A94 /* DetailEventViewController.h */,
 				85A0C5E71B6AA3CB009F3A94 /* DetailEventViewController.m */,
 				F965C4A31B60393B0065F6F9 /* MeetupViewController.h */,
 				F965C4A41B60393B0065F6F9 /* MeetupViewController.m */,
 				F965C4A01B6030320065F6F9 /* SearchViewController.h */,
 				F965C4A11B6030320065F6F9 /* SearchViewController.m */,
-				F9A9677B1B44FDFF00F74893 /* InfoViewController.h */,
-				F9A9677C1B44FDFF00F74893 /* InfoViewController.m */,
 				F94125631B4373D4006DC249 /* SavedSceneViewController.h */,
 				F94125641B4373D4006DC249 /* SavedSceneViewController.m */,
 				BF4F90871B39F0D600A93680 /* AudienceViewController.h */,
@@ -231,6 +247,10 @@
 			children = (
 				85963F7C1B34C8F7006E2868 /* AppDelegate.h */,
 				85963F7D1B34C8F7006E2868 /* AppDelegate.m */,
+				F9F8F1191B6B421B00B14EC9 /* splash.png */,
+				F9F8F11A1B6B421B00B14EC9 /* login.png */,
+				F9F8F11B1B6B421B00B14EC9 /* home.png */,
+				F9F8F11C1B6B421B00B14EC9 /* livescene.png */,
 				F99E11F21B3DAD0900A75738 /* Custom Classes */,
 				85014AA91B35AEAB00E190C8 /* Controllers */,
 				85014AA51B35A07500E190C8 /* DangerZone!! */,
@@ -272,6 +292,9 @@
 		E3A497684CF78C658459E9BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F9F8F1251B6B44C000B14EC9 /* UIKit.framework */,
+				F9F8F1231B6B44B600B14EC9 /* Foundation.framework */,
+				F9F8F1211B6B44A100B14EC9 /* CoreGraphics.framework */,
 				85067ECD1B41998A006E536C /* Fabric.framework */,
 				85067ECE1B41998A006E536C /* Crashlytics.framework */,
 				85304DD01B3E6853000405A8 /* Firebase.framework */,
@@ -400,9 +423,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9F8F11D1B6B421B00B14EC9 /* splash.png in Resources */,
+				F9F8F11E1B6B421B00B14EC9 /* login.png in Resources */,
+				F9F8F11F1B6B421B00B14EC9 /* home.png in Resources */,
 				85963F871B34C8F7006E2868 /* Main.storyboard in Resources */,
 				85963F8C1B34C8F7006E2868 /* LaunchScreen.xib in Resources */,
 				85963F891B34C8F7006E2868 /* Images.xcassets in Resources */,
+				F9F8F1201B6B421B00B14EC9 /* livescene.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +472,7 @@
 				F94125651B4373D4006DC249 /* SavedSceneViewController.m in Sources */,
 				85014AA81B35AE8E00E190C8 /* ProfileViewController.m in Sources */,
 				F96300F71B41E3B3009F459B /* ReceiveTableViewCell.m in Sources */,
+				F9F8F1181B6B3E1300B14EC9 /* PageContentViewController.m in Sources */,
 				BF4F908C1B39FA7900A93680 /* RatingViewController.m in Sources */,
 				F99E11F11B3DACFD00A75738 /* HomeTableViewCell.m in Sources */,
 				F965C4A81B604AE60065F6F9 /* SearchTableViewCell.m in Sources */,

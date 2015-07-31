@@ -76,7 +76,7 @@
                                                     <rect key="frame" x="5" y="2" width="230" height="52"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dbI-1O-uDN">
-                                                    <rect key="frame" x="40" y="6" width="34.5" height="16.5"/>
+                                                    <rect key="frame" x="40" y="6" width="35" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="190" id="tFb-ef-bni"/>
                                                     </constraints>
@@ -114,7 +114,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oIP-BP-oft">
-                                                    <rect key="frame" x="376" y="6" width="34.5" height="16.5"/>
+                                                    <rect key="frame" x="376" y="6" width="35" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="190" id="jaU-Xt-cBU"/>
                                                     </constraints>
@@ -702,7 +702,78 @@
             </objects>
             <point key="canvasLocation" x="4013" y="-722"/>
         </scene>
-        <!--Info-->
+        <!--Page View Controller-->
+        <scene sceneID="APz-t3-etl">
+            <objects>
+                <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="poK-qD-502" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fdb-Tl-RCL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5404" y="-1050"/>
+        </scene>
+        <!--Page Content View Controller-->
+        <scene sceneID="Lcb-h2-8nB">
+            <objects>
+                <viewController storyboardIdentifier="PageContentViewController" id="bvN-zJ-lqk" customClass="PageContentViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3rC-EF-6fH"/>
+                        <viewControllerLayoutGuide type="bottom" id="IJM-wj-ECK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8Fm-jW-dFQ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="APE-3f-Gyq">
+                                <rect key="frame" x="10" y="30" width="580" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="dss-mz-zdI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rSa-oG-M36">
+                                <rect key="frame" x="16" y="130" width="568" height="470"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="BSi-PM-ZI6"/>
+                                    <constraint firstAttribute="width" constant="200" id="waf-KC-iKU"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="BSi-PM-ZI6"/>
+                                        <exclude reference="waf-KC-iKU"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="rSa-oG-M36" secondAttribute="centerX" id="5eB-ua-YEB"/>
+                            <constraint firstItem="APE-3f-Gyq" firstAttribute="top" secondItem="8Fm-jW-dFQ" secondAttribute="top" constant="30" id="9E9-Cr-ipC"/>
+                            <constraint firstItem="APE-3f-Gyq" firstAttribute="leading" secondItem="8Fm-jW-dFQ" secondAttribute="leading" constant="10" id="Eer-RM-By8"/>
+                            <constraint firstAttribute="centerY" secondItem="rSa-oG-M36" secondAttribute="centerY" id="Ifp-ta-F8d"/>
+                            <constraint firstAttribute="trailing" secondItem="rSa-oG-M36" secondAttribute="trailing" constant="16" id="Uv9-lg-Rdg"/>
+                            <constraint firstItem="rSa-oG-M36" firstAttribute="top" secondItem="8Fm-jW-dFQ" secondAttribute="top" constant="130" id="ddu-yC-cl8"/>
+                            <constraint firstAttribute="trailing" secondItem="APE-3f-Gyq" secondAttribute="trailing" constant="10" id="eKh-3N-1I9"/>
+                            <constraint firstItem="rSa-oG-M36" firstAttribute="leading" secondItem="8Fm-jW-dFQ" secondAttribute="leading" constant="16" id="nVv-nZ-6VJ"/>
+                            <constraint firstAttribute="bottom" secondItem="rSa-oG-M36" secondAttribute="bottom" id="xbN-cW-xzy"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="5eB-ua-YEB"/>
+                                <exclude reference="Ifp-ta-F8d"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="phoneImageView" destination="rSa-oG-M36" id="Fmp-gP-fzh"/>
+                        <outlet property="titleLabel" destination="APE-3f-Gyq" id="NET-Ma-eMU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tN5-PD-okc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5404" y="-381"/>
+        </scene>
+        <!--Info View Controller-->
         <scene sceneID="zqG-55-qET">
             <objects>
                 <viewController id="GnI-2v-Wxa" customClass="InfoViewController" sceneMemberID="viewController">
@@ -714,183 +785,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CcJ-VO-N8K">
-                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
-                                <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5hj-d3-7Hg">
-                                        <rect key="frame" x="25" y="40" width="550" height="407"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <attributedString key="attributedText">
-                                            <fragment content="How to “Yes, And”">
-                                                <attributes>
-                                                    <font key="NSFont" size="20" name="HelveticaNeue-Bold"/>
-                                                    <font key="NSOriginalFont" size="20" name="HelveticaNeue-Bold"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment>
-                                                <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                                <attributes>
-                                                    <font key="NSFont" size="20" name="HelveticaNeue"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment>
-                                                <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                                <attributes>
-                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment>
-                                                <string key="content">For Performers:
-</string>
-                                                <attributes>
-                                                    <font key="NSFont" size="16" name="HelveticaNeue-Bold"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment>
-                                                <string key="content">
-- </string>
-                                                <attributes>
-                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content="Say YES, AND">
-                                                <attributes>
-                                                    <font key="NSFont" size="14" name="HelveticaNeue-Bold"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment>
-                                                <string key="content">. In other words, accept what your fellow performer says and add to it. This is not a rap battle, so you’re working with—and not against—your partner. Saying “yes, and” is not a must, but please don’t deny; you’ll stop the scene dead in its tracks.
- 
-- </string>
-                                                <attributes>
-                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content="Be funny, but don’t force it">
-                                                <attributes>
-                                                    <font key="NSFont" size="14" name="HelveticaNeue-Bold"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment>
-                                                <string key="content">. Most people are funniest when they’re not trying too hard. Relax, let the words come to you, and realize that not everything you say will be a rip-roaring punch line. 
-
-- </string>
-                                                <attributes>
-                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content="Be a good partner">
-                                                <attributes>
-                                                    <font key="NSFont" size="14" name="HelveticaNeue-Bold"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment>
-                                                <string key="content">. Sometimes making yourself look good means letting your fellow performer look good. Also, keep the open-ended questions to a minimum, because this will interrupt your partner’s flow and put them in the hot seat. 
-
-- </string>
-                                                <attributes>
-                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content="Feel free to make it your own">
-                                                <attributes>
-                                                    <font key="NSFont" size="14" name="HelveticaNeue-Bold"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment>
-                                                <string key="content">. We give you an improv prompt and characters, but we fully expect the stories to take several turns before the end of the scene. 
-
-- </string>
-                                                <attributes>
-                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content="End the scene when you feel the scene has ended">
-                                                <attributes>
-                                                    <font key="NSFont" size="14" name="HelveticaNeue-Bold"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment>
-                                                <string key="content">. Either of the two performers can stop the scene at any time. Keep in mind that you rate one another once the scene is done, so don’t bail on the scene at an inopportune time. 
-
-</string>
-                                                <attributes>
-                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment>
-                                                <string key="content">For the Audience: 
-</string>
-                                                <attributes>
-                                                    <font key="NSFont" size="16" name="HelveticaNeue-Bold"/>
-                                                    <font key="NSOriginalFont" size="16" name="HelveticaNeue-Bold"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment>
-                                                <string key="content">
-Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh” at good lines in real time by tapping the chat screen as many times as appropriate. (More laughing = more laughs = more taps.) Basically, kick back and enjoy the real-time hijinks.
-
-</string>
-                                                <attributes>
-                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment>
-                                                <string key="content">Please submit feedback on current features, or desired future features, to admin@yesand.io. 
-</string>
-                                                <attributes>
-                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
-                                </subviews>
-                                <color key="backgroundColor" red="0.80000001192092896" green="0.80000001192092896" blue="0.80000001192092896" alpha="1" colorSpace="calibratedRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="krg-sg-p5q">
+                                <rect key="frame" x="282" y="562" width="37" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="5hj-d3-7Hg" secondAttribute="bottom" constant="40" id="0Sr-I6-iTe"/>
-                                    <constraint firstItem="5hj-d3-7Hg" firstAttribute="leading" secondItem="CcJ-VO-N8K" secondAttribute="leading" constant="25" id="0nd-bW-R3S"/>
-                                    <constraint firstAttribute="trailing" secondItem="5hj-d3-7Hg" secondAttribute="trailing" constant="25" id="eP7-So-rsO"/>
-                                    <constraint firstItem="5hj-d3-7Hg" firstAttribute="top" secondItem="CcJ-VO-N8K" secondAttribute="top" constant="40" id="f2J-ja-Q4i"/>
+                                    <constraint firstAttribute="width" constant="37" id="1oH-If-muX"/>
+                                    <constraint firstAttribute="height" constant="30" id="avk-Cr-MGX"/>
                                 </constraints>
-                            </view>
+                                <state key="normal" title="Done">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onDoneButtonPressed:" destination="GnI-2v-Wxa" eventType="touchUpInside" id="jaa-My-ZQC"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="CcJ-VO-N8K" firstAttribute="leading" secondItem="CmG-no-WBe" secondAttribute="leading" id="4Rp-Jd-xP1"/>
-                            <constraint firstItem="CcJ-VO-N8K" firstAttribute="top" secondItem="5Uf-Uf-Jq5" secondAttribute="bottom" id="Sof-1d-izd"/>
-                            <constraint firstItem="Zwa-mN-lnU" firstAttribute="top" secondItem="CcJ-VO-N8K" secondAttribute="bottom" id="Zz1-6m-ozJ"/>
-                            <constraint firstAttribute="trailing" secondItem="CcJ-VO-N8K" secondAttribute="trailing" id="uiA-Ri-ZBf"/>
+                            <constraint firstItem="Zwa-mN-lnU" firstAttribute="top" secondItem="krg-sg-p5q" secondAttribute="bottom" constant="8" id="Lm0-9E-BqO"/>
+                            <constraint firstAttribute="centerX" secondItem="krg-sg-p5q" secondAttribute="centerX" id="vvg-H3-qE5"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Info" id="B0z-UV-D7r"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="textView" destination="5hj-d3-7Hg" id="nxm-WV-YTk"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x1r-eW-TtM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -973,25 +888,11 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
                                     <constraint firstAttribute="height" constant="50" id="qzw-Xk-BHL"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="USr-oe-HE3">
-                                <rect key="frame" x="225" y="503" width="150" height="40"/>
-                                <color key="backgroundColor" red="1" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="7gH-CS-T00"/>
-                                    <constraint firstAttribute="width" constant="150" id="cbu-hu-6Ra"/>
-                                </constraints>
-                                <state key="normal" title="How it Works">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="max-fw-xhT" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="1SK-Qd-jQ0"/>
-                            <constraint firstAttribute="centerX" secondItem="USr-oe-HE3" secondAttribute="centerX" id="MHB-tP-ZSq"/>
                             <constraint firstItem="T4w-qQ-IcL" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="OkY-8n-1Ao"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="USr-oe-HE3" secondAttribute="bottom" constant="8" id="TYz-Y7-Pra"/>
                             <constraint firstAttribute="trailing" secondItem="T4w-qQ-IcL" secondAttribute="trailing" id="WvQ-uw-hVX"/>
                             <constraint firstAttribute="trailing" secondItem="max-fw-xhT" secondAttribute="trailing" id="eVV-FB-j1o"/>
                             <constraint firstItem="IQr-Iz-FX1" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="hD8-Hi-PaY"/>
@@ -1018,14 +919,13 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="helpBarButton" destination="epH-eu-1rn" id="LXb-he-Qd5"/>
-                        <outlet property="howItWorksButton" destination="USr-oe-HE3" id="SyG-lG-IND"/>
                         <outlet property="mapView" destination="max-fw-xhT" id="3mO-l0-wU4"/>
                         <outlet property="segmentedControl" destination="QTZ-cM-tnE" id="gNz-JZ-XrK"/>
                         <outlet property="signInBarButton" destination="Hct-Rg-gKn" id="A5O-ab-hI5"/>
                         <outlet property="tableView" destination="IQr-Iz-FX1" id="ykq-ta-i9A"/>
                         <segue destination="WRj-b4-piV" kind="show" identifier="HomeToAudience" id="sbG-hL-R0G"/>
                         <segue destination="769-2g-XYm" kind="show" identifier="HomeToSavedScene" id="ZYi-VD-sef"/>
-                        <segue destination="GnI-2v-Wxa" kind="show" identifier="HomeToInfo" id="Irj-5q-D2o"/>
+                        <segue destination="GnI-2v-Wxa" kind="showDetail" identifier="HomeToInfo" id="Irj-5q-D2o"/>
                         <segue destination="V5t-P2-765" kind="showDetail" identifier="HomeToAuth" id="gdE-58-5YL"/>
                     </connections>
                 </viewController>
@@ -1059,7 +959,7 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="comedy.com" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7v-le-Emz">
-                                <rect key="frame" x="140" y="184" width="65.5" height="14.5"/>
+                                <rect key="frame" x="140" y="184" width="66" height="15"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
                                 <color key="textColor" red="0.48812342171717171" green="0.098981163021686649" blue="0.08992936575762224" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1111,7 +1011,7 @@ Rejoice! Your job is way easier. Feel free to enter a live scene and “laugh”
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please sign up to activate this feature." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kei-hh-nXQ">
-                                        <rect key="frame" x="8" y="228.5" width="584" height="30"/>
+                                        <rect key="frame" x="8" y="229" width="584" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Aen-o8-R6h"/>
                                         </constraints>
