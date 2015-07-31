@@ -9,7 +9,7 @@
 #import "ChatViewController.h"
 #import "HomeViewController.h"
 
-@interface ChatViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIScrollViewDelegate>
+@interface ChatViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIScrollViewDelegate, UITextViewDelegate>
 @end
 
 @implementation ChatViewController
@@ -34,6 +34,11 @@
     self.typingImageView.hidden = YES;
     self.currentUserCharacter.lineBreakMode = NSLineBreakByWordWrapping;
     self.otherUserCharacter.lineBreakMode = NSLineBreakByWordWrapping;
+    self.messageTextField.delegate = self;
+    self.messageTextField.font = [UIFont fontWithName: @"AppleGothic" size: 14.0];
+    self.messageTextField.layer.cornerRadius = 5;
+    self.messageTextField.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.messageTextField.layer.borderWidth = 0.5;
 
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
@@ -244,7 +249,7 @@
     self.endSceneBarButton.enabled = YES;
     self.cancelBarButton.title = @"";
     self.cancelBarButton.enabled = NO;
-    self.messageTextField.placeholder = self.currentUserCharacter.text;
+//    self.messageTextField.placeholder = self.currentUserCharacter.text;
     [self.usersRef removeAllObservers];
     [self queryConversation];
     Firebase *otherUserRef = [[Firebase alloc] initWithUrl: [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@",self.otherAuthuid]];
@@ -365,6 +370,11 @@
 {
     [self.messageTextField resignFirstResponder];
     self.textFieldBottomLayout.constant = 0;
+    NSDictionary *conversation = @{
+                                   @"messages": self.cloudMessages,
+                                   self.currentUserCharacter.text: @0
+                                   };
+    [self.sceneIDRef updateChildValues:conversation];
 }
 
 #pragma mark - Segues
@@ -425,31 +435,17 @@
     return expectSize;
 }
 
-#pragma mark - Typing indicator
-
--(void)textFieldDidBeginEditing:(UITextField *)textField {
-    NSDictionary *conversation = @{
-                                   self.currentUserCharacter.text: @1
-                                   };
-    [self.sceneIDRef updateChildValues:conversation];
-}
-
--(void)textFieldDidEndEditing:(UITextField *)textField {
-    NSDictionary *conversation = @{
-                                   self.currentUserCharacter.text: @0
-                                   };
-    [self.sceneIDRef updateChildValues:conversation];
-}
-
 #pragma mark - Send Message
 
 -(void)sendMessage {
     [self.cloudMessages addObject:[NSString stringWithFormat:@"%@: %@", self.currentUserCharacter.text, self.messageTextField.text]];
     NSDictionary *conversation = @{
-                                   @"messages": self.cloudMessages
+                                   @"messages": self.cloudMessages,
+                                   self.currentUserCharacter.text: @0
                                    };
     [self.sceneIDRef updateChildValues:conversation];
     self.messageTextField.text = @"";
+    self.heightConstraint.constant = 50;
 }
 
 - (IBAction)onSendButtonTapped:(id)sender {
@@ -458,11 +454,24 @@
     }
 }
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self sendMessage];
-    [self.messageTextField resignFirstResponder];
-    self.textFieldBottomLayout.constant = 0;
-    return YES;
+-(void)textViewDidChange:(UITextView *)textView {
+    if (![textView.text isEqualToString:@""]) {
+        NSDictionary *conversation = @{
+                                       self.currentUserCharacter.text: @1
+                                       };
+        [self.sceneIDRef updateChildValues:conversation];
+    } else {
+        NSDictionary *conversation = @{
+                                       self.currentUserCharacter.text: @0
+                                       };
+        [self.sceneIDRef updateChildValues:conversation];
+    }
+    NSUInteger numoflines = textView.contentSize.height/textView.font.lineHeight;
+    if (numoflines >= 2) {
+        self.heightConstraint.constant = 60;
+    } else if (numoflines == 1) {
+        self.heightConstraint.constant = 50;
+    }
 }
 
 #pragma mark - Disappearing

@@ -19,7 +19,6 @@
 @property BOOL isEven;
 @property (weak, nonatomic) IBOutlet UIView *userSetupview;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UITextField *messageTextField;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textFieldBottomLayout;
 @property (weak, nonatomic) IBOutlet UILabel *currentUserLabel;
 @property (weak, nonatomic) IBOutlet UILabel *otherUserLabel;
@@ -36,6 +35,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *countdownLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *laughImageView;
 @property (weak, nonatomic) IBOutlet UILabel *laughsLabel;
+@property (weak, nonatomic) IBOutlet UITextView *messageTextField;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraint;
 @property double keyboardHeight;
 @property NSMutableArray *cloudMessages;
 @property NSArray *currentMessages;
