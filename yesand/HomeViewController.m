@@ -133,14 +133,14 @@
                 } else {
                     laughCount = scene.value[@"laughs"];
                 }
-                if (scene.value[@"latitude"] != nil && scene.value[@"longitude"] != nil) {
-                    NSDictionary *sceneLocationDictionary = @{
-                                                              @"latitude": scene.value[@"latitude"],
-                                                              @"longitude": scene.value[@"longitude"]
-                                                              };
-                    [self.sceneLocations addObject:sceneLocationDictionary];
-                }
                 if ([scene.value[@"isLive"] isEqualToNumber:@1]) {
+                    if (scene.value[@"latitude"] != nil && scene.value[@"longitude"] != nil) {
+                        NSDictionary *sceneLocationDictionary = @{
+                                                                  @"latitude": scene.value[@"latitude"],
+                                                                  @"longitude": scene.value[@"longitude"]
+                                                                  };
+                        [self.sceneLocations addObject:sceneLocationDictionary];
+                    }
                     if (scene.key != nil && scene.value[@"topicName"] != nil) {
                         NSDictionary *sceneDic = @{
                                                    @"sceneID": scene.key,

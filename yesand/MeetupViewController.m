@@ -67,7 +67,7 @@
 
 -(void)retrieveJSONInfo {
     //API KEY 30552f7c5317733067253f2732c63
-    NSString *urlString = [NSString stringWithFormat:@"https://api.meetup.com/2/open_events?&sign=true&photo-host=public&zip=%@&topic=improv,%%20comedy&radius=25.0&page=5&key=30552f7c5317733067253f2732c63", self.userZipCode];
+    NSString *urlString = [NSString stringWithFormat:@"https://api.meetup.com/2/open_events?&sign=true&photo-host=public&zip=%@&topic=improv,%%20comedy&radius=25.0&page=5&key=30552f7c5317733067253f2732c63", @"60601"];
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
 
@@ -167,7 +167,7 @@
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     MKPinAnnotationView *pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:nil];
     if (![annotation isEqual:mapView.userLocation]) {
-        //        pin.image = [UIImage imageNamed:@"bikeImage"];
+        pin.image = [UIImage imageNamed:@"meetup.png"];
         pin.canShowCallout = YES;
         pin.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         return pin;
@@ -188,6 +188,17 @@
         [annotations addObject:annotation];
     }
     [self.mapView showAnnotations:annotations animated:YES];
+}
+
+-(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    NSInteger indexInt = 0;
+    for (NSDictionary *dictionary in self.venueLocations) {
+        if ([[dictionary objectForKey:@"name"] isEqualToString:@"callout pin title"]) {
+            indexInt = [self.venueLocations indexOfObjectIdenticalTo:[dictionary objectForKey:@"name"]];
+        }
+    }
+    self.detailEvent = self.venueLocations[indexInt];
+    [self performSegueWithIdentifier:@"EventsToDetailEvent" sender:self];
 }
 
 #pragma mark - Segue
