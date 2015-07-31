@@ -16,10 +16,10 @@
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
-@property (weak, nonatomic) IBOutlet UIButton *signUpButton;
-@property (weak, nonatomic) IBOutlet UIButton *logInButton;
 @property Firebase *myRootRef;
 @property (weak, nonatomic) IBOutlet UIButton *goHomeButton;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+@property (weak, nonatomic) IBOutlet UIButton *twitterButton;
 @property TwitterAuthHelper *twitterAuthHelper;
 @end
 
@@ -37,16 +37,21 @@
     //views setup
     UIFont *newFont = [UIFont fontWithName:@"AppleGothic" size:14];
     [[UILabel appearance] setFont:newFont];
-    self.signUpButton.layer.cornerRadius = 10;
-    self.signUpButton.layer.borderWidth = 1.0f;
-    self.signUpButton.layer.borderColor = [UIColor whiteColor].CGColor;
-    self.logInButton.layer.cornerRadius = 10;
-    self.logInButton.layer.borderWidth = 1.0f;
-    self.logInButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.twitterButton.layer.cornerRadius = 10;
+    self.twitterButton.layer.borderWidth = 1.0f;
+    self.twitterButton.layer.borderColor = [UIColor whiteColor].CGColor;
     self.goHomeButton.layer.cornerRadius = 10;
     self.goHomeButton.layer.borderWidth = 1.0f;
     self.goHomeButton.layer.borderColor = [UIColor whiteColor].CGColor;
-    self.logInButton.layer.cornerRadius = 10;
+    UIFont *segmentedFont = [UIFont fontWithName: @"AppleGothic" size: 12.0];
+    NSDictionary *attributes = [NSDictionary dictionaryWithObject:segmentedFont
+                                                           forKey:NSFontAttributeName];
+    [self.segmentedControl setTitleTextAttributes:attributes
+                                         forState:UIControlStateNormal];
+}
+
+- (UIStatusBarStyle) preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 #pragma mark - Twitter Authentication
@@ -131,14 +136,22 @@
 
 #pragma mark - Guest Login
 
-- (IBAction)onGoHomeButtonPressed:(id)sender {
+- (IBAction)remainAnonymousPressed:(id)sender {
     [self performSegueWithIdentifier:@"AuthToHome" sender:sender];
 }
 
 #pragma mark - Email & Password Login
 
-- (IBAction)onSignUpButtonPressed:(UIButton *)button {
-    if ([button.titleLabel.text isEqualToString:@"Sign up"]) {
+- (IBAction)onSegmentedControlTapped:(UISegmentedControl *)sender {
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
+        self.usernameField.hidden = NO;
+    } else {
+        self.usernameField.hidden = YES;
+    }
+}
+
+- (void)goPressed {
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
         [self.myRootRef createUser:self.emailField.text password:self.passwordField.text
           withValueCompletionBlock:^(NSError *error, NSDictionary *result) {
               if (error) {
@@ -147,7 +160,6 @@
                   NSString *uid = [result objectForKey:@"uid"];
                   [self savingUserData];
                   NSLog(@"Successfully created user account with uid: %@", uid);
-                  [self performSegueWithIdentifier:@"AuthToHome" sender:self];
               }
           }];
     } else {
@@ -160,15 +172,6 @@
           [self performSegueWithIdentifier:@"AuthToHome" sender:self];
       }
   }];
-    }
-}
-- (IBAction)onLoginButtonPressed:(UIButton *)button {
-    if ([button.titleLabel.text isEqualToString:@"Log in"]) {
-        [button setTitle:@"Sign up" forState:UIControlStateNormal];
-        [self.signUpButton setTitle:@"Log in" forState:UIControlStateNormal];
-    } else {
-        [button setTitle:@"Log in" forState:UIControlStateNormal];
-        [self.signUpButton setTitle:@"Sign up" forState:UIControlStateNormal];
     }
 }
 
@@ -199,6 +202,7 @@ withCompletionBlock:^(NSError *error, FAuthData *authData) {
         [[[self.myRootRef childByAppendingPath:@"users"]
           childByAppendingPath:authData.uid] setValue:newUser];
     }
+    [self performSegueWithIdentifier:@"AuthToHome" sender:self];
 }];
 }
 
@@ -211,6 +215,7 @@ withCompletionBlock:^(NSError *error, FAuthData *authData) {
         [nextResponder becomeFirstResponder];
     } else {
         [textField resignFirstResponder];
+        [self goPressed];
     }
     return NO;
 }

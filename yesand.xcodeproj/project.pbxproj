@@ -193,6 +193,8 @@
 		85014AA91B35AEAB00E190C8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				85963FA31B359D9C006E2868 /* AuthViewController.h */,
+				85963FA41B359D9C006E2868 /* AuthViewController.m */,
 				F9F8F1161B6B3E1300B14EC9 /* PageContentViewController.h */,
 				F9F8F1171B6B3E1300B14EC9 /* PageContentViewController.m */,
 				F9A9677B1B44FDFF00F74893 /* InfoViewController.h */,
@@ -209,8 +211,6 @@
 				BF4F90881B39F0D600A93680 /* AudienceViewController.m */,
 				BF4F908A1B39FA7900A93680 /* RatingViewController.h */,
 				BF4F908B1B39FA7900A93680 /* RatingViewController.m */,
-				85963FA31B359D9C006E2868 /* AuthViewController.h */,
-				85963FA41B359D9C006E2868 /* AuthViewController.m */,
 				85014AA61B35AE8E00E190C8 /* ProfileViewController.h */,
 				85014AA71B35AE8E00E190C8 /* ProfileViewController.m */,
 				BF4F90841B39E4EC00A93680 /* EditProfileViewController.h */,
