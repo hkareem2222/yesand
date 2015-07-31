@@ -313,9 +313,8 @@
 
 - (IBAction)onSignInButtonPressed:(UIBarButtonItem *)sender {
     [self performSegueWithIdentifier:@"HomeToAuth" sender:sender];
-    Firebase *ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com"];
-    [ref unauth];
 }
+
 #pragma mark - Alerts for Errors
 
 -(void)showAlert:(NSError *)error {

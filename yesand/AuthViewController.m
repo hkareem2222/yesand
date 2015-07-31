@@ -19,7 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *signUpButton;
 @property (weak, nonatomic) IBOutlet UIButton *logInButton;
 @property Firebase *myRootRef;
-@property (weak, nonatomic) IBOutlet UIButton *guestButton;
+@property (weak, nonatomic) IBOutlet UIButton *goHomeButton;
 @property TwitterAuthHelper *twitterAuthHelper;
 @end
 
@@ -37,31 +37,16 @@
     //views setup
     UIFont *newFont = [UIFont fontWithName:@"AppleGothic" size:14];
     [[UILabel appearance] setFont:newFont];
-
     self.signUpButton.layer.cornerRadius = 10;
     self.signUpButton.layer.borderWidth = 1.0f;
     self.signUpButton.layer.borderColor = [UIColor whiteColor].CGColor;
     self.logInButton.layer.cornerRadius = 10;
     self.logInButton.layer.borderWidth = 1.0f;
     self.logInButton.layer.borderColor = [UIColor whiteColor].CGColor;
-    self.guestButton.layer.cornerRadius = 10;
-    self.guestButton.layer.borderWidth = 1.0f;
-    self.guestButton.layer.borderColor = [UIColor whiteColor].CGColor;
-
-
-    //auth check on load
+    self.goHomeButton.layer.cornerRadius = 10;
+    self.goHomeButton.layer.borderWidth = 1.0f;
+    self.goHomeButton.layer.borderColor = [UIColor whiteColor].CGColor;
     self.logInButton.layer.cornerRadius = 10;
-    [self.myRootRef observeAuthEventWithBlock:^(FAuthData *authData) {
-        if ([authData.provider isEqualToString:@"anonymous"]) {
-            NSLog(@"anonymous user");
-        } else if (authData) {
-            [self performSegueWithIdentifier:@"AuthToHome" sender:self];
-            NSLog(@"%@", authData);
-        }
-        else {
-            NSLog(@"no user logged in");
-        }
-    }];
 }
 
 #pragma mark - Twitter Authentication
@@ -146,41 +131,8 @@
 
 #pragma mark - Guest Login
 
-- (IBAction)onGuestButtonPressed:(id)sender {
-    [self.myRootRef observeAuthEventWithBlock:^(FAuthData *authData) {
-        if (authData) {
-            NSLog(@"%@", authData);
-            [self performSegueWithIdentifier:@"AuthToHome" sender:sender];
-        } else {
-            NSLog(@"no user logged in (logging in anonymously");
-            [self.myRootRef authAnonymouslyWithCompletionBlock:^(NSError *error, FAuthData *authData) {
-                if (error) {
-                    [self showAlert:error];
-                } else {
-                    NSLog(@"anonymous login successful authData: %@", authData);
-                    NSDictionary *newUser = @{
-                                              @"provider": authData.provider,
-                                              @"isAvailable": @0,
-                                              @"updateAt": kFirebaseServerValueTimestamp,
-                                              @"character one": @"test",
-                                              @"character two": @"test",
-                                              @"topic name": @"test",
-                                              @"authuid": authData.uid,
-                                              @"username": authData.uid,
-                                              @"name": @" ",
-                                              @"tagline": @" ",
-                                              @"location": @" ",
-                                              @"website": @" ",
-                                              @"rating": @[@3,@3],
-                                              @"rating avg": @"3"
-                                              };
-                    [[[self.myRootRef childByAppendingPath:@"users"]
-                      childByAppendingPath:authData.uid] setValue:newUser];
-                    [self performSegueWithIdentifier:@"AuthToHome" sender:sender];
-                }
-            }];
-        }
-    }];
+- (IBAction)onGoHomeButtonPressed:(id)sender {
+    [self performSegueWithIdentifier:@"AuthToHome" sender:sender];
 }
 
 #pragma mark - Email & Password Login
