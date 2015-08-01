@@ -19,8 +19,8 @@
 {
     [super viewDidLoad];
     // Create the data model
-    self.pageTitles = @[@"Sign up here", @"Check out live and top scenes", @"Tap screen to laugh at performers scene", @"Enter waiting room to act out a scene"];
-    self.pageImages = @[@"login.png", @"home.png", @"livescene.png", @"splash.png"];
+    self.pageTitles = @[@"View live and top Yes And scenes", @"Enter waiting room to particpate in a scene", @"Perform an improv scene with other users", @"View live scenes as the audience. Tap to laugh at their lines", @"Search scenes to see how others acted out the same topic", @"View your past scenes to see your improvement over time", @"Find improv meetups in your area"];
+    self.pageImages = @[@"1_home_6.png", @"2_wait_6.png", @"3_chat_6.png", @"4_audience_6.png",@"5_search_6.png", @"6_profile_6.png", @"7_meetup_6.png"];
 
     // Create page view controller
     self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
