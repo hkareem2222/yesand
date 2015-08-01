@@ -126,6 +126,7 @@
             self.liveScenes = [NSMutableArray new];
             self.topScenes = [NSMutableArray new];
             self.sceneLocations = [NSMutableArray new];
+//            NSMutableArray *reports = [NSMutableArray new];
             for (FDataSnapshot *scene in snapshot.children) {
                 NSNumber *laughCount;
                 if (scene.value[@"laughs"] == nil) {

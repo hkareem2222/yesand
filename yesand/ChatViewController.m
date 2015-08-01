@@ -23,6 +23,7 @@
     HomeViewController *homeVC = (HomeViewController *)navController.viewControllers.firstObject;
     self.latitude = homeVC.userLatitide;
     self.longitude = homeVC.userLongitude;
+    self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
 
     //views setup
     self.userSetupview.layer.cornerRadius = 5;
@@ -59,6 +60,7 @@
 
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardWillShowNotification object:nil];
+    [center addObserver:self selector:@selector(keyboardOffScreen:) name:UIKeyboardWillHideNotification object:nil];
     //---------------------------------endsHere
 }
 
@@ -366,12 +368,10 @@
     self.textFieldBottomLayout.constant = keyboardFrame.size.height; //- 50;
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+-(void)keyboardOffScreen:(NSNotification *)notification
 {
-    [self.messageTextField resignFirstResponder];
     self.textFieldBottomLayout.constant = 0;
     NSDictionary *conversation = @{
-                                   @"messages": self.cloudMessages,
                                    self.currentUserCharacter.text: @0
                                    };
     [self.sceneIDRef updateChildValues:conversation];
@@ -467,8 +467,12 @@
         [self.sceneIDRef updateChildValues:conversation];
     }
     NSUInteger numoflines = textView.contentSize.height/textView.font.lineHeight;
-    if (numoflines >= 2) {
-        self.heightConstraint.constant = 60;
+    if (numoflines >= 3) {
+        self.heightConstraint.constant = 74;
+    } else if (numoflines == 2) {
+        self.heightConstraint.constant = 62;
+        NSRange top = NSMakeRange(textView.text.length -1, 0);
+        [textView scrollRangeToVisible:top];
     } else if (numoflines == 1) {
         self.heightConstraint.constant = 50;
     }

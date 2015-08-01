@@ -2187,8 +2187,8 @@
         <image name="twitterlogincustom" width="912" height="159"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yb9-Qh-uOw"/>
-        <segue reference="jPd-zO-bd8"/>
+        <segue reference="hkv-kI-r5j"/>
         <segue reference="ZYi-VD-sef"/>
+        <segue reference="jPd-zO-bd8"/>
     </inferredMetricsTieBreakers>
 </document>
