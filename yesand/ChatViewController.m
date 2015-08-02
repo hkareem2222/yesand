@@ -251,7 +251,7 @@
     self.endSceneBarButton.enabled = YES;
     self.cancelBarButton.title = @"";
     self.cancelBarButton.enabled = NO;
-//    self.messageTextField.placeholder = self.currentUserCharacter.text;
+    self.messageTextField.text = self.currentUserCharacter.text;
     [self.usersRef removeAllObservers];
     [self queryConversation];
     Firebase *otherUserRef = [[Firebase alloc] initWithUrl: [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@",self.otherAuthuid]];
@@ -451,8 +451,11 @@
 - (IBAction)onSendButtonTapped:(id)sender {
     if (![self.messageTextField.text isEqualToString:@""] && self.messageTextField.text != nil) {
         [self sendMessage];
+//        self.messageTextField.text = self.currentUserCharacter.text;
     }
 }
+
+#pragma mark - Text View
 
 -(void)textViewDidChange:(UITextView *)textView {
     if (![textView.text isEqualToString:@""]) {
@@ -476,6 +479,10 @@
     } else if (numoflines == 1) {
         self.heightConstraint.constant = 50;
     }
+}
+
+-(void)textViewDidBeginEditing:(UITextView *)textView {
+    textView.text = @"";
 }
 
 #pragma mark - Disappearing

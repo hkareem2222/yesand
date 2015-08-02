@@ -23,6 +23,7 @@
 @property Firebase *ref;
 @property NSString *selectedScene;
 @property Firebase *currentUserRef;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @end
 
 @implementation ProfileViewController
@@ -32,6 +33,7 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated {
+    [self.activityIndicator startAnimating];
     NSDictionary *attrDict = @{
                                NSFontAttributeName : [UIFont fontWithName:@"AppleGothic" size:21.0],
                                NSForegroundColorAttributeName : [UIColor whiteColor]
@@ -84,9 +86,11 @@
                     }
                 }
                 [self.tableView reloadData];
+                [self.activityIndicator stopAnimating];
             }
         } withCancelBlock:^(NSError *error) {
             NSLog(@"%@", error.description);
+            [self.activityIndicator stopAnimating];
         }];
     }
 }

@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet UIButton *twitterButton;
 @property TwitterAuthHelper *twitterAuthHelper;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @end
 
 @implementation AuthViewController
@@ -88,15 +89,18 @@
     }
 }
 - (void)authenticateWithTwitterAccount:(ACAccount *)account {
+    [self.activityIndicator startAnimating];
     [self.twitterAuthHelper authenticateAccount:account
                                    withCallback:^(NSError *error, FAuthData *authData) {
                                        if (error) {
                                            [self showAlert:error];
+                                           [self.activityIndicator stopAnimating];
                                        } else {
                                            // User successfully logged in
                                            NSLog(@"Logged in! %@", authData);
                                            [self saveTwitterUserData:authData];
                                            [self performSegueWithIdentifier:@"AuthToHome" sender:self];
+                                           [self.activityIndicator stopAnimating];
                                        }
                                    }];
 }

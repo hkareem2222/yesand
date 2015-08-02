@@ -30,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *signInBarButton;
 @property NSDictionary *sceneDic;
 @property NSMutableArray *sceneLocations;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @end
 
 @implementation HomeViewController
@@ -114,6 +115,7 @@
 
 -(void)viewDidAppear:(BOOL)animated {
     //listening for Scenes
+    [self.activityIndicator startAnimating];
     [self sceneListener];
 }
 
@@ -161,11 +163,13 @@
                     }
                 }
             }
+            [self.activityIndicator stopAnimating];
             [self addMapAnnotations];
             [self sortByLaughs:self.topScenes andWith:self.liveScenes];
         }
     } withCancelBlock:^(NSError *error) {
         NSLog(@"%@", error.description);
+        [self.activityIndicator stopAnimating];
     }];
 }
 

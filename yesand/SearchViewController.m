@@ -23,6 +23,7 @@
 @property NSDictionary *sceneDic;
 @property NSString *selectedScene;
 @property BOOL searched;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -43,6 +44,7 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated {
+    [self.activityIndicator startAnimating];
     [self sceneListener];
 }
 
@@ -72,9 +74,11 @@
             self.sortedScenes = [[self.loadedScenes reverseObjectEnumerator] allObjects];
 //            self.scenes = [NSMutableArray arrayWithArray:self.sortedScenes];
             [self.tableView reloadData];
+            [self.activityIndicator stopAnimating];
         }
     } withCancelBlock:^(NSError *error) {
         NSLog(@"%@", error.description);
+        [self.activityIndicator stopAnimating];
     }];
 }
 

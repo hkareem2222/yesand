@@ -168,8 +168,8 @@
     MKPinAnnotationView *pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:nil];
     if (![annotation isEqual:mapView.userLocation]) {
         pin.image = [UIImage imageNamed:@"meetup.png"];
-        pin.canShowCallout = YES;
-        pin.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        pin.canShowCallout = NO;
+//        pin.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         return pin;
 
     }
@@ -190,16 +190,16 @@
     [self.mapView showAnnotations:annotations animated:YES];
 }
 
--(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-    NSInteger indexInt = 0;
-    for (NSDictionary *dictionary in self.venueLocations) {
-        if ([[dictionary objectForKey:@"name"] isEqualToString:@"callout pin title"]) {
-            indexInt = [self.venueLocations indexOfObjectIdenticalTo:[dictionary objectForKey:@"name"]];
-        }
-    }
-    self.detailEvent = self.venueLocations[indexInt];
-    [self performSegueWithIdentifier:@"EventsToDetailEvent" sender:self];
-}
+//-(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+//    NSInteger indexInt = 0;
+//    for (NSDictionary *dictionary in self.venueLocations) {
+//        if ([[dictionary objectForKey:@"name"] isEqualToString:@"callout pin title"]) {
+//            indexInt = [self.venueLocations indexOfObjectIdenticalTo:[dictionary objectForKey:@"name"]];
+//        }
+//    }
+//    self.detailEvent = self.venueLocations[indexInt];
+//    [self performSegueWithIdentifier:@"EventsToDetailEvent" sender:self];
+//}
 
 #pragma mark - Segue
 
