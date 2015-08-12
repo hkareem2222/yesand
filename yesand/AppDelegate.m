@@ -20,19 +20,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [Fabric with:@[CrashlyticsKit]];
     [application setStatusBarStyle:UIStatusBarStyleLightContent];
-    NSShadow *shadow = [[NSShadow alloc] init];
-//    shadow.shadowOffset = CGSizeMake(0.0, 0.0);
-//    shadow.shadowColor = [UIColor lightGrayColor];
     UIFont *newFont = [UIFont fontWithName:@"AppleGothic" size:12];
+    [[UIBarButtonItem appearance] setTitleTextAttributes:
+    @{NSForegroundColorAttributeName:[UIColor whiteColor],
+      NSFontAttributeName:newFont
+      }
+                                                forState:UIControlStateNormal];
 
-    [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil]
-     setTitleTextAttributes:
-     @{NSForegroundColorAttributeName:[UIColor whiteColor],
-       NSShadowAttributeName:shadow,
-       NSFontAttributeName:newFont
-       }
-     forState:UIControlStateNormal];
-//        [self.window.rootViewController performSegueWithIdentifier:@"AuthToHome" sender:self];
     UIImage *whiteUnderline = [UIImage imageNamed:@"WhiteLine"];
     [[UITabBar appearance] setSelectionIndicatorImage:whiteUnderline];
     [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor] }
