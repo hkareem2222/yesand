@@ -58,10 +58,10 @@
     [self.rsvpWebView setHidden:YES];
     [sender setTitle:@""];
 }
-- (IBAction)onNumberOfUsersAttendingPressed:(id)sender {
+
+//- (IBAction)onNumberOfUsersAttendingPressed:(id)sender {
     //show number of Yes, And Users attending the event.
     //for now it's always 0 until model is setup to work
-    
-}
+//}
 
 @end
