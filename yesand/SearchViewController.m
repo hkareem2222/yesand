@@ -61,7 +61,8 @@
                     laughCount = scene.value[@"laughs"];
                 }
                 if ([scene.value[@"isLive"] isEqualToNumber:@0]) {
-                    if (scene.key != nil && scene.value[@"topicName"] != nil) {
+                    NSMutableArray *messageArray = scene.value[@"messages"];
+                    if (scene.key != nil && scene.value[@"topicName"] != nil && messageArray.count >= 5) {
                         NSDictionary *sceneDic = @{
                                                    @"sceneID": scene.key,
                                                    @"topicName": scene.value[@"topicName"],

@@ -90,6 +90,7 @@
                           options:NSKeyValueObservingOptionNew
      | NSKeyValueObservingOptionOld
                           context:nil];
+    [self performSelector:@selector(userHasBeenWaiting) withObject:nil afterDelay:20.0];
 }
 
 #pragma mark - Animation with image
@@ -133,6 +134,11 @@
                               };
     [user updateChildValues:userDic];
     [self findNewUsers];
+}
+
+-(void)userHasBeenWaiting {
+    self.topicLabel.text = @"It appears no one is available";
+    self.countdownLabel.text = @"Sorry! It's us, not you.";
 }
 
 #pragma mark - User Setup --- Transition To Chat
@@ -180,6 +186,7 @@
 
     if (self.indexOfCurrentUser % 2 == 0) {
         if (self.indexOfCurrentUser + 1 < self.availableUsers.count) {
+            [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(userHasBeenWaiting) object:nil];
             self.otherUser = self.availableUsers[self.indexOfCurrentUser + 1];
             self.otherUsername = [self.otherUser objectForKey:@"username"];
             self.otherUserLabel.text = [self.otherUser objectForKey:@"username"];
@@ -201,6 +208,7 @@
                 self.ifCalled = YES;
             }
         } else {
+            [self performSelector:@selector(userHasBeenWaiting) withObject:nil afterDelay:20.0];
             self.otherUserLabel.text = @"Finding";
             self.currentUserCharacter.text = @"Character";
             self.otherUserCharacter.text = @"Character";
@@ -213,6 +221,7 @@
             self.countdown = 10;
         }
     } else {
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(userHasBeenWaiting) object:nil];
         self.otherUser = self.availableUsers[self.indexOfCurrentUser - 1];
         self.otherUsername = [self.otherUser objectForKey:@"username"];
         self.otherAuthuid = [self.otherUser objectForKey:@"authuid"];
