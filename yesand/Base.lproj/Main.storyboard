@@ -978,7 +978,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="comedy.com" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7v-le-Emz">
-                                <rect key="frame" x="140" y="184" width="66" height="15"/>
+                                <rect key="frame" x="140" y="184" width="65.5" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
                                 <color key="textColor" red="0.48812342171717171" green="0.098981163021686649" blue="0.08992936575762224" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1029,31 +1029,35 @@
                             <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uus-gh-Tpy">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please sign up to activate this feature." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kei-hh-nXQ">
-                                        <rect key="frame" x="8" y="229" width="584" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign In To Activate This Feature" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kei-hh-nXQ">
+                                        <rect key="frame" x="0.0" y="221" width="600" height="45"/>
+                                        <color key="backgroundColor" red="1" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="Aen-o8-R6h"/>
+                                            <constraint firstAttribute="height" constant="45" id="Aye-XT-7ge"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="a17-sv-Gzh">
+                                        <rect key="frame" x="281.5" y="225" width="37" height="37"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="37" id="A1P-Pu-Opt"/>
+                                            <constraint firstAttribute="width" constant="37" id="W2s-5v-bdN"/>
+                                        </constraints>
+                                        <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="centerY" secondItem="kei-hh-nXQ" secondAttribute="centerY" id="Kkr-Dh-gHF"/>
-                                    <constraint firstAttribute="trailing" secondItem="kei-hh-nXQ" secondAttribute="trailing" constant="8" id="OYv-J7-yWV"/>
-                                    <constraint firstItem="kei-hh-nXQ" firstAttribute="leading" secondItem="Uus-gh-Tpy" secondAttribute="leading" constant="8" id="TyW-bC-RBT"/>
+                                    <constraint firstItem="kei-hh-nXQ" firstAttribute="leading" secondItem="Uus-gh-Tpy" secondAttribute="leading" id="G1Z-lE-pLr"/>
+                                    <constraint firstAttribute="centerX" secondItem="kei-hh-nXQ" secondAttribute="centerX" id="Mxb-8v-0a4"/>
+                                    <constraint firstAttribute="centerY" secondItem="kei-hh-nXQ" secondAttribute="centerY" id="OWJ-00-G4j"/>
+                                    <constraint firstAttribute="centerY" secondItem="a17-sv-Gzh" secondAttribute="centerY" id="QxW-nI-rZX"/>
+                                    <constraint firstAttribute="trailing" secondItem="kei-hh-nXQ" secondAttribute="trailing" id="cec-Xv-Gqq"/>
+                                    <constraint firstAttribute="centerX" secondItem="a17-sv-Gzh" secondAttribute="centerX" id="tkl-8Q-Khn"/>
                                 </constraints>
                             </view>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="a17-sv-Gzh">
-                                <rect key="frame" x="282" y="282" width="37" height="37"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="37" id="DAU-IF-NPQ"/>
-                                    <constraint firstAttribute="height" constant="37" id="yif-B4-uP8"/>
-                                </constraints>
-                                <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -1061,12 +1065,10 @@
                             <constraint firstItem="Cwi-MO-jdh" firstAttribute="top" secondItem="Igr-Qk-j9T" secondAttribute="bottom" id="2Lt-yc-rj5"/>
                             <constraint firstItem="tlD-WR-8d0" firstAttribute="leading" secondItem="eHi-d4-Xll" secondAttribute="trailing" constant="30" id="5ca-En-5sY"/>
                             <constraint firstItem="roW-jg-Mfv" firstAttribute="leading" secondItem="eHi-d4-Xll" secondAttribute="trailing" constant="30" id="8vq-i0-1JA"/>
-                            <constraint firstAttribute="centerX" secondItem="a17-sv-Gzh" secondAttribute="centerX" id="CfL-XG-qf7"/>
                             <constraint firstItem="Igr-Qk-j9T" firstAttribute="leading" secondItem="5MU-Ba-TqL" secondAttribute="leading" id="H8b-qK-ZFe"/>
                             <constraint firstAttribute="trailing" secondItem="Igr-Qk-j9T" secondAttribute="trailing" id="I4E-XM-sFt"/>
                             <constraint firstItem="eHi-d4-Xll" firstAttribute="top" secondItem="XX8-Az-woW" secondAttribute="bottom" constant="25" id="Jbc-SN-sEF"/>
                             <constraint firstItem="P7v-le-Emz" firstAttribute="top" secondItem="kGD-uh-Z3K" secondAttribute="bottom" constant="10" id="Mnz-qM-XBF"/>
-                            <constraint firstAttribute="centerY" secondItem="a17-sv-Gzh" secondAttribute="centerY" id="Z4j-9x-ajE"/>
                             <constraint firstItem="P7v-le-Emz" firstAttribute="leading" secondItem="eHi-d4-Xll" secondAttribute="trailing" constant="30" id="aQh-oC-Yyl"/>
                             <constraint firstItem="eHi-d4-Xll" firstAttribute="leading" secondItem="5MU-Ba-TqL" secondAttribute="leading" constant="25" id="eT5-hw-deC"/>
                             <constraint firstItem="Uus-gh-Tpy" firstAttribute="top" secondItem="XX8-Az-woW" secondAttribute="bottom" id="gyC-NZ-0Qi"/>
@@ -1080,7 +1082,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="K0h-w6-sAo">
-                        <barButtonItem key="rightBarButtonItem" image="settingsicon" id="6k4-B0-AX7">
+                        <barButtonItem key="rightBarButtonItem" id="6k4-B0-AX7">
                             <connections>
                                 <action selector="onSettingsPressed:" destination="DSd-uC-qSp" id="msM-pW-7P4"/>
                             </connections>
@@ -2021,6 +2023,7 @@
                         <outlet property="overlayViewLabel" destination="nr4-IP-R3m" id="0ot-16-y0b"/>
                         <outlet property="tableView" destination="SLb-Cq-8gE" id="IrE-I2-Ms3"/>
                         <segue destination="lrO-Dr-IZb" kind="show" identifier="EventsToDetailEvent" id="eag-sy-Z0X"/>
+                        <segue destination="V5t-P2-765" kind="presentation" identifier="EventsToAuth" modalPresentationStyle="currentContext" id="tVv-WH-Gfw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="etV-Mj-jzd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2241,12 +2244,11 @@
         <image name="helpicon" width="29" height="29"/>
         <image name="laughsicon" width="20" height="20"/>
         <image name="logo-transparent" width="169" height="163"/>
-        <image name="settingsicon" width="23" height="23"/>
         <image name="twitterlogincustom" width="912" height="159"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="hkv-kI-r5j"/>
-        <segue reference="ZYi-VD-sef"/>
-        <segue reference="gdE-58-5YL"/>
+        <segue reference="tVv-WH-Gfw"/>
+        <segue reference="MjL-Mh-mnN"/>
     </inferredMetricsTieBreakers>
 </document>

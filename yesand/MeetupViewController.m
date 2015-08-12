@@ -112,7 +112,7 @@
     Firebase *ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com"];
     if ([ref.authData.provider isEqualToString:@"anonymous"]) {
         self.overlayTableView.alpha = 0.75;
-        self.overlayViewLabel.text = @"Please sign up to activate this feature.";
+        self.overlayViewLabel.text = @"Sign in to activate this feature";
         self.overlayViewLabel.alpha = 1.0;
         //create button to Sign up that segues to AuthVC
     }

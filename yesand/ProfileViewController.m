@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property NSMutableArray *scenes;
 @property Firebase *ref;
+@property BOOL isEditable;
 @property NSString *selectedScene;
 @property Firebase *currentUserRef;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
@@ -46,8 +47,6 @@
 
     self.ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com"];
     if (self.ref.authData) {
-        self.editProfileBarButton.image = [UIImage imageNamed:@"settingsicon.png"];
-
         NSString *currentUserString = [NSString stringWithFormat:@"https://yesand.firebaseio.com/users/%@", self.ref.authData.uid];
         self.currentUserRef = [[Firebase alloc] initWithUrl:currentUserString];
         [self.currentUserRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
@@ -55,7 +54,11 @@
                 if ([self.ref.authData.provider isEqualToString:@"anonymous"]) {
                     self.navigationItem.title = @"anonymous";
                     self.paywallView.alpha = 0.75;
+                    [self.editProfileBarButton setTitle:@"Sign In"];
+                    self.isEditable = NO;
                 } else {
+                    self.editProfileBarButton.image = [UIImage imageNamed:@"settingsicon.png"];
+                    self.isEditable = YES;
                     self.profileHeadingLabel.text = snapshot.value[@"name"];
                     self.profileSubheadingLabel.text = snapshot.value[@"tagline"];
                     self.profileLinkLabel.text = snapshot.value[@"website"];
@@ -143,10 +146,10 @@
 }
 
 - (IBAction)onSettingsPressed:(UIBarButtonItem *)sender {
-    if ([sender.title isEqualToString:@"Sign up!"]) {
-        [self performSegueWithIdentifier:@"UnwindToAuthFromProfile" sender:sender];
-    } else {
+    if (self.isEditable) {
         [self performSegueWithIdentifier:@"ProfileToEdit" sender:sender];
+    } else {
+        [self performSegueWithIdentifier:@"UnwindToAuthFromProfile" sender:sender];
     }
 }
 
