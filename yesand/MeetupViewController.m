@@ -25,6 +25,7 @@
 @property NSDictionary *detailEvent;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UILabel *overlayViewLabel;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *signInBarButton;
 @end
 
 @implementation MeetupViewController
@@ -40,6 +41,8 @@
     //nav controller view
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     self.navigationItem.title = @"Events";
+    self.signInBarButton.title = @"Sign In";
+    self.signInBarButton.enabled = YES;
 
     //-------map stuff
     self.locationManager = [[CLLocationManager alloc] init];
@@ -107,8 +110,19 @@
         self.overlayTableView.alpha = 0.75;
         self.overlayViewLabel.text = @"Sign in to activate this feature";
         self.overlayViewLabel.alpha = 1.0;
-        //create button to Sign up that segues to AuthVC
+        self.signInBarButton.title = @"Sign In";
+        self.signInBarButton.enabled = YES;
+    } else {
+        self.overlayTableView.alpha = 0.0;
+        self.overlayViewLabel.text = @"Sign in to activate this feature";
+        self.overlayViewLabel.alpha = 0.0;
+        self.signInBarButton.title = @"";
+        self.signInBarButton.enabled = NO;
     }
+}
+
+- (IBAction)onSignInPressed:(UIBarButtonItem *)sender {
+    [self performSegueWithIdentifier:@"EventsToAuth" sender:sender];
 }
 
 #pragma mark - Table View
@@ -197,8 +211,10 @@
 #pragma mark - Segue
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    DetailEventViewController *detailVC = segue.destinationViewController;
-    detailVC.eventDic = self.detailEvent;
+    if ([segue.identifier isEqualToString:@"EventsToDetailEvent"]) {
+        DetailEventViewController *detailVC = segue.destinationViewController;
+        detailVC.eventDic = self.detailEvent;
+    }
 }
 
 @end

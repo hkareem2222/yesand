@@ -13,6 +13,7 @@
 @interface ProfileViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *profileHeadingLabel;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editProfileBarButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *signInBarButton;
 @property (weak, nonatomic) IBOutlet UILabel *profileSubheadingLabel;
 @property (weak, nonatomic) IBOutlet UILabel *profileLinkLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
@@ -32,6 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    self.editProfileBarButton.image = [UIImage imageNamed:@"settingsicon.png"];
 }
 
 
@@ -45,12 +47,17 @@
         [self.currentUserRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
             if (![snapshot.value isEqual:[NSNull null]] && snapshot.value != nil) {
                 if ([self.ref.authData.provider isEqualToString:@"anonymous"]) {
-                    self.navigationItem.title = @"anonymous";
                     self.paywallView.alpha = 0.75;
-                    [self.editProfileBarButton setTitle:@"Sign In"];
+                    self.editProfileBarButton.enabled = NO;
+                    self.editProfileBarButton.image = nil;
+                    self.signInBarButton.enabled = YES;
+                    self.signInBarButton.title = @"Sign In";
                     self.isEditable = NO;
                 } else {
+                    self.editProfileBarButton.enabled = YES;
                     self.editProfileBarButton.image = [UIImage imageNamed:@"settingsicon.png"];
+                    self.signInBarButton.enabled = NO;
+                    self.signInBarButton.title = @"";
                     self.isEditable = YES;
                     self.profileHeadingLabel.text = snapshot.value[@"name"];
                     self.profileSubheadingLabel.text = snapshot.value[@"tagline"];
@@ -137,13 +144,12 @@
         savedVC.sceneID = self.selectedScene;
     }
 }
+- (IBAction)onSignInPressed:(UIBarButtonItem *)sender {
+    [self performSegueWithIdentifier:@"ProfileToAuth" sender:sender];
+}
 
 - (IBAction)onSettingsPressed:(UIBarButtonItem *)sender {
-    if (self.isEditable) {
-        [self performSegueWithIdentifier:@"ProfileToEdit" sender:sender];
-    } else {
-        [self performSegueWithIdentifier:@"UnwindToAuthFromProfile" sender:sender];
-    }
+    [self performSegueWithIdentifier:@"ProfileToEdit" sender:sender];
 }
 
 -(IBAction)unwindToProfile:(UIStoryboardSegue *)segue {

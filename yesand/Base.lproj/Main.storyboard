@@ -912,6 +912,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="centerY" secondItem="XDE-dH-PCC" secondAttribute="centerY" id="2lb-fR-Soq"/>
                                     <constraint firstAttribute="height" constant="169" id="ave-gr-Y2a"/>
@@ -1108,6 +1109,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="K0h-w6-sAo">
+                        <barButtonItem key="leftBarButtonItem" id="NbZ-MF-T0H">
+                            <connections>
+                                <action selector="onSignInPressed:" destination="DSd-uC-qSp" id="ooa-tO-15u"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="6k4-B0-AX7">
                             <connections>
                                 <action selector="onSettingsPressed:" destination="DSd-uC-qSp" id="msM-pW-7P4"/>
@@ -1125,14 +1131,14 @@
                         <outlet property="profileImageView" destination="eHi-d4-Xll" id="HGS-dL-LCz"/>
                         <outlet property="profileLinkLabel" destination="P7v-le-Emz" id="55B-Rf-iit"/>
                         <outlet property="profileSubheadingLabel" destination="tlD-WR-8d0" id="TPg-GN-M8h"/>
+                        <outlet property="signInBarButton" destination="NbZ-MF-T0H" id="9iP-oY-ap7"/>
                         <outlet property="tableView" destination="Igr-Qk-j9T" id="hc9-Yd-1LU"/>
                         <segue destination="148-S7-Huy" kind="presentation" identifier="ProfileToEdit" id="OrS-Ky-3T9"/>
                         <segue destination="769-2g-XYm" kind="show" identifier="ProfileToSavedScene" id="MjL-Mh-mnN"/>
-                        <segue destination="tkB-tk-6iZ" kind="unwind" identifier="UnwindToAuthFromProfile" unwindAction="unwindToAuth:" id="vnQ-5L-u50"/>
+                        <segue destination="V5t-P2-765" kind="showDetail" identifier="ProfileToAuth" id="meH-rq-qXM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mpt-su-ezl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="tkB-tk-6iZ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3294" y="52"/>
         </scene>
@@ -2039,7 +2045,13 @@
                             <constraint firstItem="P7E-d9-gdk" firstAttribute="leading" secondItem="Yn0-6r-nEx" secondAttribute="leading" id="yCi-3I-aj1"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Events" id="FqI-jk-ebR"/>
+                    <navigationItem key="navigationItem" title="Events" id="FqI-jk-ebR">
+                        <barButtonItem key="leftBarButtonItem" id="VNn-ac-oel">
+                            <connections>
+                                <action selector="onSignInPressed:" destination="7Ei-0T-Kqn" id="AtR-Th-Fc2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -2047,9 +2059,10 @@
                         <outlet property="mapView" destination="x3X-7X-9m7" id="VYW-fe-22h"/>
                         <outlet property="overlayTableView" destination="ait-sY-Wrb" id="pAD-lD-KOB"/>
                         <outlet property="overlayViewLabel" destination="nr4-IP-R3m" id="0ot-16-y0b"/>
+                        <outlet property="signInBarButton" destination="VNn-ac-oel" id="2mU-G3-Pcs"/>
                         <outlet property="tableView" destination="SLb-Cq-8gE" id="IrE-I2-Ms3"/>
                         <segue destination="lrO-Dr-IZb" kind="show" identifier="EventsToDetailEvent" id="eag-sy-Z0X"/>
-                        <segue destination="V5t-P2-765" kind="presentation" identifier="EventsToAuth" modalPresentationStyle="currentContext" id="tVv-WH-Gfw"/>
+                        <segue destination="V5t-P2-765" kind="showDetail" identifier="EventsToAuth" id="tVv-WH-Gfw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="etV-Mj-jzd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2273,7 +2286,7 @@
         <image name="twitterlogincustom" width="912" height="159"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yb9-Qh-uOw"/>
+        <segue reference="hkv-kI-r5j"/>
         <segue reference="gdE-58-5YL"/>
         <segue reference="ZYi-VD-sef"/>
     </inferredMetricsTieBreakers>
