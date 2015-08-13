@@ -20,14 +20,23 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [Fabric with:@[CrashlyticsKit]];
     [application setStatusBarStyle:UIStatusBarStyleLightContent];
-    UIFont *newFont = [UIFont fontWithName:@"AppleGothic" size:12];
-    [[UIBarButtonItem appearance] setTitleTextAttributes:
-    @{NSForegroundColorAttributeName:[UIColor whiteColor],
-      NSFontAttributeName:newFont
-      }
+    UIFont *newFont = [UIFont fontWithName:@"AppleGothic" size:14];
+    [[UILabel appearance] setFont:newFont];
+
+    NSDictionary *barAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"AppleGothic" size:12],
+                                    NSForegroundColorAttributeName:[UIColor whiteColor]
+                                    };
+    [[UIBarButtonItem appearance] setTitleTextAttributes: barAttributes
                                                 forState:UIControlStateNormal];
 
     UIImage *whiteUnderline = [UIImage imageNamed:@"WhiteLine"];
+    NSDictionary *attrDict = @{
+                               NSFontAttributeName : [UIFont fontWithName:@"AppleGothic" size:21.0],
+                               NSForegroundColorAttributeName : [UIColor whiteColor],
+                               };
+    [[UINavigationBar appearance] setTitleTextAttributes:attrDict];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0]];
+
     [[UITabBar appearance] setSelectionIndicatorImage:whiteUnderline];
     [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor] }
                                              forState:UIControlStateNormal];

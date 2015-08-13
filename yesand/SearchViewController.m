@@ -31,14 +31,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     self.navigationItem.title = @"Yes And Scenes";
-    NSDictionary *attrDict = @{
-                               NSFontAttributeName : [UIFont fontWithName:@"AppleGothic" size:21.0],
-                               NSForegroundColorAttributeName : [UIColor whiteColor]
-                               };
-    self.navigationController.navigationBar.titleTextAttributes = attrDict;
     self.searchBar.delegate = self;
     self.searched = NO;
 }

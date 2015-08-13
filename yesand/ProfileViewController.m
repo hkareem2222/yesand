@@ -31,19 +31,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 }
+
 
 -(void)viewDidAppear:(BOOL)animated {
     [self.activityIndicator startAnimating];
-    NSDictionary *attrDict = @{
-                               NSFontAttributeName : [UIFont fontWithName:@"AppleGothic" size:21.0],
-                               NSForegroundColorAttributeName : [UIColor whiteColor]
-                               };
-    self.navigationController.navigationBar.titleTextAttributes = attrDict;
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
-
-    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 
     self.ref = [[Firebase alloc] initWithUrl: @"https://yesand.firebaseio.com"];
     if (self.ref.authData) {
