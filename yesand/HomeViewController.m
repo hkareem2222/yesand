@@ -31,6 +31,7 @@
 @property NSDictionary *sceneDic;
 @property NSMutableArray *sceneLocations;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIView *noLiveScenesView;
 @end
 
 @implementation HomeViewController
@@ -240,8 +241,14 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.segmentedControl.selectedSegmentIndex == 0) {
+        if (self.liveScenes.count == 0) {
+            self.noLiveScenesView.hidden = NO;
+        } else {
+            self.noLiveScenesView.hidden = YES;
+        }
         return self.liveScenes.count;
     } else {
+        self.noLiveScenesView.hidden = YES;
         return self.topScenes.count;
     }
 }

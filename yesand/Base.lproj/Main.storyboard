@@ -897,21 +897,46 @@
                                 <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Live Scenes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1YO-Q2-Uid">
-                                <rect key="frame" x="5" y="69" width="93" height="21"/>
+                                <rect key="frame" x="5" y="69" width="93" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iL1-rO-nPe" userLabel="NoScenesView">
+                                <rect key="frame" x="0.0" y="264" width="600" height="287"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There aren't any live scenes at the moment" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDE-dH-PCC">
+                                        <rect key="frame" x="136" y="133.5" width="329.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="XDE-dH-PCC" secondAttribute="centerY" id="2lb-fR-Soq"/>
+                                    <constraint firstAttribute="height" constant="169" id="ave-gr-Y2a"/>
+                                    <constraint firstAttribute="centerX" secondItem="XDE-dH-PCC" secondAttribute="centerX" id="nlz-r2-0st"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="ave-gr-Y2a"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="iL1-rO-nPe" secondAttribute="trailing" id="14X-cU-QUg"/>
                             <constraint firstItem="max-fw-xhT" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="1SK-Qd-jQ0"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="iL1-rO-nPe" secondAttribute="bottom" id="1mA-uM-Weh"/>
+                            <constraint firstItem="iL1-rO-nPe" firstAttribute="top" secondItem="T4w-qQ-IcL" secondAttribute="bottom" id="4K6-o9-DoK"/>
                             <constraint firstAttribute="centerX" secondItem="5jx-81-kRJ" secondAttribute="centerX" id="6a0-uV-wXS"/>
                             <constraint firstItem="1YO-Q2-Uid" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="5" id="MSQ-1W-eoC"/>
                             <constraint firstItem="T4w-qQ-IcL" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="OkY-8n-1Ao"/>
                             <constraint firstItem="1YO-Q2-Uid" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="5" id="SVX-Wr-hHR"/>
                             <constraint firstAttribute="trailing" secondItem="T4w-qQ-IcL" secondAttribute="trailing" id="WvQ-uw-hVX"/>
                             <constraint firstAttribute="centerY" secondItem="5jx-81-kRJ" secondAttribute="centerY" id="dLe-aB-mcl"/>
+                            <constraint firstItem="iL1-rO-nPe" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="dZI-YU-bBz"/>
                             <constraint firstAttribute="trailing" secondItem="max-fw-xhT" secondAttribute="trailing" id="eVV-FB-j1o"/>
                             <constraint firstItem="IQr-Iz-FX1" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="hD8-Hi-PaY"/>
                             <constraint firstAttribute="trailing" secondItem="IQr-Iz-FX1" secondAttribute="trailing" id="jxp-fM-4dE"/>
@@ -939,6 +964,7 @@
                         <outlet property="activityIndicator" destination="5jx-81-kRJ" id="U9y-iU-8Ff"/>
                         <outlet property="helpBarButton" destination="epH-eu-1rn" id="LXb-he-Qd5"/>
                         <outlet property="mapView" destination="max-fw-xhT" id="3mO-l0-wU4"/>
+                        <outlet property="noLiveScenesView" destination="iL1-rO-nPe" id="jrz-cb-yAx"/>
                         <outlet property="segmentedControl" destination="QTZ-cM-tnE" id="gNz-JZ-XrK"/>
                         <outlet property="signInBarButton" destination="Hct-Rg-gKn" id="A5O-ab-hI5"/>
                         <outlet property="tableView" destination="IQr-Iz-FX1" id="ykq-ta-i9A"/>
@@ -2243,12 +2269,12 @@
         <image name="flagIcon" width="266" height="311"/>
         <image name="helpicon" width="29" height="29"/>
         <image name="laughsicon" width="20" height="20"/>
-        <image name="logo_white" width="1260" height="1260"/>
+        <image name="logo_white" width="420" height="420"/>
         <image name="twitterlogincustom" width="912" height="159"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="yb9-Qh-uOw"/>
-        <segue reference="tVv-WH-Gfw"/>
-        <segue reference="MjL-Mh-mnN"/>
+        <segue reference="gdE-58-5YL"/>
+        <segue reference="ZYi-VD-sef"/>
     </inferredMetricsTieBreakers>
 </document>
