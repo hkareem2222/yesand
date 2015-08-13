@@ -29,17 +29,6 @@
     self.taglineField.delegate = self;
     self.locationField.delegate = self;
     self.websiteField.delegate = self;
-
-    self.editNavBar.barTintColor = [UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
-
-    self.editNavBar.tintColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
-    
-    NSDictionary *attrDict = @{
-                               NSFontAttributeName : [UIFont fontWithName:@"AppleGothic" size:21.0],
-                               NSForegroundColorAttributeName : [UIColor whiteColor]
-                               };
-    self.editNavBar.titleTextAttributes = attrDict;
-
     self.logoutButton.layer.cornerRadius = 5;
 
     for (UITextField *textField in self.textFields) {

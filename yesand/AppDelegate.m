@@ -23,7 +23,7 @@
     UIFont *newFont = [UIFont fontWithName:@"AppleGothic" size:14];
     [[UILabel appearance] setFont:newFont];
 
-    NSDictionary *barAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"AppleGothic" size:12],
+    NSDictionary *barAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"AppleGothic" size:14],
                                     NSForegroundColorAttributeName:[UIColor whiteColor]
                                     };
     [[UIBarButtonItem appearance] setTitleTextAttributes: barAttributes
@@ -36,6 +36,7 @@
                                };
     [[UINavigationBar appearance] setTitleTextAttributes:attrDict];
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:255/255.0 green:40/255.0 blue:40/255.0 alpha:1.0]];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
 
     [[UITabBar appearance] setSelectionIndicatorImage:whiteUnderline];
     [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor] }
