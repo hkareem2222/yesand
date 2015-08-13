@@ -978,7 +978,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="comedy.com" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7v-le-Emz">
-                                <rect key="frame" x="140" y="184" width="65.5" height="14.5"/>
+                                <rect key="frame" x="140" y="184" width="66" height="15"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
                                 <color key="textColor" red="0.48812342171717171" green="0.098981163021686649" blue="0.08992936575762224" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1040,7 +1040,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="a17-sv-Gzh">
-                                        <rect key="frame" x="281.5" y="225" width="37" height="37"/>
+                                        <rect key="frame" x="282" y="225" width="37" height="37"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="37" id="A1P-Pu-Opt"/>
                                             <constraint firstAttribute="width" constant="37" id="W2s-5v-bdN"/>
@@ -1590,7 +1590,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-transparent" translatesAutoresizingMaskIntoConstraints="NO" id="Zsc-5r-0q1">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_white" translatesAutoresizingMaskIntoConstraints="NO" id="Zsc-5r-0q1">
                                 <rect key="frame" x="263" y="40" width="74" height="74"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="74" id="mip-JN-sQd"/>
@@ -2243,11 +2243,11 @@
         <image name="flagIcon" width="266" height="311"/>
         <image name="helpicon" width="29" height="29"/>
         <image name="laughsicon" width="20" height="20"/>
-        <image name="logo-transparent" width="169" height="163"/>
+        <image name="logo_white" width="1260" height="1260"/>
         <image name="twitterlogincustom" width="912" height="159"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hkv-kI-r5j"/>
+        <segue reference="yb9-Qh-uOw"/>
         <segue reference="tVv-WH-Gfw"/>
         <segue reference="MjL-Mh-mnN"/>
     </inferredMetricsTieBreakers>
