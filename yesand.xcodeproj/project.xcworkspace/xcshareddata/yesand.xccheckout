@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>B3D2EFB2-B09F-4C17-90D2-3FBA84367C1F</string>
 	<key>IDESourceControlProjectName</key>
-	<string>yesand</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>3049D35828576035AB961C5996ECAAC56E0619ED</key>
 		<string>github.com:hkareem2222/yesand.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>yesand.xcodeproj</string>
+	<string>yesand.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>3049D35828576035AB961C5996ECAAC56E0619ED</key>
@@ -34,7 +34,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>3049D35828576035AB961C5996ECAAC56E0619ED</string>
 			<key>IDESourceControlWCCName</key>
-			<string>yesand</string>
+			<string>YesAnd</string>
 		</dict>
 	</array>
 </dict>
