@@ -33,6 +33,7 @@
     self.passwordField.delegate = self;
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     self.myRootRef = [[Firebase alloc] initWithUrl:@"https://yesand.firebaseio.com"];
+    self.usernameField.hidden = YES;
 
     //views setup
     UIFont *newFont = [UIFont fontWithName:@"AppleGothic" size:14];
@@ -146,7 +147,7 @@
 #pragma mark - Email & Password Login
 
 - (IBAction)onSegmentedControlTapped:(UISegmentedControl *)sender {
-    if (self.segmentedControl.selectedSegmentIndex == 0) {
+    if (self.segmentedControl.selectedSegmentIndex == 1) {
         self.usernameField.hidden = NO;
     } else {
         self.usernameField.hidden = YES;
@@ -154,7 +155,7 @@
 }
 
 - (void)goPressed {
-    if (self.segmentedControl.selectedSegmentIndex == 0) {
+    if (self.segmentedControl.selectedSegmentIndex == 1) {
         [self.myRootRef createUser:self.emailField.text password:self.passwordField.text
           withValueCompletionBlock:^(NSError *error, NSDictionary *result) {
               if (error) {
